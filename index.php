@@ -13,6 +13,11 @@
     <option id="option_packages">muss in Packages-Ordner installiert werden</option>
     <option id="option_depends_on_mod">abhängig von anderem Mod, CC, Store oder ähnlichem</option>
   </select>
+  <select name="select_shema_patch_level">
+    <option id="option_169">1.69</option>
+    <option id="option_167">1.67</option>
+    <option id="option_166">1.66</option>
+  </select>
   <input type="url" name="url_shema_flag_option_depends_on_mod_data">
 
 

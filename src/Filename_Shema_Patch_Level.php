@@ -2,12 +2,9 @@
 
 class Filename_Shema_Patch_Level implements Filename_Shema {
 
-  private const array_ui_data_key = [
+  public const array_ui_data_key = [
     "select_shema_patch_level"
   ];
-
-  # max amount of character the short url can contain
-  private const max_short_url_length = 10;
 
   # format-string to use with printf to print in ui
   private const string_ui_format = "<span>%s</span>";
@@ -19,7 +16,7 @@ class Filename_Shema_Patch_Level implements Filename_Shema {
     $key = current(Filename_Shema_Patch_Level::array_ui_data_key);
 
     if(!isset($data_from_ui[$key])){
-      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST: $key");
+      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST-Request: '$key'");
     }
 
     return [
@@ -35,7 +32,7 @@ class Filename_Shema_Patch_Level implements Filename_Shema {
 
     # error if patch level not matching regex pattern
     if(preg_match("/^[0-9]\.[0-9]{2}$/",$patch_level) !== 1){
-      throw new Shema_Exception("Fehler beim einlesen der Daten. Der eingegebene Patch-Level ist nicht gültig.\\nPatch-Level Eingabe-String: '".$patch_level."'");
+      throw new Shema_Exception("Fehler beim Einlesen der Daten. Der eingegebene Patch-Level ist nicht gültig.\\nPatch-Level Eingabe-String: '".$patch_level."'");
     }
 
     return str_replace(".","",$patch_level);
@@ -47,7 +44,7 @@ class Filename_Shema_Patch_Level implements Filename_Shema {
 
     # error if patch level not matching regex pattern
     if(preg_match("/^[0-9]{3}$/",$filename_part) !== 1){
-      throw new Shema_Exception("Fehler beim auslesen der Daten. Der ausgelesene Patch-Level ist nicht gültig.\\nPatch-Level Eingabe-String: '".$filename_part."'");
+      throw new Shema_Exception("Fehler beim Auslesen der Daten. Der ausgelesene Patch-Level ist nicht gültig.\\nPatch-Level Eingabe-String: '".$filename_part."'");
     }
 
     $converted_patch_level = substr($filename_part,0,1).".".substr($filename_part,1);

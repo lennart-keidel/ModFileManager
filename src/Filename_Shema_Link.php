@@ -19,7 +19,7 @@ class Filename_Shema_Link implements Filename_Shema {
     $key = current(Filename_Shema_Link::array_ui_data_key);
 
     if(!isset($data_from_ui[$key])){
-      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST: $key");
+      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST-Request: '$key'");
     }
 
     return [
@@ -35,7 +35,7 @@ class Filename_Shema_Link implements Filename_Shema {
 
     # error if website not returning valid http-response-code
     if(!Url_Shortener_API_Handler::test_if_url_is_valid($url)){
-      throw new Shema_Exception("Fehler beim einlesen der Daten. Der eingegebene Link ist nicht gültig.\\nHTTP-Response-Code: ".Url_Shortener_API_Handler::get_http_response_code($url).".\\nLink: '".$url."'");
+      throw new Shema_Exception("Fehler beim Einlesen der Daten. Der eingegebene Link ist nicht gültig.\\nHTTP-Response-Code: ".Url_Shortener_API_Handler::get_http_response_code($url).".\\nLink: '".$url."'");
     }
 
     # create short-url-id of url

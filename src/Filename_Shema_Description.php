@@ -36,7 +36,7 @@ class Filename_Shema_Description implements Filename_Shema {
     $key = current(Filename_Shema_Description::array_ui_data_key);
 
     if(!isset($data_from_ui[$key])){
-      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST: $key");
+      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST-Request: '$key'");
     }
 
     return [
@@ -51,7 +51,7 @@ class Filename_Shema_Description implements Filename_Shema {
 
     # error if length of string is over the max description character length
     if(strlen($string_description) > Filename_Shema_Description::max_description_length){
-      throw new Shema_Exception("Fehler beim einlesen der Daten. Die eingegebene Beschreibung ist länger als die maximal erlaubten ".Filename_Shema_Description::max_description_length." Zeichen.");
+      throw new Shema_Exception("Fehler beim Einlesen der Daten. Die eingegebene Beschreibung ist länger als die maximal erlaubten ".Filename_Shema_Description::max_description_length." Zeichen.");
     }
 
     # replace stuff in description string
@@ -68,7 +68,7 @@ class Filename_Shema_Description implements Filename_Shema {
   public static function convert_filename_to_data(string $filename_part) : array {
 
     if(!strlen($filename_part) || !preg_match("/[a-zA-Z0-9]/",$filename_part)){
-      throw new Shema_Exception("Fehler beim einlesen der Datei. Mod-Beschreibung ist ein String ohne valide Zeichen.");
+      throw new Shema_Exception("Fehler beim Einlesen der Datei. Mod-Beschreibung ist ein String ohne valide Zeichen.");
     }
 
     # replace stuff in description string from file

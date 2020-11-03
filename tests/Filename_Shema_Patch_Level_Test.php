@@ -146,7 +146,8 @@ class Filename_Shema_Patch_Level_Test extends TestCase {
     assertCount(1,$data_from_filename);
     assertIsString(key($data_from_filename));
     assertIsString(current($data_from_filename));
-    assertEquals($this->ui_data["select_shema_patch_level"],$data_from_filename["select_shema_patch_level"]);
+    $key = current(Filename_Shema_Patch_Level::array_ui_data_key);
+    assertEquals($this->ui_data[$key],$data_from_filename[$key]);
   }
 
 

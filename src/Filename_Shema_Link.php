@@ -19,7 +19,7 @@ class Filename_Shema_Link implements Filename_Shema {
     $key = current(Filename_Shema_Link::array_ui_data_key);
 
     if(!isset($data_from_ui[$key])){
-      throw new Shema_Exception("Fehler bei Verarbeitung der Daten. Fehlender Schlüssel in POST: $key");
+      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST: $key");
     }
 
     return [
@@ -30,37 +30,29 @@ class Filename_Shema_Link implements Filename_Shema {
 
   # convert data to filename part using this shema
   public static function convert_data_to_filename(array $data_converted) : string {
-    $string_description = current($data_converted);
 
-    # error if length of string is over the max description character length
-    if(strlen($string_description) > Filename_Shema_Link::max_description_length){
-      throw new Shema_Exception("Fehler beim einlesen der Daten. Die eingegebene Beschreibung ist länger als die maximal erlaubten ".Filename_Shema_Link::max_description_length." Zeichen.");
+    $url = current($data_converted);
+
+    # error if website not returning valid http-response-code
+    if(!Url_Shortener_API_Handler::test_if_url_is_valid($url)){
+      throw new Shema_Exception("Fehler beim einlesen der Daten. Der eingegebene Link ist nicht gültig.\\nHTTP-Response-Code: ".Url_Shortener_API_Handler::get_http_response_code($url).".\\nLink: '".$url."'");
     }
 
-    # replace stuff in description string
-    foreach(Filename_Shema_Link::array_replace_regex_data_to_filename as $regex_search => $replace){
-      $string_description = preg_replace("/$regex_search/",$replace, $string_description);
-    }
+    # create short-url-id of url
+    $short_url_id = Url_Shortener_API_Handler::short_url($url);
 
-    # return short id of selected option
-    return $string_description;
+    return $short_url_id;
   }
 
 
   # reverse process: converting filename back to data
   public static function convert_filename_to_data(string $filename_part) : array {
 
-    if(!strlen($filename_part) || !preg_match("/[a-zA-Z0-9]/",$filename_part)){
-      throw new Shema_Exception("Fehler beim einlesen der Datei. Mod-Beschreibung ist ein String ohne valide Zeichen.");
-    }
-
-    # replace stuff in description string from file
-    foreach(Filename_Shema_Link::array_replace_regex_filename_to_data as $regex_search => $replace){
-      $filename_part = preg_replace("/$regex_search/",$replace, $filename_part);
-    }
+    # get original url from short url id
+    $original_url = Url_Shortener_API_Handler::expand_url($filename_part);
 
     # return array in format of original ui data
-    return [ current(Filename_Shema_Link::array_ui_data_key) => $filename_part ];
+    return [ current(Filename_Shema_Link::array_ui_data_key) => $original_url ];
   }
 
 

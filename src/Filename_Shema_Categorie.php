@@ -47,7 +47,7 @@ class Filename_Shema_Categorie implements Filename_Shema {
     $key = current(Filename_Shema_Categorie::array_ui_data_key);
 
     if(!isset($data_from_ui[$key])){
-      throw new Shema_Exception("Fehler bei Verarbeitung der Daten. Fehlender Schlüssel in POST: $key");
+      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST: $key");
     }
 
     return [
@@ -63,7 +63,7 @@ class Filename_Shema_Categorie implements Filename_Shema {
     # search ui-text-value and get key
     $key = array_search(current($data_converted),Filename_Shema_Categorie::array_option_ui);
     if($key === false){
-      throw new Shema_Exception("Fehler bei Verarbeitung der Daten. Fehlender Wert: ".current($data_converted));
+      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Wert: ".current($data_converted));
     }
 
     # return short id of selected option
@@ -81,7 +81,7 @@ class Filename_Shema_Categorie implements Filename_Shema {
     # search for short id and get key
     $key = array_search($filename_part, Filename_Shema_Categorie::array_option_id);
     if($key === false){
-      throw new Shema_Exception("Fehler bei Verarbeitung der Daten. Fehlender Wert: $filename_part");
+      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Wert: $filename_part");
     }
     # return array in format of original ui data
     return [current(Filename_Shema_Categorie::array_ui_data_key) => Filename_Shema_Categorie::array_option_ui[$key]];

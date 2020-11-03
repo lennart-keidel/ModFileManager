@@ -8,7 +8,7 @@ class Shema_Exception extends Exception {
   }
 
   public function print_error(string $message) : void {
-    Ui::set_error($message);
+    Ui::set_error("\"".$message."\"");
   }
 }
 

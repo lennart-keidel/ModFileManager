@@ -36,7 +36,7 @@ class Filename_Shema_Description implements Filename_Shema {
     $key = current(Filename_Shema_Description::array_ui_data_key);
 
     if(!isset($data_from_ui[$key])){
-      throw new Shema_Exception("Fehler bei Verarbeitung der Daten. Fehlender Schlüssel in POST: $key");
+      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST: $key");
     }
 
     return [

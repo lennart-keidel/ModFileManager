@@ -22,7 +22,7 @@ class Filename_Shema_Link_Test extends TestCase {
     $this->ui_data = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "http://localhost/mod_files_renamer/",
+      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
       "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf"
@@ -31,7 +31,7 @@ class Filename_Shema_Link_Test extends TestCase {
     $this->wrong_ui_data1 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_lin" => "http://localhost/mod_files_renamer/",
+      "url_shema_lin" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
       "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf"
@@ -48,20 +48,19 @@ class Filename_Shema_Link_Test extends TestCase {
     ];
 
 
-    $this->wrong_ui_data2 = [
+    $this->wrong_ui_data3 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "not-valid-url",
+      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/61757973",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
       "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf"
     ];
 
-    $this->filename = "nps9n";
-
     $this->wrong_filename1 = "nps9nasldasmdkasd";
 
     $this->wrong_filename2 = "";
+
   }
 
 
@@ -80,43 +79,49 @@ class Filename_Shema_Link_Test extends TestCase {
   }
 
 
-  // public function test_convert_data_to_filename() : void {
-  //   $converted_ui_data = Filename_Shema_Link::convert_ui_data_to_data($this->ui_data);
-  //   $filename = Filename_Shema_Link::convert_data_to_filename($converted_ui_data);
-  //   assertIsString($filename);
-  //   assertNotEquals("", $filename);
-  // }
+  public function test_convert_data_to_filename() : void {
+    $converted_ui_data = Filename_Shema_Link::convert_ui_data_to_data($this->ui_data);
+    $filename = Filename_Shema_Link::convert_data_to_filename($converted_ui_data);
+    assertIsString($filename);
+    assertNotEquals("", $filename);
+  }
 
 
-  // public function test_convert_data_to_filename_with_wrong_ui_data() : void {
-  //   $converted_ui_data = Filename_Shema_Link::convert_ui_data_to_data($this->wrong_ui_data2);
-  //   $this->expectException(Shema_Exception::class);
-  //   $filename = Filename_Shema_Link::convert_data_to_filename($converted_ui_data);
-  // }
+  public function test_convert_data_to_filename_with_wrong_ui_data1() : void {
+    $converted_ui_data = Filename_Shema_Link::convert_ui_data_to_data($this->wrong_ui_data2);
+    $this->expectException(Shema_Exception::class);
+    Filename_Shema_Link::convert_data_to_filename($converted_ui_data);
+  }
 
 
-  // public function test_convert_filename_to_data1() : void {
-  //   $converted_ui_data = Filename_Shema_Link::convert_ui_data_to_data($this->ui_data);
-  //   $filename = Filename_Shema_Link::convert_data_to_filename($converted_ui_data);
-  //   $data_from_filename = Filename_Shema_Link::convert_filename_to_data($filename);
-  //   assertIsArray($data_from_filename);
-  //   assertCount(1,$data_from_filename);
-  //   assertIsString(key($data_from_filename));
-  // }
+  public function test_convert_data_to_filename_with_wrong_ui_data2() : void {
+    $converted_ui_data = Filename_Shema_Link::convert_ui_data_to_data($this->wrong_ui_data3);
+    $this->expectException(Shema_Exception::class);
+    Filename_Shema_Link::convert_data_to_filename($converted_ui_data);
+  }
 
 
-  // public function test_convert_filename_to_data2() : void {
-  //   $data_from_filename = Filename_Shema_Link::convert_filename_to_data($this->filename);
-  //   assertIsArray($data_from_filename);
-  //   assertCount(1,$data_from_filename);
-  //   assertIsString(key($data_from_filename));
-  // }
+  public function test_convert_filename_to_data() : void {
+    $converted_ui_data = Filename_Shema_Link::convert_ui_data_to_data($this->ui_data);
+    $filename = Filename_Shema_Link::convert_data_to_filename($converted_ui_data);
+    $data_from_filename = Filename_Shema_Link::convert_filename_to_data($filename);
+    assertIsArray($data_from_filename);
+    assertCount(1,$data_from_filename);
+    assertIsString(key($data_from_filename));
+    assertIsString(current($data_from_filename));
+  }
 
 
-  // public function test_convert_filename_to_data_with_wrong_filename1() : void {
-  //   $this->expectException(Shema_Exception::class);
-  //   $data_from_filename = Filename_Shema_Link::convert_filename_to_data($this->wrong_filename2);
-  // }
+  public function test_convert_filename_to_data_with_wrong_data1() : void {
+    $this->expectException(Shema_Exception::class);
+    $data_from_filename = Filename_Shema_Link::convert_filename_to_data($this->wrong_filename1);
+  }
+
+
+  public function test_convert_filename_to_data_with_wrong_data2() : void {
+    $this->expectException(Shema_Exception::class);
+    $data_from_filename = Filename_Shema_Link::convert_filename_to_data($this->wrong_filename2);
+  }
 
 
   // public function test_convert_filename_to_data_with_wrong_filename2() : void {

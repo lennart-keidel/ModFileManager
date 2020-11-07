@@ -81,7 +81,7 @@ class Filename_Shema_Categorie implements Filename_Shema {
     # search for short id and get key
     $key = array_search($filename_part, Filename_Shema_Categorie::array_option_id);
     if($key === false){
-      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Wert: $filename_part");
+      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Wert '$filename_part' ist für die Kategorie nicht valide.");
     }
     # return array in format of original ui data
     return [current(Filename_Shema_Categorie::array_ui_data_key) => Filename_Shema_Categorie::array_option_ui[$key]];

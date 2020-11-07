@@ -1,4 +1,10 @@
 {
+  "name": "lennartkeidel/mod_files_renamer",
+  "version": "1.0.0",
+  "description": "Searializes and reads data from filename-strings by a given schema.",
+  "config": {
+    "optimize-autoloader": true
+  },
   "require-dev": {
     "phpunit/phpunit": "^9"
   },

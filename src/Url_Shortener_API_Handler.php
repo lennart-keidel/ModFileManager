@@ -75,12 +75,12 @@ class Url_Shortener_API_Handler {
 
     # error if url-API response contains error
     if(isset($data->errorCode) && isset($data->message)){
-      throw new Shema_Exception("Fehler beim Abrufen der originalen-Url durch die Short-Url-ID.\\nShort-Url: '".$ipt_short_url."'\\nError-Code von Url-Api: ".$data->errorCode.".\\nNachricht von Url-API: '".$data->message."'");
+      throw new Shema_Exception("Fehler beim Abrufen der originalen-Url durch die Short-Url-ID. Der Link ist nicht gültig. \\nShort-Url: '".$ipt_short_url."'\\nError-Code von Url-Api: ".$data->errorCode.".\\nNachricht von Url-API: '".$data->message."'");
     }
 
     # error if not object or required key not existing or empty
     if(!is_object($data) || !isset($data->longurl) || empty($data->longurl)){
-      throw new Shema_Exception("Fehler beim Abrufen der Short-Url durch die Short-Url-ID. Keine gültige Antwort von Url-Api erhalten.\\nShort-Url: '".$ipt_short_url."'\\nServer-Response: '".$response."'");
+      throw new Shema_Exception("Fehler beim Abrufen der Short-Url durch die Short-Url-ID. Der Link ist nicht gültig. Keine gültige Antwort von Url-Api erhalten.\\nShort-Url: '".$ipt_short_url."'\\nServer-Response: '".$response."'");
     }
 
     return $data->longurl;

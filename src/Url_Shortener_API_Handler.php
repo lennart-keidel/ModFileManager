@@ -5,8 +5,8 @@ use function PHPUnit\Framework\isEmpty;
 class Url_Shortener_API_Handler {
 
   private const signature = 'f13712add9';
-  public static $api_url =  'https://lennart-keidel.de/url/yourls-api.php';
-  public static $short_id_base_url = 'https://lennart-keidel.de/url';
+  public const api_url =  'https://lennart-keidel.de/url/yourls-api.php';
+  public const short_id_base_url = 'https://lennart-keidel.de/url';
 
 
   # create short of url via own hosted url shortener
@@ -14,7 +14,7 @@ class Url_Shortener_API_Handler {
 
     // Init the CURL session
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, Url_Shortener_API_Handler::$api_url);
+    curl_setopt($ch, CURLOPT_URL, Url_Shortener_API_Handler::api_url);
     curl_setopt($ch, CURLOPT_HEADER, 0);            // No header in the result
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return, do not echo result
     curl_setopt($ch, CURLOPT_POST, 1);              // This is a POST request
@@ -32,9 +32,23 @@ class Url_Shortener_API_Handler {
     # deocode json respone
     $data = @json_decode($response);
 
-    # if url-API response contains error
-    if(isset($data->errorCode) && isset($data->message)){
-      throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nEingegebene Url: '".$ipt_long_url."'\\nError-Code von Url-Api: ".$data->errorCode.".\\nNachricht von Url-API: '".$data->message."'");
+    # error if empty response and not valid
+    if(empty($response)){
+      if(Url_Shortener_API_Handler::get_http_response_code(Url_Shortener_API_Handler::api_url)){
+        throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nUrl-Shortener API unter: '".Url_Shortener_API_Handler::api_url."' gibt keinen validen HTTP-Response-Code zurück. Die Url zum Url-Shortener API funktioniert nicht mehr.\\n");
+      }
+      else {
+        throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nUrl-Shortener API unter: '".Url_Shortener_API_Handler::api_url."' gibt keinen eine leere Antwort zurück. Die Url zum Url-Shortener API funktioniert nicht mehr.\\n");
+      }
+    }
+
+    # error if url-API response contains error
+    if(isset($data->errorCode)){
+      $message = "Fehler beim Erstellen der Short-Url.\\nEingegebene Url: '".$ipt_long_url."'\\nError-Code von Url-Api: ".$data->errorCode;
+      if(isset($data->message)){
+        $message .= "\\nNachricht von Url-API: '".$data->message."'";
+      }
+      throw new Shema_Exception($message);
     }
 
     # error if not object or required key not existing or empty
@@ -53,7 +67,7 @@ class Url_Shortener_API_Handler {
 
     // Init the CURL session
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, Url_Shortener_API_Handler::$api_url);
+    curl_setopt($ch, CURLOPT_URL, Url_Shortener_API_Handler::api_url);
     curl_setopt($ch, CURLOPT_HEADER, 0);            // No header in the result
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return, do not echo result
     curl_setopt($ch, CURLOPT_POST, 1);              // This is a POST request
@@ -71,11 +85,25 @@ class Url_Shortener_API_Handler {
     // var_dump($response);
 
     // Do something with the result. Here, we echo the long URL
-    $data = @json_decode( $response );
+    $data = @json_decode($response);
+
+    # error if empty response and not valid
+    if(empty($response)){
+      if(Url_Shortener_API_Handler::get_http_response_code(Url_Shortener_API_Handler::api_url)){
+        throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nUrl-Shortener API unter: '".Url_Shortener_API_Handler::api_url."' gibt keinen validen HTTP-Response-Code zurück. Die Url zum Url-Shortener API funktioniert nicht mehr.\\n");
+      }
+      else {
+        throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nUrl-Shortener API unter: '".Url_Shortener_API_Handler::api_url."' gibt keinen eine leere Antwort zurück. Die Url zum Url-Shortener API funktioniert nicht mehr.\\n");
+      }
+    }
 
     # error if url-API response contains error
-    if(isset($data->errorCode) && isset($data->message)){
-      throw new Shema_Exception("Fehler beim Abrufen der originalen-Url durch die Short-Url-ID. Der Link ist nicht gültig. \\nShort-Url: '".$ipt_short_url."'\\nError-Code von Url-Api: ".$data->errorCode.".\\nNachricht von Url-API: '".$data->message."'");
+    if(isset($data->errorCode)){
+      $message = "Fehler beim Abrufen der originalen-Url durch die Short-Url-ID. Der Link ist nicht gültig. \\nShort-Url: '".$ipt_short_url."'\\nError-Code von Url-Api: ".$data->errorCode;
+      if(isset($data->message)){
+        $message .= "\\nNachricht von Url-API: '".$data->message."'";
+      }
+      throw new Shema_Exception($message);
     }
 
     # error if not object or required key not existing or empty

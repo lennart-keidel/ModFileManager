@@ -19,7 +19,7 @@ class Url_Shortener_API_Handler_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 
@@ -39,7 +39,7 @@ class Url_Shortener_API_Handler_Test extends TestCase {
   public function test_short_url() : void {
     foreach($this->array_url as $fe_url){
       $result_short_id = Url_Shortener_API_Handler::short_url($fe_url);
-      $result_short_url = Url_Shortener_API_Handler::$short_id_base_url."/".$result_short_id;
+      $result_short_url = Url_Shortener_API_Handler::short_id_base_url."/".$result_short_id;
       assertIsString($result_short_id);
       assertEquals(5, strlen($result_short_id));
       $response_code = Url_Shortener_API_Handler::get_http_response_code($result_short_url);

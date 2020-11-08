@@ -42,7 +42,7 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
     $this->ui_data1 = [
@@ -501,7 +501,7 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
   public function test_convert_filename_to_data_with_wrong_data3() : void {
-    $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename3);
+    Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename3);
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEquals("", $output);
@@ -523,7 +523,6 @@ class Filename_Shema_Flag_Test extends TestCase {
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($filename);
     Filename_Shema_Flag::print_filename_data_for_ui($data_from_filename);
     $output = $this->getActualOutput();
-    var_dump($output);
     assertIsString($output);
     assertNotEquals("", $output);
   }

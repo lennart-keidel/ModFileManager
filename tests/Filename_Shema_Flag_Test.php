@@ -24,6 +24,7 @@ class Filename_Shema_Flag_Test extends TestCase {
   protected $wrong_ui_data4 = [];
   protected $wrong_ui_data5 = [];
   protected $wrong_ui_data6 = [];
+  protected $wrong_ui_data7 = [];
   protected $filename1 = "";
   protected $filename2 = "";
   protected $filename3 = "";
@@ -41,7 +42,7 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
     $this->ui_data1 = [
@@ -207,6 +208,23 @@ class Filename_Shema_Flag_Test extends TestCase {
     ];
 
 
+    # "checkbox_shema_flag" contains double flag
+    $this->wrong_ui_data7 = [
+      "select_shema_categorie" => "Tuning",
+      "text_shema_description" => "somtehing to do with this",
+      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "date_shema_installation_date" => "2020-10-29",
+      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
+      "checkbox_shema_flag" => [
+        "option_depends_on_content",
+        "option_depends_on_expansion",
+        "option_install_in_packages",
+        "option_install_in_packages",
+      ],
+      "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+    ];
+
+
     $this->filename1 = "I";
 
     $this->filename2 = "O_D7qcvl_Eep11_V";
@@ -289,6 +307,12 @@ class Filename_Shema_Flag_Test extends TestCase {
   public function test_convert_ui_data_to_data_with_wrong_ui_data4() : void {
     $this->expectException(Shema_Exception::class);
     Filename_Shema_Flag::convert_ui_data_to_data($this->wrong_ui_data6);
+  }
+
+
+  public function test_convert_ui_data_to_data_with_wrong_ui_data5() : void {
+    $this->expectException(Shema_Exception::class);
+    Filename_Shema_Flag::convert_ui_data_to_data($this->wrong_ui_data7);
   }
 
 

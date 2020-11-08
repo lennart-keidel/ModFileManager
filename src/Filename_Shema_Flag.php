@@ -79,6 +79,9 @@ class Filename_Shema_Flag implements Filename_Shema {
     $main_data = $data_from_ui[$main_key];
     Filename_Shema_Flag::check_ui_data_for_not_valid_flag_options($main_data);
 
+    # check for not double flag-options in ui-data
+    Filename_Shema_Flag::check_ui_data_for_double_flag_options($main_data);
+
     # check for not combineable flag-options
     Filename_Shema_Flag::check_ui_data_for_not_combineable_options($main_data);
 
@@ -107,6 +110,16 @@ class Filename_Shema_Flag implements Filename_Shema {
           }
         }
       }
+    }
+    return true;
+  }
+
+
+  # check for double flag options in ui-data
+  private static function check_ui_data_for_double_flag_options(array $data) : bool {
+    if(count(array_unique($data))<count($data)){
+      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Optionsschlüssel '".current(array_diff_key($data,array_unique($data)))."' existiert doppelt.");
+      return false;
     }
     return true;
   }

@@ -17,26 +17,12 @@ class Filename_Shema_Categorie implements Filename_Shema {
     "option_default_replacemant" => "DR",
     "option_tuning" => "TUN",
     "option_script" => "SCR",
-    "option_create_a_sim" => "CAS",
+    "option_mod_create_a_sim" => "MODCAS",
+    "option_cc_create_a_sim" => "CCCAS",
     "option_cc_script" => "CCSCR",
     "option_cc_buy" => "CCBUY",
     "option_cc_build" => "CCBUI",
     "option_other" => "OTH"
-  ];
-
-  # array with short id's of options
-  # key: internal key for this value
-  # value: ui string
-  public const array_option_ui = [
-    "option_core_mod" => "Core Mod",
-    "option_default_replacemant" => "Default Replacemant",
-    "option_tuning" => "Tuning",
-    "option_script" => "Script-Mod",
-    "option_create_a_sim" => "Create-A-Sim",
-    "option_cc_script" => "Custom Content Objekt mit eigenem Script/Funktion",
-    "option_cc_buy" => "Custom Content Objekt für Kaufmodus",
-    "option_cc_build" => "Custom Content Objekt für Baumodus",
-    "option_other" => "keine der anderen Kategorien"
   ];
 
 
@@ -61,8 +47,8 @@ class Filename_Shema_Categorie implements Filename_Shema {
   public static function convert_data_to_filename(array $data_converted) : string {
 
     # search ui-text-value and get key
-    $key = array_search(current($data_converted),Filename_Shema_Categorie::array_option_ui);
-    if($key === false){
+    $key = current($data_converted);
+    if(isset(Filename_Shema_Categorie::array_option_id[$key]) === false){
       throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Wert: ".current($data_converted));
     }
 
@@ -83,8 +69,9 @@ class Filename_Shema_Categorie implements Filename_Shema {
     if($key === false){
       throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Wert '$filename_part' ist für die Kategorie nicht valide.");
     }
+
     # return array in format of original ui data
-    return [current(Filename_Shema_Categorie::array_ui_data_key) => Filename_Shema_Categorie::array_option_ui[$key]];
+    return [current(Filename_Shema_Categorie::array_ui_data_key) => $key];
   }
 
 

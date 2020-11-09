@@ -23,11 +23,11 @@ class Filename_Shema_Categorie_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
     $this->ui_data = [
-      "select_shema_categorie" => "Tuning",
+      "select_shema_categorie" => "option_tuning",
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "http://localhost/mod_files_renamer/",
       "date_shema_installation_date" => "2020-10-29",
@@ -45,7 +45,7 @@ class Filename_Shema_Categorie_Test extends TestCase {
     ];
 
     $this->wrong_ui_data2 = [
-      "!wrong!" => "Tuning",
+      "!wrong!" => "option_tuning",
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "http://localhost/mod_files_renamer/",
       "date_shema_installation_date" => "2020-10-29",

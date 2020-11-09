@@ -266,7 +266,7 @@ class Filename_Shema_Flag implements Filename_Shema {
       $short_id = substr($filename_part,0,1);
       $option = array_search($short_id, Filename_Shema_Flag::array_option_short_id);
 
-      # error if flag not valid
+      # error if flag option not valid
       # skip this flag
       if($option === false){
         new Shema_Exception("Fehler beim Auslesen der Daten.\\nDas Flag '$short_id' im Dateinamen ist nicht gültig. Das Flag '$short_id' wird daher für diese Datei übersprungen.", false);

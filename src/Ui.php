@@ -10,6 +10,7 @@ class Ui {
   private const input_shema_template_categorie = '
     <label for="select_shema_categorie%1$d">Kategorie</label>
     <select id="select_shema_categorie%1$d" name="files[%1$d][select_shema_categorie]">
+      <option value="" selected disabled>Auswählen</option>
       <optgroup label="CC">
         <option value="option_cc_buy">Custom Content Objekt für Kaufmodus</option>
         <option value="option_cc_build">Custom Content Objekt für Baumodus</option>
@@ -44,7 +45,8 @@ class Ui {
 
   private const input_shema_template_patch_level = '
     <label for="select_shema_patch_level%1$d">Patch-Level</label>
-    <select id="select_shema_patch_level%1$d" name="files[%1$d][select_shema_patch_level]">
+    <select id="select_shema_patch_level%1$d" name="files[%1$d][select_shema_patch_level]" required>
+      <option value="" selected disabled>Auswählen</option>
       <option value="1.69">1.69</option>
       <option value="1.67">1.67</option>
       <option value="1.66">1.66</option>
@@ -52,26 +54,24 @@ class Ui {
   ';
 
   private const input_shema_template_flag = '
-    <input type="checkbox" name="files[%1$d][checkbox_shema_flag][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
-    <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
+  <input type="checkbox" name="files[%1$d][checkbox_shema_flag][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
+  <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
 
-    <input type="checkbox" name="files[%1$d][checkbox_shema_flag][]" id="option_install_in_packages%1$d" value="option_install_in_packages">
-    <label for="option_install_in_packages%1$d">muss in Packages-Ordner installiert werden</label>
+  <input type="checkbox" name="files[%1$d][checkbox_shema_flag][]" id="option_install_in_packages%1$d" value="option_install_in_packages">
+  <label for="option_install_in_packages%1$d">muss in Packages-Ordner installiert werden</label>
 
-    <input type="checkbox" name="files[%1$d][checkbox_shema_flag][]" id="option_depends_on_content%1$d" value="option_depends_on_content">
-    <label for="option_depends_on_content%1$d">abhängig von anderem Mod, CC, Store oder ähnlichem</label>
+  <input type="checkbox" name="files[%1$d][checkbox_shema_flag][]" id="option_depends_on_content%1$d" value="option_depends_on_content">
+  <label for="option_depends_on_content%1$d">abhängig von anderem Mod, CC, Store oder ähnlichem</label>
 
-    <input type="checkbox" name="files[%1$d][checkbox_shema_flag][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion">
-    <label for="option_depends_on_expansion%1$d">abhängig von Erweiterungspack oder Accessoirepack</label>
+  <input disabled-and-hidden-until="[\'checked\',\'option_depends_on_content%1$d\']" id="url_flag_data_depends_on_content%1$d" type="url" name="files[%1$d][url_flag_data_depends_on_content]">
+  <label disabled-and-hidden-until="[\'checked\',\'option_depends_on_content%1$d\']" for="url_flag_data_depends_on_content%1$d">Link zum Mod, CC von dem dieser Mod, CC abhängig ist</label>
 
-    <input type="checkbox" name="files[%1$d][checkbox_shema_flag][]" id="option_is_essential%1$d" value="option_is_essential">
-    <label for="option_is_essential%1$d">gehört zu den absolut wichtigsten Mods/CC, die immer installiert sein sollen</label>
+  <input type="checkbox" name="files[%1$d][checkbox_shema_flag][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion">
+  <label for="option_depends_on_expansion%1$d">abhängig von Erweiterungspack oder Accessoirepack</label>
 
-    <label for="url_flag_data_depends_on_content%1$d">Link zum Mod, CC von dem dieser Mod, CC abhängig ist</label>
-    <input id="url_flag_data_depends_on_content%1$d" type="url" name="files[%1$d][url_flag_data_depends_on_content]">
-
-    <label for="select_flag_data_depends_on_expansion%1$d">Erweiterung von dem dieser Mod, CC abhängig ist</label>
-    <select name="files[%1$d][select_flag_data_depends_on_expansion]">
+    <label disabled-and-hidden-until="[\'checked\',\'option_depends_on_expansion%1$d\']" for="select_flag_data_depends_on_expansion%1$d">Erweiterung von dem dieser Mod, CC abhängig ist</label>
+    <select disabled-and-hidden-until="[\'checked\',\'option_depends_on_expansion%1$d\']" id="select_flag_data_depends_on_expansion%1$d" name="files[%1$d][select_flag_data_depends_on_expansion]">
+      <option value="" selected disabled>Auswählen</option>
       <optgroup label="Erweiterungspack">
         <option value="ep01">Reiseabenteuer</option>
         <option value="ep02">Traumkarrieren</option>
@@ -97,6 +97,9 @@ class Ui {
         <option value="sp09">Movie Accessoires</option>
       </optgroup>
     </select>
+
+    <input type="checkbox" name="files[%1$d][checkbox_shema_flag][]" id="option_is_essential%1$d" value="option_is_essential">
+    <label for="option_is_essential%1$d">gehört zu den absolut wichtigsten Mods/CC, die immer installiert sein sollen</label>
   ';
 
   private const template_error_message = "<javascript>alert(%s)</javascript>";
@@ -121,6 +124,17 @@ class Ui {
     $shema_class_name = strtolower($shema_class_name);
     printf(constant("Ui::input_shema_template_$shema_class_name"), Ui::$out_input_shema_index);
 
+  }
+
+
+  public static function out_search_by_shema_interface() : void {
+    // echo "<select name=search[""]>";
+    // echo "<option selected disabled value=''>Auswählen</option>";
+    foreach(Main::shema_order_global as $shema_id){
+      $shema_id = strtolower($shema_id);
+      // printf('<option value="%1$s">%2$s</option>', strtolower($shema_id), str_replace("_"," ",$shema_id));
+    }
+    // echo "</select>";
   }
 
 

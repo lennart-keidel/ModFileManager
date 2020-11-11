@@ -9,9 +9,10 @@
   <style>
 
     /* add line break in form element */
-    input + label, label + input, label + select {
+    label + input, label + select, input[type=checkbox] + label {
       display: block;
     }
+
 
     /* no selection color in labels */
     label::selection {
@@ -28,6 +29,9 @@
       require 'vendor/autoload.php';
       Ui::out_input_shema("Categorie");
       Ui::out_input_shema("Description");
+      Ui::out_input_shema("Patch_Level");
+      Ui::out_input_shema("Flag");
+      Ui::out_search_by_shema_interface();
     ?>
 
     <input type="submit" value="absenden">

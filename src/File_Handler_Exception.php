@@ -1,6 +1,6 @@
 <?php
 
-class Shema_Exception extends Exception implements I_Custom_Exception {
+class File_Handler_Exception extends Exception implements I_Custom_Exception {
 
   public $message = "";
 

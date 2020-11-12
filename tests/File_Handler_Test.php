@@ -4,6 +4,8 @@ use PHPUnit\Framework\TestCase;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEmpty;
 use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertFileDoesNotExist;
+use function PHPUnit\Framework\assertFileExists;
 use function PHPUnit\Framework\assertIsArray;
 use function PHPUnit\Framework\assertIsString;
 use function PHPUnit\Framework\assertNotEmpty;
@@ -159,6 +161,63 @@ class File_Handler_Test extends TestCase {
     assertEquals(File_Handler::get_filename_from_path_without_fileextension($path1), "filename");
     $path2 = "filename.a.b.txt";
     assertEquals(File_Handler::get_filename_from_path_without_fileextension($path2), "filename.a.b");
+  }
+
+
+  public function test_rename_file() : void {
+
+    # get two files
+    $path_original_filename = "";
+    foreach (new DirectoryIterator(File_Handler_Test::path_temp_test_dir_root) as $file) {
+      if($file->isFile() && !$file->isDot()){
+        if($path_original_filename===""){
+          $path_original_filename = $file->getPathname();
+        }
+        else {
+          $path_second_original_filename = $file->getPathname();
+          break;
+        }
+      }
+    }
+
+    # rename first file
+    var_dump($path_original_filename,$path_second_original_filename);
+    $path_new_filename = dirname($path_original_filename)."/new_filename.package";
+    assertFileExists($path_original_filename);
+    File_Handler::rename_file($path_original_filename, $path_new_filename);
+    assertFileDoesNotExist($path_original_filename);
+    assertFileExists($path_new_filename);
+
+    # rename second file to same name as first file
+    # assert Exception
+    assertFileExists($path_second_original_filename);
+    $this->expectException(File_Handler_Exception::class);
+    File_Handler::rename_file($path_second_original_filename, $path_new_filename);
+    assertFileExists($path_second_original_filename);
+    assertFileExists($path_new_filename);
+  }
+
+
+  public function test_rename_file_from_filename_list() : void {
+
+    # create filename list
+    # store new filename in filename list
+    $filename_list = File_Handler::get_filename_list_from_path_recursive(File_Handler_Test::path_temp_test_dir_root);
+    $new_filename_list = [];
+    foreach($filename_list as $path => $array_filename){
+      foreach($array_filename as $old_filename){
+        $new_filename_list[$path][$old_filename] = $old_filename.".new";
+      }
+    }
+
+    # test if old file not existing and new file existing
+    File_Handler::rename_file_from_filename_list($new_filename_list);
+    foreach($new_filename_list as $path => $array_filename){
+      foreach($array_filename as $old_filename => $new_filename){
+        assertFileDoesNotExist($path."/".$old_filename);
+        assertFileExists($path."/".$new_filename);
+      }
+    }
   }
 
 }

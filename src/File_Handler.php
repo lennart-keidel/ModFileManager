@@ -56,7 +56,31 @@ class File_Handler {
   }
 
 
+  # rename a file
+  public static function rename_file(string $path_original_filename, string $path_new_filename) : void {
+    if($path_original_filename===$path_new_filename){
+      return;
+    }
+    try {
+      if(is_file($path_new_filename)){
+        throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Der Dateiname unter dem Pfad existiert bereits und wird nicht umbennant um die Datei nicht zu überschreiben: ".$path_new_filename);
+      }
+      rename($path_original_filename, $path_new_filename);
+    }
+    catch(Exception $e){
+      throw new File_Handler_Exception($e->getMessage());
+    }
+  }
 
+
+
+  public static function rename_file_from_filename_list(array $filename_list) : void {
+    foreach($filename_list as $path => $array_filename){
+      foreach($array_filename as $old_filename => $new_filename){
+        File_Handler::rename_file($path."/".$old_filename, $path."/".$new_filename);
+      }
+    }
+  }
 
 
 }

@@ -2,6 +2,7 @@
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertDirectoryExists;
 use function PHPUnit\Framework\assertEmpty;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFileDoesNotExist;
@@ -22,6 +23,18 @@ class File_Handler_Test extends TestCase {
     File_Handler_Test::path_temp_test_dir_root."/sub_dir3",
     File_Handler_Test::path_temp_test_dir_root."/empty_dir"
   ];
+
+  public function setUp() : void {
+
+
+
+
+
+    ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
+
+
+  }
 
   # set up ui data with realistic data
   public static function setUpBeforeClass() : void {
@@ -121,11 +134,12 @@ class File_Handler_Test extends TestCase {
       assertIsString($path);
       assertNotEmpty($path);
       assertTrue(is_dir($path));
+      assertDirectoryExists($path);
       assertIsArray($array_filenames);
 
       # test if only files with allowed fileextensions are contained
       # test if all files that should be contained are contained
-      foreach (new DirectoryIterator(File_Handler_Test::path_temp_test_dir_root) as $file) {
+      foreach (new DirectoryIterator($path) as $file) {
         if($file->isDot()){
           continue;
         }

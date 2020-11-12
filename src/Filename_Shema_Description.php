@@ -2,7 +2,7 @@
 
 class Filename_Shema_Description implements Filename_Shema {
 
-  private const array_ui_data_key = [
+  public const array_ui_data_key = [
     "text_shema_description"
   ];
 

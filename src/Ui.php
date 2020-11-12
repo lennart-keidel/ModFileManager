@@ -3,8 +3,12 @@
 class Ui {
 
   # format-string to use with printf to print in ui
+  private const input_shema_template_path_source_dir = '
+    <input type="hidden" name="files[%1$d][path_source_dir]" value="%2$s">
+  ';
+
   private const input_shema_template_original_filename = '
-    <input type="hidden" name="files[%1$d][originale_filename]" value="%2$s">
+    <input type="hidden" name="files[%1$d][original_filename]" value="%2$s">
   ';
 
   private const input_shema_template_categorie = '
@@ -107,7 +111,7 @@ class Ui {
   private static $out_input_shema_index = 0;
 
   # print error message as js alert
-  public static function set_error(string $message) : void {
+  public static function out_error(string $message) : void {
     if(!empty($message)){
       printf(Ui::template_error_message, $message);
     }

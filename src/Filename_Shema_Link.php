@@ -2,7 +2,7 @@
 
 class Filename_Shema_Link implements Filename_Shema {
 
-  private const array_ui_data_key = [
+  public const array_ui_data_key = [
     "url_shema_link"
   ];
 

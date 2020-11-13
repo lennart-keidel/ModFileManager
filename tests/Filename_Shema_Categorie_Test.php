@@ -32,7 +32,6 @@ class Filename_Shema_Categorie_Test extends TestCase {
       "url_shema_link" => "http://localhost/mod_files_renamer/",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf"
     ];
 
     $this->wrong_ui_data1 = [
@@ -41,7 +40,6 @@ class Filename_Shema_Categorie_Test extends TestCase {
       "url_shema_link" => "http://localhost/mod_files_renamer/",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf"
     ];
 
     $this->wrong_ui_data2 = [
@@ -50,7 +48,6 @@ class Filename_Shema_Categorie_Test extends TestCase {
       "url_shema_link" => "http://localhost/mod_files_renamer/",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf"
     ];
 
     $this->filename = "COR";

@@ -50,7 +50,6 @@ class Filename_Shema_Flag_Test extends TestCase {
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
@@ -64,7 +63,6 @@ class Filename_Shema_Flag_Test extends TestCase {
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "select_flag_data_depends_on_expansion" => "ep11",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
@@ -80,7 +78,6 @@ class Filename_Shema_Flag_Test extends TestCase {
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "select_flag_data_depends_on_expansion" => "sp09",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
@@ -96,7 +93,6 @@ class Filename_Shema_Flag_Test extends TestCase {
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "checkbox_shema_flag" => [
 
       ]
@@ -108,7 +104,6 @@ class Filename_Shema_Flag_Test extends TestCase {
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
@@ -127,7 +122,6 @@ class Filename_Shema_Flag_Test extends TestCase {
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
@@ -144,7 +138,6 @@ class Filename_Shema_Flag_Test extends TestCase {
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
@@ -161,7 +154,6 @@ class Filename_Shema_Flag_Test extends TestCase {
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "select_flag_data_depends_on_expansion" => "sp99",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
@@ -179,7 +171,6 @@ class Filename_Shema_Flag_Test extends TestCase {
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "select_flag_data_depends_on_expansion" => "sp02",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
@@ -197,7 +188,6 @@ class Filename_Shema_Flag_Test extends TestCase {
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
@@ -214,7 +204,6 @@ class Filename_Shema_Flag_Test extends TestCase {
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",

@@ -37,7 +37,6 @@ class Filename_Shema_Patch_Level_Test extends TestCase {
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "select_shema_patch_level" => "1.69"
     ];
 
@@ -47,7 +46,6 @@ class Filename_Shema_Patch_Level_Test extends TestCase {
       "url_shema_lin" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "select_shema_patch_leve" => "1.69"
     ];
 
@@ -58,7 +56,6 @@ class Filename_Shema_Patch_Level_Test extends TestCase {
       "url_shema_link" => "",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "select_shema_patch_level" => "1.609"
     ];
 
@@ -69,7 +66,6 @@ class Filename_Shema_Patch_Level_Test extends TestCase {
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/61757973",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "select_shema_patch_level" => "16.9"
     ];
 
@@ -79,7 +75,6 @@ class Filename_Shema_Patch_Level_Test extends TestCase {
       "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/61757973",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "url_shema_flag_option_depends_on_mod_data" => "https://www.php.net/manual/en/function.printf",
       "select_shema_patch_level" => "169"
     ];
 

@@ -2,6 +2,9 @@
 
 class Ui {
 
+  public const ui_key_path_source_dir = "path_source_dir";
+  public const ui_key_original_filename = "original_filename";
+
   # format-string to use with printf to print in ui
   private const input_shema_template_path_source_dir = '
     <input type="hidden" name="files[%1$d][path_source_dir]" value="%2$s">

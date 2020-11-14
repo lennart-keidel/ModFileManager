@@ -42,7 +42,7 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
     $this->ui_data1 = [
@@ -236,6 +236,9 @@ class Filename_Shema_Flag_Test extends TestCase {
 
     # not existing short link
     $this->wrong_filename4 = "P_D7qcva_Eep11_V";
+
+    # not existing expansion id
+    $this->wrong_filename5 = "P_D7qcva_Eep99_V";
 
   }
 
@@ -500,6 +503,16 @@ class Filename_Shema_Flag_Test extends TestCase {
   public function test_convert_filename_to_data_with_wrong_data4() : void {
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename4);
     $output = $this->getActualOutput();
+    assertIsString($output);
+    assertNotEquals("", $output);
+    assertNotEmpty($data_from_filename);
+  }
+
+
+  public function test_convert_filename_to_data_with_wrong_data5() : void {
+    $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename5);
+    $output = $this->getActualOutput();
+    var_dump($data_from_filename, $output);
     assertIsString($output);
     assertNotEquals("", $output);
     assertNotEmpty($data_from_filename);

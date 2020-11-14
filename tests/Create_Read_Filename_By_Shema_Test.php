@@ -33,7 +33,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 
@@ -292,7 +292,8 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
   public function test_read_data_from_filename_list_by_shema_with_wrong_data() : void {
     // $this->expectException(Shema_Exception::class);
-    Create_Read_Filename_By_Shema::read_data_from_filename_list_by_shema($this->test_read_data_from_filename_list_by_shema_wrong_data);
+    $result = Create_Read_Filename_By_Shema::read_data_from_filename_list_by_shema($this->test_read_data_from_filename_list_by_shema_wrong_data);
+    var_dump($result);
   }
 
 

@@ -9,6 +9,51 @@ class Filename_Shema_Patch_Level implements Filename_Shema {
   # format-string to use with printf to print in ui
   private const string_ui_format = "<span>%s</span>";
 
+  public const array_valid_patch_level = [
+    "1.70",
+    "1.69",
+    "1.67",
+    "1.66",
+    "1.63",
+    "1.57",
+    "1.55",
+    "1.50",
+    "1.48",
+    "1.47",
+    "1.42",
+    "1.39",
+    "1.38",
+    "1.36",
+    "1.34",
+    "1.33",
+    "1.32",
+    "1.31",
+    "1.29",
+    "1.27",
+    "1.26",
+    "1.25",
+    "1.24",
+    "1.22",
+    "1.19",
+    "1.18",
+    "1.17",
+    "1.15",
+    "1.14",
+    "1.12",
+    "1.11",
+    "1.10",
+    "1.09",
+    "1.08",
+    "1.07",
+    "1.06",
+    "1.05",
+    "1.04",
+    "1.03",
+    "1.02",
+    "1.01",
+    "1.00"
+  ];
+
 
   # convert data collected from ui to usable data for following process
   public static function convert_ui_data_to_data(array $data_from_ui) : array {
@@ -30,8 +75,8 @@ class Filename_Shema_Patch_Level implements Filename_Shema {
 
     $patch_level = current($data_converted);
 
-    # error if patch level not matching regex pattern
-    if(preg_match("/^[0-9]\.[0-9]{2}$/",$patch_level) !== 1){
+    # error if patch level not matching patch level
+    if(in_array($patch_level, self::array_valid_patch_level) === false){
       throw new Shema_Exception("Fehler beim Einlesen der Daten. Der eingegebene Patch-Level ist nicht gültig.\\nPatch-Level Eingabe-String: '".$patch_level."'");
     }
 
@@ -43,7 +88,7 @@ class Filename_Shema_Patch_Level implements Filename_Shema {
   public static function convert_filename_to_data(string $filename_part) : array {
 
     # error if patch level not matching regex pattern
-    if(preg_match("/^[0-9]{3}$/",$filename_part) !== 1){
+    if(in_array(substr($filename_part,0,1).".".substr($filename_part,1), self::array_valid_patch_level) === false){
       throw new Shema_Exception("Fehler beim Auslesen der Daten. Der ausgelesene Patch-Level ist nicht gültig.\\nPatch-Level Eingabe-String: '".$filename_part."'");
     }
 

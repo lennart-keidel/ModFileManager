@@ -306,6 +306,12 @@ class Filename_Shema_Flag implements Filename_Shema {
               $value = "";
             }
           }
+          if($option === "option_depends_on_expansion"){
+            if(preg_match("/^ep(0[1-9]|10|11)|sp0[1-9]$/",strtolower($value)) === 0){
+              new Shema_Exception("Fehler beim Auslesen der Daten.\\nDer Wert '$value' für den Optionsschlüssel '$key' ist nicht gültig. Das Flag '$short_id' wird daher für diese Datei übersprungen.", false);
+              continue;
+            }
+          }
           $array_result[$key] = $value;
         }
 

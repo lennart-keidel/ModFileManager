@@ -17,7 +17,7 @@ class Create_Read_Filename_By_Shema {
       $data = $shema_class::convert_ui_data_to_data($ui_data_for_one_file);
       $result .= $shema_class::convert_data_to_filename($data);
       if($shema_index < count(Main::shema_order_global)-1){
-        $result .= Create_Read_Filename_By_Shema::filename_shema_seperator;
+        $result .= self::filename_shema_seperator;
       }
     }
 
@@ -25,16 +25,19 @@ class Create_Read_Filename_By_Shema {
   }
 
 
+  # create filename list of new filenames by whole ui data
+  # repeat create_filename_by_shema_from_ui_data function for whole ui data
+  # connect to filename list
   public static function create_filename_list_by_shema_from_ui_data(array $ui_data) : array {
     $result = [];
-    $ui_data_for_all_files = $ui_data[Create_Read_Filename_By_Shema::ui_data_key_root];
+    $ui_data_for_all_files = $ui_data[self::ui_data_key_root];
     foreach($ui_data_for_all_files as $ui_data_for_one_file){
       $path_source_dir = dirname($ui_data_for_one_file[Ui::ui_key_path_source]);
       $original_filename = basename($ui_data_for_one_file[Ui::ui_key_path_source]);
-      $new_filename = Create_Read_Filename_By_Shema::create_filename_by_shema_from_ui_data($ui_data_for_one_file);
+      $new_filename = self::create_filename_by_shema_from_ui_data($ui_data_for_one_file);
       $result[$path_source_dir][$original_filename] = $new_filename;
     }
-    $result = Create_Read_Filename_By_Shema::add_index_to_duplicate_filenames_in_filename_list($result);
+    $result = self::add_index_to_duplicate_filenames_in_filename_list($result);
     return $result;
   }
 
@@ -60,7 +63,7 @@ class Create_Read_Filename_By_Shema {
         if($last_new_filename === $new_filename && $index > 1 && !empty($new_filename)){
           $filename_without_extension = File_Handler::get_filename_from_path_without_fileextension($new_filename);
           $fileextension = File_Handler::get_fileextension_from_path($new_filename);
-          $filename_list[$path][$old_filename] = $filename_without_extension.Create_Read_Filename_By_Shema::filename_shema_seperator.$index.(empty($fileextension) ? "" : ".".$fileextension);
+          $filename_list[$path][$old_filename] = $filename_without_extension.self::filename_shema_seperator.$index.(empty($fileextension) ? "" : ".".$fileextension);
         }
         else {
           $index = 1;
@@ -71,6 +74,43 @@ class Create_Read_Filename_By_Shema {
     }
 
     return $filename_list;
+  }
+
+
+  # read data from filename by shema
+  # reverse process of create_filename_by_shema_from_ui_data
+  # call convert_filename_to_data function of Filnema_Shema_* Classes and connect to array
+  private static function read_data_from_filename_by_shema(string $filename) : array {
+    $result = [];
+
+    $filename = File_Handler::get_filename_from_path_without_fileextension($filename);
+    $filename_splitted_by_shema = explode(self::filename_shema_seperator, $filename);
+    foreach(Main::shema_order_global as $shema_index => $shema_name){
+      $shema_class_name = "Filename_Shema_$shema_name";
+      $result = array_merge($result, $shema_class_name::convert_filename_to_data($filename_splitted_by_shema[$shema_index]));
+    }
+
+    return $result;
+  }
+
+
+
+  # reaed data from filename list by shema
+  # reverse process of create_filename_list_by_shema_from_ui_data
+  # call read_data_from_filename_by_shema and connect to ui-data array
+  public static function read_data_from_filename_list_by_shema(array $filename_list) : array {
+    $result = [self::ui_data_key_root => []];
+
+    foreach($filename_list as $path => $array_filenames){
+      $result_part = [];
+      foreach($array_filenames as $filename){
+        $result_part = self::read_data_from_filename_by_shema($filename);
+        $result_part[Ui::ui_key_path_source] = $path."/".$filename;
+        $result[self::ui_data_key_root][] = $result_part;
+      }
+    }
+
+    return $result;
   }
 }
 

@@ -22,6 +22,9 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
   protected $full_ui_data1 = [];
   protected $test_create_filename_list_by_shema_from_ui_data_input = [];
   protected $test_create_filename_list_by_shema_from_ui_data_expected_result = [];
+  protected $test_read_data_from_filename_by_shema_input_and_expected_output = [];
+  protected $wrong_filename1 = "";
+  protected $test_read_data_from_filename_list_by_shema_wrong_data = [];
 
 
   # set up ui data with realistic data
@@ -156,7 +159,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
           "select_shema_patch_level" => "1.67",
           "checkbox_shema_flag" => [
             "option_is_essential"
-          ],
+          ]
         ]
       ]
     ];
@@ -169,6 +172,74 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
       ],
       "/path/to/another/dir" => [
         "def.package" => "DR__a_little_description__ytrlb__167__12Nov20__V.package"
+      ]
+    ];
+
+
+    $this->test_read_data_from_filename_list_by_shema_input_and_expected_output = [
+      "input" => [
+        "/path/to/a/dir" => [
+          "TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01.sims3pack",
+          "TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01__2.sims3pack"
+        ],
+        "/path/to/another/dir" => [
+          "DR__a_little_description__ytrlb__167__12Nov20__V.package"
+        ]
+      ],
+      "expected_output" => [
+        "files" => [
+          [
+            "path_source" => "/path/to/a/dir/TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01.sims3pack",
+            "select_shema_categorie" => "option_tuning",
+            "text_shema_description" => "somtehing to do with this",
+            "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+            "date_shema_installation_date" => "2020-10-29",
+            "select_flag_data_depends_on_expansion" => "ep01",
+            "select_shema_patch_level" => "1.67",
+            "checkbox_shema_flag" => [
+              "option_depends_on_content",
+              "option_depends_on_expansion"
+            ],
+            "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+          ],
+          [
+            "path_source" => "/path/to/a/dir/TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01__2.sims3pack",
+            "select_shema_categorie" => "option_tuning",
+            "text_shema_description" => "somtehing to do with this",
+            "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+            "date_shema_installation_date" => "2020-10-29",
+            "select_flag_data_depends_on_expansion" => "ep01",
+            "select_shema_patch_level" => "1.67",
+            "checkbox_shema_flag" => [
+              "option_depends_on_content",
+              "option_depends_on_expansion"
+            ],
+            "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+          ],
+          [
+            "path_source" => "/path/to/another/dir/DR__a_little_description__ytrlb__167__12Nov20__V.package",
+            "select_shema_categorie" => "option_default_replacemant",
+            "text_shema_description" => "a little description",
+            "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+            "date_shema_installation_date" => "2020-11-12",
+            "select_shema_patch_level" => "1.67",
+            "checkbox_shema_flag" => [
+              "option_is_essential"
+            ]
+          ]
+        ]
+      ]
+    ];
+
+    $this->wrong_filename1 = "TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01.sims3pack";
+
+    $this->test_read_data_from_filename_list_by_shema_wrong_data = [
+      "/path/to/a/dir" => [
+        "TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01.sims3pack",
+        "TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep99__2.sims3pack"
+      ],
+      "/path/to/another/dir" => [
+        "DR__a_little_description__ytrlb__167__12Nov20__V.package"
       ]
     ];
   }
@@ -208,6 +279,24 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
     assertIsArray($result);
     assertEquals($this->test_create_filename_list_by_shema_from_ui_data_expected_result, $result);
   }
+
+
+  public function test_read_data_from_filename_list_by_shema() : void {
+    $input = $this->test_read_data_from_filename_list_by_shema_input_and_expected_output["input"];
+    $expected_output = $this->test_read_data_from_filename_list_by_shema_input_and_expected_output["expected_output"];
+    $result = Create_Read_Filename_By_Shema::read_data_from_filename_list_by_shema($input);
+    assertIsArray($result);
+    assertEquals($expected_output, $result);
+  }
+
+
+  public function test_read_data_from_filename_list_by_shema_with_wrong_data() : void {
+    // $this->expectException(Shema_Exception::class);
+    Create_Read_Filename_By_Shema::read_data_from_filename_list_by_shema($this->test_read_data_from_filename_list_by_shema_wrong_data);
+  }
+
+
+
 
 }
 

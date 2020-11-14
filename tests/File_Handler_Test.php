@@ -23,6 +23,47 @@ class File_Handler_Test extends TestCase {
     File_Handler_Test::path_temp_test_dir_root."/sub_dir3",
     File_Handler_Test::path_temp_test_dir_root."/empty_dir"
   ];
+  private $get_fileextension_from_path_input_and_expected_output = [
+    "/a/b/filename.txt" => "txt",
+    "filename.txt" => "txt",
+    "a.txt" => "txt",
+    ".hidden_filename.txt" => "txt",
+    ".hidden_filename_wihout_filextension" => "",
+    "no_filextension" => "",
+    "b" => "",
+    "" => "",
+    "/" => "",
+    "a.b.c" => "c",
+    ".a.b.c" => "c"
+  ];
+  private $get_filename_from_path_without_fileextension_input_and_expected_output = [
+    "/a/b/filename.txt" => "filename",
+    "filename.txt" => "filename",
+    "a.txt" => "a",
+    ".hidden_filename.txt" => ".hidden_filename",
+    ".hidden_filename_wihout_filextension" => ".hidden_filename_wihout_filextension",
+    "no_filextension" => "no_filextension",
+    "b" => "b",
+    "" => "",
+    "/" => "",
+    "a.b.c" => "a.b",
+    ".a.b.c" => ".a.b"
+  ];
+  private $remove_trailing_slash_from_path_input_and_expected_output = [
+    "/path/to/dir/" => "/path/to/dir",
+    "/path/to/dir" => "/path/to/dir",
+    "\\path\\to\\dir\\" => "\\path\\to\\dir",
+    "a/" => "a",
+    "a" => "a",
+    "./" => ".",
+    "." => ".",
+    "../" => "..",
+    ".." => "..",
+    "/" => "/",
+    "" => "",
+    "a//" => "a",
+    "a//////" => "a",
+  ];
 
   public function setUp() : void {
 
@@ -31,7 +72,7 @@ class File_Handler_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
   }
@@ -163,18 +204,16 @@ class File_Handler_Test extends TestCase {
 
 
   public function test_get_fileextension_from_path() : void {
-    $path1 = "/a/b/a.txt";
-    assertEquals(File_Handler::get_fileextension_from_path($path1), "txt");
-    $path2 = "filename.a.b.txt";
-    assertEquals(File_Handler::get_fileextension_from_path($path2), "txt");
+    foreach($this->get_fileextension_from_path_input_and_expected_output as $input => $expected_output){
+      assertEquals($expected_output, File_Handler::get_fileextension_from_path($input));
+    }
   }
 
 
   public function test_get_filename_from_path_without_fileextension() : void {
-    $path1 = "/a/b/filename.txt";
-    assertEquals(File_Handler::get_filename_from_path_without_fileextension($path1), "filename");
-    $path2 = "filename.a.b.txt";
-    assertEquals(File_Handler::get_filename_from_path_without_fileextension($path2), "filename.a.b");
+    foreach($this->get_filename_from_path_without_fileextension_input_and_expected_output as $input => $expected_output){
+      assertEquals($expected_output, File_Handler::get_filename_from_path_without_fileextension($input));
+    }
   }
 
 
@@ -195,7 +234,6 @@ class File_Handler_Test extends TestCase {
     }
 
     # rename first file
-    var_dump($path_original_filename,$path_second_original_filename);
     $path_new_filename = dirname($path_original_filename)."/new_filename.package";
     assertFileExists($path_original_filename);
     File_Handler::rename_file($path_original_filename, $path_new_filename);
@@ -209,6 +247,13 @@ class File_Handler_Test extends TestCase {
     File_Handler::rename_file($path_second_original_filename, $path_new_filename);
     assertFileExists($path_second_original_filename);
     assertFileExists($path_new_filename);
+  }
+
+
+  public function test_rename_file_with_wrong_data() : void {
+    while(is_file($not_existing_path = md5(rand()."a")));
+    $this->expectException(File_Handler_Exception::class);
+    File_Handler::rename_file($not_existing_path,"abc.txt");
   }
 
 
@@ -231,6 +276,13 @@ class File_Handler_Test extends TestCase {
         assertFileDoesNotExist($path."/".$old_filename);
         assertFileExists($path."/".$new_filename);
       }
+    }
+  }
+
+
+  public function test_remove_trailing_slash_from_path() : void {
+    foreach($this->remove_trailing_slash_from_path_input_and_expected_output as $input => $expected_output){
+      assertEquals($expected_output, File_Handler::remove_trailing_slash_from_path($input));
     }
   }
 

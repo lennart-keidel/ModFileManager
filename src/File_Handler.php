@@ -16,6 +16,7 @@ class File_Handler {
       || $file->isDir()){
         continue;
       }
+      $path = File_Handler::remove_trailing_slash_from_path($path);
       $result[$path][] = $file->getFilename();
     }
     return $result;
@@ -35,7 +36,7 @@ class File_Handler {
       if(array_search(strtolower($file->getExtension()), $fileextension_filter) === false || $file->isDir()){
         continue;
       }
-      $path_directory = dirname($file->getPathname());
+      $path_directory = File_Handler::remove_trailing_slash_from_path(dirname($file->getPathname()));
       $result[$path_directory][] = $file->getFilename();
     }
     return $result;
@@ -45,14 +46,22 @@ class File_Handler {
   # get fileextension from path without filename
   public static function get_fileextension_from_path(string $path) : string {
     $filename = basename($path);
-    return substr($filename, strrpos($filename,".")+1);
+    $pos_dot = strrpos($filename,".");
+    if($pos_dot === 0 || $pos_dot === false){
+      return "";
+    }
+    return substr($filename, $pos_dot+1);
   }
 
 
   # get filename from path without fileextension
   public static function get_filename_from_path_without_fileextension(string $path) : string {
     $filename = basename($path);
-    return substr($filename, 0, strrpos($filename,"."));
+    $pos_dot = strrpos($filename,".");
+    if($pos_dot === 0 || $pos_dot === false){
+      return $filename;
+    }
+    return substr($filename, 0, $pos_dot);
   }
 
 
@@ -80,6 +89,14 @@ class File_Handler {
         File_Handler::rename_file($path."/".$old_filename, $path."/".$new_filename);
       }
     }
+  }
+
+
+  public static function remove_trailing_slash_from_path(string $path) : string {
+    while(strlen($path) > 1 && (substr($path,-1)==="/" || substr($path,-1)==="\\")){
+      $path = substr($path, 0, strlen($path)-1);
+    }
+    return $path;
   }
 
 

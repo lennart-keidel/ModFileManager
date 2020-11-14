@@ -1,6 +1,6 @@
 <?php
 
-class Filename_Shema_Categorie implements Filename_Shema {
+class Filename_Shema_Categorie implements I_Filename_Shema {
 
   public const array_ui_data_key = [
     "select_shema_categorie"

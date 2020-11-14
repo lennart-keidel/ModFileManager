@@ -1,7 +1,7 @@
 <?php
 
 # interface for every filename-shema-part
-Interface Filename_Shema {
+Interface I_Filename_Shema {
 
   # convert data collected from ui to usable data for following process
   public static function convert_ui_data_to_data(array $data_from_ui) : array;

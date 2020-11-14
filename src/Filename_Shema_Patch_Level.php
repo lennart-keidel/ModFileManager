@@ -1,6 +1,6 @@
 <?php
 
-class Filename_Shema_Patch_Level implements Filename_Shema {
+class Filename_Shema_Patch_Level implements I_Filename_Shema {
 
   public const array_ui_data_key = [
     "select_shema_patch_level"

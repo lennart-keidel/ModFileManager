@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\Constraint\ExceptionMessageRegularExpression;
 
-class Filename_Shema_Flag implements Filename_Shema {
+class Filename_Shema_Flag implements I_Filename_Shema {
 
   public const array_ui_data_key = [
     "checkbox_shema_flag"

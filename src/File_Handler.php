@@ -1,6 +1,6 @@
 <?php
 
-class File_Handler {
+abstract class File_Handler {
 
   public const fileextension_filter = ["sims3pack", "package"];
 

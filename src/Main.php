@@ -1,6 +1,6 @@
 <?php
 
-class Main {
+abstract class Main {
 
   public const shema_order_global = [
     0 => "Categorie",

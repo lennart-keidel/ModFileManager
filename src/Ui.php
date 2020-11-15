@@ -1,6 +1,6 @@
 <?php
 
-class Ui {
+abstract class Ui {
 
   public const ui_key_path_source = "path_source";
 

@@ -1,6 +1,6 @@
 <?php
 
-class Filename_Shema_Installation_Date implements I_Filename_Shema {
+abstract class Filename_Shema_Installation_Date implements I_Filename_Shema {
 
   public const array_ui_data_key = [
     "date_shema_installation_date"

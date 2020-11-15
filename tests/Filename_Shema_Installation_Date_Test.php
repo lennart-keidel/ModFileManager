@@ -28,7 +28,7 @@ class Filename_Shema_Installation_Date_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 
@@ -155,6 +155,7 @@ class Filename_Shema_Installation_Date_Test extends TestCase {
   public function test_convert_data_to_filename_with_wrong_ui_data2() : void {
     $converted_ui_data = Filename_Shema_Installation_Date::convert_ui_data_to_data($this->wrong_ui_data3);
     $this->expectException(Shema_Exception::class);
+    Filename_Shema_Installation_Date::convert_data_to_filename($converted_ui_data);
   }
 
 

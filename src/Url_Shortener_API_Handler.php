@@ -2,7 +2,7 @@
 
 use function PHPUnit\Framework\isEmpty;
 
-class Url_Shortener_API_Handler {
+abstract class Url_Shortener_API_Handler {
 
   private const signature = 'f13712add9';
   public const api_url =  'https://lennart-keidel.de/url/yourls-api.php';

@@ -1,6 +1,6 @@
 <?php
 
-class Filename_Shema_Description implements I_Filename_Shema {
+abstract class Filename_Shema_Description implements I_Filename_Shema {
 
   public const array_ui_data_key = [
     "text_shema_description"

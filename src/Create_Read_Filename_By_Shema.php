@@ -1,6 +1,6 @@
 <?php
 
-class Create_Read_Filename_By_Shema {
+abstract class Create_Read_Filename_By_Shema {
 
   public const filename_shema_seperator = "__";
   public const ui_data_key_root = "files";

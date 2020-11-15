@@ -253,7 +253,7 @@ class File_Handler_Test extends TestCase {
   public function test_rename_file_with_wrong_data() : void {
     while(is_file($not_existing_path = md5(rand()."a")));
     $this->expectException(File_Handler_Exception::class);
-    File_Handler::rename_file($not_existing_path,"abc.txt");
+    File_Handler::rename_file($not_existing_path.".txt","abc.txt");
   }
 
 

@@ -5,6 +5,7 @@ use function PHPUnit\Framework\assertContains;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEmpty;
 use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertIsArray;
 use function PHPUnit\Framework\assertIsString;
 use function PHPUnit\Framework\assertNotEmpty;
@@ -222,7 +223,8 @@ class Filename_Shema_Flag_Test extends TestCase {
 
     $this->filename4 = "D7qcvl";
 
-    $this->filename5 = "Esp09";
+    # expansion id is uppercase, assume it's converted to lowercase
+    $this->filename5 = "ESP09";
 
 
     # empty flag, that only is valid if it's the only flag
@@ -238,7 +240,16 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_filename4 = "P_D7qcva_Eep11_V";
 
     # not existing expansion id
-    $this->wrong_filename5 = "P_D7qcva_Eep99_V";
+    $this->wrong_filename5 = "P_D7qcvl_Eep99_V";
+
+    # install in packages and install in overrides, both together are not valid
+    $this->wrong_filename6 = "P_D7qcvl_Eep01_O_V";
+
+    # flag that requires sub data has no data
+    $this->wrong_filename7 = "P_D_Eep07_V";
+
+    # install in packages and install in overrides, both together are not valid, in different order
+    $this->wrong_filename8 = "O_D7qcvl_Eep01_P_V";
 
   }
 
@@ -468,12 +479,18 @@ class Filename_Shema_Flag_Test extends TestCase {
     assertIsArray($data_from_filename[$main_key]);
     assertCount(1, $data_from_filename[$main_key]);
     assertContains("option_depends_on_expansion",$data_from_filename[$main_key]);
+    assertTrue($data_from_filename["select_flag_data_depends_on_expansion"] === "sp09");
   }
 
 
 
   public function test_convert_filename_to_data_with_wrong_data1() : void {
+    $this->wrong_filename1 = "P_D7qcvl_Eep11_I";
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename1);
+    $main_key = current(Filename_Shema_Flag::array_ui_data_key);
+    assertCount(3,$data_from_filename);
+    assertCount(3,$data_from_filename[$main_key]);
+    assertFalse(in_array("no_flag_option_selected", $data_from_filename[$main_key]));
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEquals("", $output);
@@ -489,11 +506,15 @@ class Filename_Shema_Flag_Test extends TestCase {
     assertIsArray($data_from_filename[$main_key]);
     assertCount(1, $data_from_filename[$main_key]);
     assertContains("option_depends_on_expansion",$data_from_filename[$main_key]);
+    assertTrue($data_from_filename["select_flag_data_depends_on_expansion"] === "sp07");
   }
 
 
   public function test_convert_filename_to_data_with_wrong_data3() : void {
-    Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename3);
+    $result = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename3);
+    $main_key = current(Filename_Shema_Flag::array_ui_data_key);
+    assertCount(3, $result);
+    assertCount(4, $result[$main_key]);
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEquals("", $output);
@@ -502,6 +523,10 @@ class Filename_Shema_Flag_Test extends TestCase {
 
   public function test_convert_filename_to_data_with_wrong_data4() : void {
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename4);
+    $main_key = current(Filename_Shema_Flag::array_ui_data_key);
+    assertCount(2, $data_from_filename);
+    assertCount(3, $data_from_filename[current(Filename_Shema_Flag::array_ui_data_key)]);
+    assertFalse(in_array("option_depends_on_content", $data_from_filename[$main_key]));
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEquals("", $output);
@@ -511,8 +536,52 @@ class Filename_Shema_Flag_Test extends TestCase {
 
   public function test_convert_filename_to_data_with_wrong_data5() : void {
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename5);
+    $main_key = current(Filename_Shema_Flag::array_ui_data_key);
+    assertCount(2, $data_from_filename);
+    assertCount(3, $data_from_filename[current(Filename_Shema_Flag::array_ui_data_key)]);
+    assertFalse(in_array("option_depends_on_expansion", $data_from_filename[$main_key]));
     $output = $this->getActualOutput();
-    var_dump($data_from_filename, $output);
+    assertIsString($output);
+    assertNotEquals("", $output);
+    assertNotEmpty($data_from_filename);
+  }
+
+
+  public function test_convert_filename_to_data_with_wrong_data6() : void {
+    $this->wrong_filename6 = "P_D7qcvl_Eep01_O_V";
+    $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename6);
+    $main_key = current(Filename_Shema_Flag::array_ui_data_key);
+    assertCount(3, $data_from_filename);
+    assertCount(4, $data_from_filename[$main_key]);
+    assertFalse(in_array("option_install_in_overrides", $data_from_filename[$main_key]));
+    $output = $this->getActualOutput();
+    assertIsString($output);
+    assertNotEquals("", $output);
+    assertNotEmpty($data_from_filename);
+  }
+
+
+  public function test_convert_filename_to_data_with_wrong_data7() : void {
+    $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename7);
+    $main_key = current(Filename_Shema_Flag::array_ui_data_key);
+    assertCount(2, $data_from_filename);
+    assertCount(3, $data_from_filename[$main_key]);
+    assertFalse(in_array("option_depends_on_content", $data_from_filename[$main_key]));
+    assertFalse(in_array("url_flag_data_depends_on_content", $data_from_filename));
+    $output = $this->getActualOutput();
+    assertIsString($output);
+    assertNotEquals("", $output);
+    assertNotEmpty($data_from_filename);
+  }
+
+
+  public function test_convert_filename_to_data_with_wrong_data8() : void {
+    $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename8);
+    $main_key = current(Filename_Shema_Flag::array_ui_data_key);
+    assertCount(3, $data_from_filename);
+    assertCount(4, $data_from_filename[$main_key]);
+    assertFalse(in_array("option_install_in_overrides", $data_from_filename[$main_key]));
+    $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEquals("", $output);
     assertNotEmpty($data_from_filename);

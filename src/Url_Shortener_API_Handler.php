@@ -82,8 +82,6 @@ class Url_Shortener_API_Handler {
     $response = curl_exec($ch);
     curl_close($ch);
 
-    // var_dump($response);
-
     // Do something with the result. Here, we echo the long URL
     $data = @json_decode($response);
 

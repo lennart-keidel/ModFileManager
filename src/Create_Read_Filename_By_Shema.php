@@ -11,6 +11,7 @@ class Create_Read_Filename_By_Shema {
   public static function create_filename_by_shema_from_ui_data(array $ui_data_for_one_file) : string {
     $result = "";
 
+    Shema_Exception::set_source_path($ui_data_for_one_file[Ui::ui_key_path_source]);
     $original_fileextension = File_Handler::get_fileextension_from_path($ui_data_for_one_file[Ui::ui_key_path_source]);
     foreach(Main::shema_order_global as $shema_index => $shema_class_name){
       $shema_class = "Filename_Shema_$shema_class_name";
@@ -19,6 +20,7 @@ class Create_Read_Filename_By_Shema {
       if($shema_index < count(Main::shema_order_global)-1){
         $result .= self::filename_shema_seperator;
       }
+
     }
 
     return $result.(empty($original_fileextension) ? "" : ".".$original_fileextension);
@@ -95,7 +97,7 @@ class Create_Read_Filename_By_Shema {
 
 
 
-  # reaed data from filename list by shema
+  # read data from filename list by shema
   # reverse process of create_filename_list_by_shema_from_ui_data
   # call read_data_from_filename_by_shema and connect to ui-data array
   public static function read_data_from_filename_list_by_shema(array $filename_list) : array {
@@ -104,6 +106,7 @@ class Create_Read_Filename_By_Shema {
     foreach($filename_list as $path => $array_filenames){
       $result_part = [];
       foreach($array_filenames as $filename){
+        Shema_Exception::set_source_path($path."/".$filename);
         $result_part = self::read_data_from_filename_by_shema($filename);
         $result_part[Ui::ui_key_path_source] = $path."/".$filename;
         $result[self::ui_data_key_root][] = $result_part;

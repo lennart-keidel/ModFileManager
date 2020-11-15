@@ -291,9 +291,10 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
 
   public function test_read_data_from_filename_list_by_shema_with_wrong_data() : void {
-    // $this->expectException(Shema_Exception::class);
     $result = Create_Read_Filename_By_Shema::read_data_from_filename_list_by_shema($this->test_read_data_from_filename_list_by_shema_wrong_data);
-    var_dump($result);
+    $output = $this->getActualOutput();
+    assertIsString($output);
+    assertNotEmpty($output);
   }
 
 

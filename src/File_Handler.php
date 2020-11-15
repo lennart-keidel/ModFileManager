@@ -70,28 +70,36 @@ class File_Handler {
     if($path_original_filename===$path_new_filename){
       return;
     }
+    if(is_file($path_new_filename)){
+      File_Handler_Exception::append_source_path($path_new_filename);
+      throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Der Dateiname unter dem Pfad existiert bereits und wird nicht umbennant, um die Datei nicht zu überschreiben.");
+      return;
+    }
     try {
-      if(is_file($path_new_filename)){
-        throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Der Dateiname unter dem Pfad existiert bereits und wird nicht umbennant um die Datei nicht zu überschreiben: ".$path_new_filename);
-      }
       rename($path_original_filename, $path_new_filename);
     }
     catch(Exception $e){
+      File_Handler_Exception::append_source_path($path_original_filename);
       throw new File_Handler_Exception($e->getMessage());
+      return;
     }
   }
 
 
-
+  # rename files form filename list
+  # in format [ path => [ old_filename => new_filename ] ]
   public static function rename_file_from_filename_list(array $filename_list) : void {
     foreach($filename_list as $path => $array_filename){
       foreach($array_filename as $old_filename => $new_filename){
+        File_Handler_Exception::set_source_path($path);
         File_Handler::rename_file($path."/".$old_filename, $path."/".$new_filename);
       }
     }
   }
 
 
+  # remove trailing slash from path
+  # works for backslash and slash
   public static function remove_trailing_slash_from_path(string $path) : string {
     while(strlen($path) > 1 && (substr($path,-1)==="/" || substr($path,-1)==="\\")){
       $path = substr($path, 0, strlen($path)-1);

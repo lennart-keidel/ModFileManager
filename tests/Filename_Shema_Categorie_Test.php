@@ -5,6 +5,7 @@ use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertIsArray;
 use function PHPUnit\Framework\assertIsString;
+use function PHPUnit\Framework\assertNotEmpty;
 use function PHPUnit\Framework\assertNotEquals;
 
 # test class
@@ -121,7 +122,7 @@ class Filename_Shema_Categorie_Test extends TestCase {
     Filename_Shema_Categorie::print_filename_data_for_ui($data_from_filename);
     $output = $this->getActualOutput();
     assertIsString($output);
-    assertNotEquals("", $output);
+    assertNotEmpty($output);
   }
 
 }

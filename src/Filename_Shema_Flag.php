@@ -189,7 +189,7 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
 
   # create array with data of sub-options that are required by other options
   # error if key with sub-data not existing
-  public static function create_array_with_required_sub_data_from_ui_data(array $data_from_ui) : array {
+  private static function create_array_with_required_sub_data_from_ui_data(array $data_from_ui) : array {
     $array_sub_data = [];
     foreach(self::array_ui_data_key_sub_data as $key_option => $array_sub_keys){
       if(array_search($key_option, $data_from_ui[current(self::array_ui_data_key)]) !== false){
@@ -298,6 +298,37 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
     $result = "";
     $result .= self::array_option_short_id[$option_key];
     return $result;
+  }
+
+
+  # reverse process: converting filename back to data
+  public static function convert_filename_to_data(string $filename_part) : array {
+    $main_key = current(self::array_ui_data_key);
+    $array_result = [$main_key => []];
+    $filename_as_array = explode(self::filename_flag_delimiter,$filename_part);
+
+    # iterate through filename data
+    foreach($filename_as_array as $filename_flag_part){
+
+      $short_id = substr($filename_flag_part,0,1);
+      $option = array_search($short_id, self::array_option_short_id);
+
+      # if flag not valid, skip this flag for this file
+      if(self::convert_filename_to_data_validate_option($option, $filename_flag_part, $filename_as_array, $array_result[$main_key]) === false ||
+         self::convert_filename_to_data_check_for_not_combineable_options($option, $filename_as_array) === false){
+        continue;
+      }
+
+      # add option to result array
+      # process data specific to flag
+      $function_name = "convert_filename_to_data_$option";
+      if(self::$function_name($filename_flag_part, $array_result) === true){
+        $array_result[$main_key][] = $option;
+      }
+
+    }
+
+    return $array_result;
   }
 
 
@@ -410,38 +441,6 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
     }
     return true;
   }
-
-
-  # reverse process: converting filename back to data
-  public static function convert_filename_to_data(string $filename_part) : array {
-    $main_key = current(self::array_ui_data_key);
-    $array_result = [$main_key => []];
-    $filename_as_array = explode(self::filename_flag_delimiter,$filename_part);
-
-    # iterate through filename data
-    foreach($filename_as_array as $filename_flag_part){
-
-      $short_id = substr($filename_flag_part,0,1);
-      $option = array_search($short_id, self::array_option_short_id);
-
-      # if flag not valid, skip this flag for this file
-      if(self::convert_filename_to_data_validate_option($option, $filename_flag_part, $filename_as_array, $array_result[$main_key]) === false ||
-         self::convert_filename_to_data_check_for_not_combineable_options($option, $filename_as_array) === false){
-        continue;
-      }
-
-      # add option to result array
-      # process data specific to flag
-      $function_name = "convert_filename_to_data_$option";
-      if(self::$function_name($filename_flag_part, $array_result) === true){
-        $array_result[$main_key][] = $option;
-      }
-
-    }
-
-    return $array_result;
-  }
-
 
 
   # print converted data from filename to ui

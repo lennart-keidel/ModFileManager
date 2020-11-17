@@ -7,6 +7,12 @@ abstract class File_Handler {
   # get list of filenames and filter for fileextensions
   # return array in format: [path => [filename1, filename2]]
   public static function get_filename_list_from_path(string $path) : array {
+    if(is_dir($path) === false){
+      File_Handler_Exception::set_source_path($path);
+      throw new File_Handler_Exception("Der angegebene Pfad ist kein Ordner. Der Pfad muss ein Ordner sein.");
+      return [];
+    }
+
     $result = [];
     $fileextension_filter = array_map("strtolower", File_Handler::fileextension_filter);
 
@@ -26,6 +32,12 @@ abstract class File_Handler {
   # get list of filenames and filter for fileextensions
   # return array in format: [path => [filename1, filename2]]
   public static function get_filename_list_from_path_recursive(string $path_root) : array {
+    if(is_dir($path_root) === false){
+      File_Handler_Exception::set_source_path($path_root);
+      throw new File_Handler_Exception("Der angegebene Pfad ist kein Ordner. Der Pfad muss ein Ordner sein.");
+      return [];
+    }
+
     $result = [];
     $fileextension_filter = array_map("strtolower", File_Handler::fileextension_filter);
 
@@ -73,6 +85,11 @@ abstract class File_Handler {
     if(is_file($path_new_filename)){
       File_Handler_Exception::append_source_path($path_new_filename);
       throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Der Dateiname unter dem Pfad existiert bereits und wird nicht umbennant, um die Datei nicht zu überschreiben.");
+      return;
+    }
+    if(is_file($path_original_filename) === false){
+      File_Handler_Exception::append_source_path($path_original_filename);
+      throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Die Datei existiert nicht oder ist keine gültige Datei.");
       return;
     }
     try {

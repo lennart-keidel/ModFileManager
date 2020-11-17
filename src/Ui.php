@@ -22,7 +22,7 @@ abstract class Ui {
   private static $out_input_shema_index = 0;
 
   # print error message as js alert
-  public static function out_error(string $message) : void {
+  public static function print_error(string $message) : void {
     if(!empty($message)){
       printf(Ui::template_error_message, $message);
     }

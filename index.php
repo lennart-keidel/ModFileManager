@@ -24,6 +24,10 @@ require 'vendor/autoload.php';
       background-color: transparent;
     }
   </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){ console.log("a"); });
+    document.addEventListener("DOMContentLoaded", function(){ console.log("b"); });
+  </script>
 </head>
 <body>
 
@@ -43,7 +47,6 @@ require 'vendor/autoload.php';
   <hr>
 
   <form class="shema_input" method="post" action=".">
-
 
     <?php
       Filename_Shema_Categorie::print_filename_shema_input_for_ui(0);

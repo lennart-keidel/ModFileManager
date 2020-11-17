@@ -11,10 +11,35 @@ require 'vendor/autoload.php';
   <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
   <style>
 
+    details {
+      padding-top: 0.5em;
+    }
+
+    details > *:not(summary){
+      padding-left: 2em;
+    }
+
+    summary {
+      padding-bottom: 0.5em;
+      font-weight: bold;
+    }
+
+    summary:focus {
+      outline: none;
+    }
+
+    .container_label_and_input {
+      padding-bottom: 0.5em;
+    }
+
+    .container_label_and_input.sub_input {
+      padding-left: 2em;
+    }
+
     /* add line break in form element */
-    .shema_input label + input,
-    .shema_input label + select,
-    .shema_input input[type=checkbox] + label {
+    .container_label_and_input > label + input,
+    .container_label_and_input > label + select,
+    .container_label_and_input > label + textarea {
       display: block;
     }
 
@@ -31,31 +56,55 @@ require 'vendor/autoload.php';
 </head>
 <body>
 
-  <form class="shema_search" method="post" action=".">
   <?php
-    foreach(Main::shema_order_global as $class_id){
-      echo "<div>";
-      echo '<input type="checkbox" name="enable_shema_search_'.$class_id.'" checked>';
-      $full_class_name = "Filename_Shema_$class_id";
-      $full_class_name::print_filneame_shema_search_input_for_ui();
-      echo "</div>";
-    }
+
+    Ui::print_source_path_input();
+
   ?>
-  <input type="submit" value="suchen">
-  </form>
 
   <hr>
 
-  <form class="shema_input" method="post" action=".">
+  <?php
+
+    Ui::print_filename_shema_search_input();
+  ?>
+
+  <hr>
 
     <?php
-      Filename_Shema_Categorie::print_filename_shema_input_for_ui(0);
-      Filename_Shema_Description::print_filename_shema_input_for_ui(0);
-      Filename_Shema_Patch_Level::print_filename_shema_input_for_ui(0);
-      Filename_Shema_Flag::print_filename_shema_input_for_ui(0);
+      $filename_list = [
+        "mods" => [
+          "abc_def.package"
+        ]
+      ];
+
+      Ui::print_filename_shema_input_for_filename_list($filename_list);
     ?>
 
-    <input type="submit" value="absenden">
+    <hr>
+
+    <?php
+
+      $filename_data_list = [
+        "files" => [
+          [
+            "path_source" => "mods/ghi_jkl.package",
+            "select_shema_categorie" => "Tuning",
+            "text_shema_description" => "somtehing to do with this",
+            "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+            "date_shema_installation_date" => "2020-10-29",
+            "select_flag_data_depends_on_expansion" => "ep01",
+            "checkbox_shema_flag" => [
+              "option_depends_on_content",
+              "option_depends_on_expansion"
+            ],
+            "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+          ]
+        ]
+      ];
+
+      Ui::print_input_shema_for_filename_data_list_and_fill($filename_data_list);
+    ?>
 
     <?php
       if(isset($_POST) && !empty($_POST)){

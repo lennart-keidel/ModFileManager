@@ -19,7 +19,7 @@ Interface I_Filename_Shema {
   public static function print_filename_shema_input_for_ui(int $index) : void;
 
   # print filename shema input to ui
-  public static function print_filneame_shema_search_input_for_ui() : void;
+  public static function print_filneame_shema_search_input_for_ui(int $index) : void;
 }
 
 ?>

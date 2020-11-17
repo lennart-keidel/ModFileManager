@@ -66,23 +66,34 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
 
   # input shema template for ui
   private const input_shema_template = '
-  <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
-  <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
+  <div class="container_label_and_input">
+    <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
+    <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
+  </div>
 
-  <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_packages%1$d" value="option_install_in_packages">
-  <label for="option_install_in_packages%1$d">muss in Packages-Ordner installiert werden</label>
+  <div class="container_label_and_input">
+    <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_packages%1$d" value="option_install_in_packages">
+    <label for="option_install_in_packages%1$d">muss in Packages-Ordner installiert werden</label>
+  </div>
 
-  <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_depends_on_content%1$d" value="option_depends_on_content">
-  <label for="option_depends_on_content%1$d">abhängig von anderem Mod, CC, Store oder ähnlichem</label>
+  <div class="container_label_and_input">
+    <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_depends_on_content%1$d" value="option_depends_on_content">
+    <label for="option_depends_on_content%1$d">abhängig von anderem Mod, CC, Store oder ähnlichem</label>
+  </div>
 
-  <input disabled-and-hidden-until="[\'checked\',\'option_depends_on_content%1$d\']" id="url_flag_data_depends_on_content%1$d" type="url" name="%2$s[%1$d][url_flag_data_depends_on_content]">
-  <label disabled-and-hidden-until="[\'checked\',\'option_depends_on_content%1$d\']" for="url_flag_data_depends_on_content%1$d">Link zum Mod, CC von dem dieser Mod, CC abhängig ist</label>
+  <div class="container_label_and_input sub_input">
+    <label disabled-and-hidden-until="[\'checked\',\'option_depends_on_content%1$d\']" for="url_flag_data_depends_on_content%1$d">Link zum Mod, CC von dem dieser Mod, CC abhängig ist</label>
+    <input disabled-and-hidden-until="[\'checked\',\'option_depends_on_content%1$d\']" id="url_flag_data_depends_on_content%1$d" type="url" name="%2$s[%1$d][url_flag_data_depends_on_content]" required>
+  </div>
 
-  <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion">
-  <label for="option_depends_on_expansion%1$d">abhängig von Erweiterungspack oder Accessoirepack</label>
+  <div class="container_label_and_input">
+    <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion">
+    <label for="option_depends_on_expansion%1$d">abhängig von Erweiterungspack oder Accessoirepack</label>
+  </div>
 
+  <div class="container_label_and_input sub_input">
     <label disabled-and-hidden-until="[\'checked\',\'option_depends_on_expansion%1$d\']" for="select_flag_data_depends_on_expansion%1$d">Erweiterung von dem dieser Mod, CC abhängig ist</label>
-    <select disabled-and-hidden-until="[\'checked\',\'option_depends_on_expansion%1$d\']" id="select_flag_data_depends_on_expansion%1$d" name="%2$s[%1$d][select_flag_data_depends_on_expansion]">
+    <select disabled-and-hidden-until="[\'checked\',\'option_depends_on_expansion%1$d\']" id="select_flag_data_depends_on_expansion%1$d" name="%2$s[%1$d][select_flag_data_depends_on_expansion]" required>
       <option value="" selected disabled>Auswählen</option>
       <optgroup label="Erweiterungspack">
         <option value="ep01">Reiseabenteuer</option>
@@ -99,7 +110,7 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
       </optgroup>
       <optgroup label="Accessoirepack">
         <option value="sp01">Luxus Accessoires</option>
-        <option value="sp02">Gib Gas-Luxus Accessoires</option>
+        <option value="sp02">Gib Gas Accessoires</option>
         <option value="sp03">Design Garten Accessoires</option>
         <option value="sp04">Stadt Accessoires</option>
         <option value="sp05">Traumsuite Accessoires</option>
@@ -109,9 +120,12 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
         <option value="sp09">Movie Accessoires</option>
       </optgroup>
     </select>
+  </div>
 
+  <div class="container_label_and_input">
     <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_is_essential%1$d" value="option_is_essential">
     <label for="option_is_essential%1$d">gehört zu den absolut wichtigsten Mods/CC, die immer installiert sein sollen</label>
+  </div>
   ';
 
 
@@ -476,8 +490,8 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
 
 
   # print filename shema search input to ui
-  public static function print_filneame_shema_search_input_for_ui() : void {
-    printf(self::input_shema_template, 0, Ui::ui_search_data_key_root);
+  public static function print_filneame_shema_search_input_for_ui(int $index) : void {
+    printf(self::input_shema_template, $index, Ui::ui_search_data_key_root);
   }
 
 }

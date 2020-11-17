@@ -11,8 +11,10 @@ abstract class Filename_Shema_Description implements I_Filename_Shema {
 
   # input shema template for ui
   private const input_shema_template = '
-    <label for="text_shema_description%1$d">Beschreibung</label>
-    <input id="text_shema_description%1$d" type="text" name="%2$s[%1$d][text_shema_description]" placeholder="max. '.self::max_description_length.' Zeichen, Sonderzeichen werden entfernt">
+    <div class="container_label_and_input">
+      <label for="text_shema_description%1$d">Beschreibung</label>
+      <input id="text_shema_description%1$d" type="text" name="%2$s[%1$d][text_shema_description]" placeholder="max. '.self::max_description_length.' Zeichen, Sonderzeichen werden entfernt">
+    </div>
   ';
 
   # format-string to use with printf to print in ui
@@ -108,8 +110,8 @@ abstract class Filename_Shema_Description implements I_Filename_Shema {
 
 
   # print filename shema search input to ui
-  public static function print_filneame_shema_search_input_for_ui() : void {
-    printf(self::input_shema_template, 0, Ui::ui_search_data_key_root);
+  public static function print_filneame_shema_search_input_for_ui(int $index) : void {
+    printf(self::input_shema_template, $index, Ui::ui_search_data_key_root);
   }
 
 }

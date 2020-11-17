@@ -97,7 +97,7 @@ abstract class File_Handler {
     }
     catch(Exception $e){
       File_Handler_Exception::append_source_path($path_original_filename);
-      throw new File_Handler_Exception($e->getMessage());
+      throw new File_Handler_Exception("Fehler beim umbenennen der Dateien.\\nHier die PHP-Fehlermeldung: ".$e->getMessage());
       return;
     }
   }

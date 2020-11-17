@@ -9,6 +9,12 @@ abstract class Filename_Shema_Description implements I_Filename_Shema {
   # max amount of character the discription can contain
   private const max_description_length = 75;
 
+  # input shema template for ui
+  private const input_shema_template = '
+    <label for="text_shema_description%1$d">Beschreibung</label>
+    <input id="text_shema_description%1$d" type="text" name="%2$s[%1$d][text_shema_description]" placeholder="max. '.self::max_description_length.' Zeichen, Sonderzeichen werden entfernt">
+  ';
+
   # format-string to use with printf to print in ui
   private const string_ui_format = "<span>%s</span>";
 
@@ -17,6 +23,13 @@ abstract class Filename_Shema_Description implements I_Filename_Shema {
   # value: replace with
   private const array_replace_regex_data_to_filename = [
     "[^A-Za-z0-9_]" => "_",
+    "[ü]" => "ue",
+    "[Ü]" => "Ue",
+    "[ö]" => "oe",
+    "[Ö]" => "Oe",
+    "[ä]" => "ae",
+    "[Ä]" => "Ae",
+    "[ß]" => "ss",
     "_{2,}" => "_",
     "_$" => ""
   ];
@@ -85,6 +98,18 @@ abstract class Filename_Shema_Description implements I_Filename_Shema {
   public static function print_filename_data_for_ui(array $filename_data) : void {
     # print data from filename to ui by formated string
     printf(Filename_Shema_Description::string_ui_format, current($filename_data));
+  }
+
+
+  # print filename shema input to ui
+  public static function print_filename_shema_input_for_ui(int $index) : void {
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root);
+  }
+
+
+  # print filename shema search input to ui
+  public static function print_filneame_shema_search_input_for_ui() : void {
+    printf(self::input_shema_template, 0, Ui::ui_search_data_key_root);
   }
 
 }

@@ -25,6 +25,33 @@ abstract class Filename_Shema_Categorie implements I_Filename_Shema {
     "option_other" => "OTH"
   ];
 
+  # input shema template for ui
+  private const input_shema_template = '
+    <label for="select_shema_categorie%1$d">Kategorie</label>
+    <select id="select_shema_categorie%1$d" name="%2$s[%1$d][select_shema_categorie]">
+      <option value="" selected disabled>Auswählen</option>
+      <optgroup label="CC">
+        <option value="option_cc_buy">Custom Content Objekt für Kaufmodus</option>
+        <option value="option_cc_build">Custom Content Objekt für Baumodus</option>
+        <option value="option_cc_script">Custom Content Objekt mit eigenem Script/Funktion</option>
+        <option value="option_cc_create_a_sim">Cutom Content für Create-A-Sim</option>
+      </optgroup>
+      <optgroup label="Mod">
+        <option value="option_tuning">Tuning</option>
+        <option value="option_default_replacemant">Default Replacemant</option>
+        <option value="option_script">Script-Mod</option>
+        <option value="option_mod_create_a_sim">Slider oder Mod für Create-A-Sim</option>
+        <option value="option_core_mod">Core Mod</option>
+      </optgroup>
+      <option value="option_other">keine der anderen Kategorien</option>
+    </select>
+  ';
+
+
+  private const input_shema_search_template = '
+
+  ';
+
 
   # convert data collected from ui to usable data for following process
   public static function convert_ui_data_to_data(array $data_from_ui) : array {
@@ -79,6 +106,18 @@ abstract class Filename_Shema_Categorie implements I_Filename_Shema {
   public static function print_filename_data_for_ui(array $filename_data) : void {
     # print data from filename to ui by formated string
     printf(Filename_Shema_Categorie::string_ui_format, current($filename_data));
+  }
+
+
+  # print filename shema input to ui
+  public static function print_filename_shema_input_for_ui(int $index) : void {
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root);
+  }
+
+
+  # print filename shema search input to ui
+  public static function print_filneame_shema_search_input_for_ui() : void {
+    printf(self::input_shema_template, 0, Ui::ui_search_data_key_root);
   }
 
 }

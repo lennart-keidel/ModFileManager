@@ -28,7 +28,7 @@ class Filename_Shema_Installation_Date_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 
@@ -220,6 +220,21 @@ class Filename_Shema_Installation_Date_Test extends TestCase {
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEquals("", $output);
+  }
+
+
+  public function test_print_filename_shema_input_for_ui() : void {
+    Filename_Shema_Installation_Date::print_filename_shema_input_for_ui(0);
+    $output = $this->getActualOutput();
+    assertIsString($output);
+    assertNotEmpty($output);
+  }
+
+  public function test_print_filneame_shema_search_input_for_ui() : void {
+    Filename_Shema_Installation_Date::print_filneame_shema_search_input_for_ui();
+    $output = $this->getActualOutput();
+    assertIsString($output);
+    assertNotEmpty($output);
   }
 
 }

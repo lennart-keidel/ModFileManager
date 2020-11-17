@@ -64,6 +64,56 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
   # format-string to use with printf to print in ui
   private const string_ui_format = "<span>%s</span>";
 
+  # input shema template for ui
+  private const input_shema_template = '
+  <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
+  <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
+
+  <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_packages%1$d" value="option_install_in_packages">
+  <label for="option_install_in_packages%1$d">muss in Packages-Ordner installiert werden</label>
+
+  <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_depends_on_content%1$d" value="option_depends_on_content">
+  <label for="option_depends_on_content%1$d">abhängig von anderem Mod, CC, Store oder ähnlichem</label>
+
+  <input disabled-and-hidden-until="[\'checked\',\'option_depends_on_content%1$d\']" id="url_flag_data_depends_on_content%1$d" type="url" name="%2$s[%1$d][url_flag_data_depends_on_content]">
+  <label disabled-and-hidden-until="[\'checked\',\'option_depends_on_content%1$d\']" for="url_flag_data_depends_on_content%1$d">Link zum Mod, CC von dem dieser Mod, CC abhängig ist</label>
+
+  <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion">
+  <label for="option_depends_on_expansion%1$d">abhängig von Erweiterungspack oder Accessoirepack</label>
+
+    <label disabled-and-hidden-until="[\'checked\',\'option_depends_on_expansion%1$d\']" for="select_flag_data_depends_on_expansion%1$d">Erweiterung von dem dieser Mod, CC abhängig ist</label>
+    <select disabled-and-hidden-until="[\'checked\',\'option_depends_on_expansion%1$d\']" id="select_flag_data_depends_on_expansion%1$d" name="%2$s[%1$d][select_flag_data_depends_on_expansion]">
+      <option value="" selected disabled>Auswählen</option>
+      <optgroup label="Erweiterungspack">
+        <option value="ep01">Reiseabenteuer</option>
+        <option value="ep02">Traumkarrieren</option>
+        <option value="ep03">Late Night</option>
+        <option value="ep04">Lebensfreude</option>
+        <option value="ep05">Einfach Tierisch</option>
+        <option value="ep06">Showtime</option>
+        <option value="ep07">Supernatural</option>
+        <option value="ep08">Jahreszeiten</option>
+        <option value="ep09">Wildes Studentenleben</option>
+        <option value="ep10">Inselparadies</option>
+        <option value="ep11">Into The Future</option>
+      </optgroup>
+      <optgroup label="Accessoirepack">
+        <option value="sp01">Luxus Accessoires</option>
+        <option value="sp02">Gib Gas-Luxus Accessoires</option>
+        <option value="sp03">Design Garten Accessoires</option>
+        <option value="sp04">Stadt Accessoires</option>
+        <option value="sp05">Traumsuite Accessoires</option>
+        <option value="sp06">Katy Perry Süße Welt</option>
+        <option value="sp07">Diesel Accessoires</option>
+        <option value="sp08">70er, 80er & 90er Accessoires</option>
+        <option value="sp09">Movie Accessoires</option>
+      </optgroup>
+    </select>
+
+    <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_is_essential%1$d" value="option_is_essential">
+    <label for="option_is_essential%1$d">gehört zu den absolut wichtigsten Mods/CC, die immer installiert sein sollen</label>
+  ';
+
 
   # convert data collected from ui to usable data for following process
   public static function convert_ui_data_to_data(array $data_from_ui) : array {
@@ -417,6 +467,18 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
     foreach($sub_data as $sub_data_key => $sub_data_value){
       printf(self::string_ui_format, $sub_data_value);
     }
+  }
+
+
+  # print filename shema input to ui
+  public static function print_filename_shema_input_for_ui(int $index) : void {
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root);
+  }
+
+
+  # print filename shema search input to ui
+  public static function print_filneame_shema_search_input_for_ui() : void {
+    printf(self::input_shema_template, 0, Ui::ui_search_data_key_root);
   }
 
 }

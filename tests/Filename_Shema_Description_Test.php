@@ -5,6 +5,7 @@ use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertIsArray;
 use function PHPUnit\Framework\assertIsString;
+use function PHPUnit\Framework\assertNotEmpty;
 use function PHPUnit\Framework\assertNotEquals;
 
 # test class
@@ -130,6 +131,20 @@ class Filename_Shema_Description_Test extends TestCase {
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEquals("", $output);
+  }
+
+  public function test_print_filename_shema_input_for_ui() : void {
+    Filename_Shema_Description::print_filename_shema_input_for_ui(0);
+    $output = $this->getActualOutput();
+    assertIsString($output);
+    assertNotEmpty($output);
+  }
+
+  public function test_print_filneame_shema_search_input_for_ui() : void {
+    Filename_Shema_Description::print_filneame_shema_search_input_for_ui();
+    $output = $this->getActualOutput();
+    assertIsString($output);
+    assertNotEmpty($output);
   }
 
 }

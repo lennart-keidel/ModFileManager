@@ -598,6 +598,21 @@ class Filename_Shema_Flag_Test extends TestCase {
     assertNotEquals("", $output);
   }
 
+
+  public function test_print_filename_shema_input_for_ui() : void {
+    Filename_Shema_Flag::print_filename_shema_input_for_ui(0);
+    $output = $this->getActualOutput();
+    assertIsString($output);
+    assertNotEmpty($output);
+  }
+
+  public function test_print_filneame_shema_search_input_for_ui() : void {
+    Filename_Shema_Flag::print_filneame_shema_search_input_for_ui();
+    $output = $this->getActualOutput();
+    assertIsString($output);
+    assertNotEmpty($output);
+  }
+
 }
 
 ?>

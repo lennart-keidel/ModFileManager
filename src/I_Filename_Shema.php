@@ -15,6 +15,11 @@ Interface I_Filename_Shema {
   # print converted data from filename to ui
   public static function print_filename_data_for_ui(array $filename_data) : void;
 
+  # print filename shema input to ui
+  public static function print_filename_shema_input_for_ui(int $index) : void;
+
+  # print filename shema input to ui
+  public static function print_filneame_shema_search_input_for_ui() : void;
 }
 
 ?>

@@ -12,6 +12,11 @@ abstract class Filename_Shema_Link implements I_Filename_Shema {
   # format-string to use with printf to print in ui
   private const string_ui_format = "<span>%s</span>";
 
+  # input shema template for ui
+  private const input_shema_template = '
+    <label for="url_shema_link%1$d">Link zum Mod, CC</label>
+    <input id="url_shema_link%1$d" type="url" name="%2$s[%1$d][url_shema_link]">
+  ';
 
   # convert data collected from ui to usable data for following process
   public static function convert_ui_data_to_data(array $data_from_ui) : array {
@@ -60,6 +65,18 @@ abstract class Filename_Shema_Link implements I_Filename_Shema {
   public static function print_filename_data_for_ui(array $filename_data) : void {
     # print data from filename to ui by formated string
     printf(Filename_Shema_Link::string_ui_format, current($filename_data));
+  }
+
+
+  # print filename shema input to ui
+  public static function print_filename_shema_input_for_ui(int $index) : void {
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root);
+  }
+
+
+  # print filename shema search input to ui
+  public static function print_filneame_shema_search_input_for_ui() : void {
+    printf(self::input_shema_template, 0, Ui::ui_search_data_key_root);
   }
 
 }

@@ -9,6 +9,12 @@ abstract class Filename_Shema_Installation_Date implements I_Filename_Shema {
   # format-string to use with printf to print in ui
   private const string_ui_format = "<span>%s</span>";
 
+  # input shema template for ui
+  private const input_shema_template = '
+    <label for="date_shema_installation_date%1$d">Installationsdatum</label>
+    <input id="date_shema_installation_date%1$d" type="date" name="%2$s[%1$d][date_shema_installation_date]">
+  ';
+
   # regex format for input/output date
   private const regex_date_io = "/^(20[1-9][0-9]-(0[1-9]|1[0-2])-([0][1-9]|[12][0-9]|3[01]))$/";
 
@@ -98,6 +104,18 @@ abstract class Filename_Shema_Installation_Date implements I_Filename_Shema {
   public static function print_filename_data_for_ui(array $filename_data) : void {
     # print data from filename to ui by formated string
     printf(Filename_Shema_Installation_Date::string_ui_format, current($filename_data));
+  }
+
+
+  # print filename shema input to ui
+  public static function print_filename_shema_input_for_ui(int $index) : void {
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root);
+  }
+
+
+  # print filename shema search input to ui
+  public static function print_filneame_shema_search_input_for_ui() : void {
+    printf(self::input_shema_template, 0, Ui::ui_search_data_key_root);
   }
 
 }

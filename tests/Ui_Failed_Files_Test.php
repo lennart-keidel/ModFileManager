@@ -1,0 +1,92 @@
+<?php declare(strict_types=1);
+use PHPUnit\Framework\TestCase;
+use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertIsArray;
+use function PHPUnit\Framework\assertIsString;
+use function PHPUnit\Framework\assertNotEmpty;
+use function PHPUnit\Framework\assertTrue;
+
+# test class
+class Ui_Failed_Files_Test extends TestCase {
+
+
+  public function test_add_failed_filename_data() : void {
+    $filename_data1 = [
+      "select_shema_categorie" => "Tuning",
+      "text_shema_description" => "somtehing to do with this",
+      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "date_shema_installation_date" => "2020-10-29",
+      "select_flag_data_depends_on_expansion" => "ep01",
+      "checkbox_shema_flag" => [
+        "option_depends_on_content",
+        "option_depends_on_expansion"
+      ],
+      "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+    ];
+    $filename_data2 = [
+      "select_shema_categorie" => "Tuning",
+      "text_shema_description" => "somtehing to do with this",
+      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "date_shema_installation_date" => "2020-10-29",
+      "select_flag_data_depends_on_expansion" => "ep01",
+      "checkbox_shema_flag" => [
+        "option_depends_on_content",
+        "option_depends_on_expansion"
+      ],
+      "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+    ];
+    Ui_Failed_Files::add_failed_filename_data($filename_data1);
+    Ui_Failed_Files::add_failed_filename_data($filename_data2);
+    $failed_filename_data = Ui_Failed_Files::get_failed_filename_data();
+    var_dump($failed_filename_data);
+    assertIsArray($failed_filename_data);
+    assertTrue(isset($failed_filename_data[Ui::ui_data_key_root]));
+    assertIsArray($failed_filename_data[Ui::ui_data_key_root]);
+    assertIsArray(current($failed_filename_data[Ui::ui_data_key_root]));
+  }
+
+
+  public function test_add_failed_filename_list() : void {
+    $filename_list1 = [
+      "mods/abc" => [
+        "abc.package",
+        "def.sims3pack"
+      ]
+    ];
+    $filename_list2 = [
+      "mods/def" => [
+        "abc.package",
+        "def.sims3pack"
+      ]
+    ];
+    Ui_Failed_Files::add_failed_filename_list($filename_list1);
+    Ui_Failed_Files::add_failed_filename_list($filename_list2);
+    $failed_filename_list = Ui_Failed_Files::get_failed_filename_list();
+    assertIsArray($failed_filename_list);
+    foreach($failed_filename_list as $path => $array_filenames){
+      assertIsString($path);
+      foreach($array_filenames as $filename){
+        assertIsString($filename);
+      }
+    }
+  }
+
+
+  public function test_print_input_shema_for_failed_filename_list() : void {
+    Ui_Failed_Files::print_input_shema_for_failed_filename_list();
+    $output = $this->getActualOutput();
+    assertIsString($output);
+    assertNotEmpty($output);
+  }
+
+
+  public function test_print_input_shema_for_failed_filename_data() : void {
+    Ui_Failed_Files::print_input_shema_for_failed_filename_data();
+    $output = $this->getActualOutput();
+    assertIsString($output);
+    assertNotEmpty($output);
+  }
+
+}
+
+?>

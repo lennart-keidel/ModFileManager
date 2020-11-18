@@ -3,8 +3,6 @@
 abstract class Create_Read_Filename_By_Shema {
 
   public const filename_shema_seperator = "__";
-  public const ui_data_key_root = "files";
-
 
   # create filename by calling shema classes and connecting results to one string
   # input is ui data part for one file
@@ -15,8 +13,14 @@ abstract class Create_Read_Filename_By_Shema {
     $original_fileextension = File_Handler::get_fileextension_from_path($ui_data_for_one_file[Ui::ui_key_path_source]);
     foreach(Main::shema_order_global as $shema_index => $shema_class_name){
       $shema_class = "Filename_Shema_$shema_class_name";
-      $data = $shema_class::convert_ui_data_to_data($ui_data_for_one_file);
-      $result .= $shema_class::convert_data_to_filename($data);
+      try {
+        $data = $shema_class::convert_ui_data_to_data($ui_data_for_one_file);
+        $result .= $shema_class::convert_data_to_filename($data);
+      }
+      catch(Exception $e){
+        Ui_Failed_Files::add_failed_filename_data($ui_data_for_one_file);
+        continue;
+      }
       if($shema_index < count(Main::shema_order_global)-1){
         $result .= self::filename_shema_seperator;
       }
@@ -32,7 +36,7 @@ abstract class Create_Read_Filename_By_Shema {
   # connect to filename list
   public static function create_filename_list_by_shema_from_ui_data(array $ui_data) : array {
     $result = [];
-    $ui_data_for_all_files = $ui_data[self::ui_data_key_root];
+    $ui_data_for_all_files = $ui_data[Ui::ui_data_key_root];
     foreach($ui_data_for_all_files as $ui_data_for_one_file){
       $path_source_dir = dirname($ui_data_for_one_file[Ui::ui_key_path_source]);
       $original_filename = basename($ui_data_for_one_file[Ui::ui_key_path_source]);
@@ -87,9 +91,11 @@ abstract class Create_Read_Filename_By_Shema {
 
     $filename = File_Handler::get_filename_from_path_without_fileextension($filename);
     $filename_splitted_by_shema = explode(self::filename_shema_seperator, $filename);
+    $data_from_filename = [];
     foreach(Main::shema_order_global as $shema_index => $shema_name){
       $shema_class_name = "Filename_Shema_$shema_name";
-      $result = array_merge($result, $shema_class_name::convert_filename_to_data($filename_splitted_by_shema[$shema_index]));
+      $data_from_filename = $shema_class_name::convert_filename_to_data($filename_splitted_by_shema[$shema_index]);
+      $result = array_merge($result, $data_from_filename);
     }
 
     return $result;
@@ -101,15 +107,22 @@ abstract class Create_Read_Filename_By_Shema {
   # reverse process of create_filename_list_by_shema_from_ui_data
   # call read_data_from_filename_by_shema and connect to ui-data array
   public static function read_data_from_filename_list_by_shema(array $filename_list) : array {
-    $result = [self::ui_data_key_root => []];
+    $result = [Ui::ui_data_key_root => []];
 
     foreach($filename_list as $path => $array_filenames){
       $result_part = [];
       foreach($array_filenames as $filename){
         Shema_Exception::set_source_path($path."/".$filename);
-        $result_part = self::read_data_from_filename_by_shema($filename);
+        try {
+          $result_part = self::read_data_from_filename_by_shema($filename);
+        }
+        catch(Exception $e){
+          $failed_filename_list = [$path => [$filename]];
+          Ui_Failed_Files::add_failed_filename_list($failed_filename_list);
+          continue;
+        }
         $result_part[Ui::ui_key_path_source] = $path."/".$filename;
-        $result[self::ui_data_key_root][] = $result_part;
+        $result[Ui::ui_data_key_root][] = $result_part;
       }
     }
 

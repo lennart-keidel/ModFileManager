@@ -32,6 +32,7 @@ require 'vendor/autoload.php';
       padding-bottom: 0.5em;
     }
 
+
     .container_label_and_input.sub_input {
       padding-left: 2em;
     }
@@ -43,6 +44,31 @@ require 'vendor/autoload.php';
       display: block;
     }
 
+
+    /* === SEARCH === */
+    .disable_search_shema {
+      display: inline-block;
+    }
+
+    .disable_search_shema::before {
+      content: '';
+    }
+
+    .disable_search_shema + .container_label_and_input {
+      display: inline-block;
+    }
+
+    .container_search_disable > .container_label_and_input {
+      margin-left: 1em;
+    }
+
+    .toggle_rowbreak {
+      display: none;
+    }
+
+    .container_search_disable .toggle_rowbreak {
+      display: block;
+    }
 
     /* no selection color in labels */
     label::selection {
@@ -75,9 +101,14 @@ require 'vendor/autoload.php';
       $filename_list = [
         "mods" => [
           "abc_def.package"
+        ],
+        "modsa" => [
+          "abc_def2.package"
         ]
       ];
 
+      Ui_Failed_Files::add_failed_filename_list($filename_list);
+      Ui_Failed_Files::print_input_shema_for_failed_filename_list();
       Ui::print_filename_shema_input_for_filename_list($filename_list);
     ?>
 
@@ -104,6 +135,8 @@ require 'vendor/autoload.php';
       ];
 
       Ui::print_input_shema_for_filename_data_list_and_fill($filename_data_list);
+      Ui_Failed_Files::add_failed_filename_data($filename_data_list["files"][0]);
+      Ui_Failed_Files::print_input_shema_for_failed_filename_data();
     ?>
 
     <?php

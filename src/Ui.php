@@ -18,22 +18,38 @@ abstract class Ui {
   # ui data key for source path input to search recursive
   public const ui_path_source_root_recursive_key = "path_source_root_options";
 
+  # ui data key for search shema connector
+  public const ui_key_search_connector = "search_shema_connector";
+
   # ui data key for filename source path
   public const ui_key_path_source = "path_source";
 
   # html template for error messages
-  private const template_error_message = "<javascript>alert(%s)</javascript>";
+  private const template_error_message = '<javascript>alert(%1$s)</javascript>';
 
   # html template for source path input
   private const input_path_source_template = '
   <div class="container_label_and_input">
-    <label for="input_source_path_root">Pfad zum Quellordner</label>
-    <input id="input_source_path_root" type="text" name="%1$s[%2$d][path_source_root]">
+    <label for="input_source_path_root%1$d">Pfad zum Quellordner</label>
+    <input id="input_source_path_root%1$d" type="text" name="%2$s[%1$d][path_source_root]">
   </div>
   <div class="container_label_and_input">
-    <input id="input_source_path_root_recursive" type="checkbox" name="%1$s[%2$d][path_source_root_options]" value="search_source_dir_recursive">
-    <label for="input_source_path_root_recursive">Alle Unterordner und deren Dateien einbinden</label>
+    <input id="input_source_path_root_recursive%1$d" type="checkbox" name="%2$s[%1$d][path_source_root_options]" value="search_source_dir_recursive">
+    <label for="input_source_path_root_recursive%1$d">Alle Unterordner und deren Dateien einbinden</label>
   </div>
+  ';
+
+  private const search_connector_input_template = '
+  <label for="search_shema_connector">Suche verbinden mit: </label>
+  <select id="search_shema_connector" name="%2$s[%1$d][search_shema_connector]" required>
+    <option value="" selected disabled>Auswählen</option>
+    <option value="or">Oder</option>
+    <option value="and">Und</option>
+  </select>
+  ';
+
+  private const search_disable_input_template = '
+  <input type="checkbox" class="disable_search_shema" id="disable_search_shema_%3$s" name="%2$s[%1$d][disable_search_shema]" checked>
   ';
 
   # html template for begin/end of shema input container
@@ -71,7 +87,7 @@ abstract class Ui {
 
   # html template for hidden input for source path
   private const input_shema_template_path_source = '
-  <input type="hidden" name="files[%1$d][path_source]" value="%2$s">
+  <input type="hidden" name="%2$s[%1$d][path_source]" value="%3$s">
   ';
 
   private const template_source_input_submit_button = '
@@ -93,7 +109,7 @@ abstract class Ui {
   private static function print_filename_shema_input(string $path_source) : void {
     $filename = File_Handler::get_filename_from_path_without_fileextension($path_source);
     printf(self::template_shema_input_container_begin,$filename);
-    printf(self::input_shema_template_path_source, self::$out_input_shema_index, $path_source);
+    printf(self::input_shema_template_path_source, self::$out_input_shema_index, self::ui_data_key_root, $path_source);
     foreach(Main::shema_order_global as $class_id){
       $class_name = "Filename_Shema_$class_id";
       $class_name::print_filename_shema_input_for_ui(self::$out_input_shema_index);
@@ -141,7 +157,7 @@ abstract class Ui {
 
 
   # print input shema by filename data list and print js code to fill it with the data
-  public static function print_input_shema_for_filename_data_list_and_fill(array $filename_data_list) : void {
+  protected static function print_input_shema_for_filename_data_list(array $filename_data_list) : void {
     printf(self::template_shema_input_form_begin, "");
     foreach($filename_data_list[self::ui_data_key_root] as $filename_data_for_one_file){
       $path_source = $filename_data_for_one_file[self::ui_key_path_source];
@@ -149,6 +165,12 @@ abstract class Ui {
     }
     printf(self::template_shema_input_submit_button, "");
     printf(self::template_shema_input_form_end, "");
+  }
+
+
+  # print input shema by filename data list and print js code to fill it with the data
+  public static function print_input_shema_for_filename_data_list_and_fill(array $filename_data_list) : void {
+    self::print_input_shema_for_filename_data_list($filename_data_list);
     self::fill_input_shema_with_filename_data_list($filename_data_list);
   }
 
@@ -156,7 +178,7 @@ abstract class Ui {
   # print source path input for the root path of files
   public static function print_source_path_input() : void {
     printf(self::template_source_input_form_begin, "");
-    printf(self::input_path_source_template, self::ui_source_input_key_root, self::$out_input_shema_index);
+    printf(self::input_path_source_template, self::$out_input_shema_index, self::ui_source_input_key_root);
     printf(self::template_source_input_submit_button, "");
     printf(self::template_source_input_form_end, "");
   }
@@ -165,9 +187,13 @@ abstract class Ui {
   # print shema search input
   public static function print_filename_shema_search_input() : void {
     printf(self::template_shema_search_input_form_begin,"");
+    printf(self::search_connector_input_template, self::$out_input_shema_index, self::ui_search_data_key_root);
     foreach(Main::shema_order_global as $class_id){
+      echo "<div class='container_search_disable'>";
+      printf(self::search_disable_input_template, self::$out_input_shema_index, self::ui_search_data_key_root, $class_id);
       $class_name = "Filename_Shema_$class_id";
       $class_name::print_filneame_shema_search_input_for_ui(self::$out_input_shema_index);
+      echo "</div>";
     }
     printf(self::template_shema_search_submit_button, "");
     printf(self::template_shema_search_input_form_end,"");

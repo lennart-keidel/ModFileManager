@@ -66,6 +66,7 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
 
   # input shema template for ui
   private const input_shema_template = '
+  <span class="toggle_rowbreak"></span>
   <div class="container_label_and_input">
     <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
     <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>

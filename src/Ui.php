@@ -18,9 +18,6 @@ abstract class Ui {
   # ui data key for source path input to search recursive
   public const ui_path_source_root_recursive_key = "path_source_root_options";
 
-  # ui data key for search shema connector
-  public const ui_key_search_connector = "search_shema_connector";
-
   # ui data key for filename source path
   public const ui_key_path_source = "path_source";
 
@@ -160,6 +157,7 @@ abstract class Ui {
   protected static function print_input_shema_for_filename_data_list(array $filename_data_list) : void {
     printf(self::template_shema_input_form_begin, "");
     foreach($filename_data_list[self::ui_data_key_root] as $filename_data_for_one_file){
+      var_dump($filename_data_for_one_file,"hier");
       $path_source = $filename_data_for_one_file[self::ui_key_path_source];
       self::print_filename_shema_input($path_source);
     }

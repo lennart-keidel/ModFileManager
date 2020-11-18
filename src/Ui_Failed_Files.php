@@ -11,18 +11,25 @@ abstract class Ui_Failed_Files extends Ui {
     self::$failed_filename_data[self::ui_data_key_root][] = $filename_data;
   }
 
+  # reset saved failed filename data
+  public static function reset_failed_filename_data(){
+    self::$failed_filename_data = [ self::ui_data_key_root => [] ];
+  }
 
   # return failed filename data
   public static function get_failed_filename_data() : array {
     return self::$failed_filename_data;
   }
 
-
   # save failed filename list
   public static function add_failed_filename_list(array $filename_list) : void {
     self::$failed_filename_list = array_merge(self::$failed_filename_list, $filename_list);
   }
 
+  # reset saved failed filename list
+  public static function reset_failed_filename_list(){
+    self::$failed_filename_list = [];
+  }
 
   # return failed filename list
   public static function get_failed_filename_list() : array {

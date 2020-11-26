@@ -84,7 +84,7 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
 
   <div class="container_label_and_input sub_input">
     <label disabled-and-hidden-until="[\'checked\',\'option_depends_on_content%1$d\']" for="url_flag_data_depends_on_content%1$d">Link zum Mod, CC von dem dieser Mod, CC abhängig ist</label>
-    <input disabled-and-hidden-until="[\'checked\',\'option_depends_on_content%1$d\']" id="url_flag_data_depends_on_content%1$d" type="url" name="%2$s[%1$d][url_flag_data_depends_on_content]" required>
+    <input disabled-and-hidden-until="[\'checked\',\'option_depends_on_content%1$d\']" id="url_flag_data_depends_on_content%1$d" type="url" name="%2$s[%1$d][url_flag_data_depends_on_content]">
   </div>
 
   <div class="container_label_and_input">
@@ -94,7 +94,7 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
 
   <div class="container_label_and_input sub_input">
     <label disabled-and-hidden-until="[\'checked\',\'option_depends_on_expansion%1$d\']" for="select_flag_data_depends_on_expansion%1$d">Erweiterung von dem dieser Mod, CC abhängig ist</label>
-    <select disabled-and-hidden-until="[\'checked\',\'option_depends_on_expansion%1$d\']" id="select_flag_data_depends_on_expansion%1$d" name="%2$s[%1$d][select_flag_data_depends_on_expansion]" required>
+    <select disabled-and-hidden-until="[\'checked\',\'option_depends_on_expansion%1$d\']" id="select_flag_data_depends_on_expansion%1$d" name="%2$s[%1$d][select_flag_data_depends_on_expansion]">
       <option value="" selected disabled>Auswählen</option>
       <optgroup label="Erweiterungspack">
         <option value="ep01">Reiseabenteuer</option>

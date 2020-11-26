@@ -1,7 +1,10 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
+
+use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;
+use function PHPUnit\Framework\assertIsArray;
 use function PHPUnit\Framework\assertIsNotResource;
 use function PHPUnit\Framework\assertTrue;
 
@@ -91,6 +94,7 @@ class Search_Shema_Test extends TestCase {
         "option_is_essential"
       ]
     ];
+
   }
 
 
@@ -108,6 +112,55 @@ class Search_Shema_Test extends TestCase {
     assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file2));
     assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file3));
     assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file4));
+  }
+
+  public function test_filter_filename_data_by_search_input1_with_or_connector() : void {
+    Search_Shema::set_search_ui_data(self::$search_input1);
+    $filename_data_input = [
+      "files" => [
+        self::$filename_data_for_one_file1,
+        self::$filename_data_for_one_file2,
+        self::$filename_data_for_one_file3,
+        self::$filename_data_for_one_file4
+      ]
+    ];
+    $filtered_filename_data_expected_output = [
+      "files" => [
+        self::$filename_data_for_one_file1,
+        self::$filename_data_for_one_file2,
+        self::$filename_data_for_one_file3
+      ]
+    ];
+    $filtered_filename_data = Search_Shema::filter_filename_data_by_search_input($filename_data_input);
+    assertIsArray($filtered_filename_data);
+    assertCount(1, $filtered_filename_data);
+    assertEquals(Ui::ui_data_key_root, key($filtered_filename_data));
+    assertCount(3, $filtered_filename_data[Ui::ui_data_key_root]);
+    assertEquals($filtered_filename_data_expected_output, $filtered_filename_data);
+  }
+
+
+  public function test_filter_filename_data_by_search_input1_with_and_connector() : void {
+    Search_Shema::set_search_ui_data(self::$search_input2);
+    $filename_data_input = [
+      "files" => [
+        self::$filename_data_for_one_file1,
+        self::$filename_data_for_one_file2,
+        self::$filename_data_for_one_file3,
+        self::$filename_data_for_one_file4
+      ]
+    ];
+    $filtered_filename_data_expected_output = [
+      "files" => [
+        self::$filename_data_for_one_file1
+      ]
+    ];
+    $filtered_filename_data = Search_Shema::filter_filename_data_by_search_input($filename_data_input);
+    assertIsArray($filtered_filename_data);
+    assertCount(1, $filtered_filename_data);
+    assertEquals(Ui::ui_data_key_root, key($filtered_filename_data));
+    assertCount(1, $filtered_filename_data[Ui::ui_data_key_root]);
+    assertEquals($filtered_filename_data_expected_output, $filtered_filename_data);
   }
 
 }

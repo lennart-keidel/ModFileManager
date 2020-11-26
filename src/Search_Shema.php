@@ -20,6 +20,7 @@ abstract class Search_Shema {
   }
 
 
+  # check if filename data for one file matches search input with search connector
   public static function check_if_filename_data_for_one_file_matches_search_input(array $filename_data_for_one_input) : bool {
 
     foreach(self::$search_ui_data as $search_element){
@@ -42,7 +43,31 @@ abstract class Search_Shema {
   }
 
 
+  # filter whole filename data array by search
+  # return array with filtered filename data
+  public static function filter_filename_data_by_search_input(array $filename_data) : array {
+    if(self::check_search_connector_value(self::$search_connector) === false){
+      throw new Ui_Exception("Fehler beim Filtern der ausgelesenen Daten. Der übermittelte Such-Verbindung ist nicht valide. Such-Verbindung: ".self::$search_connector);
+    }
 
+    if(empty(self::$search_ui_data) === true){
+      throw new Ui_Exception("Fehler beim Filtern der ausgelesenen Daten. Es wurden keine ausgelesenen Daten übermittelt.");
+    }
+
+    $result_filtered = [Ui::ui_data_key_root => []];
+    $result_filtered[Ui::ui_data_key_root] = array_filter($filename_data[Ui::ui_data_key_root], function($filename_data_for_one_file){
+      return self::check_if_filename_data_for_one_file_matches_search_input($filename_data_for_one_file);
+    });
+
+    return $result_filtered;
+  }
+
+
+  # check search connector value
+  # return false if not valid
+  private static function check_search_connector_value(string $value_search_connector) : bool {
+    return (in_array($value_search_connector, self::search_connector_valid_values));
+  }
 
 }
 

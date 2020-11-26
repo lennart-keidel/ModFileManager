@@ -22,16 +22,16 @@ abstract class Ui {
   public const ui_key_path_source = "path_source";
 
   # html template for error messages
-  private const template_error_message = '<javascript>alert(%1$s)</javascript>';
+  private const template_error_message = '<script>alert(%1$s)</script>';
 
   # html template for source path input
   private const input_path_source_template = '
   <div class="container_label_and_input">
     <label for="input_source_path_root%1$d">Pfad zum Quellordner</label>
-    <input id="input_source_path_root%1$d" type="text" name="%2$s[%1$d][path_source_root]">
+    <input id="input_source_path_root%1$d" type="text" name="%2$s[path_source_root]">
   </div>
   <div class="container_label_and_input">
-    <input id="input_source_path_root_recursive%1$d" type="checkbox" name="%2$s[%1$d][path_source_root_options]" value="search_source_dir_recursive">
+    <input id="input_source_path_root_recursive%1$d" type="checkbox" name="%2$s[path_source_root_options]" value="search_source_dir_recursive">
     <label for="input_source_path_root_recursive%1$d">Alle Unterordner und deren Dateien einbinden</label>
   </div>
   ';

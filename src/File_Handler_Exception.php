@@ -16,7 +16,7 @@ class File_Handler_Exception extends Exception implements I_Custom_Exception {
 
 
   public static function set_source_path(string $path) : void {
-    self::$path = $path;
+    self::$path = str_replace("\\", "\\\\", $path);
   }
 
 

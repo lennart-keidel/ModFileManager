@@ -82,69 +82,10 @@ require 'vendor/autoload.php';
 </head>
 <body>
 
-  <?php
-
-    Ui::print_source_path_input();
-
-  ?>
-
-  <hr>
-
-  <?php
-
-    Ui::print_filename_shema_search_input();
-  ?>
-
-  <hr>
 
     <?php
-      $filename_list = [
-        "mods" => [
-          "abc_def.package"
-        ],
-        "modsa" => [
-          "abc_def2.package"
-        ]
-      ];
-
-      Ui_Failed_Files::add_failed_filename_list($filename_list);
-      Ui_Failed_Files::print_input_shema_for_failed_filename_list();
-      Ui::print_filename_shema_input_for_filename_list($filename_list);
+      @Main::handle_ui_data($_POST);
     ?>
-
-    <hr>
-
-    <?php
-
-      $filename_data_list = [
-        "files" => [
-          [
-            "path_source" => "mods/ghi_jkl.package",
-            "select_shema_categorie" => "Tuning",
-            "text_shema_description" => "somtehing to do with this",
-            "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
-            "date_shema_installation_date" => "2020-10-29",
-            "select_flag_data_depends_on_expansion" => "ep01",
-            "checkbox_shema_flag" => [
-              "option_depends_on_content",
-              "option_depends_on_expansion"
-            ],
-            "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
-          ]
-        ]
-      ];
-
-      Ui::print_input_shema_for_filename_data_list_and_fill($filename_data_list);
-      Ui_Failed_Files::add_failed_filename_data($filename_data_list["files"][0]);
-      Ui_Failed_Files::print_input_shema_for_failed_filename_data();
-    ?>
-
-    <?php
-      if(isset($_POST) && !empty($_POST)){
-        var_dump($_POST);
-      }
-    ?>
-  </form>
 
 </body>
 </html>

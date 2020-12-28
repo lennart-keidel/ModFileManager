@@ -19,6 +19,7 @@ abstract class Create_Read_Filename_By_Shema {
       }
       catch(Exception $e){
         Ui_Failed_Files::add_failed_filename_data($ui_data_for_one_file);
+        throw new Shema_Exception($e->getMessage());
         continue;
       }
       if($shema_index < count(Main::shema_order_global)-1){

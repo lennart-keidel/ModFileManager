@@ -231,7 +231,7 @@ class Filename_Shema_Installation_Date_Test extends TestCase {
   }
 
   public function test_print_filneame_shema_search_input_for_ui() : void {
-    Filename_Shema_Installation_Date::print_filneame_shema_search_input_for_ui();
+    Filename_Shema_Installation_Date::print_filneame_shema_search_input_for_ui(0);
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEmpty($output);

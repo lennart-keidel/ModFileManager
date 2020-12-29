@@ -17,14 +17,13 @@ abstract class File_Handler {
     $fileextension_filter = array_map("strtolower", File_Handler::fileextension_filter);
 
     foreach (new DirectoryIterator($path) as $file) {
-      if(array_search(strtolower($file->getExtension()), $fileextension_filter) === false
-      || $file->isDot()
-      || $file->isDir()){
+      if(array_search(strtolower($file->getExtension()), $fileextension_filter) === false || $file->isDot() || $file->isDir()){
         continue;
       }
       $path = File_Handler::remove_trailing_slash_from_path($path);
       $result[$path][] = $file->getFilename();
     }
+    sort($result[$path], SORT_NATURAL);
     return $result;
   }
 
@@ -51,6 +50,7 @@ abstract class File_Handler {
       $path_directory = File_Handler::remove_trailing_slash_from_path(dirname($file->getPathname()));
       $result[$path_directory][] = $file->getFilename();
     }
+    sort($result[$path_directory]);
     return $result;
   }
 

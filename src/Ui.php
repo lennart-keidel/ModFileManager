@@ -28,7 +28,7 @@ abstract class Ui {
   private const input_path_source_template = '
   <div class="container_label_and_input">
     <label for="input_source_path_root%1$d">Pfad zum Quellordner</label>
-    <input id="input_source_path_root%1$d" type="text" name="%2$s[path_source_root]">
+    <input id="input_source_path_root%1$d" type="text" name="%2$s[path_source_root]" required>
   </div>
   <div class="container_label_and_input">
     <input id="input_source_path_root_recursive%1$d" type="checkbox" name="%2$s[path_source_root_options]" value="search_source_dir_recursive">
@@ -83,6 +83,11 @@ abstract class Ui {
   ';
 
   # html template for hidden input for source path
+  private const template_shema_template_path_source_for_ui = '
+  <div><b>Pfad:</b> %1$s</div>
+  ';
+
+  # html template for hidden input for source path
   private const input_shema_template_path_source = '
   <input type="hidden" name="%2$s[%1$d][path_source]" value="%3$s">
   ';
@@ -99,14 +104,22 @@ abstract class Ui {
   <input type="submit" value="Dateien umbenennen">
   ';
 
+  private const template_delete_session_button = '
+  <form class="delete_session" method="post" action=".">
+    <hr>
+    <input type="submit" name="delete_session_button" value="Session löschen, alle eingetragenen Daten löschen">
+  </form>
+  ';
+
   private static $out_input_shema_index = 0;
 
 
   # print shema input for one file
   private static function print_filename_shema_input(string $path_source) : void {
-    $filename = File_Handler::get_filename_from_path_without_fileextension($path_source);
+    $filename = basename($path_source);
     printf(self::template_shema_input_container_begin,$filename);
     printf(self::input_shema_template_path_source, self::$out_input_shema_index, self::ui_data_key_root, $path_source);
+    printf(self::template_shema_template_path_source_for_ui, $path_source);
     foreach(Main::shema_order_global as $class_id){
       $class_name = "Filename_Shema_$class_id";
       $class_name::print_filename_shema_input_for_ui(self::$out_input_shema_index);
@@ -196,6 +209,12 @@ abstract class Ui {
     printf(self::template_shema_search_submit_button, "");
     printf(self::template_shema_search_input_form_end,"");
     self::$out_input_shema_index++;
+  }
+
+
+  # print delete session button
+  public static function print_delete_session_button() : void {
+    printf(Ui::template_delete_session_button, "");
   }
 
 

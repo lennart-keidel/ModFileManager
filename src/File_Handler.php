@@ -3,6 +3,7 @@
 abstract class File_Handler {
 
   public const fileextension_filter = ["sims3pack", "package"];
+  public const path_seperator = "\\"; # path seperator, different in windows than in macOs or linux
 
   # get list of filenames and filter for fileextensions
   # return array in format: [path => [filename1, filename2]]
@@ -103,12 +104,12 @@ abstract class File_Handler {
       return;
     }
     if(is_file($path_new_filename)){
-      File_Handler_Exception::append_source_path($path_new_filename);
+      File_Handler_Exception::set_source_path($path_new_filename);
       throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Der Dateiname unter dem Pfad existiert bereits und wird nicht umbennant, um die Datei nicht zu überschreiben.");
       return;
     }
     if(is_file($path_original_filename) === false){
-      File_Handler_Exception::append_source_path($path_original_filename);
+      File_Handler_Exception::set_source_path($path_original_filename);
       throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Die Datei existiert nicht oder ist keine gültige Datei.");
       return;
     }
@@ -116,7 +117,7 @@ abstract class File_Handler {
       rename($path_original_filename, $path_new_filename);
     }
     catch(Exception $e){
-      File_Handler_Exception::append_source_path($path_original_filename);
+      File_Handler_Exception::set_source_path($path_original_filename);
       throw new File_Handler_Exception("Fehler beim umbenennen der Dateien.\\nHier die PHP-Fehlermeldung: ".$e->getMessage());
       return;
     }
@@ -129,7 +130,7 @@ abstract class File_Handler {
     foreach($filename_list as $path => $array_filename){
       foreach($array_filename as $old_filename => $new_filename){
         File_Handler_Exception::set_source_path($path);
-        File_Handler::rename_file($path."/".$old_filename, $path."/".$new_filename);
+        File_Handler::rename_file($path.self::path_seperator.$old_filename, $path.self::path_seperator.$new_filename);
       }
     }
   }

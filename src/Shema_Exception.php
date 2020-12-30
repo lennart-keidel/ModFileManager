@@ -6,7 +6,7 @@ class Shema_Exception extends Exception implements I_Custom_Exception {
   private static $path = "";
 
 
-  public function __construct(string $message = "", bool $kill_process = true) {
+  public function __construct(string $message = "", bool $kill_process = false) {
     $this->message = $message;
     $this->print_error($this->message);
     if($kill_process === true){

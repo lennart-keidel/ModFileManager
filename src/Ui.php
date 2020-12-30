@@ -51,8 +51,8 @@ abstract class Ui {
 
   # html template for begin/end of shema input container
   private const template_shema_input_container_begin = '
-  <details>
-    <summary>%1$s</summary>
+  <details id="file_details%1$d">
+    <summary>%2$s</summary>
   ';
   private const template_shema_input_container_end = '
   </details>
@@ -89,7 +89,7 @@ abstract class Ui {
 
   # html template for hidden input for source path
   private const input_shema_template_path_source = '
-  <input type="hidden" name="%2$s[%1$d][path_source]" value="%3$s">
+  <input type="hidden" name="%2$s[%1$d][path_source]" value="%3$s" id="path_source%1$d">
   ';
 
   private const template_source_input_submit_button = '
@@ -117,7 +117,7 @@ abstract class Ui {
   # print shema input for one file
   private static function print_filename_shema_input(string $path_source) : void {
     $filename = basename($path_source);
-    printf(self::template_shema_input_container_begin,$filename);
+    printf(self::template_shema_input_container_begin, self::$out_input_shema_index, $filename);
     printf(self::input_shema_template_path_source, self::$out_input_shema_index, self::ui_data_key_root, $path_source);
     printf(self::template_shema_template_path_source_for_ui, $path_source);
     foreach(Main::shema_order_global as $class_id){
@@ -145,10 +145,11 @@ abstract class Ui {
 
   # print js code to fill shema input with received data from filename after page load
   private static function fill_input_shema_with_filename_data_list(array $filename_data_list) : void {
+
     $js_template_code = '
     <script>
     document.addEventListener("DOMContentLoaded", function(){
-      var filename_data_list = "%1$s";
+      var filename_data_list = %1$s;
       fill_input_shema_with_filename_data_list(filename_data_list);
     });
     </script>
@@ -170,7 +171,6 @@ abstract class Ui {
   protected static function print_input_shema_for_filename_data_list(array $filename_data_list) : void {
     printf(self::template_shema_input_form_begin, "");
     foreach($filename_data_list[self::ui_data_key_root] as $filename_data_for_one_file){
-      var_dump($filename_data_for_one_file,"hier");
       $path_source = $filename_data_for_one_file[self::ui_key_path_source];
       self::print_filename_shema_input($path_source);
     }

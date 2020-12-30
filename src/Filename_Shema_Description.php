@@ -13,7 +13,7 @@ abstract class Filename_Shema_Description implements I_Filename_Shema {
   private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="text_shema_description%1$d">Beschreibung</label>
-      <input id="text_shema_description%1$d" type="text" name="%2$s[%1$d][text_shema_description]" placeholder="max. '.self::max_description_length.' Zeichen, Sonderzeichen werden entfernt" required>
+      <input id="text_shema_description%1$d" type="text" name="%2$s[%1$d][text_shema_description]" placeholder="max. '.self::max_description_length.' Zeichen, Sonderzeichen werden entfernt" maxlength="'.self::max_description_length.'" required>
     </div>
   ';
 

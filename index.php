@@ -75,10 +75,7 @@ require 'vendor/autoload.php';
       background-color: transparent;
     }
   </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", function(){ console.log("a"); });
-    document.addEventListener("DOMContentLoaded", function(){ console.log("b"); });
-  </script>
+  <script src="js/fill_input_shema_with_filename_data_list.js"></script>
 </head>
 <body>
 

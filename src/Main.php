@@ -40,33 +40,31 @@ abstract class Main {
   //       Ui::print_input_shema_for_filename_data_list_and_fill($filtered_filename_data);
   //     }
 
-      # if changed filename data uploaded
-      if(isset($ui_data[Ui::ui_data_key_root]) === true){
-        var_dump($ui_data);
-        $new_filename_list = Create_Read_Filename_By_Shema::create_filename_list_by_shema_from_ui_data($ui_data);
-        var_dump($new_filename_list);
-        // $_SESSION[Ui::ui_source_input_key_root] = $new_filename_list;
-        File_Handler::rename_file_from_filename_list($new_filename_list);
-        $failed_filename_list = Ui_Failed_Files::get_failed_filename_list();
-        var_dump($failed_filename_list);
-        // $_SESSION[Ui::ui_source_input_key_root] = $failed_filename_list = Ui_Failed_Files::get_failed_filename_list();
-      }
+      # handle uploaded data for files
+      # rename files with shema
+      # store data for files with errors in session data, gets printed later on
+      self::handle_uploaded_file_data($ui_data);
 
 
 
     }
     catch(Exception $e){
-
+      Ui::print_error("Fehler in Main.php");
     }
 
     # if no source existing in session data
-    if(isset($_SESSION[Ui::ui_source_input_key_root]) === false){
+    if(empty($_SESSION) === true){
       Ui::print_source_path_input();
     }
 
     # if source existing in session data
     if(isset($_SESSION[Ui::ui_source_input_key_root]) === true){
       Ui::print_filename_shema_input_for_filename_list($_SESSION[Ui::ui_source_input_key_root]);
+    }
+
+    # if data for files exists in session
+    if(isset($_SESSION[Ui::ui_data_key_root]) === true){
+      Ui::print_input_shema_for_filename_data_list_and_fill($_SESSION);
     }
 
     # print delete session button
@@ -128,6 +126,22 @@ abstract class Main {
         throw new Ui_Exception("Fehler beim Suchen der Quelldateien. Der Quellpfad enthält keine Sims3Pack- oder Package-Dateien.");
       }
       $_SESSION[Ui::ui_source_input_key_root] = $filename_list;
+    }
+  }
+
+
+  # handle uploaded data for files
+  # rename files with shema
+  # store data for files with errors in session data, gets printed later on
+  private static function handle_uploaded_file_data(array $ui_data) : void {
+    if(isset($ui_data[Ui::ui_data_key_root]) === true){
+      $new_filename_list = Create_Read_Filename_By_Shema::create_filename_list_by_shema_from_ui_data($ui_data);
+      $failed_filename_data = Ui_Failed_Files::get_failed_filename_data();
+      if(empty($failed_filename_data) === false){
+        self::delete_session_data();
+        $_SESSION[Ui::ui_data_key_root] = $failed_filename_data[Ui::ui_data_key_root];
+      }
+      File_Handler::rename_file_from_filename_list($new_filename_list);
     }
   }
 

@@ -32,13 +32,13 @@ abstract class Main {
       # store filename list of source files in session data
       self::store_files_from_source_path_in_session($ui_data);
 
-  //     # if search input uploaded
-  //     if(isset($ui_data[Ui::ui_search_data_key_root]) === true){
-  //       Search_Shema::set_search_ui_data($ui_data);
-  //       Create_Read_Filename_By_Shema::read_data_from_filename_list_by_shema($_SESSION[Ui::ui_source_input_key_root]);
-  //       $filtered_filename_data = Search_Shema::filter_filename_data_by_search_input($ui_data);
-  //       Ui::print_input_shema_for_filename_data_list_and_fill($filtered_filename_data);
-  //     }
+      // # if search input uploaded
+      // if(isset($ui_data[Ui::ui_search_data_key_root]) === true){
+      //   Search_Shema::set_search_ui_data($ui_data);
+      //   Create_Read_Filename_By_Shema::read_data_from_filename_list_by_shema($_SESSION[Ui::ui_source_input_key_root]);
+      //   $filtered_filename_data = Search_Shema::filter_filename_data_by_search_input($ui_data);
+      //   Ui::print_input_shema_for_filename_data_list_and_fill($filtered_filename_data);
+      // }
 
       # handle uploaded data for files
       # rename files with shema
@@ -52,23 +52,9 @@ abstract class Main {
       Ui::print_error("Fehler in Main.php");
     }
 
-    # if no source existing in session data
-    if(empty($_SESSION) === true){
-      Ui::print_source_path_input();
-    }
+    self::print_ui();
 
-    # if source existing in session data
-    if(isset($_SESSION[Ui::ui_source_input_key_root]) === true){
-      Ui::print_filename_shema_input_for_filename_list($_SESSION[Ui::ui_source_input_key_root]);
-    }
-
-    # if data for files exists in session
-    if(isset($_SESSION[Ui::ui_data_key_root]) === true){
-      Ui::print_input_shema_for_filename_data_list_and_fill($_SESSION);
-    }
-
-    # print delete session button
-    Ui::print_delete_session_button();
+    var_dump($_SESSION);
   }
 
 
@@ -137,12 +123,40 @@ abstract class Main {
     if(isset($ui_data[Ui::ui_data_key_root]) === true){
       $new_filename_list = Create_Read_Filename_By_Shema::create_filename_list_by_shema_from_ui_data($ui_data);
       $failed_filename_data = Ui_Failed_Files::get_failed_filename_data();
+      self::delete_session_data();
+
+      # diese Funktion als nächstes hinzufügen
+      # kommt wenn Dateein mit Fehler geprinted werden
+      # soll auch eingesetzt werden, wenn gesuchte Dateien mit Suchfunktion gefunden wurden (siehe oben)
+      Ui::print_heading("");
+
       if(empty($failed_filename_data) === false){
-        self::delete_session_data();
         $_SESSION[Ui::ui_data_key_root] = $failed_filename_data[Ui::ui_data_key_root];
       }
       File_Handler::rename_file_from_filename_list($new_filename_list);
     }
+  }
+
+
+
+  private static function print_ui() : void {
+    # if no source existing in session data
+    if(empty($_SESSION) === true){
+      Ui::print_source_path_input();
+    }
+
+    # if source existing in session data
+    if(isset($_SESSION[Ui::ui_source_input_key_root]) === true){
+      Ui::print_filename_shema_input_for_filename_list($_SESSION[Ui::ui_source_input_key_root]);
+    }
+
+    # if data for files exists in session
+    if(isset($_SESSION[Ui::ui_data_key_root]) === true){
+      Ui::print_input_shema_for_filename_data_list_and_fill($_SESSION);
+    }
+
+    # print delete session button
+    Ui::print_delete_session_button();
   }
 
 

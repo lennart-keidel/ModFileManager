@@ -19,6 +19,7 @@ abstract class Main {
 
     try {
 
+
       # create session
       self::create_session();
 
@@ -29,8 +30,7 @@ abstract class Main {
 
       # if source path uploaded
       # store filename list of source files in session data
-      self::store_files_from_source_path_in_session();
-
+      self::store_files_from_source_path_in_session($ui_data);
 
   //     # if search input uploaded
   //     if(isset($ui_data[Ui::ui_search_data_key_root]) === true){
@@ -42,27 +42,31 @@ abstract class Main {
 
       # if changed filename data uploaded
       if(isset($ui_data[Ui::ui_data_key_root]) === true){
+        var_dump($ui_data);
         $new_filename_list = Create_Read_Filename_By_Shema::create_filename_list_by_shema_from_ui_data($ui_data);
-        $_SESSION[Ui::ui_source_input_key_root] = $new_filename_list;
+        var_dump($new_filename_list);
+        // $_SESSION[Ui::ui_source_input_key_root] = $new_filename_list;
         File_Handler::rename_file_from_filename_list($new_filename_list);
-        $_SESSION[Ui::ui_source_input_key_root] = $failed_filename_list = Ui_Failed_Files::get_failed_filename_list();
+        $failed_filename_list = Ui_Failed_Files::get_failed_filename_list();
         var_dump($failed_filename_list);
+        // $_SESSION[Ui::ui_source_input_key_root] = $failed_filename_list = Ui_Failed_Files::get_failed_filename_list();
       }
 
 
-      # if no source existing in session data
-      if(isset($_SESSION[Ui::ui_source_input_key_root]) === false){
-        Ui::print_source_path_input();
-      }
-
-      # if source existing in session data
-      if(isset($_SESSION[Ui::ui_source_input_key_root]) === true){
-        Ui::print_filename_shema_input_for_filename_list($_SESSION[Ui::ui_source_input_key_root]);
-      }
 
     }
     catch(Exception $e){
-      new Ui_Exception("Fehler in Main.php");
+
+    }
+
+    # if no source existing in session data
+    if(isset($_SESSION[Ui::ui_source_input_key_root]) === false){
+      Ui::print_source_path_input();
+    }
+
+    # if source existing in session data
+    if(isset($_SESSION[Ui::ui_source_input_key_root]) === true){
+      Ui::print_filename_shema_input_for_filename_list($_SESSION[Ui::ui_source_input_key_root]);
     }
 
     # print delete session button
@@ -70,6 +74,8 @@ abstract class Main {
   }
 
 
+  # start session
+  # if session data not valid, delete session data
   private static function create_session() : void{
 
     # start session
@@ -83,14 +89,21 @@ abstract class Main {
       isset($_SESSION[Ui::ui_search_data_key_root]) === false &&
       isset($_SESSION[Ui::ui_data_key_root]) === false
     )){
-      $_SESSION = [];
+      self::delete_session_data();
     }
   }
 
 
+  # remove all session data
+  private static function delete_session_data() : void {
+    $_SESSION = [];
+  }
+
+
+  # if delete session data is contained in ui-data delete the session
   private static function execute_delete_session_button(array $ui_data) : void {
     if(isset($ui_data["delete_session_button"]) === true){
-      $_SESSION = [];
+      self::delete_session_data();
     }
   }
 
@@ -98,7 +111,7 @@ abstract class Main {
   # if source path uploaded
   # store filename list of source files in session data
   # throw exception if missing root key
-  private static function store_files_from_source_path_in_session(){
+  private static function store_files_from_source_path_in_session(array $ui_data) : void {
     if(isset($ui_data[Ui::ui_source_input_key_root]) === true){
       if(isset($ui_data[Ui::ui_source_input_key_root][Ui::ui_path_source_root_key]) === false){
         throw new Ui_Exception("Fehler beim verarbeiten der Anfrage. Fehlender Schlüssel: ".Ui::ui_path_source_root_key);
@@ -110,9 +123,14 @@ abstract class Main {
       else {
         $filename_list = File_Handler::get_filename_list_from_path($source_path);
       }
+      if(empty($filename_list) === true){
+        self::delete_session_data();
+        throw new Ui_Exception("Fehler beim Suchen der Quelldateien. Der Quellpfad enthält keine Sims3Pack- oder Package-Dateien.");
+      }
       $_SESSION[Ui::ui_source_input_key_root] = $filename_list;
     }
   }
+
 
 }
 

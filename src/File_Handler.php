@@ -16,14 +16,21 @@ abstract class File_Handler {
     $result = [];
     $fileextension_filter = array_map("strtolower", File_Handler::fileextension_filter);
 
+    # foreach file in directory
     foreach (new DirectoryIterator($path) as $file) {
       if(array_search(strtolower($file->getExtension()), $fileextension_filter) === false || $file->isDot() || $file->isDir()){
         continue;
       }
+
       $path = File_Handler::remove_trailing_slash_from_path($path);
       $result[$path][] = $file->getFilename();
     }
-    sort($result[$path], SORT_NATURAL);
+
+    # if result not empty
+    # sort result
+    if(empty($result) === false){
+      sort($result[$path], SORT_NATURAL);
+    }
     return $result;
   }
 
@@ -42,15 +49,28 @@ abstract class File_Handler {
 
     $directory_iteartor = new RecursiveDirectoryIterator($path_root, RecursiveDirectoryIterator::SKIP_DOTS);
     $file_iterator = new RecursiveIteratorIterator($directory_iteartor, RecursiveIteratorIterator::CHILD_FIRST);
+    $previous_path_directory = $path_directory = "";
 
+    # foreach file in directory recursive
     foreach ($file_iterator as $file) {
+
+      # skip files not matching the file extension
+      # skip directorys
       if(array_search(strtolower($file->getExtension()), $fileextension_filter) === false || $file->isDir()){
         continue;
       }
+
       $path_directory = File_Handler::remove_trailing_slash_from_path(dirname($file->getPathname()));
       $result[$path_directory][] = $file->getFilename();
+
+      # if result not empty and current path is not previous path, to sort only if all files of this directory are done
+      # sort result
+      if(empty($result) === false && $path_directory !== $previous_path_directory){
+        sort($result[$previous_path_directory], SORT_NATURAL);
+      }
+      $previous_path_directory = $path_directory;
     }
-    sort($result[$path_directory]);
+
     return $result;
   }
 

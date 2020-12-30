@@ -16,7 +16,7 @@ abstract class Filename_Shema_Link implements I_Filename_Shema {
   private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="url_shema_link%1$d">Link zum Mod, CC</label>
-      <input id="url_shema_link%1$d" type="url" name="%2$s[%1$d][url_shema_link]">
+      <input id="url_shema_link%1$d" type="url" name="%2$s[%1$d][url_shema_link]" required>
     </div>
   ';
 
@@ -27,6 +27,10 @@ abstract class Filename_Shema_Link implements I_Filename_Shema {
 
     if(!isset($data_from_ui[$key])){
       throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST-Request: '$key'");
+    }
+
+    if(empty($data_from_ui[$key]) === true){
+      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer eingegebene Link ist leer.");
     }
 
     return [

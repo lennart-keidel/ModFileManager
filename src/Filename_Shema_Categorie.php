@@ -29,7 +29,7 @@ abstract class Filename_Shema_Categorie implements I_Filename_Shema {
   private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="select_shema_categorie%1$d">Kategorie</label>
-      <select id="select_shema_categorie%1$d" name="%2$s[%1$d][select_shema_categorie]">
+      <select id="select_shema_categorie%1$d" name="%2$s[%1$d][select_shema_categorie]" required>
         <option value="" selected disabled>Auswählen</option>
         <optgroup label="CC">
           <option value="option_cc_buy">Custom Content Objekt für Kaufmodus</option>

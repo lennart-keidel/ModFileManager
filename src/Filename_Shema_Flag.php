@@ -137,7 +137,7 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
     $main_key = current(self::array_ui_data_key);
 
     if(!isset($data_from_ui[$main_key])){
-      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST-Request: '$main_key'");
+      $data_from_ui[$main_key] = [];
     }
 
     # check for not valid flag-options in ui-data

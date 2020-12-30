@@ -19,8 +19,8 @@ abstract class Create_Read_Filename_By_Shema {
       }
       catch(Exception $e){
         Ui_Failed_Files::add_failed_filename_data($ui_data_for_one_file);
-        throw new Shema_Exception($e->getMessage());
-        continue;
+        $result = "";
+        break;
       }
       if($shema_index < count(Main::shema_order_global)-1){
         $result .= self::filename_shema_seperator;
@@ -28,7 +28,11 @@ abstract class Create_Read_Filename_By_Shema {
 
     }
 
-    return $result.(empty($original_fileextension) ? "" : ".".$original_fileextension);
+    if(empty($result) === false){
+      $result .= (empty($original_fileextension) ? "" : ".".$original_fileextension);
+    }
+
+    return $result;
   }
 
 

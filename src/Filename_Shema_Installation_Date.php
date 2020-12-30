@@ -13,7 +13,7 @@ abstract class Filename_Shema_Installation_Date implements I_Filename_Shema {
   private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="date_shema_installation_date%1$d">Installationsdatum</label>
-      <input id="date_shema_installation_date%1$d" type="date" name="%2$s[%1$d][date_shema_installation_date]">
+      <input id="date_shema_installation_date%1$d" type="date" name="%2$s[%1$d][date_shema_installation_date]" value="%3$s" required>
     </div>
   ';
 
@@ -111,13 +111,13 @@ abstract class Filename_Shema_Installation_Date implements I_Filename_Shema {
 
   # print filename shema input to ui
   public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root);
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root, (new DateTime())->format('Y-m-d'));
   }
 
 
   # print filename shema search input to ui
   public static function print_filneame_shema_search_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_search_data_key_root);
+    printf(self::input_shema_template, $index, Ui::ui_search_data_key_root, (new DateTime())->format('Y-m-d'));
   }
 
 }

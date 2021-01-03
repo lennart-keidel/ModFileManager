@@ -117,7 +117,7 @@ abstract class Create_Read_Filename_By_Shema {
     foreach($filename_list as $path => $array_filenames){
       $result_part = [];
       foreach($array_filenames as $filename){
-        Shema_Exception::set_source_path($path."/".$filename);
+        Shema_Exception::set_source_path($path.Filehandler::path_seperator.$filename);
         try {
           $result_part = self::read_data_from_filename_by_shema($filename);
         }
@@ -126,7 +126,7 @@ abstract class Create_Read_Filename_By_Shema {
           Ui_Failed_Files::add_failed_filename_list($failed_filename_list);
           continue;
         }
-        $result_part[Ui::ui_key_path_source] = $path."/".$filename;
+        $result_part[Ui::ui_key_path_source] = $path.Filehandler::path_seperator.$filename;
         $result[Ui::ui_data_key_root][] = $result_part;
       }
     }

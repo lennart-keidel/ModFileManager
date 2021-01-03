@@ -152,8 +152,8 @@ abstract class Ui {
       return;
     }
     $filename = basename($path_source);
-    printf(self::template_shema_input_form_begin, "");
     printf(self::template_shema_input_container_begin, self::$out_input_shema_index, $filename);
+    printf(self::template_shema_input_form_begin, "");
     printf(self::input_shema_template_path_source, self::$out_input_shema_index, self::ui_data_key_root, $path_source);
     printf(self::template_shema_template_path_source_for_ui, $path_source);
     foreach(Main::shema_order_global as $class_id){
@@ -161,8 +161,8 @@ abstract class Ui {
       $class_name::print_filename_shema_input_for_ui(self::$out_input_shema_index);
     }
     printf(self::template_shema_input_submit_button, "");
-    printf(self::template_shema_input_container_end,"");
     printf(self::template_shema_input_form_end, "");
+    printf(self::template_shema_input_container_end,"");
     self::$out_input_shema_index++;
   }
 
@@ -206,11 +206,8 @@ abstract class Ui {
   # print input shema by filename data list and print js code to fill it with the data
   protected static function print_input_shema_for_filename_data_list(array $filename_data_list) : void {
     foreach($filename_data_list[self::ui_data_key_root] as $filename_data_for_one_file){
-      printf(self::template_shema_input_form_begin, "");
       $path_source = $filename_data_for_one_file[self::ui_key_path_source];
       self::print_filename_shema_input($path_source);
-      printf(self::template_shema_input_submit_button, "");
-      printf(self::template_shema_input_form_end, "");
     }
   }
 

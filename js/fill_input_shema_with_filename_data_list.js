@@ -73,3 +73,10 @@ function set_data_in_element(id, value) {
     element.value = value;
   }
 }
+
+
+function highlight_shema_input_element(index) {
+
+  // add class
+  document.getElementById("file_details" + index).classList.add("file_shema_input_highlight");
+}

@@ -67,7 +67,10 @@ abstract class Main {
   private static function create_session() : void {
 
     # start session
-    session_start();
+    # session is active for one day
+    session_start([
+      'cookie_lifetime' => 86400,
+    ]);
 
     # if session not valid
     # reset session array
@@ -158,16 +161,16 @@ abstract class Main {
       $failed_filename_data = Ui_Failed_Files::get_failed_filename_data();
       if(empty($failed_filename_data[Ui::ui_data_key_root]) === false){
         Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei:");
-        $_SESSION[Ui::ui_data_key_root] = (empty($_SESSION[Ui::ui_data_key_root]) === false ? array_merge($_SESSION[Ui::ui_data_key_root], $failed_filename_data[Ui::ui_data_key_root]) : $failed_filename_data[Ui::ui_data_key_root]);
-        var_dump($_SESSION[Ui::ui_data_key_root]);
+        $_SESSION[Ui::ui_data_key_root] = (isset($_SESSION[Ui::ui_data_key_root]) === true ? array_merge($_SESSION[Ui::ui_data_key_root], $failed_filename_data[Ui::ui_data_key_root]) : $failed_filename_data[Ui::ui_data_key_root]);
         return;
       }
 
       # check failed filename list
       $failed_filename_list = Ui_Failed_Files::get_failed_filename_list();
+      var_dump($failed_filename_list,$_SESSION[Ui::ui_source_input_key_root], array_merge($_SESSION[Ui::ui_source_input_key_root], $failed_filename_list));
       if(empty($failed_filename_list) === false){
         Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei:");
-        $_SESSION[Ui::ui_source_input_key_root] = array_merge($_SESSION[Ui::ui_source_input_key_root], $failed_filename_list);
+        $_SESSION[Ui::ui_source_input_key_root] = array_merge_recursive($_SESSION[Ui::ui_source_input_key_root], $failed_filename_list);
         return;
       }
 
@@ -190,7 +193,6 @@ abstract class Main {
           foreach($_SESSION[Ui::ui_data_key_root] as $index => $file_data){
             if($file_data[Ui::ui_key_path_source] === $original_path){
               unset($_SESSION[Ui::ui_data_key_root][$index]);
-              return;
             }
           }
         }
@@ -203,7 +205,6 @@ abstract class Main {
           $found_key = array_search($original_filename, $_SESSION[Ui::ui_source_input_key_root][$original_parent_directory]);
           if($found_key !== false){
             unset($_SESSION[Ui::ui_source_input_key_root][$original_parent_directory][$found_key]);
-            return;
           }
         }
       }

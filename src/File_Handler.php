@@ -113,7 +113,7 @@ abstract class File_Handler {
     # add failed filenames to global storage
     # throw custom exception
     if(is_file($path_new_filename)){
-      Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename), basename($path_new_filename)]]);
+      Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename)]]);
       File_Handler_Exception::set_source_path($path_new_filename);
       throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Der Dateiname unter dem Pfad existiert bereits und wird nicht umbennant, um die Datei nicht zu überschreiben.");
       return;
@@ -123,7 +123,7 @@ abstract class File_Handler {
     # add failed filenames to global storage
     # throw custom exception
     if(is_file($path_original_filename) === false){
-      Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename), basename($path_new_filename)]]);
+      Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename)]]);
       File_Handler_Exception::set_source_path($path_original_filename);
       throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Die Datei existiert nicht oder ist keine gültige Datei.");
       return;
@@ -136,7 +136,7 @@ abstract class File_Handler {
     catch(Exception $e){
 
       # add failed filenames to global storage
-      Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename), basename($path_new_filename)]]);
+      Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename)]]);
 
       # if catched exception was not a custom exception
       # throw a custom exception

@@ -66,7 +66,9 @@ abstract class File_Handler {
 
       # if result not empty and current path is not previous path, to sort only if all files of this directory are done
       # sort result
-      if(empty($result) === false && $path_directory !== $previous_path_directory){
+      if($path_directory !== $previous_path_directory &&
+      isset($result[$previous_path_directory]) &&
+      empty($result[$previous_path_directory]) === false){
         sort($result[$previous_path_directory], SORT_NATURAL);
       }
       $previous_path_directory = $path_directory;
@@ -100,25 +102,48 @@ abstract class File_Handler {
 
   # rename a file
   public static function rename_file(string $path_original_filename, string $path_new_filename) : void {
+
+    # if original filename and new filename are equal
+    # skip
     if($path_original_filename===$path_new_filename){
       return;
     }
+
+    # if new filename already exists
+    # add failed filenames to global storage
+    # throw custom exception
     if(is_file($path_new_filename)){
+      Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename), basename($path_new_filename)]]);
       File_Handler_Exception::set_source_path($path_new_filename);
       throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Der Dateiname unter dem Pfad existiert bereits und wird nicht umbennant, um die Datei nicht zu überschreiben.");
       return;
     }
+
+    # if original filename does not exist
+    # add failed filenames to global storage
+    # throw custom exception
     if(is_file($path_original_filename) === false){
+      Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename), basename($path_new_filename)]]);
       File_Handler_Exception::set_source_path($path_original_filename);
       throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Die Datei existiert nicht oder ist keine gültige Datei.");
       return;
     }
+
     try {
       rename($path_original_filename, $path_new_filename);
     }
+
     catch(Exception $e){
-      File_Handler_Exception::set_source_path($path_original_filename);
-      throw new File_Handler_Exception("Fehler beim umbenennen der Dateien.\\nHier die PHP-Fehlermeldung: ".$e->getMessage());
+
+      # add failed filenames to global storage
+      Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename), basename($path_new_filename)]]);
+
+      # if catched exception was not a custom exception
+      # throw a custom exception
+      if(($e instanceof File_Handler_Exception) === false){
+        File_Handler_Exception::set_source_path($path_original_filename);
+        throw new File_Handler_Exception("Fehler beim umbenennen der Dateien.\\nHier die PHP-Fehlermeldung: ".$e->getMessage());
+      }
       return;
     }
   }

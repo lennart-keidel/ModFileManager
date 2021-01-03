@@ -1,5 +1,6 @@
 details {
   padding-top: 0.5em;
+  border-bottom: 2px black solid;
 }
 
 details > *:not(summary){
@@ -60,4 +61,16 @@ summary:focus {
 /* no selection color in labels */
 label::selection {
   background-color: transparent;
+}
+
+
+
+.error_heading {
+  color: red;
+  font-weight: bold;
+}
+
+.success_heading {
+  color: green;
+  font-weight: bold;
 }

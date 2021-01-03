@@ -18,6 +18,18 @@ abstract class Ui {
   # ui data key for source path input to search recursive
   public const ui_path_source_root_recursive_key = "path_source_root_options";
 
+  # ui data value for source path input to search recursive
+  public const ui_path_source_root_recursive_value = "search_source_dir_recursive";
+
+  # ui data key for mode
+  public const ui_path_source_root_option_mode_key = "path_source_root_options_mode";
+
+  # ui data value for mode: rename files by shema
+  public const ui_path_source_root_option_mode_value_rename_files_by_shema = "rename_files_by_shema";
+
+  # ui data value for mode: search source dir for shema files by shema data
+  public const ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data = "search_source_dir_for_shema_files_by_shema_data";
+
   # ui data key for filename source path
   public const ui_key_path_source = "path_source";
 
@@ -28,11 +40,19 @@ abstract class Ui {
   private const input_path_source_template = '
   <div class="container_label_and_input">
     <label for="input_source_path_root%1$d">Pfad zum Quellordner</label>
-    <input id="input_source_path_root%1$d" type="text" name="%2$s[path_source_root]" required>
+    <input id="input_source_path_root%1$d" type="text" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_key.']" value="%2$s" required>
   </div>
   <div class="container_label_and_input">
-    <input id="input_source_path_root_recursive%1$d" type="checkbox" name="%2$s[path_source_root_options]" value="search_source_dir_recursive">
+    <input id="input_source_path_root_recursive%1$d" type="checkbox" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_recursive_key.']" value="'.self::ui_path_source_root_recursive_value.'">
     <label for="input_source_path_root_recursive%1$d">Alle Unterordner und deren Dateien einbinden</label>
+  </div>
+  <div class="container_label_and_input">
+    <input id="rename_files_by_shema%1$d" type="radio" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_option_mode_key.']" value="'.self::ui_path_source_root_option_mode_value_rename_files_by_shema.'" checked>
+    <label for="rename_files_by_shema%1$d">Dateien in Shema-Format bringen</label>
+  </div>
+  <div class="container_label_and_input">
+    <input id="search_source_dir_for_shema_files_by_shema_data%1$d" type="radio" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_option_mode_key.']" value="'.self::ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data.'">
+    <label for="search_source_dir_for_shema_files_by_shema_data%1$d">Nach Dateien suchen anhand von Shema-Daten</label>
   </div>
   ';
 
@@ -89,11 +109,11 @@ abstract class Ui {
 
   # html template for hidden input for source path
   private const input_shema_template_path_source = '
-  <input type="hidden" name="%2$s[%1$d][path_source]" value="%3$s" id="path_source%1$d">
+  <input type="hidden" class="'.self::ui_key_path_source.'" name="%2$s[%1$d]['.self::ui_key_path_source.']" value="%3$s" id="'.self::ui_key_path_source.'%1$d">
   ';
 
   private const template_source_input_submit_button = '
-  <input type="submit" value="Quell-Ordner eintragen">
+  <input type="submit" value="Quellordner eintragen">
   ';
 
   private const template_shema_search_submit_button = '
@@ -101,7 +121,7 @@ abstract class Ui {
   ';
 
   private const template_shema_input_submit_button = '
-  <input type="submit" value="Dateien umbenennen">
+  <input type="submit" value="Diese Datei umbenennen">
   ';
 
   private const template_delete_session_button = '
@@ -111,12 +131,28 @@ abstract class Ui {
   </form>
   ';
 
+  private const template_heading = '
+  <h2>%1$s</h2>
+  ';
+
+  private const template_error_heading = '
+  <h2 class="error_heading">%1$s</h2>
+  ';
+
+  private const template_success_heading = '
+  <h2 class="success_heading">%1$s</h2>
+  ';
+
   private static $out_input_shema_index = 0;
 
 
   # print shema input for one file
   private static function print_filename_shema_input(string $path_source) : void {
+    if(empty($path_source) === true){
+      return;
+    }
     $filename = basename($path_source);
+    printf(self::template_shema_input_form_begin, "");
     printf(self::template_shema_input_container_begin, self::$out_input_shema_index, $filename);
     printf(self::input_shema_template_path_source, self::$out_input_shema_index, self::ui_data_key_root, $path_source);
     printf(self::template_shema_template_path_source_for_ui, $path_source);
@@ -124,22 +160,22 @@ abstract class Ui {
       $class_name = "Filename_Shema_$class_id";
       $class_name::print_filename_shema_input_for_ui(self::$out_input_shema_index);
     }
+    printf(self::template_shema_input_submit_button, "");
     printf(self::template_shema_input_container_end,"");
+    printf(self::template_shema_input_form_end, "");
     self::$out_input_shema_index++;
   }
 
 
   # print shema input for each filename of a filename list
   public static function print_filename_shema_input_for_filename_list(array $filename_list) : void {
-    printf(self::template_shema_input_form_begin, "");
     foreach($filename_list as $path => $filename_array){
       foreach($filename_array as $filename){
-        $source_path = "$path/$filename";
+        $source_path = (empty($path) === false ? $path.File_Handler::path_seperator : "")."$filename";
         self::print_filename_shema_input($source_path);
       }
     }
-    printf(self::template_shema_input_submit_button, "");
-    printf(self::template_shema_input_form_end, "");
+
   }
 
 
@@ -169,13 +205,13 @@ abstract class Ui {
 
   # print input shema by filename data list and print js code to fill it with the data
   protected static function print_input_shema_for_filename_data_list(array $filename_data_list) : void {
-    printf(self::template_shema_input_form_begin, "");
     foreach($filename_data_list[self::ui_data_key_root] as $filename_data_for_one_file){
+      printf(self::template_shema_input_form_begin, "");
       $path_source = $filename_data_for_one_file[self::ui_key_path_source];
       self::print_filename_shema_input($path_source);
+      printf(self::template_shema_input_submit_button, "");
+      printf(self::template_shema_input_form_end, "");
     }
-    printf(self::template_shema_input_submit_button, "");
-    printf(self::template_shema_input_form_end, "");
   }
 
 
@@ -189,7 +225,8 @@ abstract class Ui {
   # print source path input for the root path of files
   public static function print_source_path_input() : void {
     printf(self::template_source_input_form_begin, "");
-    printf(self::input_path_source_template, self::$out_input_shema_index, self::ui_source_input_key_root);
+    $source_path_value = (isset($_COOKIE[self::ui_path_source_root_key]) === true ? $_COOKIE[self::ui_path_source_root_key] : "");
+    printf(self::input_path_source_template, self::$out_input_shema_index, $source_path_value);
     printf(self::template_source_input_submit_button, "");
     printf(self::template_source_input_form_end, "");
   }
@@ -214,14 +251,32 @@ abstract class Ui {
 
   # print delete session button
   public static function print_delete_session_button() : void {
-    printf(Ui::template_delete_session_button, "");
+    printf(self::template_delete_session_button, "");
+  }
+
+
+  # print heading
+  public static function print_heading(string $content) : void {
+    printf(self::template_heading, $content);
+  }
+
+
+  # print heading for error message
+  public static function print_error_heading(string $content) : void {
+    printf(self::template_error_heading, $content);
+  }
+
+
+  # print heading for success message
+  public static function print_success_heading(string $content) : void {
+    printf(self::template_success_heading, $content);
   }
 
 
   # print error message as js alert
   public static function print_error(string $message) : void {
     if(!empty($message)){
-      printf(Ui::template_error_message, $message);
+      printf(self::template_error_message, $message);
     }
   }
 

@@ -19,13 +19,17 @@ abstract class Main {
 
     try {
 
-
       # create session
       self::create_session();
 
       # if delete session button pushed
       # delete session
       self::execute_delete_session_button($ui_data);
+
+
+      # if source path uploaded
+      # store source path in cookie
+      self::store_source_path_in_cookie($ui_data);
 
 
       # if source path uploaded
@@ -60,7 +64,7 @@ abstract class Main {
 
   # start session
   # if session data not valid, delete session data
-  private static function create_session() : void{
+  private static function create_session() : void {
 
     # start session
     session_start();
@@ -71,7 +75,8 @@ abstract class Main {
     empty($_SESSION) === true || (
       isset($_SESSION[Ui::ui_source_input_key_root]) === false &&
       isset($_SESSION[Ui::ui_search_data_key_root]) === false &&
-      isset($_SESSION[Ui::ui_data_key_root]) === false
+      isset($_SESSION[Ui::ui_data_key_root]) === false ||
+      (isset($_SESSION[Ui::ui_data_key_root]) === true && empty($_SESSION[Ui::ui_data_key_root]) === true)
     )){
       self::delete_session_data();
     }
@@ -93,6 +98,20 @@ abstract class Main {
 
 
   # if source path uploaded
+  # store source path in cookie
+  private static function store_source_path_in_cookie(array $ui_data) : void {
+
+    # if source path key exists in ui data
+    # set expire date: now + 1 month
+    if(isset($ui_data[Ui::ui_source_input_key_root][Ui::ui_path_source_root_key]) === true){
+      $expire_date = new DateTime();
+      $expire_date->add(new DateInterval("P8M"));
+      setcookie(Ui::ui_path_source_root_key, $ui_data[Ui::ui_source_input_key_root][Ui::ui_path_source_root_key], $expire_date->getTimestamp(), "/");
+    }
+  }
+
+
+  # if source path uploaded
   # store filename list of source files in session data
   # throw exception if missing root key
   private static function store_files_from_source_path_in_session(array $ui_data) : void {
@@ -101,7 +120,7 @@ abstract class Main {
         throw new Ui_Exception("Fehler beim verarbeiten der Anfrage. Fehlender Schlüssel: ".Ui::ui_path_source_root_key);
       }
       $source_path = $ui_data[Ui::ui_source_input_key_root][Ui::ui_path_source_root_key];
-      if(isset($ui_data[Ui::ui_source_input_key_root][Ui::ui_path_source_root_recursive_key]) === true && $ui_data[Ui::ui_source_input_key_root][Ui::ui_path_source_root_recursive_key] === "search_source_dir_recursive"){
+      if(isset($ui_data[Ui::ui_source_input_key_root][Ui::ui_path_source_root_recursive_key]) === true && $ui_data[Ui::ui_source_input_key_root][Ui::ui_path_source_root_recursive_key] === Ui::ui_path_source_root_recursive_value){
         $filename_list = File_Handler::get_filename_list_from_path_recursive($source_path);
       }
       else {
@@ -121,38 +140,92 @@ abstract class Main {
   # store data for files with errors in session data, gets printed later on
   private static function handle_uploaded_file_data(array $ui_data) : void {
     if(isset($ui_data[Ui::ui_data_key_root]) === true){
+
       $new_filename_list = Create_Read_Filename_By_Shema::create_filename_list_by_shema_from_ui_data($ui_data);
-      $failed_filename_data = Ui_Failed_Files::get_failed_filename_data();
-      self::delete_session_data();
+      self::remove_original_filename_from_session_data($new_filename_list);
 
-      # diese Funktion als nächstes hinzufügen
-      # kommt wenn Dateein mit Fehler geprinted werden
-      # soll auch eingesetzt werden, wenn gesuchte Dateien mit Suchfunktion gefunden wurden (siehe oben)
-      Ui::print_heading("");
-
-      if(empty($failed_filename_data) === false){
-        $_SESSION[Ui::ui_data_key_root] = $failed_filename_data[Ui::ui_data_key_root];
+      # if array failed filename data is not empty
+      # -> if creation of new filename failed cause of an exception
+      #    data of failed filename creations is stored in $failed_filename_data
+      # store data from error filenames in session
+      try {
+        File_Handler::rename_file_from_filename_list($new_filename_list);
       }
-      File_Handler::rename_file_from_filename_list($new_filename_list);
+      catch(Exception $exception){
+      }
+
+      # check failed filename data
+      $failed_filename_data = Ui_Failed_Files::get_failed_filename_data();
+      if(empty($failed_filename_data[Ui::ui_data_key_root]) === false){
+        Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei:");
+        $_SESSION[Ui::ui_data_key_root] = (empty($_SESSION[Ui::ui_data_key_root]) === false ? array_merge($_SESSION[Ui::ui_data_key_root], $failed_filename_data[Ui::ui_data_key_root]) : $failed_filename_data[Ui::ui_data_key_root]);
+        var_dump($_SESSION[Ui::ui_data_key_root]);
+        return;
+      }
+
+      # check failed filename list
+      $failed_filename_list = Ui_Failed_Files::get_failed_filename_list();
+      if(empty($failed_filename_list) === false){
+        Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei:");
+        $_SESSION[Ui::ui_source_input_key_root] = array_merge($_SESSION[Ui::ui_source_input_key_root], $failed_filename_list);
+        return;
+      }
+
+      # print heading with success message
+      Ui::print_success_heading("Die Datei wurde erfolgreich umbenannt.");
     }
   }
 
 
+  private static function remove_original_filename_from_session_data(array $filename_list) : void {
+
+    # get original filename from filename list
+    foreach($filename_list as $path => $array_filename){
+      foreach($array_filename as $original_filename => $new_filename){
+        $original_path = $path.File_Handler::path_seperator.$original_filename;
+
+        # find original path in session filename data, root key: files
+        # remove this filename data
+        if(isset($_SESSION[Ui::ui_data_key_root]) === true){
+          foreach($_SESSION[Ui::ui_data_key_root] as $index => $file_data){
+            if($file_data[Ui::ui_key_path_source] === $original_path){
+              unset($_SESSION[Ui::ui_data_key_root][$index]);
+              return;
+            }
+          }
+        }
+
+        # find original path in session filename list, root key: source
+        # remove this filename list item
+        if(isset($_SESSION[Ui::ui_source_input_key_root]) === true){
+          $original_parent_directory = File_Handler::remove_trailing_slash_from_path(dirname($original_path));
+          $original_filename = basename($original_path);
+          $found_key = array_search($original_filename, $_SESSION[Ui::ui_source_input_key_root][$original_parent_directory]);
+          if($found_key !== false){
+            unset($_SESSION[Ui::ui_source_input_key_root][$original_parent_directory][$found_key]);
+            return;
+          }
+        }
+      }
+    }
+  }
+
 
   private static function print_ui() : void {
+
     # if no source existing in session data
     if(empty($_SESSION) === true){
       Ui::print_source_path_input();
     }
 
-    # if source existing in session data
-    if(isset($_SESSION[Ui::ui_source_input_key_root]) === true){
-      Ui::print_filename_shema_input_for_filename_list($_SESSION[Ui::ui_source_input_key_root]);
+    # if data for files exists in session
+    if(isset($_SESSION[Ui::ui_data_key_root]) === true && empty($_SESSION[Ui::ui_data_key_root]) === false){
+      Ui::print_input_shema_for_filename_data_list_and_fill($_SESSION);
     }
 
-    # if data for files exists in session
-    if(isset($_SESSION[Ui::ui_data_key_root]) === true){
-      Ui::print_input_shema_for_filename_data_list_and_fill($_SESSION);
+    # if source existing in session data
+    if(isset($_SESSION[Ui::ui_source_input_key_root]) === true && empty($_SESSION[Ui::ui_source_input_key_root]) === false){
+      Ui::print_filename_shema_input_for_filename_list($_SESSION[Ui::ui_source_input_key_root]);
     }
 
     # print delete session button

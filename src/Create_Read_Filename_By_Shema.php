@@ -20,7 +20,7 @@ abstract class Create_Read_Filename_By_Shema {
       catch(Exception $e){
         Ui_Failed_Files::add_failed_filename_data($ui_data_for_one_file);
         $result = "";
-        break;
+        return $result;
       }
       if($shema_index < count(Main::shema_order_global)-1){
         $result .= self::filename_shema_seperator;
@@ -91,7 +91,7 @@ abstract class Create_Read_Filename_By_Shema {
   # read data from filename by shema
   # reverse process of create_filename_by_shema_from_ui_data
   # call convert_filename_to_data function of Filnema_Shema_* Classes and connect to array
-  private static function read_data_from_filename_by_shema(string $filename) : array {
+  public static function read_data_from_filename_by_shema(string $filename) : array {
     $result = [];
 
     $filename = File_Handler::get_filename_from_path_without_fileextension($filename);
@@ -117,7 +117,7 @@ abstract class Create_Read_Filename_By_Shema {
     foreach($filename_list as $path => $array_filenames){
       $result_part = [];
       foreach($array_filenames as $filename){
-        Shema_Exception::set_source_path($path.Filehandler::path_seperator.$filename);
+        Shema_Exception::set_source_path($path.File_Handler::path_seperator.$filename);
         try {
           $result_part = self::read_data_from_filename_by_shema($filename);
         }
@@ -126,7 +126,7 @@ abstract class Create_Read_Filename_By_Shema {
           Ui_Failed_Files::add_failed_filename_list($failed_filename_list);
           continue;
         }
-        $result_part[Ui::ui_key_path_source] = $path.Filehandler::path_seperator.$filename;
+        $result_part[Ui::ui_key_path_source] = $path.File_Handler::path_seperator.$filename;
         $result[Ui::ui_data_key_root][] = $result_part;
       }
     }

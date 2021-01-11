@@ -16,7 +16,7 @@ abstract class Filename_Shema_Link implements I_Filename_Shema {
   private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="url_shema_link%1$d">Link zum Mod, CC</label>
-      <input id="url_shema_link%1$d" type="url" name="%2$s[%1$d][url_shema_link]" required>
+      <input class="%3$s%1$d" id="url_shema_link%1$d" type="url" name="%2$s[%1$d][url_shema_link]" required>
     </div>
   ';
 
@@ -76,13 +76,13 @@ abstract class Filename_Shema_Link implements I_Filename_Shema {
 
   # print filename shema input to ui
   public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root);
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root, Filename_Shema_Link::class);
   }
 
 
   # print filename shema search input to ui
   public static function print_filneame_shema_search_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_search_data_key_root);
+    printf(self::input_shema_template, $index, Ui::ui_search_data_key_root, Filename_Shema_Link::class);
   }
 
 }

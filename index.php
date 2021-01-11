@@ -9,7 +9,8 @@ require 'vendor/autoload.php';
   <title>Mod Files Renamer</title>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
-  <script src="js/fill_input_shema_with_filename_data_list.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/main.js"></script>
 </head>
 <body>
 

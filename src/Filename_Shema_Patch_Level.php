@@ -13,7 +13,7 @@ abstract class Filename_Shema_Patch_Level implements I_Filename_Shema {
     private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="select_shema_patch_level%1$d">Patch-Level</label>
-      <select id="select_shema_patch_level%1$d" name="%2$s[%1$d][select_shema_patch_level]" required>
+      <select class="%3$s%1$d" id="select_shema_patch_level%1$d" name="%2$s[%1$d][select_shema_patch_level]" required>
         <option value="1.70">1.70</option>
         <option value="1.69" selected>1.69</option>
         <option value="1.67">1.67</option>
@@ -159,13 +159,13 @@ abstract class Filename_Shema_Patch_Level implements I_Filename_Shema {
 
   # print filename shema input to ui
   public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root);
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root, Filename_Shema_Patch_Level::class);
   }
 
 
   # print filename shema search input to ui
   public static function print_filneame_shema_search_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_search_data_key_root);
+    printf(self::input_shema_template, $index, Ui::ui_search_data_key_root, Filename_Shema_Patch_Level::class);
   }
 
 }

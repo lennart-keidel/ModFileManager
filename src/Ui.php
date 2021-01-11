@@ -4,7 +4,10 @@ abstract class Ui {
 
 
   # ui data root key for filename shema input
-  public const ui_data_key_root = "files";
+  public const ui_data_key_root = "file_data_list";
+
+  # ui data root key for filename shema input
+  public const ui_file_list_key_root = "file_name_list";
 
   # ui data root key for search input
   public const ui_search_data_key_root = "search";
@@ -34,7 +37,7 @@ abstract class Ui {
   public const ui_key_path_source = "path_source";
 
   # html template for error messages
-  private const template_error_message = '<script>alert(%1$s)</script>';
+  private const template_error_message = '<script>console.log(%1$s);alert(%1$s)</script>';
 
   # html template for source path input
   private const input_path_source_template = '
@@ -57,8 +60,8 @@ abstract class Ui {
   ';
 
   private const search_connector_input_template = '
-  <label for="search_shema_connector">Suche verbinden mit: </label>
-  <select id="search_shema_connector" name="%2$s[%1$d][search_shema_connector]" required>
+  <label class="'.Search_Shema::ui_key_search_connector.'" for="'.Search_Shema::ui_key_search_connector.'">Suche verbinden mit: </label>
+  <select class="'.Search_Shema::ui_key_search_connector.'" id="'.Search_Shema::ui_key_search_connector.'%1$d" name="%2$s[%1$d]['.Search_Shema::ui_key_search_connector.']" required>
     <option value="" selected disabled>Auswählen</option>
     <option value="or">Oder</option>
     <option value="and">Und</option>
@@ -66,7 +69,7 @@ abstract class Ui {
   ';
 
   private const search_disable_input_template = '
-  <input type="checkbox" class="disable_search_shema" id="disable_search_shema_%3$s" name="%2$s[%1$d][disable_search_shema]" checked>
+  <input type="checkbox" class="enable_search_shema" id="enable_search_shema%1$d" onclick="disable_input_by_class_name_if_source_element_is_not_checked(\'enable_search_shema%1$d\', \'%2$s%3$d\')" checked>
   ';
 
   # html template for begin/end of shema input container
@@ -104,7 +107,7 @@ abstract class Ui {
 
   # html template for hidden input for source path
   private const template_shema_template_path_source_for_ui = '
-  <div><b>Pfad:</b> %1$s</div>
+  <div class="input_shema_source_path_ui"><b>Ordner:</b> <span id="file_source_path%1$d">%1$s<span></div><button type="button" class="copy_button_source_path_file" onclick="copyToClipboard(\'#file_source_path%1$d\')">kopieren</button>
   ';
 
   # html template for hidden input for source path
@@ -126,8 +129,8 @@ abstract class Ui {
 
   private const template_delete_session_button = '
   <form class="delete_session" method="post" action=".">
-    <hr>
-    <input type="submit" name="delete_session_button" value="Session löschen, alle eingetragenen Daten löschen">
+    <hr id="delete_session_button_divider">
+    <input type="submit" id="delete_session_button" name="delete_session_button" value="alle offenen eingetragenen Daten löschen und zurück zum Anfang">
   </form>
   ';
 
@@ -143,7 +146,11 @@ abstract class Ui {
   <h2 class="success_heading">%1$s</h2>
   ';
 
-  private static $out_input_shema_index = 0;
+  public static $out_input_shema_index = 0;
+
+  public static $out_individual_index = 0;
+
+  private static $dont_print_errors_from_this_exceptions = [];
 
 
   # print shema input for one file
@@ -152,10 +159,11 @@ abstract class Ui {
       return;
     }
     $filename = basename($path_source);
+    $dirname = dirname($path_source);
     printf(self::template_shema_input_container_begin, self::$out_input_shema_index, $filename);
     printf(self::template_shema_input_form_begin, "");
     printf(self::input_shema_template_path_source, self::$out_input_shema_index, self::ui_data_key_root, $path_source);
-    printf(self::template_shema_template_path_source_for_ui, $path_source);
+    printf(self::template_shema_template_path_source_for_ui, $dirname);
     foreach(Main::shema_order_global as $class_id){
       $class_name = "Filename_Shema_$class_id";
       $class_name::print_filename_shema_input_for_ui(self::$out_input_shema_index);
@@ -180,7 +188,7 @@ abstract class Ui {
 
 
   # print js code to fill shema input with received data from filename after page load
-  private static function fill_input_shema_with_filename_data_list(array $filename_data_list) : void {
+  public static function fill_input_shema_with_filename_data_list(array $filename_data_list) : void {
 
     $js_template_code = '
     <script>
@@ -205,7 +213,7 @@ abstract class Ui {
 
   # print input shema by filename data list and print js code to fill it with the data
   protected static function print_input_shema_for_filename_data_list(array $filename_data_list) : void {
-    foreach($filename_data_list[self::ui_data_key_root] as $filename_data_for_one_file){
+    foreach($filename_data_list[self::ui_data_key_root] as $index => $filename_data_for_one_file){
       $path_source = $filename_data_for_one_file[self::ui_key_path_source];
       self::print_filename_shema_input($path_source);
     }
@@ -231,18 +239,18 @@ abstract class Ui {
 
   # print shema search input
   public static function print_filename_shema_search_input() : void {
+    $index = 100000;
     printf(self::template_shema_search_input_form_begin,"");
-    printf(self::search_connector_input_template, self::$out_input_shema_index, self::ui_search_data_key_root);
+    printf(self::search_connector_input_template, $index, self::ui_search_data_key_root);
     foreach(Main::shema_order_global as $class_id){
       echo "<div class='container_search_disable'>";
-      printf(self::search_disable_input_template, self::$out_input_shema_index, self::ui_search_data_key_root, $class_id);
       $class_name = "Filename_Shema_$class_id";
-      $class_name::print_filneame_shema_search_input_for_ui(self::$out_input_shema_index);
+      printf(self::search_disable_input_template, self::$out_individual_index++, $class_name, $index);
+      $class_name::print_filneame_shema_search_input_for_ui($index);
       echo "</div>";
     }
     printf(self::template_shema_search_submit_button, "");
     printf(self::template_shema_search_input_form_end,"");
-    self::$out_input_shema_index++;
   }
 
 
@@ -270,9 +278,21 @@ abstract class Ui {
   }
 
 
+  # add class name to exception array
+  public static function dont_print_errors_from_this_exceptions(string $class_name) : void {
+    self::$dont_print_errors_from_this_exceptions[] = $class_name;
+  }
+
+
+  # reset exception array
+  public static function reset_dont_print_errors_from_this_exceptions() : void {
+    self::$dont_print_errors_from_this_exceptions = [];
+  }
+
+
   # print error message as js alert
-  public static function print_error(string $message) : void {
-    if(!empty($message)){
+  public static function print_error(string $message, string $class_name) : void {
+    if(!empty($message) && in_array($class_name, self::$dont_print_errors_from_this_exceptions) === false){
       printf(self::template_error_message, $message);
     }
   }

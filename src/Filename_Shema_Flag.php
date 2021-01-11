@@ -68,33 +68,47 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
   private const input_shema_template = '
   <span class="toggle_rowbreak"></span>
   <div class="container_label_and_input">
-    <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
     <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
   </div>
 
   <div class="container_label_and_input">
-    <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_packages%1$d" value="option_install_in_packages">
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_packages%1$d" value="option_install_in_packages">
     <label for="option_install_in_packages%1$d">muss in Packages-Ordner installiert werden</label>
   </div>
 
   <div class="container_label_and_input">
-    <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_depends_on_content%1$d" value="option_depends_on_content">
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_depends_on_content%1$d" value="option_depends_on_content" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\', \'option_depends_on_content%1$d\')">
     <label for="option_depends_on_content%1$d">abhängig von anderem Mod, CC, Store oder ähnlichem</label>
+    <script>
+      document.addEventListener("DOMContentLoaded", function(){
+        setTimeout(function(){
+          disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\',\'option_depends_on_content%1$d\');
+        },100);
+      });
+    </script>
   </div>
 
-  <div class="container_label_and_input sub_input">
-    <label disabled-and-hidden-until="[\'checked\',\'option_depends_on_content%1$d\']" for="url_flag_data_depends_on_content%1$d">Link zum Mod, CC von dem dieser Mod, CC abhängig ist</label>
-    <input disabled-and-hidden-until="[\'checked\',\'option_depends_on_content%1$d\']" id="url_flag_data_depends_on_content%1$d" type="url" name="%2$s[%1$d][url_flag_data_depends_on_content]">
+  <div class="option_depends_on_content%1$d container_label_and_input sub_input">
+    <label class="option_depends_on_content%1$d" for="url_flag_data_depends_on_content%1$d">Link zum Mod, CC von dem dieser Mod, CC abhängig ist</label>
+    <input class="option_depends_on_content%1$d %3$s%1$d" id="url_flag_data_depends_on_content%1$d" type="url" name="%2$s[%1$d][url_flag_data_depends_on_content]" required disabled>
   </div>
 
   <div class="container_label_and_input">
-    <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion">
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\', \'option_depends_on_expansion%1$d\')">
     <label for="option_depends_on_expansion%1$d">abhängig von Erweiterungspack oder Accessoirepack</label>
+    <script>
+      document.addEventListener("DOMContentLoaded", function(){
+        setTimeout(function(){
+          disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\',\'option_depends_on_expansion%1$d\');
+        },100);
+      });
+    </script>
   </div>
 
-  <div class="container_label_and_input sub_input">
-    <label disabled-and-hidden-until="[\'checked\',\'option_depends_on_expansion%1$d\']" for="select_flag_data_depends_on_expansion%1$d">Erweiterung von dem dieser Mod, CC abhängig ist</label>
-    <select disabled-and-hidden-until="[\'checked\',\'option_depends_on_expansion%1$d\']" id="select_flag_data_depends_on_expansion%1$d" name="%2$s[%1$d][select_flag_data_depends_on_expansion]">
+  <div class="option_depends_on_expansion%1$d container_label_and_input sub_input">
+    <label class="option_depends_on_expansion%1$d" for="select_flag_data_depends_on_expansion%1$d">Erweiterung von dem dieser Mod, CC abhängig ist</label>
+    <select class="option_depends_on_expansion%1$d %3$s%1$d" id="select_flag_data_depends_on_expansion%1$d" name="%2$s[%1$d][select_flag_data_depends_on_expansion]" required disabled>
       <option value="" selected disabled>Auswählen</option>
       <optgroup label="Erweiterungspack">
         <option value="ep01">Reiseabenteuer</option>
@@ -124,7 +138,7 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
   </div>
 
   <div class="container_label_and_input">
-    <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_is_essential%1$d" value="option_is_essential">
+    <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" class="%3$s%1$d" id="option_is_essential%1$d" value="option_is_essential">
     <label for="option_is_essential%1$d">gehört zu den absolut wichtigsten Mods/CC, die immer installiert sein sollen</label>
   </div>
   ';
@@ -486,13 +500,13 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
 
   # print filename shema input to ui
   public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root);
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root, Filename_Shema_Flag::class);
   }
 
 
   # print filename shema search input to ui
   public static function print_filneame_shema_search_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_search_data_key_root);
+    printf(self::input_shema_template, $index, Ui::ui_search_data_key_root, Filename_Shema_Flag::class);
   }
 
 }

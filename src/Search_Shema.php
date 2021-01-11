@@ -50,12 +50,11 @@ abstract class Search_Shema {
       throw new Ui_Exception("Fehler beim Filtern der ausgelesenen Daten. Der übermittelte Such-Verbindung ist nicht valide. Such-Verbindung: ".self::$search_connector);
     }
 
-    if(empty(self::$search_ui_data) === true){
+    if(empty(self::$search_ui_data) === true || empty($filename_data) === true){
       throw new Ui_Exception("Fehler beim Filtern der ausgelesenen Daten. Es wurden keine ausgelesenen Daten übermittelt.");
     }
 
-    $result_filtered = [Ui::ui_data_key_root => []];
-    $result_filtered[Ui::ui_data_key_root] = array_filter($filename_data[Ui::ui_data_key_root], function($filename_data_for_one_file){
+    $result_filtered = array_filter($filename_data[Ui::ui_data_key_root], function($filename_data_for_one_file){
       return self::check_if_filename_data_for_one_file_matches_search_input($filename_data_for_one_file);
     });
 
@@ -66,7 +65,7 @@ abstract class Search_Shema {
   # check search connector value
   # return false if not valid
   private static function check_search_connector_value(string $value_search_connector) : bool {
-    return (in_array($value_search_connector, self::search_connector_valid_values));
+    return (in_array($value_search_connector, self::search_connector_valid_values) || empty($value_search_connector) === true);
   }
 
 }

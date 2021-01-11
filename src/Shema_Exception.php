@@ -26,7 +26,7 @@ class Shema_Exception extends Exception implements I_Custom_Exception {
 
 
   public static function append_source_path(string $paht_to_append) : void {
-    self::$path = File_Handler::remove_trailing_slash_from_path(self::$path).Filehandler::path_seperator.$paht_to_append;
+    self::$path = File_Handler::remove_trailing_slash_from_path(self::$path).File_Handler::path_seperator.$paht_to_append;
   }
 
 
@@ -38,7 +38,7 @@ class Shema_Exception extends Exception implements I_Custom_Exception {
     if(empty(self::$path) === false){
       $message = "$message\\nPfad: ".self::$path;
     }
-    Ui::print_error("\"".$message."\"");
+    Ui::print_error("\"".$message."\"", self::class);
   }
 }
 

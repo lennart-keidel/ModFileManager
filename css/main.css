@@ -1,10 +1,19 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 details {
+  /* margin-top: 1em; */
   padding-top: 0.5em;
-  border-bottom: 2px black solid;
+  border-top: 2px black solid;
 }
 
 details > *:not(summary){
   padding-left: 2em;
+}
+
+details > form {
+  padding-bottom: 1em;
 }
 
 summary {
@@ -17,12 +26,13 @@ summary:focus {
 }
 
 .container_label_and_input {
-  padding-bottom: 0.5em;
+  padding-top: 0.5em;
 }
 
 
 .container_label_and_input.sub_input {
   padding-left: 2em;
+  display: none;
 }
 
 /* add line break in form element */
@@ -34,15 +44,15 @@ summary:focus {
 
 
 /* === SEARCH === */
-.disable_search_shema {
+.enable_search_shema {
   display: inline-block;
 }
 
-.disable_search_shema::before {
+.enable_search_shema::before {
   content: '';
 }
 
-.disable_search_shema + .container_label_and_input {
+.enable_search_shema + .container_label_and_input {
   display: inline-block;
 }
 
@@ -63,6 +73,34 @@ label::selection {
   background-color: transparent;
 }
 
+.shema_search {
+  margin-bottom: 1em;
+}
+
+.search_shema_connector {
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+#delete_session_button {
+  margin-top: 1em;
+}
+
+#delete_session_button_divider {
+  margin-top: 1em;
+}
+
+input[type=submit] {
+  margin-top: 1em;
+}
+
+.input_shema_source_path_ui {
+  display: inline-block;
+}
+
+.copy_button_source_path_file {
+  margin-left: 0.5em;
+}
 
 
 .error_heading {

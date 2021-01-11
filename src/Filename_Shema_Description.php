@@ -13,7 +13,7 @@ abstract class Filename_Shema_Description implements I_Filename_Shema {
   private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="text_shema_description%1$d">Beschreibung</label>
-      <input id="text_shema_description%1$d" type="text" name="%2$s[%1$d][text_shema_description]" placeholder="max. '.self::max_description_length.' Zeichen, Sonderzeichen werden entfernt" maxlength="'.self::max_description_length.'" required>
+      <input class="%3$s%1$d" id="text_shema_description%1$d" type="text" name="%2$s[%1$d][text_shema_description]" placeholder="max. '.self::max_description_length.' Zeichen, Sonderzeichen werden entfernt" maxlength="'.self::max_description_length.'" required>
     </div>
   ';
 
@@ -64,7 +64,10 @@ abstract class Filename_Shema_Description implements I_Filename_Shema {
   public static function convert_data_to_filename(array $data_converted) : string {
     $string_description = current($data_converted);
 
-    # error if length of string is over the max description character length
+    if(!strlen($string_description) || !preg_match("/[a-zA-Z0-9]/",$string_description)){
+      throw new Shema_Exception("Fehler beim Einlesen der Daten. Die Mod-Beschreibung enthält keine validen Zeichen.");
+    }
+
     if(strlen($string_description) > Filename_Shema_Description::max_description_length){
       throw new Shema_Exception("Fehler beim Einlesen der Daten. Die eingegebene Beschreibung ist länger als die maximal erlaubten ".Filename_Shema_Description::max_description_length." Zeichen.");
     }
@@ -105,13 +108,13 @@ abstract class Filename_Shema_Description implements I_Filename_Shema {
 
   # print filename shema input to ui
   public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root);
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root, Filename_Shema_Description::class);
   }
 
 
   # print filename shema search input to ui
   public static function print_filneame_shema_search_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_search_data_key_root);
+    printf(self::input_shema_template, $index, Ui::ui_search_data_key_root, Filename_Shema_Description::class);
   }
 
 }

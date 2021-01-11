@@ -1,19 +1,21 @@
 
-
 // fill data in shema input with data from data list
 function fill_input_shema_with_filename_data_list(filename_data_list) {
   var id, value;
-  root_key = "files";
+  root_key = "file_data_list";
 
   for (var array_index in filename_data_list[root_key]) {
 
     var filename_data = filename_data_list[root_key][array_index];
     var path = filename_data["path_source"];
+    var index = array_index;
 
-    var index = get_index_of_filename_input_by_path(path);
 
     // open details tag
-    document.getElementById("file_details" + index).setAttribute("open", "open");
+    if (document.getElementById("file_details" + index)) {
+      index = get_index_of_filename_input_by_path(path);
+      document.getElementById("file_details" + index).setAttribute("open", "open");
+    }
 
     // iterate through filename data list
     for (key in filename_data) {
@@ -33,8 +35,8 @@ function fill_input_shema_with_filename_data_list(filename_data_list) {
       // create id and value
       // set data in element
       else {
-        id = key + index;
         value = filename_data[key];
+        id = key + index;
         set_data_in_element(id, value);
       }
     }
@@ -48,17 +50,17 @@ function get_index_of_filename_input_by_path(path) {
   var elements = document.getElementsByClassName(class_name)
   var f;
   for (f = 0; f < elements.length; f++) {
-    console.log(elements[f].getAttribute("value"), f);
     if (elements[f].getAttribute("value") == path) {
       return f;
     }
   }
-  return 7;
+  return 0;
 }
 
 
 // set data in element
 function set_data_in_element(id, value) {
+  console.log(id);
   var element = document.getElementById(id);
 
   // if element is checkbox
@@ -79,4 +81,43 @@ function highlight_shema_input_element(index) {
 
   // add class
   document.getElementById("file_details" + index).classList.add("file_shema_input_highlight");
+}
+
+
+function disable_input_by_class_name_if_source_element_is_not_checked(id_name, class_name) {
+  all_elements = document.getElementsByClassName(class_name);
+  source = document.getElementById(id_name);
+  for (f = 0; f < all_elements.length; f++) {
+    if (source.checked) {
+      all_elements[f].removeAttribute("disabled");
+    }
+    else {
+      all_elements[f].setAttribute("disabled", "disabled");
+    }
+  }
+}
+
+
+function disable_and_hide_input_by_class_name_if_source_element_is_not_checked(id_name, class_name) {
+  all_elements = document.getElementsByClassName(class_name);
+  source = document.getElementById(id_name);
+  for (f = 0; f < all_elements.length; f++) {
+    if (source.checked) {
+      all_elements[f].removeAttribute("disabled");
+      all_elements[f].style.display = "block";
+    }
+    else {
+      all_elements[f].setAttribute("disabled", "disabled");
+      all_elements[f].style.display = "none";
+    }
+  }
+}
+
+
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
 }

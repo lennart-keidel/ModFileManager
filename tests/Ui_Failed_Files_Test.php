@@ -15,7 +15,7 @@ class Ui_Failed_Files_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
   }
@@ -76,6 +76,7 @@ class Ui_Failed_Files_Test extends TestCase {
 
 
   public function test_add_failed_filename_list() : void {
+    Ui_Failed_Files::reset_failed_filename_list();
     Ui_Failed_Files::add_failed_filename_list(self::$filename_list1);
     Ui_Failed_Files::add_failed_filename_list(self::$filename_list2);
     $failed_filename_list = Ui_Failed_Files::get_failed_filename_list();
@@ -91,7 +92,8 @@ class Ui_Failed_Files_Test extends TestCase {
 
   public function test_print_input_shema_for_failed_filename_list() : void {
     Ui_Failed_Files::reset_failed_filename_list();
-    Ui_Failed_Files::add_failed_filename_data(self::$filename_list1);
+    Ui_Failed_Files::add_failed_filename_list(self::$filename_list1);
+    Ui_Failed_Files::get_failed_filename_list(self::$filename_list1);
     Ui_Failed_Files::print_input_shema_for_failed_filename_list();
     $output = $this->getActualOutput();
     assertIsString($output);

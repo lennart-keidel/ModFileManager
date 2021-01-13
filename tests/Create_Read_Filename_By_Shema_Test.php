@@ -33,7 +33,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 
@@ -121,9 +121,9 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
     ];
 
     $this->test_create_filename_list_by_shema_from_ui_data_input = [
-      "files" => [
+      Ui::ui_data_key_root => [
         [
-          "path_source" => "/path/to/a/dir/abc.sims3pack",
+          "path_source" => "\\path\\to\\a\\dir\\abc.sims3pack",
           "select_shema_categorie" => "option_tuning",
           "text_shema_description" => "somtehing to do with this",
           "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
@@ -137,7 +137,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
           "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
         ],
         [
-          "path_source" => "/path/to/a/dir/def.sims3pack",
+          "path_source" => "\\path\\to\\a\\dir\\def.sims3pack",
           "select_shema_categorie" => "option_tuning",
           "text_shema_description" => "somtehing to do with this",
           "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
@@ -151,7 +151,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
           "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
         ],
         [
-          "path_source" => "/path/to/another/dir/def.package",
+          "path_source" => "\\path\\to\\another\\dir\\def.package",
           "select_shema_categorie" => "option_default_replacemant",
           "text_shema_description" => "a little description",
           "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
@@ -166,11 +166,11 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
 
     $this->test_create_filename_list_by_shema_from_ui_data_expected_result = [
-      "/path/to/a/dir" => [
+      "\\path\\to\\a\\dir" => [
         "abc.sims3pack" => "TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01.sims3pack",
         "def.sims3pack" => "TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01__2.sims3pack"
       ],
-      "/path/to/another/dir" => [
+      "\\path\\to\\another\\dir" => [
         "def.package" => "DR__a_little_description__ytrlb__167__12Nov20__V.package"
       ]
     ];
@@ -178,18 +178,18 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
     $this->test_read_data_from_filename_list_by_shema_input_and_expected_output = [
       "input" => [
-        "/path/to/a/dir" => [
+        "\\path\\to\\a\\dir" => [
           "TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01.sims3pack",
           "TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01__2.sims3pack"
         ],
-        "/path/to/another/dir" => [
+        "\\path\\to\\another\\dir" => [
           "DR__a_little_description__ytrlb__167__12Nov20__V.package"
         ]
       ],
       "expected_output" => [
-        "files" => [
+        Ui::ui_data_key_root => [
           [
-            "path_source" => "/path/to/a/dir/TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01.sims3pack",
+            "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01.sims3pack",
             "select_shema_categorie" => "option_tuning",
             "text_shema_description" => "somtehing to do with this",
             "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
@@ -203,7 +203,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
             "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
           ],
           [
-            "path_source" => "/path/to/a/dir/TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01__2.sims3pack",
+            "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01__2.sims3pack",
             "select_shema_categorie" => "option_tuning",
             "text_shema_description" => "somtehing to do with this",
             "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
@@ -217,7 +217,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
             "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
           ],
           [
-            "path_source" => "/path/to/another/dir/DR__a_little_description__ytrlb__167__12Nov20__V.package",
+            "path_source" => "\\path\\to\\another\\dir\\DR__a_little_description__ytrlb__167__12Nov20__V.package",
             "select_shema_categorie" => "option_default_replacemant",
             "text_shema_description" => "a little description",
             "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
@@ -234,21 +234,14 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
     $this->wrong_filename1 = "TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01.sims3pack";
 
     $this->test_read_data_from_filename_list_by_shema_wrong_data = [
-      "/path/to/a/dir" => [
+      "\\path\\to\\a\\dir" => [
         "TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep01.sims3pack",
         "TUN__somtehing_to_do_with_this__ytrlb__167__29Oct20__D1godx_Eep99__2.sims3pack"
       ],
-      "/path/to/another/dir" => [
+      "\\path\\to\\another\\dir" => [
         "DR__a_little_description__ytrlb__167__12Nov20__V.package"
       ]
     ];
-  }
-
-
-  # set up ui data with realistic data
-  public static function tearDownAfterClass(): void {
-
-
   }
 
 
@@ -262,8 +255,8 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
 
   public function test_create_filename_by_shema_from_ui_data_with_wrong_ui_data() : void {
-    $this->expectException(Shema_Exception::class);
-    Create_Read_Filename_By_Shema::create_filename_by_shema_from_ui_data($this->wrong_ui_data_for_one_file1);
+    $result = Create_Read_Filename_By_Shema::create_filename_by_shema_from_ui_data($this->wrong_ui_data_for_one_file1);
+    assertEmpty($result);
   }
 
 

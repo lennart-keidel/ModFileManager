@@ -13,6 +13,16 @@ class Search_Shema_Test extends TestCase {
 
   private static $search_input1, $search_input2, $filename_data_for_one_file1, $filename_data_for_one_file2, $filename_data_for_one_file3, $filename_data_for_one_file4 = [];
 
+
+  # set up ui data with realistic data
+  protected function setUp() : void {
+
+    ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
+
+
+  }
+
   public static function setUpBeforeClass() : void {
     self::$search_input1 = [
       "search_shema_connector" => "or",
@@ -117,7 +127,7 @@ class Search_Shema_Test extends TestCase {
   public function test_filter_filename_data_by_search_input1_with_or_connector() : void {
     Search_Shema::set_search_ui_data(self::$search_input1);
     $filename_data_input = [
-      "files" => [
+      Ui::ui_data_key_root => [
         self::$filename_data_for_one_file1,
         self::$filename_data_for_one_file2,
         self::$filename_data_for_one_file3,
@@ -125,17 +135,13 @@ class Search_Shema_Test extends TestCase {
       ]
     ];
     $filtered_filename_data_expected_output = [
-      "files" => [
-        self::$filename_data_for_one_file1,
-        self::$filename_data_for_one_file2,
-        self::$filename_data_for_one_file3
-      ]
+      self::$filename_data_for_one_file1,
+      self::$filename_data_for_one_file2,
+      self::$filename_data_for_one_file3
     ];
     $filtered_filename_data = Search_Shema::filter_filename_data_by_search_input($filename_data_input);
     assertIsArray($filtered_filename_data);
-    assertCount(1, $filtered_filename_data);
-    assertEquals(Ui::ui_data_key_root, key($filtered_filename_data));
-    assertCount(3, $filtered_filename_data[Ui::ui_data_key_root]);
+    assertCount(3, $filtered_filename_data);
     assertEquals($filtered_filename_data_expected_output, $filtered_filename_data);
   }
 
@@ -143,7 +149,7 @@ class Search_Shema_Test extends TestCase {
   public function test_filter_filename_data_by_search_input1_with_and_connector() : void {
     Search_Shema::set_search_ui_data(self::$search_input2);
     $filename_data_input = [
-      "files" => [
+      Ui::ui_data_key_root => [
         self::$filename_data_for_one_file1,
         self::$filename_data_for_one_file2,
         self::$filename_data_for_one_file3,
@@ -151,15 +157,11 @@ class Search_Shema_Test extends TestCase {
       ]
     ];
     $filtered_filename_data_expected_output = [
-      "files" => [
-        self::$filename_data_for_one_file1
-      ]
+      self::$filename_data_for_one_file1
     ];
     $filtered_filename_data = Search_Shema::filter_filename_data_by_search_input($filename_data_input);
     assertIsArray($filtered_filename_data);
     assertCount(1, $filtered_filename_data);
-    assertEquals(Ui::ui_data_key_root, key($filtered_filename_data));
-    assertCount(1, $filtered_filename_data[Ui::ui_data_key_root]);
     assertEquals($filtered_filename_data_expected_output, $filtered_filename_data);
   }
 

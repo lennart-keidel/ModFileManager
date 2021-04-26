@@ -155,7 +155,7 @@ abstract class Url_Shortener_API_Handler {
   # test if website exists by checking the http-response-code
   public static function test_if_url_is_valid(string $url) : bool {
     $response_code = Url_Shortener_API_Handler::get_http_response_code($url);
-    return $response_code < 300 && $response_code > 100;
+    return $response_code > 100 && $response_code < 300;
   }
 
 }

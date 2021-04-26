@@ -222,6 +222,7 @@ abstract class Ui {
 
   # print input shema by filename data list and print js code to fill it with the data
   public static function print_input_shema_for_filename_data_list_and_fill(array $filename_data_list) : void {
+    $filename_data_list[self::ui_data_key_root] = array_values($filename_data_list[self::ui_data_key_root]); # remove bug where id for frontend is starts not at 0
     self::print_input_shema_for_filename_data_list($filename_data_list);
     self::fill_input_shema_with_filename_data_list($filename_data_list);
   }
@@ -230,7 +231,7 @@ abstract class Ui {
   # print source path input for the root path of files
   public static function print_source_path_input() : void {
     printf(self::template_source_input_form_begin, "");
-    $source_path_value = (isset($_COOKIE[self::ui_path_source_root_key]) === true ? $_COOKIE[self::ui_path_source_root_key] : "");
+    $source_path_value = (isset($_COOKIE[self::ui_path_source_root_key]) === true ? str_replace("+"," ",$_COOKIE[self::ui_path_source_root_key]) : "");
     printf(self::input_path_source_template, self::$out_input_shema_index, $source_path_value);
     printf(self::template_source_input_submit_button, "");
     printf(self::template_source_input_form_end, "");
@@ -239,7 +240,7 @@ abstract class Ui {
 
   # print shema search input
   public static function print_filename_shema_search_input() : void {
-    $index = 100000;
+    $index = 1000000;
     printf(self::template_shema_search_input_form_begin,"");
     printf(self::search_connector_input_template, $index, self::ui_search_data_key_root);
     foreach(Main::shema_order_global as $class_id){

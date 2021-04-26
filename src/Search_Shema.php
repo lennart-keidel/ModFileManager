@@ -23,6 +23,7 @@ abstract class Search_Shema {
   # check if filename data for one file matches search input with search connector
   public static function check_if_filename_data_for_one_file_matches_search_input(array $filename_data_for_one_input) : bool {
 
+    var_dump($search_ui_data);
     foreach(self::$search_ui_data as $search_element){
       if(in_array($search_element, $filename_data_for_one_input) === true){
         if(self::$search_connector === "or"){

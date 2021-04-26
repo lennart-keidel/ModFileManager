@@ -17,8 +17,6 @@ abstract class Main {
     $_POST = [];
     $_GET = [];
 
-    var_dump($ui_data);
-
     try {
 
       # create session
@@ -53,8 +51,6 @@ abstract class Main {
 
     # print ui
     self::print_ui();
-
-    var_dump($_SESSION);
   }
 
 
@@ -169,7 +165,6 @@ abstract class Main {
             $filename_data[Ui::ui_key_path_source] = $path_directory.File_Handler::path_seperator.$filename;
             $filename_data_list[] = $filename_data;
             unset($filename_list[$path_directory][$index]);
-            var_dump(empty($filename_data[$path_directory]) === true);
             if(empty($filename_data[$path_directory]) === true){
               unset($filename_data[$path_directory]);
             }
@@ -184,6 +179,7 @@ abstract class Main {
         $_SESSION[Ui::ui_file_list_key_root] = $filename_list;
       }
       if(empty($filename_data_list) === false){
+        var_dump($filename_data_list);
         $_SESSION[Ui::ui_data_key_root] = $filename_data_list;
       }
     }
@@ -193,12 +189,14 @@ abstract class Main {
   private static function handle_search_input(array $ui_data) : void {
     if(isset($ui_data[Ui::ui_search_data_key_root]) === true){
       self::store_search_input_in_session($ui_data);
+      var_dump(current($ui_data[Ui::ui_search_data_key_root]));
       Search_Shema::set_search_ui_data(current($ui_data[Ui::ui_search_data_key_root]));
       $filename_list = self::get_filename_list_from_source_path();
       Ui::dont_print_errors_from_this_exceptions(Shema_Exception::class);
       $filename_data = Create_Read_Filename_By_Shema::read_data_from_filename_list_by_shema($filename_list);
       Ui::reset_dont_print_errors_from_this_exceptions();
       $filtered_filename_data = Search_Shema::filter_filename_data_by_search_input($filename_data);
+
       if(empty($filtered_filename_data) === true){
         Ui::print_error_heading("Keine Dateien gefunden, die zu deinen Eingaben passen.");
       }

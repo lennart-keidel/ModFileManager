@@ -183,7 +183,6 @@ abstract class Ui {
         self::print_filename_shema_input($source_path);
       }
     }
-
   }
 
 

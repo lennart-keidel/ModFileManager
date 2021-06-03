@@ -170,7 +170,6 @@ abstract class Ui {
     printf(self::template_shema_template_path_source_for_ui, self::$out_input_shema_index, $dirname);
     foreach(Main::shema_order_global as $class_id){
       $class_name = "Filename_Shema_$class_id";
-      var_dump(self::$out_input_shema_index);
       $class_name::print_filename_shema_input_for_ui(self::$out_input_shema_index);
     }
     printf(self::template_shema_input_submit_button, "");

@@ -11,11 +11,12 @@ use function PHPUnit\Framework\assertTrue;
 # test class
 class Search_Shema_Test extends TestCase {
 
-  private static $search_input1, $search_input2, $filename_data_for_one_file1, $filename_data_for_one_file2, $filename_data_for_one_file3, $filename_data_for_one_file4 = [];
+  private static $search_input1, $search_input2, $search_input3, $search_input4, $filename_data_for_one_file1, $filename_data_for_one_file2, $filename_data_for_one_file3, $filename_data_for_one_file4 = [];
 
 
   # set up ui data with realistic data
   protected function setUp() : void {
+
 
 
 
@@ -54,6 +55,16 @@ class Search_Shema_Test extends TestCase {
         "option_depends_on_expansion"
       ],
       "url_flag_data_depends_on_content" => "https://google.com"
+    ];
+
+    self::$search_input3 = [
+      "search_shema_connector" => "or",
+      "select_shema_categorie" => "option_tuning",
+    ];
+
+    self::$search_input4 = [
+      "search_shema_connector" => "and",
+      "select_shema_categorie" => "option_tuning",
     ];
 
     # every data matches search_input1 and search_input2
@@ -124,6 +135,23 @@ class Search_Shema_Test extends TestCase {
     Search_Shema::set_search_ui_data(self::$search_input2);
     assertTrue(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file1));
     assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file2));
+    assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file3));
+    assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file4));
+  }
+
+
+  public function test_check_if_filename_data_for_one_file_matches_search_input_with_or_connector_with_only_one_parameter_in_search_input() : void {
+    Search_Shema::set_search_ui_data(self::$search_input3);
+    assertTrue(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file1));
+    assertTrue(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file2));
+    assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file3));
+    assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file4));
+  }
+
+  public function test_check_if_filename_data_for_one_file_matches_search_input_with_and_connector_with_only_one_parameter_in_search_input() : void {
+    Search_Shema::set_search_ui_data(self::$search_input4);
+    assertTrue(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file1));
+    assertTrue(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file2));
     assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file3));
     assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file4));
   }

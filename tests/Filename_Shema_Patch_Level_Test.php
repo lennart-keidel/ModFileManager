@@ -27,7 +27,7 @@ class Filename_Shema_Patch_Level_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 

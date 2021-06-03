@@ -23,8 +23,10 @@ class Filename_Shema_Link_Test extends TestCase {
 
 
 
+
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+
 
 
 

@@ -35,7 +35,7 @@ class Filename_Shema_Installation_Date_Test extends TestCase {
     $this->ui_data1 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
       "date_shema_installation_date" => "2020-11-03",
       "select_shema_patch_level" => "1.69"
@@ -44,7 +44,7 @@ class Filename_Shema_Installation_Date_Test extends TestCase {
     $this->ui_data2 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
       "date_shema_installation_date" => "2080-11-03",
       "select_shema_patch_level" => "1.69"
@@ -53,7 +53,7 @@ class Filename_Shema_Installation_Date_Test extends TestCase {
     $this->wrong_ui_data1 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_lin" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_lin" => "https://google.com",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
       "date_shema_installation_dat" => "2020-11-03",
       "select_shema_patch_leve" => "1.69"
@@ -230,8 +230,8 @@ class Filename_Shema_Installation_Date_Test extends TestCase {
     assertNotEmpty($output);
   }
 
-  public function test_print_filneame_shema_search_input_for_ui() : void {
-    Filename_Shema_Installation_Date::print_filneame_shema_search_input_for_ui(0);
+  public function test_print_filename_shema_search_input_for_ui() : void {
+    Filename_Shema_Installation_Date::print_filename_shema_search_input_for_ui(0);
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEmpty($output);

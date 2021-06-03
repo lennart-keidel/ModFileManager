@@ -49,20 +49,20 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->ui_data1 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+      "url_flag_data_depends_on_content" => "https://youtube.com"
     ];
 
     $this->ui_data2 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep11",
       "checkbox_shema_flag" => [
@@ -71,13 +71,13 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+      "url_flag_data_depends_on_content" => "https://youtube.com"
     ];
 
     $this->ui_data3 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "sp09",
       "checkbox_shema_flag" => [
@@ -86,13 +86,13 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_overrides",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+      "url_flag_data_depends_on_content" => "https://youtube.com"
     ];
 
     $this->ui_data4 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "checkbox_shema_flag" => [
 
@@ -103,7 +103,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_ui_data1 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
@@ -113,7 +113,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+      "url_flag_data_depends_on_content" => "https://youtube.com"
     ];
 
 
@@ -121,7 +121,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_ui_data2 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
@@ -137,7 +137,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_ui_data3 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
@@ -145,7 +145,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+      "url_flag_data_depends_on_content" => "https://youtube.com"
     ];
 
 
@@ -153,7 +153,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_ui_data4 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "sp99",
       "checkbox_shema_flag" => [
@@ -162,7 +162,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+      "url_flag_data_depends_on_content" => "https://youtube.com"
     ];
 
 
@@ -170,7 +170,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_ui_data5 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "sp02",
       "checkbox_shema_flag" => [
@@ -179,7 +179,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://potato-ballad-sims.tumblr.com/post/6175797327"
+      "url_flag_data_depends_on_content" => "https://somerandomurlthatdoesntexistandhopefullywontexistanytimesoon.com"
     ];
 
 
@@ -187,7 +187,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_ui_data6 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
@@ -195,7 +195,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_e"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+      "url_flag_data_depends_on_content" => "https://youtube.com"
     ];
 
 
@@ -203,7 +203,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_ui_data7 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
@@ -211,7 +211,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_install_in_packages",
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+      "url_flag_data_depends_on_content" => "https://youtube.com"
     ];
 
 
@@ -606,8 +606,8 @@ class Filename_Shema_Flag_Test extends TestCase {
     assertNotEmpty($output);
   }
 
-  public function test_print_filneame_shema_search_input_for_ui() : void {
-    Filename_Shema_Flag::print_filneame_shema_search_input_for_ui(0);
+  public function test_print_filename_shema_search_input_for_ui() : void {
+    Filename_Shema_Flag::print_filename_shema_search_input_for_ui(0);
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEmpty($output);

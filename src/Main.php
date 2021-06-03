@@ -19,6 +19,8 @@ abstract class Main {
 
     try {
 
+      var_dump(Url_Shortener_API_Handler::short_url("https://youtube.com"));
+
       # create session
       self::create_session();
 

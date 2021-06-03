@@ -140,8 +140,8 @@ class Filename_Shema_Description_Test extends TestCase {
     assertNotEmpty($output);
   }
 
-  public function test_print_filneame_shema_search_input_for_ui() : void {
-    Filename_Shema_Description::print_filneame_shema_search_input_for_ui(0);
+  public function test_print_filename_shema_search_input_for_ui() : void {
+    Filename_Shema_Description::print_filename_shema_search_input_for_ui(0);
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEmpty($output);

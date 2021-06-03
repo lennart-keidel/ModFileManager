@@ -14,8 +14,12 @@ class Ui_Failed_Files_Test extends TestCase {
   public function setUp() : void {
 
 
+
+
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
     // $this->markTestSkipped("Dieser Test ist deaktiviert.");
+
+
 
 
   }
@@ -25,28 +29,28 @@ class Ui_Failed_Files_Test extends TestCase {
       "path_source" => "mods/abc/def.package",
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+      "url_flag_data_depends_on_content" => "https://google.com"
     ];
 
     self::$filename_data2 = [
       "path_source" => "mods/abc/def.package",
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/d/638203/broadcaster-a-custom-stereo-music-utility-updated-27-march-2020.html"
+      "url_flag_data_depends_on_content" => "https://google.com"
     ];
 
     self::$filename_list1 = [

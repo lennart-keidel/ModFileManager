@@ -31,7 +31,7 @@ class Filename_Shema_Link_Test extends TestCase {
     $this->ui_data = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_link" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
     ];
@@ -39,7 +39,7 @@ class Filename_Shema_Link_Test extends TestCase {
     $this->wrong_ui_data1 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_lin" => "https://potato-ballad-sims.tumblr.com/post/617579732777795584",
+      "url_shema_lin" => "https://google.com",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
     ];
@@ -148,8 +148,8 @@ class Filename_Shema_Link_Test extends TestCase {
     assertNotEmpty($output);
   }
 
-  public function test_print_filneame_shema_search_input_for_ui() : void {
-    Filename_Shema_Link::print_filneame_shema_search_input_for_ui(0);
+  public function test_print_filename_shema_search_input_for_ui() : void {
+    Filename_Shema_Link::print_filename_shema_search_input_for_ui(0);
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEmpty($output);

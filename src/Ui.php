@@ -109,7 +109,7 @@ abstract class Ui {
 
   # html template for hidden input for source path
   private const template_shema_template_path_source_for_ui = '
-  <div class="input_shema_source_path_ui"><b>Ordner:</b> <span id="file_source_path%1$d">%1$s<span></div><button type="button" class="copy_button_source_path_file" onclick="copyToClipboard(\'#file_source_path%1$d\')">kopieren</button>
+  <div class="input_shema_source_path_ui"><b>Ordner:</b> <span id="file_source_path%1$d">%2$s<span></div><button type="button" class="copy_button_source_path_file" onclick="copyToClipboard(\'#file_source_path%1$d\')">kopieren</button>
   ';
 
   # html template for hidden input for source path
@@ -167,9 +167,10 @@ abstract class Ui {
     printf(self::template_shema_input_container_begin, self::$out_input_shema_index, $filename);
     printf(self::template_shema_input_form_begin, "");
     printf(self::input_shema_template_path_source, self::$out_input_shema_index, self::ui_data_key_root, $path_source);
-    printf(self::template_shema_template_path_source_for_ui, $dirname);
+    printf(self::template_shema_template_path_source_for_ui, self::$out_input_shema_index, $dirname);
     foreach(Main::shema_order_global as $class_id){
       $class_name = "Filename_Shema_$class_id";
+      var_dump(self::$out_input_shema_index);
       $class_name::print_filename_shema_input_for_ui(self::$out_input_shema_index);
     }
     printf(self::template_shema_input_submit_button, "");

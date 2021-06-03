@@ -81,7 +81,7 @@ abstract class Filename_Shema_Link implements I_Filename_Shema {
 
 
   # print filename shema search input to ui
-  public static function print_filneame_shema_search_input_for_ui(int $index) : void {
+  public static function print_filename_shema_search_input_for_ui(int $index) : void {
     printf(self::input_shema_template, $index, Ui::ui_search_data_key_root, Filename_Shema_Link::class);
   }
 

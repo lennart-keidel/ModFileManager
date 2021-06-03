@@ -39,7 +39,7 @@ abstract class Ui {
   public const ui_key_error_flag_for_filename_data = "error";
 
   # html template for error messages
-  private const template_error_message = '<script>console.log(%1$s);alert(%1$s)</script>';
+  private const template_error_message = '<script>console.log("%1$s");alert("%1$s")</script>';
 
   # html template for source path input
   private const input_path_source_template = '
@@ -71,7 +71,8 @@ abstract class Ui {
   ';
 
   private const search_disable_input_template = '
-  <input type="checkbox" class="enable_search_shema" id="enable_search_shema%1$d" onclick="disable_input_by_class_name_if_source_element_is_not_checked(\'enable_search_shema%1$d\', \'%2$s%3$d\')" checked>
+  <script>window.addEventListener("load", function () {disable_input_by_class_name_if_source_element_is_not_checked("enable_search_shema%1$d", "%2$s%3$d");});</script>
+  <input type="checkbox" name="search[1000000][enable_search_shema][]" value="enable_search_shema%1$d" class="enable_search_shema" id="enable_search_shema%1$d" onclick="disable_input_by_class_name_if_source_element_is_not_checked(\'enable_search_shema%1$d\', \'%2$s%3$d\')">
   ';
 
   # html template for begin/end of shema input container
@@ -250,7 +251,7 @@ abstract class Ui {
       echo "<div class='container_search_disable'>";
       $class_name = "Filename_Shema_$class_id";
       printf(self::search_disable_input_template, self::$out_individual_index++, $class_name, $index);
-      $class_name::print_filneame_shema_search_input_for_ui($index);
+      $class_name::print_filename_shema_search_input_for_ui($index);
       echo "</div>";
     }
     printf(self::template_shema_search_submit_button, "");

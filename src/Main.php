@@ -46,7 +46,6 @@ abstract class Main {
       self::handle_uploaded_file_data($ui_data);
     }
     catch(Exception $e){
-      Ui::print_error("Fehler in Main.php", self::class);
     }
 
     # print ui

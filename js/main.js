@@ -28,9 +28,12 @@ function fill_input_shema_with_filename_data_list(filename_data_list) {
       // if key of filename data list is checkbox (flag option)
       // use different value and id
       // set data in checkbox elementfilename_data_lis
-      if (key == "checkbox_shema_flag") {
+      if (typeof filename_data[key] == 'object') {
         for (inner_key in filename_data[key]) {
-          id = filename_data[key][inner_key] + index;
+          id = filename_data[key][inner_key];
+          if(key == "checkbox_shema_flag"){
+            id += index;
+          }
           value = filename_data[key][inner_key];
           set_data_in_element(id, value);
         }

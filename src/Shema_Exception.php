@@ -38,7 +38,7 @@ class Shema_Exception extends Exception implements I_Custom_Exception {
     if(empty(self::$path) === false){
       $message = "$message\\nPfad: ".self::$path;
     }
-    Ui::print_error("\"".$message."\"", self::class);
+    Ui::print_error($message, self::class);
   }
 }
 

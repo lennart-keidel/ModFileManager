@@ -20,6 +20,11 @@ function fill_input_shema_with_filename_data_list(filename_data_list) {
     // iterate through filename data list
     for (key in filename_data) {
 
+      if(key == "error") {
+        document.getElementById("file_details" + index).className += "error";
+        continue;
+      }
+
       // if key of filename data list is checkbox (flag option)
       // use different value and id
       // set data in checkbox elementfilename_data_lis
@@ -60,7 +65,6 @@ function get_index_of_filename_input_by_path(path) {
 
 // set data in element
 function set_data_in_element(id, value) {
-  console.log(id);
   var element = document.getElementById(id);
 
   // if element is checkbox
@@ -114,6 +118,7 @@ function disable_and_hide_input_by_class_name_if_source_element_is_not_checked(i
 }
 
 
+// copy text of parameter element to clipboard on button click
 function copyToClipboard(element) {
   var $temp = $("<input>");
   $("body").append($temp);

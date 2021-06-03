@@ -108,6 +108,10 @@ input[type=submit] {
   font-weight: bold;
 }
 
+details.error summary {
+  background-color: rgba(255,0,0,0.5);
+}
+
 .success_heading {
   color: green;
   font-weight: bold;

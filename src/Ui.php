@@ -131,8 +131,10 @@ abstract class Ui {
 
   private const template_delete_session_button = '
   <form class="delete_session" method="post" action=".">
-    <hr id="delete_session_button_divider">
-    <input type="submit" id="delete_session_button" name="delete_session_button" value="alle offenen eingetragenen Daten löschen und zurück zum Anfang">
+    <br>
+    <button type="submit" id="delete_session_button" name="delete_session_button" onclick="return confirm(this.value);" value="alle offenen eingetragenen Daten löschen und zurück zum Anfang">alle offenen eingetragenen Daten löschen und zurück zum Anfang</button>
+    <br>
+    <!hr id="delete_session_button_divider">
   </form>
   ';
 
@@ -214,7 +216,7 @@ abstract class Ui {
 
   # print input shema by filename data list and print js code to fill it with the data
   protected static function print_input_shema_for_filename_data_list(array $filename_data_list) : void {
-    foreach($filename_data_list[self::ui_data_key_root] as $index => $filename_data_for_one_file){
+    foreach($filename_data_list[self::ui_data_key_root] as $filename_data_for_one_file){
       $path_source = $filename_data_for_one_file[self::ui_key_path_source];
       self::print_filename_shema_input($path_source);
     }

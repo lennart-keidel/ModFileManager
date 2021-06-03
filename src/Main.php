@@ -228,9 +228,8 @@ abstract class Main {
       # check failed filename data
       $failed_filename_data = Ui_Failed_Files::get_failed_filename_data();
       if(empty($failed_filename_data[Ui::ui_data_key_root]) === false){
-        $failed_filename_data[UI::ui_key_error_flag_for_filename_data] = true;
         Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei:");
-        self::replace_original_filename_data_from_session_data($failed_filename_data);
+        self::replace_original_filename_data_from_session_data($failed_filename_data, true);
         // $_SESSION[Ui::ui_data_key_root] = array_merge((isset($_SESSION[Ui::ui_data_key_root]) === true ? $_SESSION[Ui::ui_data_key_root] : []), $failed_filename_data[Ui::ui_data_key_root]);
         return;
       }
@@ -285,17 +284,17 @@ abstract class Main {
 
 
   # replace filename data in session by path and replace it with filename data from input
-  private static function replace_original_filename_data_from_session_data(array $filename_data) : void {
+  private static function replace_original_filename_data_from_session_data(array $filename_data, bool $is_failed_filename_data = false) : void {
     foreach($_SESSION[UI::ui_data_key_root] as $k_session => $fe_session){
       foreach($filename_data[UI::ui_data_key_root] as $k_input => $fe_input){
         if($fe_session[UI::ui_key_path_source] === $fe_input[UI::ui_key_path_source]){
           $_SESSION[UI::ui_data_key_root][$k_session] = $fe_input;
+          if($is_failed_filename_data === true){
+            $_SESSION[UI::ui_data_key_root][$k_session][UI::ui_key_error_flag_for_filename_data] = true;
+          }
         }
       }
     }
-    // if($is_failed_filename_data === true){
-    //   $_SESSION[UI::ui_data_key_root][UI::ui_key_error_flag_for_filename_data] = true;
-    // }
   }
 
 
@@ -317,6 +316,8 @@ abstract class Main {
 
 
   private static function print_ui() : void {
+
+    Ui::print_delete_session_button();
 
     # if no source existing in session data
     if(empty($_SESSION) === true){

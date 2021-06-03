@@ -16,6 +16,7 @@ abstract class Search_Shema {
   public static function set_search_ui_data(array $search_ui_data) : void {
     self::$search_connector = $search_ui_data[self::ui_key_search_connector];
     unset($search_ui_data[self::ui_key_search_connector]);
+    unset($search_ui_data[Ui::ui_key_enable_search_shema]);
     self::$search_ui_data = $search_ui_data;
   }
 
@@ -23,14 +24,32 @@ abstract class Search_Shema {
   # check if filename data for one file matches search input with search connector
   public static function check_if_filename_data_for_one_file_matches_search_input(array $filename_data_for_one_input) : bool {
 
-    foreach(self::$search_ui_data as $search_element){
-      if(in_array($search_element, $filename_data_for_one_input) === true){
-        if(self::$search_connector === "or"){
-          return true;
+    foreach(self::$search_ui_data as $search_key => $search_element){
+
+      // if search element is string
+      if(is_array($search_element) === false){
+        if(in_array($search_element, $filename_data_for_one_input) === true){
+          if(self::$search_connector === "or"){
+            return true;
+          }
+        }
+        elseif(self::$search_connector === "and") {
+          return false;
         }
       }
-      elseif(self::$search_connector === "and") {
-        return false;
+
+      // if search element is array
+      else {
+        foreach($search_element as $inner_search_element){
+          if(in_array($inner_search_element, $filename_data_for_one_input[$search_key]) === true){
+            if(self::$search_connector === "or"){
+              return true;
+            }
+          }
+          elseif(self::$search_connector === "and") {
+            return false;
+          }
+        }
       }
     }
     if(self::$search_connector === "or"){

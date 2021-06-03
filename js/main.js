@@ -97,9 +97,11 @@ function disable_input_by_class_name_if_source_element_is_not_checked(id_name, c
   for (f = 0; f < all_elements.length; f++) {
     if (source.checked) {
       all_elements[f].removeAttribute("disabled");
+      all_elements[f].removeAttribute("required");
     }
     else {
       all_elements[f].setAttribute("disabled", "disabled");
+      all_elements[f].setAttribute("required","required");
     }
   }
 }

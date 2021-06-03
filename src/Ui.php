@@ -38,6 +38,8 @@ abstract class Ui {
 
   public const ui_key_error_flag_for_filename_data = "error";
 
+  public const ui_key_enable_search_shema = "enable_search_shema";
+
   # html template for error messages
   private const template_error_message = '<script>console.log("%1$s");alert("%1$s")</script>';
 
@@ -71,8 +73,8 @@ abstract class Ui {
   ';
 
   private const search_disable_input_template = '
-  <script>window.addEventListener("load", function () {disable_input_by_class_name_if_source_element_is_not_checked("enable_search_shema%1$d", "%2$s%3$d");});</script>
-  <input type="checkbox" name="search[1000000][enable_search_shema][]" value="enable_search_shema%1$d" class="enable_search_shema" id="enable_search_shema%1$d" onclick="disable_input_by_class_name_if_source_element_is_not_checked(\'enable_search_shema%1$d\', \'%2$s%3$d\')">
+  <script>window.addEventListener("load", function () {disable_input_by_class_name_if_source_element_is_not_checked("'.self::ui_key_enable_search_shema.'%1$d", "%2$s%3$d");});</script>
+  <input type="checkbox" name="search[1000000]['.self::ui_key_enable_search_shema.'][]" value="'.self::ui_key_enable_search_shema.'%1$d" class="'.self::ui_key_enable_search_shema.'" id="'.self::ui_key_enable_search_shema.'%1$d" onclick="disable_input_by_class_name_if_source_element_is_not_checked(\''.self::ui_key_enable_search_shema.'%1$d\', \'%2$s%3$d\')">
   ';
 
   # html template for begin/end of shema input container

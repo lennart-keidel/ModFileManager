@@ -197,6 +197,48 @@ class Search_Shema_Test extends TestCase {
     assertEquals($filtered_filename_data_expected_output, $filtered_filename_data);
   }
 
+
+  public function test_filter_filename_data_by_search_input2_with_or_connector() : void {
+    Search_Shema::set_search_ui_data(self::$search_input3);
+    $filename_data_input = [
+      Ui::ui_data_key_root => [
+        self::$filename_data_for_one_file1,
+        self::$filename_data_for_one_file2,
+        self::$filename_data_for_one_file3,
+        self::$filename_data_for_one_file4
+      ]
+    ];
+    $filtered_filename_data_expected_output = [
+      self::$filename_data_for_one_file1,
+      self::$filename_data_for_one_file2
+    ];
+    $filtered_filename_data = Search_Shema::filter_filename_data_by_search_input($filename_data_input);
+    assertIsArray($filtered_filename_data);
+    assertCount(2, $filtered_filename_data);
+    assertEquals($filtered_filename_data_expected_output, $filtered_filename_data);
+  }
+
+
+  public function test_filter_filename_data_by_search_input2_with_and_connector() : void {
+    Search_Shema::set_search_ui_data(self::$search_input4);
+    $filename_data_input = [
+      Ui::ui_data_key_root => [
+        self::$filename_data_for_one_file1,
+        self::$filename_data_for_one_file2,
+        self::$filename_data_for_one_file3,
+        self::$filename_data_for_one_file4
+      ]
+    ];
+    $filtered_filename_data_expected_output = [
+      self::$filename_data_for_one_file1,
+      self::$filename_data_for_one_file2
+    ];
+    $filtered_filename_data = Search_Shema::filter_filename_data_by_search_input($filename_data_input);
+    assertIsArray($filtered_filename_data);
+    assertCount(2, $filtered_filename_data);
+    assertEquals($filtered_filename_data_expected_output, $filtered_filename_data);
+  }
+
 }
 
 ?>

@@ -179,7 +179,6 @@ abstract class Main {
         $_SESSION[Ui::ui_file_list_key_root] = $filename_list;
       }
       if(empty($filename_data_list) === false){
-        var_dump($filename_data_list);
         $_SESSION[Ui::ui_data_key_root] = $filename_data_list;
       }
     }
@@ -189,7 +188,6 @@ abstract class Main {
   private static function handle_search_input(array $ui_data) : void {
     if(isset($ui_data[Ui::ui_search_data_key_root]) === true){
       self::store_search_input_in_session($ui_data);
-      var_dump(current($ui_data[Ui::ui_search_data_key_root]));
       Search_Shema::set_search_ui_data(current($ui_data[Ui::ui_search_data_key_root]));
       $filename_list = self::get_filename_list_from_source_path();
       Ui::dont_print_errors_from_this_exceptions(Shema_Exception::class);
@@ -215,7 +213,7 @@ abstract class Main {
     if(isset($ui_data[Ui::ui_data_key_root]) === true){
 
       $new_filename_list = Create_Read_Filename_By_Shema::create_filename_list_by_shema_from_ui_data($ui_data);
-      self::remove_original_filename_from_session_data($new_filename_list);
+
 
       # if array failed filename data is not empty
       # -> if creation of new filename failed cause of an exception
@@ -230,18 +228,23 @@ abstract class Main {
       # check failed filename data
       $failed_filename_data = Ui_Failed_Files::get_failed_filename_data();
       if(empty($failed_filename_data[Ui::ui_data_key_root]) === false){
+        $failed_filename_data[UI::ui_key_error_flag_for_filename_data] = true;
         Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei:");
-        $_SESSION[Ui::ui_data_key_root] = array_merge((isset($_SESSION[Ui::ui_data_key_root]) === true ? $_SESSION[Ui::ui_data_key_root] : []), $failed_filename_data[Ui::ui_data_key_root]);
+        self::replace_original_filename_data_from_session_data($failed_filename_data);
+        // $_SESSION[Ui::ui_data_key_root] = array_merge((isset($_SESSION[Ui::ui_data_key_root]) === true ? $_SESSION[Ui::ui_data_key_root] : []), $failed_filename_data[Ui::ui_data_key_root]);
         return;
       }
 
       # check failed filename list
       $failed_filename_list = Ui_Failed_Files::get_failed_filename_list();
       if(empty($failed_filename_list) === false){
+        $failed_filename_list[UI::ui_key_error_flag_for_filename_data] = true;
         Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei:");
-        $_SESSION[Ui::ui_file_list_key_root] = array_merge_recursive($_SESSION[Ui::ui_file_list_key_root], $failed_filename_list);
+        // $_SESSION[Ui::ui_file_list_key_root] = array_merge_recursive($_SESSION[Ui::ui_file_list_key_root], $failed_filename_list);
         return;
       }
+
+      self::remove_original_filename_from_session_data($new_filename_list);
 
       # print heading with success message
       Ui::print_success_heading("Die Datei wurde erfolgreich umbenannt.");
@@ -278,6 +281,21 @@ abstract class Main {
         }
       }
     }
+  }
+
+
+  # replace filename data in session by path and replace it with filename data from input
+  private static function replace_original_filename_data_from_session_data(array $filename_data) : void {
+    foreach($_SESSION[UI::ui_data_key_root] as $k_session => $fe_session){
+      foreach($filename_data[UI::ui_data_key_root] as $k_input => $fe_input){
+        if($fe_session[UI::ui_key_path_source] === $fe_input[UI::ui_key_path_source]){
+          $_SESSION[UI::ui_data_key_root][$k_session] = $fe_input;
+        }
+      }
+    }
+    // if($is_failed_filename_data === true){
+    //   $_SESSION[UI::ui_data_key_root][UI::ui_key_error_flag_for_filename_data] = true;
+    // }
   }
 
 

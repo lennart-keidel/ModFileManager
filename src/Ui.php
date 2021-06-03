@@ -36,6 +36,8 @@ abstract class Ui {
   # ui data key for filename source path
   public const ui_key_path_source = "path_source";
 
+  public const ui_key_error_flag_for_filename_data = "error";
+
   # html template for error messages
   private const template_error_message = '<script>console.log(%1$s);alert(%1$s)</script>';
 
@@ -183,7 +185,6 @@ abstract class Ui {
         self::print_filename_shema_input($source_path);
       }
     }
-
   }
 
 

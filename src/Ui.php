@@ -228,7 +228,7 @@ abstract class Ui {
 
   # print input shema by filename data list and print js code to fill it with the data
   public static function print_input_shema_for_filename_data_list_and_fill(array $filename_data_list) : void {
-    $filename_data_list[self::ui_data_key_root] = array_values($filename_data_list[self::ui_data_key_root]); # remove bug where id for frontend is starts not at 0
+    $filename_data_list[self::ui_data_key_root] = array_values($filename_data_list[self::ui_data_key_root]); # remove bug where id for frontend starts not at 0
     self::print_input_shema_for_filename_data_list($filename_data_list);
     self::fill_input_shema_with_filename_data_list($filename_data_list);
   }

@@ -226,6 +226,7 @@ abstract class Main {
 
       # check failed filename data
       $failed_filename_data = Ui_Failed_Files::get_failed_filename_data();
+
       if(empty($failed_filename_data[Ui::ui_data_key_root]) === false){
         Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei:");
         self::replace_original_filename_data_from_session_data($failed_filename_data, true);
@@ -245,7 +246,7 @@ abstract class Main {
       self::remove_original_filename_from_session_data($new_filename_list);
 
       # print heading with success message
-      Ui::print_success_heading("Die Datei wurde erfolgreich umbenannt.");
+      Ui::print_success_heading("Die Datei wurde erfolgreich umbenannt und aus der Liste entfernt.");
     }
   }
 
@@ -284,8 +285,30 @@ abstract class Main {
 
   # replace filename data in session by path and replace it with filename data from input
   private static function replace_original_filename_data_from_session_data(array $filename_data, bool $is_failed_filename_data = false) : void {
+
+    # if file with error was in session under file_list
+    # remove file_list item
+    # merge failed file data into file_data in session
+    foreach($_SESSION[UI::ui_file_list_key_root] as $path_session => $filename_array_session){
+      foreach($filename_array_session as $key_filename_session => $filename_session){
+        foreach($filename_data[UI::ui_data_key_root] as $fe_input){
+          $full_path = $path_session . File_Handler::path_seperator . $filename_session;
+          if($full_path === $fe_input[UI::ui_key_path_source]){
+            unset($_SESSION[UI::ui_file_list_key_root][$path_session][$key_filename_session]);
+            $new_key = count($_SESSION[UI::ui_data_key_root]);
+            $_SESSION[UI::ui_data_key_root][$new_key] = current($filename_data[UI::ui_data_key_root]);
+            if($is_failed_filename_data === true){
+              $_SESSION[UI::ui_data_key_root][$new_key][UI::ui_key_error_flag_for_filename_data] = true;
+            }
+          }
+        }
+      }
+    }
+
+    # if file with error was in session under file_data
+    # replace this one instance in session under file_data
     foreach($_SESSION[UI::ui_data_key_root] as $k_session => $fe_session){
-      foreach($filename_data[UI::ui_data_key_root] as $k_input => $fe_input){
+      foreach($filename_data[UI::ui_data_key_root] as $fe_input){
         if($fe_session[UI::ui_key_path_source] === $fe_input[UI::ui_key_path_source]){
           $_SESSION[UI::ui_data_key_root][$k_session] = $fe_input;
           if($is_failed_filename_data === true){

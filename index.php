@@ -17,8 +17,32 @@ require 'vendor/autoload.php';
 
 
     <?php
+      # $!'\"%&{}[]§²³,.;:-_#+~*´`áà
+      $original1 = "";
+      $original = strtr($original1, [
+        " " => "%20",
+        "`" => "%60",
+        "+" => "%2B",
+        "{" => "%7B",
+        "}" => "%7D",
+        "^" => "%5E",
+        "<" => "%3C",
+        ">" => "%3E",
+        "\"" => "%22",
+        "\n" => "%0A",
+        "\r" => "",
+        "\\" => "%5C",
+      ]);
+      if(!empty($original1)){
+        $encode = rawurlencode($original);
+        $short = Url_Shortener_API_Handler::short_url($original);
+        $expand = Url_Shortener_API_Handler::expand_url($short);
+        $decode = rawurldecode($expand);
+        var_dump($short, str_replace("\r", "", $original1), $decode, $decode === str_replace("\r", "", $original1));
+      }
       @Main::handle_ui_data($_POST);
     ?>
+
 
 </body>
 </html>

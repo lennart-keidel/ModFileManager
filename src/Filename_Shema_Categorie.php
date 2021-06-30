@@ -12,6 +12,7 @@ abstract class Filename_Shema_Categorie implements I_Filename_Shema {
   # array with short id's of options
   # key: internal key for this value
   # value: short id
+  # SHORT IDs CAN HAVE MAX 6 CHARACTERS
   private const array_option_id = [
     "option_core_mod" => "COR",
     "option_default_replacemant" => "DR",
@@ -22,7 +23,9 @@ abstract class Filename_Shema_Categorie implements I_Filename_Shema {
     "option_cc_script" => "CCSCR",
     "option_cc_buy" => "CCBUY",
     "option_cc_build" => "CCBUI",
-    "option_other" => "OTH"
+    "option_other" => "OTH",
+    "option_fix" => "FIX",
+    "option_mod_tuning" => "MODTUN",
   ];
 
   # input shema template for ui
@@ -40,9 +43,11 @@ abstract class Filename_Shema_Categorie implements I_Filename_Shema {
         <optgroup label="Mod">
           <option value="option_tuning">Tuning</option>
           <option value="option_default_replacemant">Default Replacemant</option>
+          <option value="option_fix">Fix</option>
           <option value="option_script">Script-Mod</option>
           <option value="option_mod_create_a_sim">Slider oder Mod für Create-A-Sim</option>
           <option value="option_core_mod">Core Mod</option>
+          <option value="option_mod_tuning">Mod Tuning</option>
         </optgroup>
         <option value="option_other">keine der anderen Kategorien</option>
       </select>

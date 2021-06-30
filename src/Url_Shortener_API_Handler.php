@@ -6,11 +6,15 @@ abstract class Url_Shortener_API_Handler {
 
   private const signature = 'f13712add9';
   public const api_url =  'https://lennart-keidel.de/url/yourls-api.php';
-  public const short_id_base_url = 'https://lennart-keidel.de/url';
+  public const short_id_base_url = 'https://lennart-keidel.de/urla';
 
 
   # create short of url via own hosted url shortener
   public static function short_url(string $ipt_long_url){
+
+    if(empty($ipt_long_url)){
+      throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nDie eingegebene URL oder Text ist leer.\\n");
+    }
 
     // Init the CURL session
     $ch = curl_init();

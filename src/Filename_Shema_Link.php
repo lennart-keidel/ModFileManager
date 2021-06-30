@@ -45,9 +45,9 @@ abstract class Filename_Shema_Link implements I_Filename_Shema {
     $url = current($data_converted);
 
     # error if website not returning valid http-response-code
-    if(!Url_Shortener_API_Handler::test_if_url_is_valid($url)){
-      throw new Shema_Exception("Fehler beim Einlesen der Daten. Der eingegebene Link ist nicht gültig.\\nHTTP-Response-Code: ".Url_Shortener_API_Handler::get_http_response_code($url).".\\nLink: '".$url."'");
-    }
+    // if(!Url_Shortener_API_Handler::test_if_url_is_valid($url)){
+    //   throw new Shema_Exception("Fehler beim Einlesen der Daten. Der eingegebene Link ist nicht gültig.\\nHTTP-Response-Code: ".Url_Shortener_API_Handler::get_http_response_code($url).".\\nLink: '".$url."'");
+    // }
 
     # create short-url-id of url
     $short_url_id = Url_Shortener_API_Handler::short_url($url);

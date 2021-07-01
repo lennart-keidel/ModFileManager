@@ -52,7 +52,7 @@ function fill_input_shema_with_filename_data_list(filename_data_list) {
 }
 
 
-// get index of filename input in ui by it's path
+// get index of filename input in ui by it's path (value of textfield)
 function get_index_of_filename_input_by_path(path) {
   var class_name = "path_source";
   var elements = document.getElementsByClassName(class_name)
@@ -91,25 +91,25 @@ function highlight_shema_input_element(index) {
 }
 
 
-function disable_input_by_class_name_if_source_element_is_not_checked(id_name, class_name) {
-  all_elements = document.getElementsByClassName(class_name);
-  source = document.getElementById(id_name);
+// disable all elements by a class name if an checkbox element with a id is not checked
+function disable_input_by_class_name_if_source_element_is_not_checked(id_source_element, class_element_to_disable) {
+  all_elements = document.getElementsByClassName(class_element_to_disable);
+  source = document.getElementById(id_source_element);
   for (f = 0; f < all_elements.length; f++) {
     if (source.checked) {
       all_elements[f].removeAttribute("disabled");
-      all_elements[f].removeAttribute("required");
     }
     else {
       all_elements[f].setAttribute("disabled", "disabled");
-      all_elements[f].setAttribute("required","required");
     }
   }
 }
 
 
-function disable_and_hide_input_by_class_name_if_source_element_is_not_checked(id_name, class_name) {
-  all_elements = document.getElementsByClassName(class_name);
-  source = document.getElementById(id_name);
+// disable and hide all elements by a class name if an checkbox element with a id is not checked
+function disable_and_hide_input_by_class_name_if_source_element_is_not_checked(id_source_element, class_element_to_disable) {
+  all_elements = document.getElementsByClassName(class_element_to_disable);
+  source = document.getElementById(id_source_element);
   for (f = 0; f < all_elements.length; f++) {
     if (source.checked) {
       all_elements[f].removeAttribute("disabled");

@@ -23,7 +23,6 @@ class Filename_Shema_Flag_Test extends TestCase {
   protected $wrong_ui_data2 = [];
   protected $wrong_ui_data3 = [];
   protected $wrong_ui_data4 = [];
-  protected $wrong_ui_data5 = [];
   protected $wrong_ui_data6 = [];
   protected $wrong_ui_data7 = [];
   protected $filename1 = "";
@@ -51,20 +50,20 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->ui_data1 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://youtube.com"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/d/526207/more-traits-for-all-ages.html"
     ];
 
     $this->ui_data2 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep11",
       "checkbox_shema_flag" => [
@@ -73,13 +72,13 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://youtube.com"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/"
     ];
 
     $this->ui_data3 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "sp09",
       "checkbox_shema_flag" => [
@@ -88,13 +87,13 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_overrides",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://youtube.com"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/"
     ];
 
     $this->ui_data4 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "checkbox_shema_flag" => [
 
@@ -105,7 +104,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_ui_data1 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
@@ -115,7 +114,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://youtube.com"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/"
     ];
 
 
@@ -123,7 +122,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_ui_data2 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
@@ -139,7 +138,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_ui_data3 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
@@ -147,7 +146,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://youtube.com"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/"
     ];
 
 
@@ -155,7 +154,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_ui_data4 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "sp99",
       "checkbox_shema_flag" => [
@@ -164,24 +163,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://youtube.com"
-    ];
-
-
-    # "url_flag_data_depends_on_content" not existing website
-    $this->wrong_ui_data5 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_flag_data_depends_on_expansion" => "sp02",
-      "checkbox_shema_flag" => [
-        "option_depends_on_content",
-        "option_depends_on_expansion",
-        "option_install_in_packages",
-        "option_is_essential"
-      ],
-      "url_flag_data_depends_on_content" => "https://somerandomurlthatdoesntexistandhopefullywontexistanytimesoon.com"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/"
     ];
 
 
@@ -189,7 +171,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_ui_data6 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
@@ -197,7 +179,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_e"
       ],
-      "url_flag_data_depends_on_content" => "https://youtube.com"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/"
     ];
 
 
@@ -205,7 +187,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $this->wrong_ui_data7 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
@@ -213,45 +195,45 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_install_in_packages",
       ],
-      "url_flag_data_depends_on_content" => "https://youtube.com"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/"
     ];
 
 
     $this->filename1 = "I";
 
-    $this->filename2 = "O_D7qcvl_Eep11_V";
+    $this->filename2 = "O_Dzd5tW_Eep11_V";
 
     $this->filename3 = "O";
 
-    $this->filename4 = "D7qcvl";
+    $this->filename4 = "Dzd5tW";
 
     # expansion id is uppercase, assume it's converted to lowercase
     $this->filename5 = "ESP09";
 
 
     # empty flag, that only is valid if it's the only flag
-    $this->wrong_filename1 = "P_D7qcvl_Eep11_I";
+    $this->wrong_filename1 = "P_Dzd5tW_Eep11_I";
 
     # double flag
     $this->wrong_filename2 = "Esp07_Eep01";
 
     # data for Flag that should have no data
-    $this->wrong_filename3 = "P_D7qcvl_Eep11_Va";
+    $this->wrong_filename3 = "P_Dzd5tW_Eep11_Va";
 
     # not existing short link
     $this->wrong_filename4 = "P_D7qcva_Eep11_V";
 
     # not existing expansion id
-    $this->wrong_filename5 = "P_D7qcvl_Eep99_V";
+    $this->wrong_filename5 = "P_Dzd5tW_Eep99_V";
 
     # install in packages and install in overrides, both together are not valid
-    $this->wrong_filename6 = "P_D7qcvl_Eep01_O_V";
+    $this->wrong_filename6 = "P_Dzd5tW_Eep01_O_V";
 
     # flag that requires sub data has no data
     $this->wrong_filename7 = "P_D_Eep07_V";
 
     # install in packages and install in overrides, both together are not valid, in different order
-    $this->wrong_filename8 = "O_D7qcvl_Eep01_P_V";
+    $this->wrong_filename8 = "O_Dzd5tW_Eep01_P_V";
 
   }
 
@@ -384,13 +366,6 @@ class Filename_Shema_Flag_Test extends TestCase {
   }
 
 
-  public function test_convert_data_to_filename_with_wrong_ui_data2() : void {
-    $converted_ui_data = Filename_Shema_Flag::convert_ui_data_to_data($this->wrong_ui_data5);
-    $this->expectException(Shema_Exception::class);
-    Filename_Shema_Flag::convert_data_to_filename($converted_ui_data);
-  }
-
-
   public function test_convert_filename_to_data1() : void {
     $converted_ui_data = Filename_Shema_Flag::convert_ui_data_to_data($this->ui_data1);
     $filename = Filename_Shema_Flag::convert_data_to_filename($converted_ui_data);
@@ -477,7 +452,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->filename5);
     assertIsArray($data_from_filename);
     assertCount(2, $data_from_filename);
-    $main_key = current(Filename_Shema_Flag::array_ui_data_key);
+    $main_key = current(Filename_Shema_Flag::array_ui_data_key,);
     assertIsArray($data_from_filename[$main_key]);
     assertCount(1, $data_from_filename[$main_key]);
     assertContains("option_depends_on_expansion",$data_from_filename[$main_key]);
@@ -487,7 +462,7 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
   public function test_convert_filename_to_data_with_wrong_data1() : void {
-    $this->wrong_filename1 = "P_D7qcvl_Eep11_I";
+    $this->wrong_filename1 = "P_Dzd5tW_Eep11_I";
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename1);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(3,$data_from_filename);
@@ -550,7 +525,7 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
   public function test_convert_filename_to_data_with_wrong_data6() : void {
-    $this->wrong_filename6 = "P_D7qcvl_Eep01_O_V";
+    $this->wrong_filename6 = "P_Dzd5tW_Eep01_O_V";
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename6);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(3, $data_from_filename);

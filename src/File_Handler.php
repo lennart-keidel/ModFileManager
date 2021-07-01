@@ -100,6 +100,30 @@ abstract class File_Handler {
   }
 
 
+  # add an index to a filename
+  public static function add_index_to_filename(string $path_filename, int $index) : string {
+    if(strlen($path_filename) < 1 || (substr($path_filename,-1)==="/" || substr($path_filename,-1)==="\\")){
+      return $path_filename;
+    }
+    if($file_extension = self::get_fileextension_from_path($path_filename)){
+      $path_filename = preg_replace("/\.$file_extension$/", "", $path_filename);
+    }
+    return self::remove_index_from_filename($path_filename) . Create_Read_Filename_By_Shema::filename_shema_seperator . $index . (empty($file_extension) === false ? "." . $file_extension : "");
+  }
+
+
+  # remove an index from a filename
+  public static function remove_index_from_filename(string $path_filename) : string {
+    if(strlen($path_filename) < 1 || (substr($path_filename,-1)==="/" || substr($path_filename,-1)==="\\")){
+      return $path_filename;
+    }
+    if($file_extension = self::get_fileextension_from_path($path_filename)){
+      $path_filename = preg_replace("/\.$file_extension$/", "", $path_filename);
+    }
+    return preg_replace("/" . Create_Read_Filename_By_Shema::filename_shema_seperator . "[0-9]+$/","",$path_filename) . (empty($file_extension) === false ? "." . $file_extension : "");
+  }
+
+
   # rename a file
   public static function rename_file(string $path_original_filename, string $path_new_filename) : void {
 
@@ -112,11 +136,17 @@ abstract class File_Handler {
     # if new filename already exists
     # add failed filenames to global storage
     # throw custom exception
-    if(is_file($path_new_filename)){
-      Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename)]]);
-      File_Handler_Exception::set_source_path($path_new_filename);
-      throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Der Dateiname unter dem Pfad existiert bereits und wird nicht umbennant, um die Datei nicht zu überschreiben.");
-      return;
+    $file_index = 0;
+    while(is_file($path_new_filename)){
+      if($file_index++ > 0){
+        self::add_index_to_filename($path_new_filename,$file_index);
+      }
+      if (filesize($path_new_filename) == filesize($path_original_filename) && md5_file($path_new_filename) == md5_file($path_original_filename)){
+        Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename)]]);
+        File_Handler_Exception::set_source_path($path_new_filename);
+        throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Der Dateiname unter dem Pfad existiert bereits und wird nicht umbennant, um die Datei nicht zu überschreiben.");
+        return;
+      }
     }
 
     # if original filename does not exist

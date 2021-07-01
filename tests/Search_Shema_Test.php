@@ -33,28 +33,28 @@ class Search_Shema_Test extends TestCase {
       "search_shema_connector" => "or",
       "select_shema_categorie" => "option_tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://google.com"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/"
     ];
 
     self::$search_input2 = [
       "search_shema_connector" => "and",
       "select_shema_categorie" => "option_tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://google.com"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/"
     ];
 
     self::$search_input3 = [
@@ -71,14 +71,14 @@ class Search_Shema_Test extends TestCase {
     self::$filename_data_for_one_file1 = [
       "select_shema_categorie" => "option_tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://google.com"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/"
     ];
 
     # two data match search_input1 and search_input2

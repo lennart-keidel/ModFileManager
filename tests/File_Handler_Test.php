@@ -64,6 +64,40 @@ class File_Handler_Test extends TestCase {
     "a//" => "a",
     "a//////" => "a",
   ];
+  private $remove_index_from_filename_input_and_expected_output = [
+    "/path/to/dir/" => "/path/to/dir/",
+    "/path/to/dir__2" => "/path/to/dir",
+    "/path/to/dir__2__2" => "/path/to/dir__2",
+    "\\path\\to\\dir\\" => "\\path\\to\\dir\\",
+    "\\path\\to\\dir\\a.package" => "\\path\\to\\dir\\a.package",
+    "\\path\\to\\dir\\a__2.package" => "\\path\\to\\dir\\a.package",
+    "a.package" => "a.package",
+    "a__2.package" => "a.package",
+    "/path/to/dir/a__2.package" => "/path/to/dir/a.package",
+    ".a" => ".a",
+    "../" => "../",
+    ".a__2" => ".a",
+    ".a__2.package" => ".a.package",
+    ".a.package" => ".a.package",
+    "" => "",
+    "a__2.package/" => "a__2.package/",
+  ];
+  private $add_index_from_filename_input_and_expected_output = [
+    "/path/to/dir/" => "/path/to/dir/",
+    "/path/to/dir" => "/path/to/dir__2",
+    "/path/to/dir__2__1" => "/path/to/dir__2__2",
+    "\\path\\to\\dir\\" => "\\path\\to\\dir\\",
+    "\\path\\to\\dir\\a.package" => "\\path\\to\\dir\\a.package",
+    "\\path\\to\\dir\\a.package" => "\\path\\to\\dir\\a__2.package",
+    "a.package" => "a__2.package",
+    "/path/to/dir/a.package" => "/path/to/dir/a__2.package",
+    ".a" => ".a",
+    "../" => "../",
+    ".a" => ".a__2",
+    ".a.package" => ".a__2.package",
+    "" => "",
+    "a__2.package/" => "a__2.package/",
+  ];
 
   public function setUp() : void {
 
@@ -285,6 +319,20 @@ class File_Handler_Test extends TestCase {
   public function test_remove_trailing_slash_from_path() : void {
     foreach($this->remove_trailing_slash_from_path_input_and_expected_output as $input => $expected_output){
       assertEquals($expected_output, File_Handler::remove_trailing_slash_from_path($input));
+    }
+  }
+
+
+  public function test_remove_index_from_filename() : void {
+    foreach($this->remove_index_from_filename_input_and_expected_output as $input => $expected_output){
+      assertEquals($expected_output, File_Handler::remove_index_from_filename($input));
+    }
+  }
+
+
+  public function test_add_index_to_filename() : void {
+    foreach($this->add_index_from_filename_input_and_expected_output as $input => $expected_output){
+      assertEquals($expected_output, File_Handler::add_index_to_filename($input, 2));
     }
   }
 

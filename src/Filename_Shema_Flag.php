@@ -277,9 +277,9 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
         throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Optionsschlüssel '$key_sub_data' darf nicht leer sein.");
       }
 
-      if(Url_Shortener_API_Handler::test_if_url_is_valid($sub_data) === false){
-        throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Link für den Optionsschlüssel '$key_sub_data' gibt keinen validen HTTP-Response-Code zurück.");
-      }
+      // if(Url_Shortener_API_Handler::test_if_url_is_valid($sub_data) === false){
+      //   throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Link für den Optionsschlüssel '$key_sub_data' gibt keinen validen HTTP-Response-Code zurück.");
+      // }
 
       $result .= Url_Shortener_API_Handler::short_url($sub_data);
     }

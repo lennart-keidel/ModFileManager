@@ -34,7 +34,7 @@ class Filename_Shema_Patch_Level_Test extends TestCase {
     $this->ui_data = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
       "select_shema_patch_level" => "1.69"
@@ -43,7 +43,7 @@ class Filename_Shema_Patch_Level_Test extends TestCase {
     $this->wrong_ui_data1 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_lin" => "https://google.com",
+      "url_shema_lin" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
       "select_shema_patch_leve" => "1.69"

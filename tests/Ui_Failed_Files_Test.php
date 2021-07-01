@@ -29,28 +29,28 @@ class Ui_Failed_Files_Test extends TestCase {
       "path_source" => "mods/abc/def.package",
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://google.com"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/"
     ];
 
     self::$filename_data2 = [
       "path_source" => "mods/abc/def.package",
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://google.com"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/"
     ];
 
     self::$filename_list1 = [

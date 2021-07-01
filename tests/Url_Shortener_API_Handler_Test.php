@@ -12,6 +12,7 @@ class Url_Shortener_API_Handler_Test extends TestCase {
 
   private $array_url = [];
   private $array_wrong_url = [];
+  private $array_short_url = [];
 
   # set up ui data with realistic data
   protected function setUp() : void {
@@ -26,14 +27,13 @@ class Url_Shortener_API_Handler_Test extends TestCase {
 
 
     $this->array_url[] = "https://modthesims.info";
-    $this->array_url[] = "https://youtube.com";
-    $this->array_url[] = "https://google.com";
+    $this->array_url[] = "https://modthesims.info/";
+    $this->array_url[] = "https://modthesims.info/";
 
     $this->array_wrong_url[] = ""; # only empty string is invalid for url-api
 
-    $this->array_short_url[] = "wir9g";
-    $this->array_short_url[] = "https://lennart-keidel.de/url/2r26e";
-    $this->array_short_url[] = "https://lennart-keidel.de/url/s5sos";
+    # must be excecuted to have a list of valid short urls
+    $this->test_short_url();
 
   }
 
@@ -43,6 +43,7 @@ class Url_Shortener_API_Handler_Test extends TestCase {
       $result_short_id = Url_Shortener_API_Handler::short_url($fe_url);
       assertIsString($result_short_id);
       assertEquals(5, strlen($result_short_id));
+      $this->array_short_url[] = $result_short_id;
     }
   }
 

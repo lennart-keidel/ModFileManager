@@ -218,17 +218,26 @@ abstract class Main {
       # -> if creation of new filename failed cause of an exception
       #    data of failed filename creations is stored in $failed_filename_data
       # store data from error filenames in session
+      $failed_at_rename = false;
       try {
         File_Handler::rename_file_from_filename_list($new_filename_list);
       }
       catch(Exception $exception){
+        $failed_at_rename = true;
+      }
+
+      # check if failed at rename
+      if($failed_at_rename === true){
+        Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei3:");
+        self::replace_original_filename_data_from_session_data(current($ui_data[Ui::ui_data_key_root]), true);
+        // $_SESSION[Ui::ui_data_key_root] = array_merge((isset($_SESSION[Ui::ui_data_key_root]) === true ? $_SESSION[Ui::ui_data_key_root] : []), $failed_filename_data[Ui::ui_data_key_root]);
+        return;
       }
 
       # check failed filename data
       $failed_filename_data = Ui_Failed_Files::get_failed_filename_data();
-
       if(empty($failed_filename_data[Ui::ui_data_key_root]) === false){
-        Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei:");
+        Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei1:");
         self::replace_original_filename_data_from_session_data($failed_filename_data, true);
         // $_SESSION[Ui::ui_data_key_root] = array_merge((isset($_SESSION[Ui::ui_data_key_root]) === true ? $_SESSION[Ui::ui_data_key_root] : []), $failed_filename_data[Ui::ui_data_key_root]);
         return;
@@ -238,7 +247,7 @@ abstract class Main {
       $failed_filename_list = Ui_Failed_Files::get_failed_filename_list();
       if(empty($failed_filename_list) === false){
         $failed_filename_list[UI::ui_key_error_flag_for_filename_data] = true;
-        Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei:");
+        Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei2:");
         // $_SESSION[Ui::ui_file_list_key_root] = array_merge_recursive($_SESSION[Ui::ui_file_list_key_root], $failed_filename_list);
         return;
       }

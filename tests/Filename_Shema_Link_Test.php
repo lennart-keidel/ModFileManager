@@ -14,7 +14,6 @@ class Filename_Shema_Link_Test extends TestCase {
   protected $ui_data = [];
   protected $wrong_ui_data1 = [];
   protected $wrong_ui_data2 = [];
-  protected $wrong_ui_data3 = [];
   protected $wrong_filename1 = "";
   protected $wrong_filename2 = "";
 
@@ -33,7 +32,7 @@ class Filename_Shema_Link_Test extends TestCase {
     $this->ui_data = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
+      "url_shema_link" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
     ];
@@ -41,7 +40,7 @@ class Filename_Shema_Link_Test extends TestCase {
     $this->wrong_ui_data1 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
-      "url_shema_lin" => "https://google.com",
+      "url_shema_lin" => "https://modthesims.info/",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
     ];
@@ -51,15 +50,6 @@ class Filename_Shema_Link_Test extends TestCase {
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
       "url_shema_link" => "",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-    ];
-
-
-    $this->wrong_ui_data3 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/61757973",
       "date_shema_installation_date" => "2020-10-29",
       "select_shema_flag" => "muss in Packages-Ordner installiert werden",
     ];
@@ -97,13 +87,6 @@ class Filename_Shema_Link_Test extends TestCase {
   public function test_convert_data_to_filename_with_wrong_ui_data1() : void {
     $this->expectException(Shema_Exception::class);
     $converted_ui_data = Filename_Shema_Link::convert_ui_data_to_data($this->wrong_ui_data2);
-    $this->expectException(Shema_Exception::class);
-    Filename_Shema_Link::convert_data_to_filename($converted_ui_data);
-  }
-
-
-  public function test_convert_data_to_filename_with_wrong_ui_data2() : void {
-    $converted_ui_data = Filename_Shema_Link::convert_ui_data_to_data($this->wrong_ui_data3);
     $this->expectException(Shema_Exception::class);
     Filename_Shema_Link::convert_data_to_filename($converted_ui_data);
   }

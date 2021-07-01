@@ -127,8 +127,7 @@ abstract class File_Handler {
   # rename a file
   public static function rename_file(string $path_original_filename, string $path_new_filename) : void {
 
-    # if original filename and new filename are equal
-    # skip
+    # if original path is equal to the new path, skip the process
     if($path_original_filename===$path_new_filename){
       return;
     }
@@ -138,8 +137,15 @@ abstract class File_Handler {
     # throw custom exception
     $file_index = 2;
     while(is_file($path_new_filename)){
+
+      # if original path is equal to the new path, skip the process
+      if($path_original_filename===$path_new_filename){
+        return;
+      }
+
       # if file is identical to already existing file under this path
-      if (filesize($path_new_filename) == filesize($path_original_filename) && md5_file($path_new_filename) == md5_file($path_original_filename)){
+      # if original filename and new filename are equal
+      if (filesize($path_new_filename) === filesize($path_original_filename) && md5_file($path_new_filename) === md5_file($path_original_filename)){
         Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename)]]);
         File_Handler_Exception::set_source_path($path_new_filename);
         throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Der Dateiname unter dem Pfad existiert bereits und ist identisch mit der bereits existierenden Datei. Die Datei wird daher nicht umbenannt.");

@@ -67,7 +67,7 @@ abstract class Ui {
   <label class="'.Search_Shema::ui_key_search_connector.'" for="'.Search_Shema::ui_key_search_connector.'">Suche verbinden mit: </label>
   <select class="'.Search_Shema::ui_key_search_connector.'" id="'.Search_Shema::ui_key_search_connector.'%1$d" name="%2$s[%1$d]['.Search_Shema::ui_key_search_connector.']" required>
     <option value="" selected disabled>Auswählen</option>
-    <option value="or">Oder</option>
+    <option value="or" selected>Oder</option>
     <option value="and">Und</option>
   </select>
   ';
@@ -134,8 +134,8 @@ abstract class Ui {
 
   private const template_delete_session_button = '
   <form class="delete_session" method="post" action=".">
-    <br>
     <button type="submit" id="delete_session_button" name="delete_session_button" onclick="return confirm(this.value);" value="alle offenen eingetragenen Daten löschen und zurück zum Anfang">alle offenen eingetragenen Daten löschen und zurück zum Anfang</button>
+    <br>
     <br>
     <!hr id="delete_session_button_divider">
   </form>

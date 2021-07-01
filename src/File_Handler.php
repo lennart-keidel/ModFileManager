@@ -136,17 +136,17 @@ abstract class File_Handler {
     # if new filename already exists
     # add failed filenames to global storage
     # throw custom exception
-    $file_index = 0;
+    $file_index = 2;
     while(is_file($path_new_filename)){
-      if($file_index++ > 0){
-        self::add_index_to_filename($path_new_filename,$file_index);
-      }
+      # if file is identical to already existing file under this path
       if (filesize($path_new_filename) == filesize($path_original_filename) && md5_file($path_new_filename) == md5_file($path_original_filename)){
         Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename)]]);
         File_Handler_Exception::set_source_path($path_new_filename);
-        throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Der Dateiname unter dem Pfad existiert bereits und wird nicht umbennant, um die Datei nicht zu überschreiben.");
+        throw new File_Handler_Exception("Fehler beim umbenennen der Dateien. Der Dateiname unter dem Pfad existiert bereits und ist identisch mit der bereits existierenden Datei. Die Datei wird daher nicht umbenannt.");
         return;
       }
+
+      $path_new_filename = self::add_index_to_filename($path_new_filename,$file_index++);
     }
 
     # if original filename does not exist

@@ -144,7 +144,6 @@ abstract class File_Handler {
       }
 
       # if file is identical to already existing file under this path
-      # if original filename and new filename are equal
       if (filesize($path_new_filename) === filesize($path_original_filename) && md5_file($path_new_filename) === md5_file($path_original_filename)){
         Ui_Failed_Files::add_failed_filename_list([dirname($path_original_filename) => [basename($path_original_filename)]]);
         File_Handler_Exception::set_source_path($path_new_filename);

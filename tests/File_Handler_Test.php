@@ -15,13 +15,21 @@ use function PHPUnit\Framework\assertTrue;
 # test class
 class File_Handler_Test extends TestCase {
 
-  private const path_temp_test_dir_root = "./temp_test_files";
+  private const path_temp_test_dir_root = File_Handler::path_seperator."temp_test_files";
   private const array_filename = [ "normal_file1.package", "normal_file2.Sims3Pack", "normal_file3.sims3pack", "wrong_file1.packag", "wrong_file2.sims3pac" ];
   private const array_path_temp_test_sub_dir = [
-    File_Handler_Test::path_temp_test_dir_root."/sub_dir1",
-    File_Handler_Test::path_temp_test_dir_root."/sub_dir2",
-    File_Handler_Test::path_temp_test_dir_root."/sub_dir3",
-    File_Handler_Test::path_temp_test_dir_root."/empty_dir"
+    File_Handler_Test::path_temp_test_dir_root.File_Handler::path_seperator."sub_dir1",
+    File_Handler_Test::path_temp_test_dir_root.File_Handler::path_seperator."sub_dir2",
+    File_Handler_Test::path_temp_test_dir_root.File_Handler::path_seperator."sub_dir3",
+    File_Handler_Test::path_temp_test_dir_root.File_Handler::path_seperator."dir_with_4_not_identical_files",
+    File_Handler_Test::path_temp_test_dir_root.File_Handler::path_seperator."dir_with_4_identical_files",
+    File_Handler_Test::path_temp_test_dir_root.File_Handler::path_seperator."empty_dir"
+  ];
+  private $test_auto_add_index_for_rename_of_multiple_identical_files_input_and_expected_output_filenames = [
+    ["input" => "new_test_filename", "output" => "new_test_filename"],
+    ["input" => "new_test_filename", "output" => "new_test_filename" . Create_Read_Filename_By_Shema::filename_shema_seperator . "2"],
+    ["input" => "new_test_filename", "output" => "new_test_filename" . Create_Read_Filename_By_Shema::filename_shema_seperator . "3"],
+    ["input" => "new_test_filename", "output" => "new_test_filename" . Create_Read_Filename_By_Shema::filename_shema_seperator . "4"]
   ];
   private $get_fileextension_from_path_input_and_expected_output = [
     "/a/b/filename.txt" => "txt",
@@ -134,15 +142,37 @@ class File_Handler_Test extends TestCase {
     foreach($iterator_directory as $directory){
       if($directory->isDir() && strpos($directory->getPathname(), "empty_dir") === false){
         foreach(File_Handler_Test::array_filename as $filename){
-          $path = $directory->getPathname()."/$filename";
-          file_put_contents($path, "");
+          if(strpos($directory->getPathname(), "dir_with_4_identical_files") !== false){
+            $path1 = $directory->getPathname().File_Handler::path_seperator."new_test_filename1";
+            $path2 = $directory->getPathname().File_Handler::path_seperator."new_test_filename2";
+            $path3 = $directory->getPathname().File_Handler::path_seperator."new_test_filename3";
+            $path4 = $directory->getPathname().File_Handler::path_seperator."new_test_filename4";
+            file_put_contents($path1, "a");
+            file_put_contents($path2, "a");
+            file_put_contents($path3, "a");
+            file_put_contents($path4, "a");
+          }
+          elseif(strpos($directory->getPathname(), "dir_with_4_not_identical_files") !== false){
+            $path1 = $directory->getPathname().File_Handler::path_seperator."new_test_filename1";
+            $path2 = $directory->getPathname().File_Handler::path_seperator."new_test_filename2";
+            $path3 = $directory->getPathname().File_Handler::path_seperator."new_test_filename3";
+            $path4 = $directory->getPathname().File_Handler::path_seperator."new_test_filename4";
+            file_put_contents($path1, "a");
+            file_put_contents($path2, "b");
+            file_put_contents($path3, "c");
+            file_put_contents($path4, "d");
+          }
+          else {
+            $path = $directory->getPathname().File_Handler::path_seperator."$filename";
+            file_put_contents($path, "");
+          }
         }
       }
     }
 
     # create test-files in root directorys
     foreach(File_Handler_Test::array_filename as $filename){
-      $path = File_Handler_Test::path_temp_test_dir_root."/$filename";
+      $path = File_Handler_Test::path_temp_test_dir_root.File_Handler::path_seperator."$filename";
       file_put_contents($path, "");
     }
   }
@@ -197,7 +227,7 @@ class File_Handler_Test extends TestCase {
 
 
   public function test_get_filename_list_from_path_with_empty_dir() : void {
-    $result = File_Handler::get_filename_list_from_path(File_Handler_Test::path_temp_test_dir_root."/empty_dir");
+    $result = File_Handler::get_filename_list_from_path(File_Handler_Test::path_temp_test_dir_root.File_Handler::path_seperator."empty_dir");
     assertIsArray($result);
     assertEmpty($result);
   }
@@ -233,7 +263,7 @@ class File_Handler_Test extends TestCase {
 
 
   public function test_get_filename_list_from_path_recursive_with_empty_dir() : void {
-    $result = File_Handler::get_filename_list_from_path_recursive(File_Handler_Test::path_temp_test_dir_root."/empty_dir");
+    $result = File_Handler::get_filename_list_from_path_recursive(File_Handler_Test::path_temp_test_dir_root.File_Handler::path_seperator."empty_dir");
     assertIsArray($result);
     assertEmpty($result);
   }
@@ -270,7 +300,7 @@ class File_Handler_Test extends TestCase {
     }
 
     # rename first file
-    $path_new_filename = dirname($path_original_filename)."/new_filename.package";
+    $path_new_filename = dirname($path_original_filename).File_Handler::path_seperator."new_filename.package";
     assertFileExists($path_original_filename);
     File_Handler::rename_file($path_original_filename, $path_new_filename);
     assertFileDoesNotExist($path_original_filename);
@@ -283,6 +313,66 @@ class File_Handler_Test extends TestCase {
     File_Handler::rename_file($path_second_original_filename, $path_new_filename);
     assertFileExists($path_second_original_filename);
     assertFileExists($path_new_filename);
+  }
+
+
+  # test if renaming multiple files with same name, if it adds the index successfully
+  public function test_rename_files_with_exakt_same_name() : void {
+
+    # new filename for all files
+    $path_source = File_Handler_Test::path_temp_test_dir_root.File_Handler::path_seperator."dir_with_4_not_identical_files";
+
+    # get list of all files in a specific test directory
+    $array_original_filename = [];
+    foreach (new DirectoryIterator($path_source) as $file) {
+      if($file->isFile() && !$file->isDot()){
+        $array_original_filename[] = $file->getPathname();
+      }
+    }
+
+    # rename all files
+    $cnt = 0;
+    foreach($array_original_filename as $path_original_file){
+      $input = $this->test_auto_add_index_for_rename_of_multiple_identical_files_input_and_expected_output_filenames[$cnt]["input"];
+      File_Handler::rename_file($path_original_file, $path_source.File_Handler::path_seperator.$input);
+      $cnt++;
+    }
+
+    # assert that expected output exists, the files with index added
+    foreach($this->test_auto_add_index_for_rename_of_multiple_identical_files_input_and_expected_output_filenames as $key => $array_input_output){
+      assertTrue(is_file($path_source.File_Handler::path_seperator.$array_input_output["output"]));
+    }
+  }
+
+
+  # test if renaming multiple files with same name, if it adds the index successfully
+  public function test_rename_files_with_exakt_same_name_and_exact_same_data() : void {
+
+    # new filename for all files
+    $path_source = File_Handler_Test::path_temp_test_dir_root.File_Handler::path_seperator."dir_with_4_identical_files";
+
+    # get list of all files in a specific test directory
+    $array_original_filename = [];
+    foreach (new DirectoryIterator($path_source) as $file) {
+      if($file->isFile() && !$file->isDot()){
+        $array_original_filename[] = $file->getPathname();
+      }
+    }
+
+    # test if exception occurs
+    # if two identical files are renamed to the same filename
+    $cnt = 0;
+    foreach($array_original_filename as $path_original_file){
+      $input = $this->test_auto_add_index_for_rename_of_multiple_identical_files_input_and_expected_output_filenames[$cnt]["input"];
+      if($cnt == 0){
+        File_Handler::rename_file($path_original_file, $path_source.File_Handler::path_seperator.$input);
+      }
+      else {
+        $this->expectException(File_Handler_Exception::class);
+        File_Handler::rename_file($path_original_file, $path_source.File_Handler::path_seperator.$input);
+      }
+      $cnt++;
+    }
   }
 
 
@@ -309,8 +399,8 @@ class File_Handler_Test extends TestCase {
     File_Handler::rename_file_from_filename_list($new_filename_list);
     foreach($new_filename_list as $path => $array_filename){
       foreach($array_filename as $old_filename => $new_filename){
-        assertFileDoesNotExist($path."/".$old_filename);
-        assertFileExists($path."/".$new_filename);
+        assertFileDoesNotExist($path.File_Handler::path_seperator.$old_filename);
+        assertFileExists($path.File_Handler::path_seperator.$new_filename);
       }
     }
   }

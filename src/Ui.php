@@ -171,7 +171,7 @@ abstract class Ui {
     printf(self::template_shema_input_form_begin, "");
     printf(self::input_shema_template_path_source, self::$out_input_shema_index, self::ui_data_key_root, $path_source);
     printf(self::template_shema_template_path_source_for_ui, self::$out_input_shema_index, $dirname);
-    foreach(Main::shema_order_global as $class_id){
+    foreach(Main::ui_shema_order_global as $class_id){
       $class_name = "Filename_Shema_$class_id";
       $class_name::print_filename_shema_input_for_ui(self::$out_input_shema_index);
     }
@@ -249,7 +249,7 @@ abstract class Ui {
     $index = 1000000;
     printf(self::template_shema_search_input_form_begin,"");
     printf(self::search_connector_input_template, $index, self::ui_search_data_key_root);
-    foreach(Main::shema_order_global as $class_id){
+    foreach(Main::ui_shema_order_global as $class_id){
       echo "<div class='container_search_disable'>";
       $class_name = "Filename_Shema_$class_id";
       printf(self::search_disable_input_template, self::$out_individual_index++, $class_name, $index);

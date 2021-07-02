@@ -8,7 +8,19 @@ abstract class Main {
     2 => "Link",
     3 => "Patch_Level",
     4 => "Installation_Date",
-    5 => "Flag"
+    5 => "Flag",
+    6 => "Creator"
+  ];
+
+
+  public const ui_shema_order_global = [
+    0 => "Categorie",
+    1 => "Description",
+    2 => "Creator",
+    3 => "Link",
+    4 => "Patch_Level",
+    5 => "Installation_Date",
+    6 => "Flag"
   ];
 
   public static function handle_ui_data(array $ui_data=[]) : void {

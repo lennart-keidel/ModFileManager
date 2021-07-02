@@ -70,7 +70,7 @@ abstract class Search_Shema {
     }
 
     if(empty(self::$search_ui_data) === true || empty($filename_data) === true){
-      throw new Ui_Exception("Fehler beim Filtern der ausgelesenen Daten. Es wurden keine ausgelesenen Daten übermittelt.");
+      throw new Ui_Exception("Fehler beim Filtern der ausgelesenen Daten. Es wurden keine zu suchenden Daten übermittelt.");
     }
 
     $result_filtered = array_filter($filename_data[Ui::ui_data_key_root], function($filename_data_for_one_file){

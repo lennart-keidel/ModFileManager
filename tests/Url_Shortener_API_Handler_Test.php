@@ -13,6 +13,7 @@ class Url_Shortener_API_Handler_Test extends TestCase {
   private $array_url = [];
   private $array_wrong_url = [];
   private $array_short_url = [];
+  private $test_short_text_orginal = "";
 
   # set up ui data with realistic data
   protected function setUp() : void {
@@ -35,6 +36,12 @@ class Url_Shortener_API_Handler_Test extends TestCase {
     # must be excecuted to have a list of valid short urls
     $this->test_short_url();
 
+    $this->test_short_text_orginal = "asdäasd aösdmas
+    a
+
+
+    a
+    a d$!'\"%&{}[]§²³,.;:-_#+~*´`áà";
   }
 
   # test short url creation
@@ -89,6 +96,22 @@ class Url_Shortener_API_Handler_Test extends TestCase {
     $url = "https://potato-ballad-sims.tumblr.com/post/61757973"; # not existing website
     $response_code = Url_Shortener_API_Handler::get_http_response_code($url);
     assertTrue($response_code > 300 || $response_code < 100);
+  }
+
+
+  # test short text via url shortener
+  public function test_short_and_expand_text() : void {
+
+    # short text
+    $short_url = Url_Shortener_API_Handler::short_text($this->test_short_text_orginal);
+    assertIsString($short_url);
+    assertNotEmpty($short_url);
+
+    # expand text
+    $expanded_text = Url_Shortener_API_Handler::expand_text($short_url);
+    assertIsString($expanded_text);
+    assertNotEmpty($expanded_text);
+    assertEquals($this->test_short_text_orginal, $expanded_text);
   }
 
 }

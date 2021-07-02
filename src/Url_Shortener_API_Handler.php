@@ -8,9 +8,8 @@ abstract class Url_Shortener_API_Handler {
   public const api_url =  'https://lennart-keidel.de/url/yourls-api.php';
   public const short_id_base_url = 'https://lennart-keidel.de/urla';
 
-
   # create short of url via own hosted url shortener
-  public static function short_url(string $ipt_long_url){
+  public static function short_url(string $ipt_long_url) : string {
 
     if(empty($ipt_long_url)){
       throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nDie eingegebene URL oder Text ist leer.\\n");
@@ -67,7 +66,7 @@ abstract class Url_Shortener_API_Handler {
 
   # get long version of url via short url from own hosted url shortener
   # reverse process of short_url
-  public static function expand_url(string $ipt_short_url){
+  public static function expand_url(string $ipt_short_url) : string {
 
     // Init the CURL session
     $ch = curl_init();
@@ -114,7 +113,30 @@ abstract class Url_Shortener_API_Handler {
     }
 
     return $data->longurl;
+  }
 
+
+  # store a text in a url shortener
+  # url encodes the text
+  public static function short_text(string $original_text) : string {
+    $short_url = "";
+    if(!empty($original_text)){
+      $encode = rawurlencode($original_text);
+      $short_url = Url_Shortener_API_Handler::short_url($encode);
+    }
+    return $short_url;
+  }
+
+
+  # expand a text previously stored in url shortener
+  # decodes the urlencoded text
+  public static function expand_text(string $short_url) : string {
+    $decode = "";
+    if(!empty($short_url)){
+      $expand = Url_Shortener_API_Handler::expand_url($short_url);
+      $decode = rawurldecode($expand);
+    }
+    return $decode;
   }
 
 

@@ -42,6 +42,12 @@ summary:focus {
   display: block;
 }
 
+label > .sub {
+  display: block;
+  font-size: 80%;
+  opacity: 80%;
+}
+
 
 /* === SEARCH === */
 .enable_search_shema {

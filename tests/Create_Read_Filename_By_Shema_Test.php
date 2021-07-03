@@ -54,7 +54,9 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
     $this->wrong_ui_data_for_one_file1 = [
@@ -69,7 +71,9 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
     $this->filename_list_for_add_index_to_double_filenames_input = [
@@ -136,7 +140,9 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
             "option_depends_on_content",
             "option_depends_on_expansion"
           ],
-          "url_flag_data_depends_on_content" => "https://modthesims.info/"
+          "url_flag_data_depends_on_content" => "https://modthesims.info/",
+          "text_shema_long_description" => "A Longer Description",
+          "text_shema_creator" => "Nraas",
         ],
         [
           "path_source" => "\\path\\to\\a\\dir\\def.sims3pack",
@@ -150,7 +156,9 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
             "option_depends_on_content",
             "option_depends_on_expansion"
           ],
-          "url_flag_data_depends_on_content" => "https://modthesims.info/"
+          "url_flag_data_depends_on_content" => "https://modthesims.info/",
+          "text_shema_long_description" => "A Longer Description",
+          "text_shema_creator" => "Nraas",
         ],
         [
           "path_source" => "\\path\\to\\another\\dir\\def.package",
@@ -161,7 +169,9 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
           "select_shema_patch_level" => "1.67",
           "checkbox_shema_flag" => [
             "option_is_essential"
-          ]
+          ],
+          "text_shema_long_description" => "A Longer Description",
+          "text_shema_creator" => "Nraas",
         ]
       ]
     ];
@@ -169,11 +179,11 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
     $this->test_create_filename_list_by_shema_from_ui_data_expected_result = [
       "\\path\\to\\a\\dir" => [
-        "abc.sims3pack" => "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01.sims3pack",
-        "def.sims3pack" => "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__2.sims3pack"
+        "abc.sims3pack" => "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ.sims3pack",
+        "def.sims3pack" => "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ__2.sims3pack"
       ],
       "\\path\\to\\another\\dir" => [
-        "def.package" => "DR__a_little_description__zd5tW__167__12Nov20__V.package"
+        "def.package" => "DR__a_little_description__zd5tW__167__12Nov20__V__q3vcX__f0XFQ.package"
       ]
     ];
 
@@ -181,17 +191,17 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
     $this->test_read_data_from_filename_list_by_shema_input_and_expected_output = [
       "input" => [
         "\\path\\to\\a\\dir" => [
-          "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01.sims3pack",
-          "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__2.sims3pack"
+          "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ.sims3pack",
+          "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ__2.sims3pack"
         ],
         "\\path\\to\\another\\dir" => [
-          "DR__a_little_description__zd5tW__167__12Nov20__V.package"
+          "DR__a_little_description__zd5tW__167__12Nov20__V__q3vcX__f0XFQ.package"
         ]
       ],
       "expected_output" => [
         Ui::ui_data_key_root => [
           [
-            "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01.sims3pack",
+            "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ.sims3pack",
             "select_shema_categorie" => "option_tuning",
             "text_shema_description" => "somtehing to do with this",
             "url_shema_link" => "https://modthesims.info/",
@@ -202,10 +212,12 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
               "option_depends_on_content",
               "option_depends_on_expansion"
             ],
-            "url_flag_data_depends_on_content" => "https://modthesims.info/"
+            "url_flag_data_depends_on_content" => "https://modthesims.info/",
+            "text_shema_long_description" => "A Longer Description",
+            "text_shema_creator" => "Nraas",
           ],
           [
-            "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__2.sims3pack",
+            "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ__2.sims3pack",
             "select_shema_categorie" => "option_tuning",
             "text_shema_description" => "somtehing to do with this",
             "url_shema_link" => "https://modthesims.info/",
@@ -216,10 +228,12 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
               "option_depends_on_content",
               "option_depends_on_expansion"
             ],
-            "url_flag_data_depends_on_content" => "https://modthesims.info/"
+            "url_flag_data_depends_on_content" => "https://modthesims.info/",
+            "text_shema_long_description" => "A Longer Description",
+            "text_shema_creator" => "Nraas",
           ],
           [
-            "path_source" => "\\path\\to\\another\\dir\\DR__a_little_description__zd5tW__167__12Nov20__V.package",
+            "path_source" => "\\path\\to\\another\\dir\\DR__a_little_description__zd5tW__167__12Nov20__V__q3vcX__f0XFQ.package",
             "select_shema_categorie" => "option_default_replacemant",
             "text_shema_description" => "a little description",
             "url_shema_link" => "https://modthesims.info/",
@@ -227,7 +241,9 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
             "select_shema_patch_level" => "1.67",
             "checkbox_shema_flag" => [
               "option_is_essential"
-            ]
+            ],
+            "text_shema_long_description" => "A Longer Description",
+            "text_shema_creator" => "Nraas",
           ]
         ]
       ]
@@ -237,11 +253,11 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
     $this->test_read_data_from_filename_list_by_shema_wrong_data = [
       "\\path\\to\\a\\dir" => [
-        "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01.sims3pack",
-        "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep99__2.sims3pack"
+        "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ.sims3pack",
+        "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep99__q3vcX__f0XFQ__2.sims3pack"
       ],
       "\\path\\to\\another\\dir" => [
-        "DR__a_little_description__zd5tW__167__12Nov20__V.package"
+        "DR__a_little_description__zd5tW__167__12Nov20__V__q3vcX__f0XFQ.package"
       ]
     ];
   }
@@ -249,10 +265,11 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
   public function test_create_filename_by_shema_from_ui_data() : void {
     $filename = Create_Read_Filename_By_Shema::create_filename_by_shema_from_ui_data($this->ui_data_for_one_file1);
+    var_dump($filename);
     assertIsString($filename);
     assertNotEmpty($filename);
     assertTrue(strpos($filename, Create_Read_Filename_By_Shema::filename_shema_seperator) !== false);
-    assertEquals(substr_count($filename, Create_Read_Filename_By_Shema::filename_shema_seperator), 5);
+    assertEquals(substr_count($filename, Create_Read_Filename_By_Shema::filename_shema_seperator), 7);
   }
 
 

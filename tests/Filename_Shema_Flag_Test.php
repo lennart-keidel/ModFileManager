@@ -57,7 +57,9 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/d/526207/more-traits-for-all-ages.html"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/d/526207/more-traits-for-all-ages.html",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
     $this->ui_data2 = [
@@ -72,7 +74,9 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
     $this->ui_data3 = [
@@ -87,7 +91,9 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_overrides",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
     $this->ui_data4 = [
@@ -114,7 +120,9 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
 
@@ -146,7 +154,9 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
 
@@ -163,7 +173,9 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
 
@@ -179,7 +191,9 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_is_e"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
 
@@ -195,7 +209,9 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_packages",
         "option_install_in_packages",
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
 

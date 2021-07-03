@@ -40,7 +40,9 @@ class Search_Shema_Test extends TestCase {
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
     self::$search_input2 = [
@@ -54,7 +56,9 @@ class Search_Shema_Test extends TestCase {
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
     self::$search_input3 = [
@@ -78,7 +82,9 @@ class Search_Shema_Test extends TestCase {
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
     # two data match search_input1 and search_input2

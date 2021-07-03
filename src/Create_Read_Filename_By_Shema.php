@@ -98,9 +98,18 @@ abstract class Create_Read_Filename_By_Shema {
     $filename_splitted_by_shema = explode(self::filename_shema_seperator, $filename);
     $data_from_filename = [];
     foreach(Main::shema_order_global as $shema_index => $shema_name){
-      $shema_class_name = "Filename_Shema_$shema_name";
-      $data_from_filename = $shema_class_name::convert_filename_to_data($filename_splitted_by_shema[$shema_index]);
-      $result = array_merge($result, $data_from_filename);
+      try {
+        # skip if index not existing
+        if(empty($filename_splitted_by_shema[$shema_index])){
+          continue;
+        }
+        $shema_class_name = "Filename_Shema_$shema_name";
+        $data_from_filename = $shema_class_name::convert_filename_to_data($filename_splitted_by_shema[$shema_index]);
+        $result = array_merge($result, $data_from_filename);
+      }
+      catch(Exception $e){
+        return $result;
+      }
     }
 
     return $result;

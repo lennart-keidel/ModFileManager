@@ -36,7 +36,9 @@ class Ui_Failed_Files_Test extends TestCase {
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
     self::$filename_data2 = [
@@ -50,7 +52,9 @@ class Ui_Failed_Files_Test extends TestCase {
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/"
+      "url_flag_data_depends_on_content" => "https://modthesims.info/",
+      "text_shema_long_description" => "A Longer Description",
+      "text_shema_creator" => "Nraas",
     ];
 
     self::$filename_list1 = [

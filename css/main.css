@@ -20,7 +20,7 @@ summary {
   padding-bottom: 0.5em;
   font-weight: bold;
 }
-
+f
 summary:focus {
   outline: none;
 }
@@ -29,17 +29,30 @@ summary:focus {
   padding-top: 0.5em;
 }
 
-
 .container_label_and_input.sub_input {
   padding-left: 2em;
   display: none;
+}
+
+.container_label_and_input > label {
+  display: block;
+}
+
+.container_label_and_input > input[type="checkbox"] + label,
+.container_label_and_input > input[type="radio"] + label {
+  display: inline-block;
+}
+
+.container_label_and_input > input[type="checkbox"],
+.container_label_and_input > input[type="radio"] {
+  display: inline-block;
 }
 
 /* add line break in form element */
 .container_label_and_input > label + input,
 .container_label_and_input > label + select,
 .container_label_and_input > label + textarea {
-  display: block;
+  display: inline-block;
 }
 
 label > .sub {
@@ -87,6 +100,13 @@ label::selection {
   margin-bottom: 1em;
   font-weight: bold;
 }
+
+.search_plus_button {
+  display: inline!important;
+}
+
+
+
 
 #delete_session_button {
   margin-top: 1em;

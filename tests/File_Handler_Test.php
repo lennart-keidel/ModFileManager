@@ -114,7 +114,7 @@ class File_Handler_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 

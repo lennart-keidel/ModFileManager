@@ -52,6 +52,7 @@ abstract class Main {
       self::store_filename_list_from_source_path_in_session($ui_data);
 
       # if search input uploaded
+      var_dump($ui_data);
       self::handle_search_input($ui_data);
 
       # handle uploaded data for files
@@ -245,6 +246,7 @@ abstract class Main {
       }
 
       # check failed filename data
+      var_dump($failed_filename_data);
       if(empty($failed_filename_data[Ui::ui_data_key_root]) === false){
         Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei:");
         self::replace_original_filename_data_from_session_data($failed_filename_data, true);

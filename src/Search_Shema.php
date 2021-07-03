@@ -4,7 +4,7 @@ abstract class Search_Shema {
 
   private static $search_connector = "";
 
-  private static $search_ui_data = [];
+  public static $search_ui_data = [];
 
   private const search_connector_valid_values = [ "or", "and" ];
 
@@ -22,13 +22,23 @@ abstract class Search_Shema {
 
 
   # check if filename data for one file matches search input with search connector
-  public static function check_if_filename_data_for_one_file_matches_search_input(array $filename_data_for_one_input) : bool {
+  public static function check_if_filename_data_for_one_file_matches_search_input(array $filename_data_for_one_input, callable $compare_function = null) : bool {
 
+    # if callable is invalid
+    # set default compare function
+    # checks if the excact value exists in search-target
+    if(is_callable($compare_function) === false || $compare_function === null){
+      $compare_function = function(string $search_for, array $search_in) {
+        return in_array($search_for, $search_in) === true;
+      };
+    }
+
+    # iterate through search-target
     foreach(self::$search_ui_data as $search_key => $search_element){
 
       // if search element is string
       if(is_array($search_element) === false){
-        if(in_array($search_element, $filename_data_for_one_input) === true){
+        if($compare_function($search_element, $filename_data_for_one_input) === true){
           if(self::$search_connector === "or"){
             return true;
           }
@@ -41,7 +51,7 @@ abstract class Search_Shema {
       // if search element is array
       else {
         foreach($search_element as $inner_search_element){
-          if(in_array($inner_search_element, $filename_data_for_one_input[$search_key]) === true){
+          if($compare_function($inner_search_element, $filename_data_for_one_input[$search_key]) === true){
             if(self::$search_connector === "or"){
               return true;
             }
@@ -74,10 +84,15 @@ abstract class Search_Shema {
     }
 
     $result_filtered = array_filter($filename_data[Ui::ui_data_key_root], function($filename_data_for_one_file){
-      return self::check_if_filename_data_for_one_file_matches_search_input($filename_data_for_one_file);
+      return self::check_if_filename_data_for_one_file_matches_search_input($filename_data_for_one_file, self::create_callback_function_based_on_search_input());
     });
 
     return $result_filtered;
+  }
+
+
+  public static function create_callback_function_based_on_search_input() : callable {
+    return function(){return true;};
   }
 
 

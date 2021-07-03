@@ -265,7 +265,6 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
   public function test_create_filename_by_shema_from_ui_data() : void {
     $filename = Create_Read_Filename_By_Shema::create_filename_by_shema_from_ui_data($this->ui_data_for_one_file1);
-    var_dump($filename);
     assertIsString($filename);
     assertNotEmpty($filename);
     assertTrue(strpos($filename, Create_Read_Filename_By_Shema::filename_shema_seperator) !== false);

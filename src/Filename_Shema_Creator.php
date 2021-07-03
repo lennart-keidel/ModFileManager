@@ -26,7 +26,7 @@ abstract class Filename_Shema_Creator implements I_Filename_Shema {
     <div class="container_label_and_input">
       <label for="text_shema_creator%1$d">Name des Erstellers</label>
       <input class="%3$s%1$d" id="text_shema_creator%1$d" type="text" name="%2$s[%1$d][text_shema_creator]" maxlength="'.self::max_creator_length.'">
-      <select class="%3$s%1$d" id="search_operator_shema_creator%1$d" name="%2$s[%1$d][search_operator_shema_creator]" maxlength="'.self::max_creator_length.'">
+      <select class="%3$s_Operator%1$d" id="search_operator_shema_creator%1$d" name="%2$s[%1$d][search_operator_shema_creator]" maxlength="'.self::max_creator_length.'">
         <option value="contains">enthält</option>
         <option value="contains_not">enthält nicht</option>
         <option value="is">ist</option>
@@ -34,7 +34,8 @@ abstract class Filename_Shema_Creator implements I_Filename_Shema {
         <option value="starts_with">startet mit</option>
         <option value="ends_with">endet mit</option>
       </select>
-      <button type="button" class="search_plus_button">+</button>
+      <button type="button" class="search_plus_button" onclick="add_search_input_with_plus_button($(this))">+</button>
+      <button type="button" class="search_minus_button" onclick="remove_search_input_with_minus_button($(this))">-</button>
     </div>
   ';
 

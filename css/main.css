@@ -101,8 +101,9 @@ label::selection {
   font-weight: bold;
 }
 
-.search_plus_button {
-  display: inline!important;
+.search_plus_button,
+.search_minus_button {
+  font-family: monospace;
 }
 
 

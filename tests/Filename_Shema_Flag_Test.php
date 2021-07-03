@@ -34,6 +34,10 @@ class Filename_Shema_Flag_Test extends TestCase {
   protected $wrong_filename2 = "";
   protected $wrong_filename3 = "";
   protected $wrong_filename4 = "";
+  protected $wrong_filename5 = "";
+  protected $wrong_filename6 = "";
+  protected $wrong_filename7 = "";
+  protected $wrong_filename8 = "";
 
   # set up ui data with realistic data
   protected function setUp() : void {
@@ -71,7 +75,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
-        "option_install_in_packages",
+        // "option_install_in_packages",
         "option_is_essential"
       ],
       "url_flag_data_depends_on_content" => "https://modthesims.info/",
@@ -106,7 +110,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       ]
     ];
 
-    # "option_install_in_overrides" and "option_install_in_packages" are selected, which is restricted
+    # "no_flag_option_selected" and any else flag are selected, which is restricted
     $this->wrong_ui_data1 = [
       "select_shema_categorie" => "Tuning",
       "text_shema_description" => "somtehing to do with this",
@@ -117,7 +121,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_depends_on_content",
         "option_depends_on_expansion",
         "option_install_in_overrides",
-        "option_install_in_packages",
+        "no_flag_option_selected",
         "option_is_essential"
       ],
       "url_flag_data_depends_on_content" => "https://modthesims.info/",
@@ -136,7 +140,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
-        "option_install_in_packages",
+        // "option_install_in_packages",
         "option_is_essential"
       ]
     ];
@@ -151,7 +155,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
-        "option_install_in_packages",
+        // "option_install_in_packages",
         "option_is_essential"
       ],
       "url_flag_data_depends_on_content" => "https://modthesims.info/",
@@ -170,7 +174,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
-        "option_install_in_packages",
+        // "option_install_in_packages",
         "option_is_essential"
       ],
       "url_flag_data_depends_on_content" => "https://modthesims.info/",
@@ -188,7 +192,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
-        "option_install_in_packages",
+        // "option_install_in_packages",
         "option_is_e"
       ],
       "url_flag_data_depends_on_content" => "https://modthesims.info/",
@@ -206,8 +210,8 @@ class Filename_Shema_Flag_Test extends TestCase {
       "checkbox_shema_flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
-        "option_install_in_packages",
-        "option_install_in_packages",
+        "option_install_in_overrides",
+        "option_install_in_overrides",
       ],
       "url_flag_data_depends_on_content" => "https://modthesims.info/",
       "text_shema_long_description" => "A Longer Description",
@@ -228,28 +232,28 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
     # empty flag, that only is valid if it's the only flag
-    $this->wrong_filename1 = "P_Dzd5tW_Eep11_I";
+    $this->wrong_filename1 = "Dzd5tW_Eep11_I";
 
     # double flag
     $this->wrong_filename2 = "Esp07_Eep01";
 
     # data for Flag that should have no data
-    $this->wrong_filename3 = "P_Dzd5tW_Eep11_Va";
+    $this->wrong_filename3 = "Dzd5tW_Eep11_Va";
 
     # not existing short link
-    $this->wrong_filename4 = "P_D7qcva_Eep11_V";
+    $this->wrong_filename4 = "D7qcva123asd_Eep11_V";
 
     # not existing expansion id
-    $this->wrong_filename5 = "P_Dzd5tW_Eep99_V";
+    $this->wrong_filename5 = "Dzd5tW_Eep99_V";
 
-    # install in packages and install in overrides, both together are not valid
-    $this->wrong_filename6 = "P_Dzd5tW_Eep01_O_V";
+    # no flag selected and any other flag are not combinable
+    $this->wrong_filename6 = "I_Dzd5tW_Eep01_O_V";
 
     # flag that requires sub data has no data
-    $this->wrong_filename7 = "P_D_Eep07_V";
+    $this->wrong_filename7 = "D_Eep07_V";
 
-    # install in packages and install in overrides, both together are not valid, in different order
-    $this->wrong_filename8 = "O_Dzd5tW_Eep01_P_V";
+    # no flag selected and any other flag are not combinable, but in different order
+    $this->wrong_filename8 = "O_Dzd5tW_Eep01_I_V";
 
   }
 
@@ -478,11 +482,10 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
   public function test_convert_filename_to_data_with_wrong_data1() : void {
-    $this->wrong_filename1 = "P_Dzd5tW_Eep11_I";
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename1);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(3,$data_from_filename);
-    assertCount(3,$data_from_filename[$main_key]);
+    assertCount(2,$data_from_filename[$main_key]);
     assertFalse(in_array("no_flag_option_selected", $data_from_filename[$main_key]));
     $output = $this->getActualOutput();
     assertIsString($output);
@@ -507,7 +510,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $result = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename3);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(3, $result);
-    assertCount(4, $result[$main_key]);
+    assertCount(3, $result[$main_key]);
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEquals("", $output);
@@ -518,7 +521,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename4);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(2, $data_from_filename);
-    assertCount(3, $data_from_filename[current(Filename_Shema_Flag::array_ui_data_key)]);
+    assertCount(2, $data_from_filename[current(Filename_Shema_Flag::array_ui_data_key)]);
     assertFalse(in_array("option_depends_on_content", $data_from_filename[$main_key]));
     $output = $this->getActualOutput();
     assertIsString($output);
@@ -531,7 +534,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename5);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(2, $data_from_filename);
-    assertCount(3, $data_from_filename[current(Filename_Shema_Flag::array_ui_data_key)]);
+    assertCount(2, $data_from_filename[current(Filename_Shema_Flag::array_ui_data_key)]);
     assertFalse(in_array("option_depends_on_expansion", $data_from_filename[$main_key]));
     $output = $this->getActualOutput();
     assertIsString($output);
@@ -541,12 +544,10 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
   public function test_convert_filename_to_data_with_wrong_data6() : void {
-    $this->wrong_filename6 = "P_Dzd5tW_Eep01_O_V";
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename6);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(3, $data_from_filename);
     assertCount(4, $data_from_filename[$main_key]);
-    assertFalse(in_array("option_install_in_overrides", $data_from_filename[$main_key]));
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEquals("", $output);
@@ -558,7 +559,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename7);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(2, $data_from_filename);
-    assertCount(3, $data_from_filename[$main_key]);
+    assertCount(2, $data_from_filename[$main_key]);
     assertFalse(in_array("option_depends_on_content", $data_from_filename[$main_key]));
     assertFalse(in_array("url_flag_data_depends_on_content", $data_from_filename));
     $output = $this->getActualOutput();
@@ -570,10 +571,10 @@ class Filename_Shema_Flag_Test extends TestCase {
 
   public function test_convert_filename_to_data_with_wrong_data8() : void {
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename8);
+    var_dump($data_from_filename);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(3, $data_from_filename);
     assertCount(4, $data_from_filename[$main_key]);
-    assertFalse(in_array("option_install_in_overrides", $data_from_filename[$main_key]));
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEquals("", $output);

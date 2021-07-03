@@ -11,7 +11,7 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
   # array of valid flag options
   private const array_ui_data_option_valid = [
     "option_install_in_overrides",
-    "option_install_in_packages",
+    // "option_install_in_packages",
     "option_depends_on_content",
     "option_depends_on_expansion",
     "option_is_essential"
@@ -24,7 +24,7 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
   # short id for each valid flag-option
   public const array_option_short_id = [
     "option_install_in_overrides" => "O",
-    "option_install_in_packages" => "P",
+    // "option_install_in_packages" => "P",
     "option_depends_on_content" => "D",
     "option_depends_on_expansion" => "E",
     "option_is_essential" => "V",
@@ -34,12 +34,12 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
   # array of invalid combinations of values from ui-data-key-array
   # format: option-value => option-value to not combine with
   private const array_ui_data_option_not_combineable = [
-    "option_install_in_overrides" => [
-      "option_install_in_packages"
-    ],
+    // "option_install_in_overrides" => [
+    //   "option_install_in_packages"
+    // ],
     "no_flag_option_selected" => [
       "option_install_in_overrides",
-      "option_install_in_packages",
+      // "option_install_in_packages",
       "option_depends_on_content",
       "option_depends_on_expansion",
       "option_is_essential"
@@ -71,12 +71,12 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
     <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
     <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
   </div>
-
-  <div class="container_label_and_input">
-    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_packages%1$d" value="option_install_in_packages">
-    <label for="option_install_in_packages%1$d">muss in Packages-Ordner installiert werden</label>
-  </div>
-
+  '.
+  // <div class="container_label_and_input">
+  //   <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_packages%1$d" value="option_install_in_packages">
+  //   <label for="option_install_in_packages%1$d">muss in Packages-Ordner installiert werden</label>
+  // </div>
+  '
   <div class="container_label_and_input">
     <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_depends_on_content%1$d" value="option_depends_on_content" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\', \'option_depends_on_content%1$d\')">
     <label for="option_depends_on_content%1$d">abhängig von anderem Mod, CC, Store oder ähnlichem</label>
@@ -258,11 +258,11 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
   }
 
   # convert data to file for install in packages flag option
-  private static function convert_data_to_filename_option_install_in_packages(array $data, string $option_key) : string {
-    $result = "";
-    $result .= self::array_option_short_id[$option_key];
-    return $result;
-  }
+  // private static function convert_data_to_filename_option_install_in_packages(array $data, string $option_key) : string {
+  //   $result = "";
+  //   $result .= self::array_option_short_id[$option_key];
+  //   return $result;
+  // }
 
   # convert data to file for depends on content flag option
   private static function convert_data_to_filename_option_depends_on_content(array $data, string $option_key) : string {
@@ -405,9 +405,9 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
   }
 
 
-  private static function convert_filename_to_data_option_install_in_packages(string $filename_part, array &$array_result) : bool {
-    return true;
-  }
+  // private static function convert_filename_to_data_option_install_in_packages(string $filename_part, array &$array_result) : bool {
+  //   return true;
+  // }
 
 
   private static function convert_filename_to_data_option_depends_on_content(string $filename_part, array &$array_result) : bool {

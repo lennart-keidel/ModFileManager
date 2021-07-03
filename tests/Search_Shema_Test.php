@@ -95,7 +95,6 @@ class Search_Shema_Test extends TestCase {
       "date_shema_installation_date" => "2020-10-29",
       "select_flag_data_depends_on_expansion" => "ep09",
       "checkbox_shema_flag" => [
-        "option_install_in_packages",
         "option_is_essential"
       ]
     ];
@@ -108,7 +107,6 @@ class Search_Shema_Test extends TestCase {
       "date_shema_installation_date" => "2020-11-12",
       "select_flag_data_depends_on_expansion" => "ep01",
       "checkbox_shema_flag" => [
-        "option_install_in_packages",
         "option_is_essential"
       ]
     ];
@@ -121,7 +119,6 @@ class Search_Shema_Test extends TestCase {
       "date_shema_installation_date" => "2020-11-12",
       "select_flag_data_depends_on_expansion" => "ep11",
       "checkbox_shema_flag" => [
-        "option_install_in_packages",
         "option_is_essential"
       ]
     ];

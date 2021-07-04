@@ -6,8 +6,6 @@ abstract class Filename_Shema_Creator implements I_Filename_Shema {
     "text_shema_creator"
   ];
 
-  public const array_ui_data_search_operator_key = "search_operator_shema_creator";
-
   # max amount of character the discription can contain
   private const max_creator_length = 48000;
 
@@ -23,10 +21,9 @@ abstract class Filename_Shema_Creator implements I_Filename_Shema {
 
   # input shema template for ui
   private const search_input_shema_template = '
-    <div class="container_label_and_input">
+    <div class="container_label_and_input additional_input_root">
       <label for="text_shema_creator%1$d">Name des Erstellers</label>
-      <input class="%3$s%1$d" id="text_shema_creator%1$d" type="text" name="%2$s[%1$d][text_shema_creator]" maxlength="'.self::max_creator_length.'">
-      <select class="%3$s_Operator%1$d" id="search_operator_shema_creator%1$d" name="%2$s[%1$d][search_operator_shema_creator]" maxlength="'.self::max_creator_length.'">
+      <select class="%3$s_operand%1$d %3$s%1$d" id="text_shema_creator%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.'][text_shema_creator][]" maxlength="'.self::max_creator_length.'">
         <option value="contains">enthält</option>
         <option value="contains_not">enthält nicht</option>
         <option value="is">ist</option>
@@ -34,8 +31,9 @@ abstract class Filename_Shema_Creator implements I_Filename_Shema {
         <option value="starts_with">startet mit</option>
         <option value="ends_with">endet mit</option>
       </select>
-      <button type="button" class="search_plus_button" onclick="add_search_input_with_plus_button($(this))">+</button>
-      <button type="button" class="search_minus_button" onclick="remove_search_input_with_minus_button($(this))">-</button>
+      <input class="%3$s_value%1$d %3$s%1$d" id="text_shema_creator%1$d" type="text" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.'][text_shema_creator][]" maxlength="'.self::max_creator_length.'">
+      <button type="button" class="%3$s%1$d search_plus_button" onclick="add_search_input_with_plus_button($(this))">+</button>
+      <button type="button" class="%3$s%1$d search_minus_button" onclick="remove_search_input_with_minus_button($(this))">-</button>
     </div>
   ';
 
@@ -108,6 +106,10 @@ abstract class Filename_Shema_Creator implements I_Filename_Shema {
   # print filename shema search input to ui
   public static function print_filename_shema_search_input_for_ui(int $index) : void {
     printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, Filename_Shema_Creator::class);
+  }
+
+  public static function compare(string $search_input, string $compare_to, string $operand) : bool {
+    return $search_input === $compare_to;
   }
 
 }

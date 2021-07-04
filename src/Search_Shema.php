@@ -4,7 +4,8 @@ abstract class Search_Shema {
 
   private static $search_connector = "";
 
-  public static $search_ui_data = [];
+  private static $search_values = [];
+  private static $search_operands = [];
 
   private const search_connector_valid_values = [ "or", "and" ];
 
@@ -13,11 +14,10 @@ abstract class Search_Shema {
 
 
   # set search connector, remove search connector element from search ui data, set search ui data
-  public static function set_search_ui_data(array $search_ui_data) : void {
-    self::$search_connector = $search_ui_data[self::ui_key_search_connector];
-    unset($search_ui_data[self::ui_key_search_connector]);
-    unset($search_ui_data[Ui::ui_key_enable_search_shema]);
-    self::$search_ui_data = $search_ui_data;
+  public static function set_search_ui_data(array $ui_data) : void {
+    self::$search_connector = $ui_data[self::ui_key_search_connector];
+    self::$search_values = $ui_data[Ui::ui_search_data_key_value_root];
+    self::$search_operands = $ui_data[Ui::ui_search_data_key_operand_root];
   }
 
 
@@ -28,17 +28,18 @@ abstract class Search_Shema {
     # set default compare function
     # checks if the excact value exists in search-target
     if(is_callable($compare_function) === false || $compare_function === null){
-      $compare_function = function(string $search_for, array $search_in) {
-        return in_array($search_for, $search_in) === true;
+      $compare_function = function(string $search_for, array $search_in, string $search_key) : bool {
+        return $search_for === $search_in[$search_key];
       };
     }
 
     # iterate through search-target
-    foreach(self::$search_ui_data as $search_key => $search_element){
+    foreach(self::$search_values as $search_key => $search_element){
 
       // if search element is string
+      // var_dump(self::$search_values, $filename_data_for_one_input);
       if(is_array($search_element) === false){
-        if($compare_function($search_element, $filename_data_for_one_input) === true){
+        if(array_key_exists($search_key, $filename_data_for_one_input) && $compare_function($search_element, $filename_data_for_one_input[$search_key]) === true){
           if(self::$search_connector === "or"){
             return true;
           }
@@ -51,7 +52,7 @@ abstract class Search_Shema {
       // if search element is array
       else {
         foreach($search_element as $inner_search_element){
-          if($compare_function($inner_search_element, $filename_data_for_one_input[$search_key]) === true){
+          if(array_key_exists($search_key, $filename_data_for_one_input) && $compare_function($inner_search_element, $filename_data_for_one_input, $search_key) === true){
             if(self::$search_connector === "or"){
               return true;
             }
@@ -79,21 +80,24 @@ abstract class Search_Shema {
       throw new Ui_Exception("Fehler beim Filtern der ausgelesenen Daten. Der übermittelte Such-Verbindung ist nicht valide. Such-Verbindung: ".self::$search_connector);
     }
 
-    if(empty(self::$search_ui_data) === true || empty($filename_data) === true){
+    if(empty(self::$search_values) === true || empty($filename_data) === true){
       throw new Ui_Exception("Fehler beim Filtern der ausgelesenen Daten. Es wurden keine zu suchenden Daten übermittelt.");
     }
 
     $result_filtered = array_filter($filename_data[Ui::ui_data_key_root], function($filename_data_for_one_file){
-      return self::check_if_filename_data_for_one_file_matches_search_input($filename_data_for_one_file, self::create_callback_function_based_on_search_input());
+      // return self::check_if_filename_data_for_one_file_matches_search_input($filename_data_for_one_file, self::create_callback_function_based_on_search_input());
+      return self::check_if_filename_data_for_one_file_matches_search_input($filename_data_for_one_file);
     });
 
     return $result_filtered;
   }
 
 
-  public static function create_callback_function_based_on_search_input() : callable {
-    return function(){return true;};
-  }
+  // public static function create_callback_function_based_on_search_input() : callable {
+  //   return function() : bool {
+  //     return true;
+  //   };
+  // }
 
 
   # check search connector value

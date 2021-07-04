@@ -135,7 +135,7 @@ function copyToClipboard(element) {
 
 // add additional search input onclick on plus button
 function add_search_input_with_plus_button(element){
-  var parent = element.closest('div')
+  var parent = element.closest('.additional_input_root')
   var parent_clone = parent.clone();
   // var checkbox = parent.siblings('input[type=checkbox]:first');
   // var checkbox_clone = checkbox.clone();
@@ -145,9 +145,9 @@ function add_search_input_with_plus_button(element){
 
 // remove additional search input onclick on minus button
 function remove_search_input_with_minus_button(element){
-  class_name = element.siblings('input:first').attr('class');
+  class_name = element.siblings('input:first').attr('class').split(/\s+/)[0];
   if($('.'+class_name).length > 1){
-    var parent = element.closest('div');
+    var parent = element.closest('.additional_input_root');
     parent.remove();
     // var checkbox = parent.siblings('input[type=checkbox]:first');
     // var checkbox_clone = checkbox.clone();

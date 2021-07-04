@@ -12,6 +12,12 @@ abstract class Ui {
   # ui data root key for search input
   public const ui_search_data_key_root = "search";
 
+  # ui data root key for values to search for
+  public const ui_search_data_key_value_root = "value";
+
+  # ui data root key for operands to search with
+  public const ui_search_data_key_operand_root = "operand";
+
   # ui data root key for source path input
   public const ui_source_input_key_root = "source";
 

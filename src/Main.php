@@ -246,7 +246,6 @@ abstract class Main {
       }
 
       # check failed filename data
-      var_dump($failed_filename_data);
       if(empty($failed_filename_data[Ui::ui_data_key_root]) === false){
         Ui::print_error_heading("Fehler bei den eingegebenen Daten zu einer Datei:");
         self::replace_original_filename_data_from_session_data($failed_filename_data, true);

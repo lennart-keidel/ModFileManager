@@ -31,7 +31,7 @@ function fill_input_shema_with_filename_data_list(filename_data_list) {
       if (typeof filename_data[key] == 'object') {
         for (inner_key in filename_data[key]) {
           id = filename_data[key][inner_key];
-          if(key == "checkbox_shema_flag"){
+          if(key == "Filename_Shema_Flag"){
             id += index;
           }
           value = filename_data[key][inner_key];

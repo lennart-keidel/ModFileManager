@@ -1,9 +1,9 @@
 <?php
 
-abstract class Filename_Shema_Long_Description implements I_Filename_Shema {
+abstract class Filename_Shema_Long_Description extends Compareable_Text_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
-    "text_shema_long_description"
+    self::class
   ];
 
   # max amount of character the discription can contain
@@ -14,8 +14,8 @@ abstract class Filename_Shema_Long_Description implements I_Filename_Shema {
   # input shema template for ui
   private const input_shema_template = '
     <div class="container_label_and_input">
-      <label for="text_shema_long_description%1$d">Weitere Informationen</label>
-      <textarea class="%3$s%1$d" id="text_shema_long_description%1$d" name="%2$s[%1$d][text_shema_long_description]" maxlength="'.self::max_long_description_length.'" cols="40" rows="3"></textarea>
+      <label for="Filename_Shema_Long_Description%1$d">Weitere Informationen</label>
+      <textarea class="%3$s%1$d" id="Filename_Shema_Long_Description%1$d" name="%2$s[%1$d][Filename_Shema_Long_Description]" maxlength="'.self::max_long_description_length.'" cols="40" rows="3"></textarea>
     </div>
   ';
 
@@ -35,7 +35,6 @@ abstract class Filename_Shema_Long_Description implements I_Filename_Shema {
       $data_from_ui[$key]
     ];
   }
-
 
   # convert data to filename part using this shema
   public static function convert_data_to_filename(array $data_converted) : string {

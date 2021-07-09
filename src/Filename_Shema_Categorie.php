@@ -1,9 +1,9 @@
 <?php
 
-abstract class Filename_Shema_Categorie implements I_Filename_Shema {
+abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
-    "select_shema_categorie"
+    self::class
   ];
 
   # format-string to use with printf to print in ui
@@ -31,8 +31,8 @@ abstract class Filename_Shema_Categorie implements I_Filename_Shema {
   # input shema template for ui
   private const input_shema_template = '
     <div class="container_label_and_input">
-      <label for="select_shema_categorie%1$d">Kategorie</label>
-      <select class="%3$s%1$d" id="select_shema_categorie%1$d" name="%2$s[%1$d][select_shema_categorie]" required>
+      <label for="Filename_Shema_Categorie%1$d">Kategorie</label>
+      <select class="%3$s%1$d" id="Filename_Shema_Categorie%1$d" name="%2$s[%1$d][Filename_Shema_Categorie]" required>
         <option value="" selected disabled>Auswählen</option>
         <optgroup label="CC">
           <option value="option_cc_buy">Custom Content Objekt für Kaufmodus</option>

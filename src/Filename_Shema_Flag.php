@@ -2,10 +2,10 @@
 
 use PHPUnit\Framework\Constraint\ExceptionMessageRegularExpression;
 
-abstract class Filename_Shema_Flag implements I_Filename_Shema {
+abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
-    "checkbox_shema_flag"
+    self::class
   ];
 
   # array of valid flag options
@@ -68,17 +68,17 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
   private const input_shema_template = '
   <span class="toggle_rowbreak"></span>
   <div class="container_label_and_input">
-    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][Filename_Shema_Flag][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
     <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
   </div>
   '.
   // <div class="container_label_and_input">
-  //   <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_install_in_packages%1$d" value="option_install_in_packages">
+  //   <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][Filename_Shema_Flag][]" id="option_install_in_packages%1$d" value="option_install_in_packages">
   //   <label for="option_install_in_packages%1$d">muss in Packages-Ordner installiert werden</label>
   // </div>
   '
   <div class="container_label_and_input">
-    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_depends_on_content%1$d" value="option_depends_on_content" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\', \'option_depends_on_content%1$d\')">
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][Filename_Shema_Flag][]" id="option_depends_on_content%1$d" value="option_depends_on_content" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\', \'option_depends_on_content%1$d\')">
     <label for="option_depends_on_content%1$d">abhängig von anderem Mod, CC, Store oder ähnlichem</label>
     <script>
       document.addEventListener("DOMContentLoaded", function(){
@@ -95,7 +95,7 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
   </div>
 
   <div class="container_label_and_input">
-    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][checkbox_shema_flag][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\', \'option_depends_on_expansion%1$d\')">
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d][Filename_Shema_Flag][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\', \'option_depends_on_expansion%1$d\')">
     <label for="option_depends_on_expansion%1$d">abhängig von Erweiterungspack oder Accessoirepack</label>
     <script>
       document.addEventListener("DOMContentLoaded", function(){
@@ -138,7 +138,7 @@ abstract class Filename_Shema_Flag implements I_Filename_Shema {
   </div>
 
   <div class="container_label_and_input">
-    <input type="checkbox" name="%2$s[%1$d][checkbox_shema_flag][]" class="%3$s%1$d" id="option_is_essential%1$d" value="option_is_essential">
+    <input type="checkbox" name="%2$s[%1$d][Filename_Shema_Flag][]" class="%3$s%1$d" id="option_is_essential%1$d" value="option_is_essential">
     <label for="option_is_essential%1$d">gehört zu den absolut wichtigsten Mods/CC, die immer installiert sein sollen</label>
   </div>
   ';

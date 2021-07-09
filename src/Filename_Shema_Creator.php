@@ -1,9 +1,9 @@
 <?php
 
-abstract class Filename_Shema_Creator implements I_Filename_Shema {
+abstract class Filename_Shema_Creator extends Compareable_Text_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
-    "text_shema_creator"
+    self::class
   ];
 
   # max amount of character the discription can contain
@@ -14,26 +14,20 @@ abstract class Filename_Shema_Creator implements I_Filename_Shema {
   # input shema template for ui
   private const input_shema_template = '
     <div class="container_label_and_input">
-      <label for="text_shema_creator%1$d">Name des Erstellers</label>
-      <input class="%3$s%1$d" id="text_shema_creator%1$d" type="text" name="%2$s[%1$d][text_shema_creator]" maxlength="'.self::max_creator_length.'">
+      <label for="'.self::class.'%1$d">Name des Erstellers</label>
+      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.self::class.']" maxlength="'.self::max_creator_length.'">
     </div>
   ';
 
   # input shema template for ui
   private const search_input_shema_template = '
     <div class="container_label_and_input additional_input_root">
-      <label for="text_shema_creator%1$d">Name des Erstellers</label>
-      <select class="%3$s_operand%1$d %3$s%1$d" id="text_shema_creator%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.'][text_shema_creator][]" maxlength="'.self::max_creator_length.'">
-        <option value="contains">enthält</option>
-        <option value="contains_not">enthält nicht</option>
-        <option value="is">ist</option>
-        <option value="is_not">ist nicht</option>
-        <option value="starts_with">startet mit</option>
-        <option value="ends_with">endet mit</option>
+      <label for="'.self::class.'%1$d">Name des Erstellers</label>
+      <select class="%3$s_operand%1$d %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+        %4$s
       </select>
-      <input class="%3$s_value%1$d %3$s%1$d" id="text_shema_creator%1$d" type="text" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.'][text_shema_creator][]" maxlength="'.self::max_creator_length.'">
-      <button type="button" class="%3$s%1$d search_plus_button" onclick="add_search_input_with_plus_button($(this))">+</button>
-      <button type="button" class="%3$s%1$d search_minus_button" onclick="remove_search_input_with_minus_button($(this))">-</button>
+      <input class="%3$s_value%1$d %3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" maxlength="'.self::max_creator_length.'">
+      %5$s
     </div>
   ';
 
@@ -42,8 +36,9 @@ abstract class Filename_Shema_Creator implements I_Filename_Shema {
 
   # convert data collected from ui to usable data for following process
   public static function convert_ui_data_to_data(array $data_from_ui) : array {
+
     # filter data for this schema from whole ui data
-    $key = current(Filename_Shema_Creator::array_ui_data_key);
+    $key = current(self::array_ui_data_key);
 
     if(!isset($data_from_ui[$key])){
       throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST-Request: '$key'");
@@ -59,8 +54,8 @@ abstract class Filename_Shema_Creator implements I_Filename_Shema {
   public static function convert_data_to_filename(array $data_converted) : string {
     $string_creator = current($data_converted);
 
-    if(strlen($string_creator) > Filename_Shema_Creator::max_creator_length){
-      throw new Shema_Exception("Fehler beim Einlesen der Daten. Die eingegebene Beschreibung ist länger als die maximal erlaubten ".Filename_Shema_Creator::max_creator_length." Zeichen.");
+    if(strlen($string_creator) > self::max_creator_length){
+      throw new Shema_Exception("Fehler beim Einlesen der Daten. Die eingegebene Beschreibung ist länger als die maximal erlaubten ".self::max_creator_length." Zeichen.");
     }
 
     # if creator input is empty
@@ -86,30 +81,28 @@ abstract class Filename_Shema_Creator implements I_Filename_Shema {
     }
 
     # return array in format of original ui data
-    return [ current(Filename_Shema_Creator::array_ui_data_key) => $expanded_text ];
+    return [ current(self::array_ui_data_key) => $expanded_text ];
   }
 
 
   # print converted data from filename to ui
   public static function print_filename_data_for_ui(array $filename_data) : void {
     # print data from filename to ui by formated string
-    printf(Filename_Shema_Creator::string_ui_format, current($filename_data));
+    printf(self::string_ui_format, current($filename_data));
   }
 
 
   # print filename shema input to ui
   public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root, Filename_Shema_Creator::class);
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class);
   }
 
 
   # print filename shema search input to ui
   public static function print_filename_shema_search_input_for_ui(int $index) : void {
-    printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, Filename_Shema_Creator::class);
-  }
-
-  public static function compare(string $search_input, string $compare_to, string $operand) : bool {
-    return $search_input === $compare_to;
+    $operand_select_option_html = Ui::generate_search_operand_select_options_ui(self::class);
+    $additional_search_buttons = Ui::generate_additional_search_buttons_ui(self::class);
+    printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $additional_search_buttons);
   }
 
 }

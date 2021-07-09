@@ -3,7 +3,7 @@
 abstract class Filename_Shema_Installation_Date implements I_Filename_Shema {
 
   public const array_ui_data_key = [
-    "date_shema_installation_date"
+    self::class
   ];
 
   # format-string to use with printf to print in ui
@@ -12,8 +12,8 @@ abstract class Filename_Shema_Installation_Date implements I_Filename_Shema {
   # input shema template for ui
   private const input_shema_template = '
     <div class="container_label_and_input">
-      <label for="date_shema_installation_date%1$d">Installationsdatum</label>
-      <input class="%4$s%1$d" id="date_shema_installation_date%1$d" type="date" name="%2$s[%1$d][date_shema_installation_date]" value="%3$s" required>
+      <label for="Filename_Shema_Installation_Date%1$d">Installationsdatum</label>
+      <input class="%4$s%1$d" id="Filename_Shema_Installation_Date%1$d" type="date" name="%2$s[%1$d][Filename_Shema_Installation_Date]" value="%3$s" required>
     </div>
   ';
 

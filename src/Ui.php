@@ -12,6 +12,8 @@ abstract class Ui {
   # ui data root key for search input
   public const ui_search_data_key_root = "search";
 
+  public const ui_search_index = 1000000;
+
   # ui data root key for values to search for
   public const ui_search_data_key_value_root = "value";
 
@@ -80,7 +82,7 @@ abstract class Ui {
 
   private const search_disable_input_template = '
   <script>window.addEventListener("load", function () {disable_input_by_class_name_if_source_element_is_not_checked("'.self::ui_key_enable_search_shema.'%1$d", "%2$s%3$d");});</script>
-  <input type="checkbox" name="search[1000000]['.self::ui_key_enable_search_shema.'][]" value="'.self::ui_key_enable_search_shema.'%1$d" class="'.self::ui_key_enable_search_shema.'" id="'.self::ui_key_enable_search_shema.'%1$d" onclick="disable_input_by_class_name_if_source_element_is_not_checked(\''.self::ui_key_enable_search_shema.'%1$d\', \'%2$s%3$d\')">
+  <input type="checkbox" name="search['.self::ui_search_index.']['.self::ui_key_enable_search_shema.'][]" value="'.self::ui_key_enable_search_shema.'%1$d" class="'.self::ui_key_enable_search_shema.'" id="'.self::ui_key_enable_search_shema.'%1$d" onclick="disable_input_by_class_name_if_source_element_is_not_checked(\''.self::ui_key_enable_search_shema.'%1$d\', \'%2$s%3$d\')">
   ';
 
   # html template for begin/end of shema input container
@@ -158,6 +160,16 @@ abstract class Ui {
   private const template_success_heading = '
   <h2 class="success_heading">%1$s</h2>
   ';
+
+  # templpate for search operand select option input
+  private const search_operand_select_option_template = '<option value="%1$s">%2$s</option>\n';
+
+  # template for buttons to add additional search input
+  private const search_add_additional_input_buttons_template = '<button type="button" class="%2$s%1$d search_plus_button" onclick="add_search_input_with_plus_button($(this))">+</button>'."\n";
+
+  # template for buttons to remove additional search input
+  private const search_remove_additional_input_buttons_template = '<button type="button" class="%2$s%1$d search_minus_button" onclick="remove_search_input_with_minus_button($(this))">-</button>'."\n";
+
 
   public static $out_input_shema_index = 0;
 
@@ -252,14 +264,13 @@ abstract class Ui {
 
   # print shema search input
   public static function print_filename_shema_search_input() : void {
-    $index = 1000000;
     printf(self::template_shema_search_input_form_begin,"");
-    printf(self::search_connector_input_template, $index, self::ui_search_data_key_root);
+    printf(self::search_connector_input_template, self::ui_search_index, self::ui_search_data_key_root);
     foreach(Main::ui_shema_order_global as $class_id){
       echo "<div class='container_search_disable'>";
       $class_name = "Filename_Shema_$class_id";
-      printf(self::search_disable_input_template, self::$out_individual_index++, $class_name, $index);
-      $class_name::print_filename_shema_search_input_for_ui($index);
+      printf(self::search_disable_input_template, self::$out_individual_index++, $class_name, self::ui_search_index);
+      $class_name::print_filename_shema_search_input_for_ui(self::ui_search_index);
       echo "</div>";
     }
     printf(self::template_shema_search_submit_button, "");
@@ -308,6 +319,26 @@ abstract class Ui {
     if(!empty($message) && in_array($class_name, self::$dont_print_errors_from_this_exceptions) === false){
       printf(self::template_error_message, $message);
     }
+  }
+
+  # generate search operand select option for ui
+  # returns the html code
+  # does not print the html code
+  public static function generate_search_operand_select_options_ui(string $class_reference) : string {
+    $result = "";
+    foreach($class_reference::get_search_operand() as $key_operand => $fe_operand){
+      $result .= sprintf(self::search_operand_select_option_template, $key_operand, $fe_operand["text"]);
+    }
+    return $result;
+  }
+
+  # generate buttons for additional search inputs for ui
+  # returns html code
+  # does not print the html code
+  public static function generate_additional_search_buttons_ui(string $class_reference) : string {
+    $result = sprintf(self::search_add_additional_input_buttons_template, self::ui_search_index, $class_reference);
+    $result .= sprintf(self::search_remove_additional_input_buttons_template, self::ui_search_index, $class_reference);
+    return $result;
   }
 
 }

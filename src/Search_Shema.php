@@ -4,8 +4,8 @@ abstract class Search_Shema {
 
   private static $search_connector = "";
 
-  private static $search_values = [];
-  private static $search_operands = [];
+  private static $search_value_array = [];
+  private static $search_operand_array = [];
 
   private const search_connector_valid_values = [ "or", "and" ];
 
@@ -16,30 +16,29 @@ abstract class Search_Shema {
   # set search connector, remove search connector element from search ui data, set search ui data
   public static function set_search_ui_data(array $ui_data) : void {
     self::$search_connector = $ui_data[self::ui_key_search_connector];
-    self::$search_values = $ui_data[Ui::ui_search_data_key_value_root];
-    self::$search_operands = $ui_data[Ui::ui_search_data_key_operand_root];
+    self::$search_value_array = $ui_data[Ui::ui_search_data_key_value_root];
+    self::$search_operand_array = $ui_data[Ui::ui_search_data_key_operand_root];
   }
 
 
-  # check if filename data for one file matches search input with search connector
-  public static function check_if_filename_data_for_one_file_matches_search_input(array $filename_data_for_one_input, callable $compare_function = null) : bool {
+  # call callback function stored in shema class
+  # compare two values in the context of the selected operand
+  private static function search_compare(string $search_input_value, string $search_input_operand, string $value_to_compare, string $class_reference) : bool {
+    $operand_array = $class_reference::get_search_operand();
+    return $operand_array[$search_input_operand]["callable"]($search_input_value,$value_to_compare);
+  }
 
-    # if callable is invalid
-    # set default compare function
-    # checks if the excact value exists in search-target
-    if(is_callable($compare_function) === false || $compare_function === null){
-      $compare_function = function(string $search_for, array $search_in, string $search_key) : bool {
-        return $search_for === $search_in[$search_key];
-      };
-    }
+  # check if filename data for one file matches search input with search connector
+  public static function check_if_filename_data_for_one_file_matches_search_input(array $filename_data_for_one_input) : bool {
+
+    var_dump(self::$search_value_array, $filename_data_for_one_input);
 
     # iterate through search-target
-    foreach(self::$search_values as $search_key => $search_element){
-
-      // if search element is string
-      // var_dump(self::$search_values, $filename_data_for_one_input);
-      if(is_array($search_element) === false){
-        if(array_key_exists($search_key, $filename_data_for_one_input) && $compare_function($search_element, $filename_data_for_one_input[$search_key]) === true){
+    foreach(self::$search_value_array as $search_ui_key => $search_value_array_for_this_key){
+      foreach($search_value_array_for_this_key as $index => $search_value){
+        $search_operand = self::$search_operand_array[$search_ui_key][$index];
+        $value_to_compare = array_key_exists($search_ui_key, $filename_data_for_one_input) === true ? $filename_data_for_one_input[$search_ui_key] : "";
+        if(self::search_compare($search_value, $search_operand, $value_to_compare, $search_ui_key) === true){
           if(self::$search_connector === "or"){
             return true;
           }
@@ -48,21 +47,8 @@ abstract class Search_Shema {
           return false;
         }
       }
-
-      // if search element is array
-      else {
-        foreach($search_element as $inner_search_element){
-          if(array_key_exists($search_key, $filename_data_for_one_input) && $compare_function($inner_search_element, $filename_data_for_one_input, $search_key) === true){
-            if(self::$search_connector === "or"){
-              return true;
-            }
-          }
-          elseif(self::$search_connector === "and") {
-            return false;
-          }
-        }
-      }
     }
+
     if(self::$search_connector === "or"){
       return false;
     }
@@ -80,7 +66,7 @@ abstract class Search_Shema {
       throw new Ui_Exception("Fehler beim Filtern der ausgelesenen Daten. Der übermittelte Such-Verbindung ist nicht valide. Such-Verbindung: ".self::$search_connector);
     }
 
-    if(empty(self::$search_values) === true || empty($filename_data) === true){
+    if(empty(self::$search_value_array) === true || empty($filename_data) === true){
       throw new Ui_Exception("Fehler beim Filtern der ausgelesenen Daten. Es wurden keine zu suchenden Daten übermittelt.");
     }
 

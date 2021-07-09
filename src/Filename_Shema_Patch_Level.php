@@ -1,9 +1,9 @@
 <?php
 
-abstract class Filename_Shema_Patch_Level implements I_Filename_Shema {
+abstract class Filename_Shema_Patch_Level extends Compareable_Is_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
-    "select_shema_patch_level"
+    self::class
   ];
 
   # format-string to use with printf to print in ui
@@ -12,8 +12,8 @@ abstract class Filename_Shema_Patch_Level implements I_Filename_Shema {
     # input shema template for ui
     private const input_shema_template = '
     <div class="container_label_and_input">
-      <label for="select_shema_patch_level%1$d">Patch-Level</label>
-      <select class="%3$s%1$d" id="select_shema_patch_level%1$d" name="%2$s[%1$d][select_shema_patch_level]" required>
+      <label for="Filename_Shema_Patch_Level%1$d">Patch-Level</label>
+      <select class="%3$s%1$d" id="Filename_Shema_Patch_Level%1$d" name="%2$s[%1$d][Filename_Shema_Patch_Level]" required>
         <option value="1.70">1.70</option>
         <option value="1.69" selected>1.69</option>
         <option value="1.67">1.67</option>

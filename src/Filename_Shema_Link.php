@@ -20,7 +20,7 @@ abstract class Filename_Shema_Link extends Compareable_Is_Operand implements I_F
     </div>
   ';
 
-  # input shema template for ui
+  # input shema template for search ui
   private const search_input_shema_template = '
     <div class="container_label_and_input additional_input_root">
       <label for="'.self::class.'%1$d">Link zum Mod, CC</label>

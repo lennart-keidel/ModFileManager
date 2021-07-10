@@ -104,8 +104,17 @@ label::selection {
 .search_plus_button,
 .search_minus_button {
   font-family: monospace;
+  opacity: 0;
 }
 
+.container_label_and_input:hover .search_plus_button:not([disabled]),
+.container_label_and_input:hover .search_minus_button:not([disabled]) {
+  opacity: 1;
+}
+
+.special_vertical_align {
+  vertical-align: -40%;
+}
 
 
 

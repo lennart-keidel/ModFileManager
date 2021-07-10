@@ -12,10 +12,24 @@ abstract class Filename_Shema_Description extends Compareable_Text_Operand imple
   # input shema template for ui
   private const input_shema_template = '
     <div class="container_label_and_input">
-      <label for="Filename_Shema_Description%1$d">Beschreibung
+      <label for="'.self::class.'%1$d">Beschreibung
         <span class="sub">max. '.self::max_description_length.' Zeichen; Sonderzeichen werden ersetzt</span>
       </label>
-      <input class="%3$s%1$d" id="Filename_Shema_Description%1$d" type="text" name="%2$s[%1$d][Filename_Shema_Description]" required>
+      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.self::class.']" required>
+    </div>
+  ';
+
+  # input shema template for search ui
+  private const search_input_shema_template = '
+    <div class="container_label_and_input additional_input_root">
+      <label for="'.self::class.'%1$d">Beschreibung
+        <span class="sub">max. '.self::max_description_length.' Zeichen; Sonderzeichen werden ersetzt</span>
+      </label>
+      <select class="%3$s_operand%1$d %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+        %4$s
+      </select>
+      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" required>
+      %5$s
     </div>
   ';
 
@@ -50,7 +64,7 @@ abstract class Filename_Shema_Description extends Compareable_Text_Operand imple
   # convert data collected from ui to usable data for following process
   public static function convert_ui_data_to_data(array $data_from_ui) : array {
     # filter data for this schema from whole ui data
-    $key = current(Filename_Shema_Description::array_ui_data_key);
+    $key = current(self::array_ui_data_key);
 
     if(!isset($data_from_ui[$key])){
       throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST-Request: '$key'");
@@ -70,12 +84,12 @@ abstract class Filename_Shema_Description extends Compareable_Text_Operand imple
       throw new Shema_Exception("Fehler beim Einlesen der Daten. Die Mod-Beschreibung enthält keine validen Zeichen.");
     }
 
-    if(strlen($string_description) > Filename_Shema_Description::max_description_length){
-      throw new Shema_Exception("Fehler beim Einlesen der Daten. Die eingegebene Beschreibung ist länger als die maximal erlaubten ".Filename_Shema_Description::max_description_length." Zeichen.");
+    if(strlen($string_description) > self::max_description_length){
+      throw new Shema_Exception("Fehler beim Einlesen der Daten. Die eingegebene Beschreibung ist länger als die maximal erlaubten ".self::max_description_length." Zeichen.");
     }
 
     # replace stuff in description string
-    foreach(Filename_Shema_Description::array_replace_regex_data_to_filename as $regex_search => $replace){
+    foreach(self::array_replace_regex_data_to_filename as $regex_search => $replace){
       $string_description = preg_replace("/$regex_search/",$replace, $string_description);
     }
 
@@ -92,31 +106,33 @@ abstract class Filename_Shema_Description extends Compareable_Text_Operand imple
     }
 
     # replace stuff in description string from file
-    foreach(Filename_Shema_Description::array_replace_regex_filename_to_data as $regex_search => $replace){
+    foreach(self::array_replace_regex_filename_to_data as $regex_search => $replace){
       $filename_part = preg_replace("/$regex_search/",$replace, $filename_part);
     }
 
     # return array in format of original ui data
-    return [ current(Filename_Shema_Description::array_ui_data_key) => $filename_part ];
+    return [ current(self::array_ui_data_key) => $filename_part ];
   }
 
 
   # print converted data from filename to ui
   public static function print_filename_data_for_ui(array $filename_data) : void {
     # print data from filename to ui by formated string
-    printf(Filename_Shema_Description::string_ui_format, current($filename_data));
+    printf(self::string_ui_format, current($filename_data));
   }
 
 
   # print filename shema input to ui
   public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root, Filename_Shema_Description::class);
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class);
   }
 
 
   # print filename shema search input to ui
   public static function print_filename_shema_search_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_search_data_key_root, Filename_Shema_Description::class);
+    $operand_select_option_html = Ui::generate_search_operand_select_options_ui(self::class);
+    $additional_search_buttons = Ui::generate_additional_search_buttons_ui(self::class);
+    printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $additional_search_buttons);
   }
 
 }

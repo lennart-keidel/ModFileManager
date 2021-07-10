@@ -145,7 +145,7 @@ function add_search_input_with_plus_button(element){
 
 // remove additional search input onclick on minus button
 function remove_search_input_with_minus_button(element){
-  class_name = element.siblings('input:first').attr('class').split(/\s+/)[0];
+  class_name = element.siblings('input:first, textarea:first, select:nth-child(2)').attr('class').split(/\s+/)[0];
   if($('.'+class_name).length > 1){
     var parent = element.closest('.additional_input_root');
     parent.remove();

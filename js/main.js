@@ -106,6 +106,19 @@ function disable_input_by_class_name_if_source_element_is_not_checked(id_source_
 }
 
 
+// disable a element by a id name if an checkbox element with a id is not checked
+function disable_input_by_id_name_if_source_element_is_not_checked(id_source_element, id_element_to_disable) {
+  element = document.getElementById(id_element_to_disable);
+  source = document.getElementById(id_source_element);
+  if (source.checked) {
+    element.removeAttribute("disabled");
+  }
+  else {
+    element.setAttribute("disabled", "disabled");
+  }
+}
+
+
 // disable and hide all elements by a class name if an checkbox element with a id is not checked
 function disable_and_hide_input_by_class_name_if_source_element_is_not_checked(id_source_element, class_element_to_disable) {
   all_elements = document.getElementsByClassName(class_element_to_disable);
@@ -113,10 +126,12 @@ function disable_and_hide_input_by_class_name_if_source_element_is_not_checked(i
   for (f = 0; f < all_elements.length; f++) {
     if (source.checked) {
       all_elements[f].removeAttribute("disabled");
+      all_elements[f].removeAttribute("required");
       all_elements[f].style.display = "block";
     }
     else {
       all_elements[f].setAttribute("disabled", "disabled");
+      all_elements[f].setAttribute("required", "required");
       all_elements[f].style.display = "none";
     }
   }

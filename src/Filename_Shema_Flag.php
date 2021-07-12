@@ -1,7 +1,5 @@
 <?php
 
-use PHPUnit\Framework\Constraint\ExceptionMessageRegularExpression;
-
 abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
@@ -54,10 +52,10 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   # format: option-value => key or sub-content in ui-data
   public const array_ui_data_key_sub_data = [
     "option_depends_on_expansion" => [
-      "select_flag_data_depends_on_expansion"
+      "Flag_Data_Option_Depends_On_Expansion"
     ],
     "option_depends_on_content" => [
-      "url_flag_data_depends_on_content"
+      "Flag_Data_Option_Depends_On_Content"
     ]
   ];
 
@@ -89,10 +87,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     </script>
   </div>
 
-  <div class="option_depends_on_content%1$d container_label_and_input sub_input">
-    <label class="option_depends_on_content%1$d" for="url_flag_data_depends_on_content%1$d">Link zum Mod, CC von dem dieser Mod, CC abhängig ist</label>
-    <input class="option_depends_on_content%1$d %3$s%1$d" id="url_flag_data_depends_on_content%1$d" type="url" name="%2$s[%1$d][url_flag_data_depends_on_content]" required disabled>
-  </div>
+  %4$s
 
   <div class="container_label_and_input">
     <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\', \'option_depends_on_expansion%1$d\')">
@@ -106,36 +101,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     </script>
   </div>
 
-  <div class="option_depends_on_expansion%1$d container_label_and_input sub_input">
-    <label class="option_depends_on_expansion%1$d" for="select_flag_data_depends_on_expansion%1$d">Erweiterung von dem dieser Mod, CC abhängig ist</label>
-    <select class="option_depends_on_expansion%1$d %3$s%1$d" id="select_flag_data_depends_on_expansion%1$d" name="%2$s[%1$d][select_flag_data_depends_on_expansion]" required disabled>
-      <option value="" selected disabled>Auswählen</option>
-      <optgroup label="Erweiterungspack">
-        <option value="ep01">Reiseabenteuer</option>
-        <option value="ep02">Traumkarrieren</option>
-        <option value="ep03">Late Night</option>
-        <option value="ep04">Lebensfreude</option>
-        <option value="ep05">Einfach Tierisch</option>
-        <option value="ep06">Showtime</option>
-        <option value="ep07">Supernatural</option>
-        <option value="ep08">Jahreszeiten</option>
-        <option value="ep09">Wildes Studentenleben</option>
-        <option value="ep10">Inselparadies</option>
-        <option value="ep11">Into The Future</option>
-      </optgroup>
-      <optgroup label="Accessoirepack">
-        <option value="sp01">Luxus Accessoires</option>
-        <option value="sp02">Gib Gas Accessoires</option>
-        <option value="sp03">Design Garten Accessoires</option>
-        <option value="sp04">Stadt Accessoires</option>
-        <option value="sp05">Traumsuite Accessoires</option>
-        <option value="sp06">Katy Perry Süße Welt</option>
-        <option value="sp07">Diesel Accessoires</option>
-        <option value="sp08">70er, 80er & 90er Accessoires</option>
-        <option value="sp09">Movie Accessoires</option>
-      </optgroup>
-    </select>
-  </div>
+  %5$s
 
   <div class="container_label_and_input">
     <input type="checkbox" name="%2$s[%1$d]['.self::class.'][]" class="%3$s%1$d" id="option_is_essential%1$d" value="option_is_essential">
@@ -146,12 +112,24 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
 
   # input shema template for search ui
   private const search_input_shema_template = '
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      setTimeout(function(){
+        disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\',\'option_depends_on_content%1$d\');
+        disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\',\'option_depends_on_expansion%1$d\');
+        disable_input_by_id_name_if_source_element_is_not_checked(\'option_install_in_overrides%1$d\',\'%3$s_operand%1$d_deaktivate_1\');
+        disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\',\'%3$s_operand%1$d_deaktivate_2\');
+        disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\',\'%3$s_operand%1$d_deaktivate_3\');
+        disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_essential%1$d\',\'%3$s_operand%1$d_deaktivate_4\');
+      },100);
+    });
+  </script>
   <span class="toggle_rowbreak additional_input_root"></span>
   <div class="container_label_and_input">
-    <select class="%3$s_operand%1$d %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_1" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
       %4$s
     </select>
-    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides" onclick="disable_input_by_id_name_if_source_element_is_not_checked(\'option_install_in_overrides%1$d\',\'%3$s_operand%1$d_deaktivate_1\');">
     <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
   </div>
   '.
@@ -161,76 +139,30 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   // </div>
   '
   <div class="container_label_and_input">
-    <select class="%3$s_operand%1$d %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_2" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
       %4$s
     </select>
-    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_depends_on_content%1$d" value="option_depends_on_content" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\', \'option_depends_on_content%1$d\')">
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_depends_on_content%1$d" value="option_depends_on_content" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\', \'option_depends_on_content%1$d\'); disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\',\'%3$s_operand%1$d_deaktivate_2\');">
     <label for="option_depends_on_content%1$d">abhängig von anderem Mod, CC, Store oder ähnlichem</label>
-    <script>
-      document.addEventListener("DOMContentLoaded", function(){
-        setTimeout(function(){
-          disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\',\'option_depends_on_content%1$d\');
-        },100);
-      });
-    </script>
   </div>
 
-  <div class="option_depends_on_content%1$d container_label_and_input sub_input">
-    <label class="option_depends_on_content%1$d" for="url_flag_data_depends_on_content%1$d">Link zum Mod, CC von dem dieser Mod, CC abhängig ist</label>
-    <input class="option_depends_on_content%1$d %3$s%1$d" id="url_flag_data_depends_on_content%1$d" type="url" name="%2$s[%1$d][url_flag_data_depends_on_content]" required disabled>
-  </div>
+  %6$s
 
   <div class="container_label_and_input">
-    <select class="%3$s_operand%1$d %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_3" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
       %4$s
     </select>
-    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\', \'option_depends_on_expansion%1$d\')">
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\', \'option_depends_on_expansion%1$d\'); disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\',\'%3$s_operand%1$d_deaktivate_3\');">
     <label for="option_depends_on_expansion%1$d">abhängig von Erweiterungspack oder Accessoirepack</label>
-    <script>
-      document.addEventListener("DOMContentLoaded", function(){
-        setTimeout(function(){
-          disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\',\'option_depends_on_expansion%1$d\');
-        },100);
-      });
-    </script>
   </div>
 
-  <div class="option_depends_on_expansion%1$d container_label_and_input sub_input">
-    <label class="option_depends_on_expansion%1$d" for="select_flag_data_depends_on_expansion%1$d">Erweiterung von dem dieser Mod, CC abhängig ist</label>
-    <select class="option_depends_on_expansion%1$d %3$s%1$d" id="select_flag_data_depends_on_expansion%1$d" name="%2$s[%1$d][select_flag_data_depends_on_expansion]" required disabled>
-      <option value="" selected disabled>Auswählen</option>
-      <optgroup label="Erweiterungspack">
-        <option value="ep01">Reiseabenteuer</option>
-        <option value="ep02">Traumkarrieren</option>
-        <option value="ep03">Late Night</option>
-        <option value="ep04">Lebensfreude</option>
-        <option value="ep05">Einfach Tierisch</option>
-        <option value="ep06">Showtime</option>
-        <option value="ep07">Supernatural</option>
-        <option value="ep08">Jahreszeiten</option>
-        <option value="ep09">Wildes Studentenleben</option>
-        <option value="ep10">Inselparadies</option>
-        <option value="ep11">Into The Future</option>
-      </optgroup>
-      <optgroup label="Accessoirepack">
-        <option value="sp01">Luxus Accessoires</option>
-        <option value="sp02">Gib Gas Accessoires</option>
-        <option value="sp03">Design Garten Accessoires</option>
-        <option value="sp04">Stadt Accessoires</option>
-        <option value="sp05">Traumsuite Accessoires</option>
-        <option value="sp06">Katy Perry Süße Welt</option>
-        <option value="sp07">Diesel Accessoires</option>
-        <option value="sp08">70er, 80er & 90er Accessoires</option>
-        <option value="sp09">Movie Accessoires</option>
-      </optgroup>
-    </select>
-  </div>
+  %7$s
 
   <div class="container_label_and_input">
-    <select class="%3$s_operand%1$d %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_4" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
       %4$s
     </select>
-    <input type="checkbox" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" class="%3$s%1$d" id="option_is_essential%1$d" value="option_is_essential">
+    <input type="checkbox" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" class="%3$s%1$d" id="option_is_essential%1$d" value="option_is_essential" onclick="disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_essential%1$d\',\'%3$s_operand%1$d_deaktivate_4\');">
     <label for="option_is_essential%1$d">gehört zu den absolut wichtigsten Mods/CC, die immer installiert sein sollen</label>
   </div>
   ';
@@ -592,7 +524,9 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
 
   # print filename shema input to ui
   public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class);
+    $flag_data_option_depends_on_content_input_html = Flag_Data_Option_Depends_On_Content::generate_filename_shema_input_for_ui($index);
+    $flag_data_option_depends_on_expansion_input_html = Flag_Data_Option_Depends_On_Expansion::generate_filename_shema_input_for_ui($index);
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class, $flag_data_option_depends_on_content_input_html, $flag_data_option_depends_on_expansion_input_html);
   }
 
 
@@ -600,7 +534,28 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   public static function print_filename_shema_search_input_for_ui(int $index) : void {
     $operand_select_option_html = Ui::generate_search_operand_select_options_ui(self::class);
     $additional_search_buttons = Ui::generate_additional_search_buttons_ui(self::class);
-    printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $additional_search_buttons);
+    $flag_data_option_depends_on_content_input_html = Flag_Data_Option_Depends_On_Content::generate_filename_shema_search_input_for_ui($index);
+    $flag_data_option_depends_on_expansion_input_html = Flag_Data_Option_Depends_On_Expansion::generate_filename_shema_search_input_for_ui($index);
+    printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $additional_search_buttons, $flag_data_option_depends_on_content_input_html, $flag_data_option_depends_on_expansion_input_html);
+  }
+
+
+  # overwrite inheritted function
+  public static function get_search_operand() : array {
+    return [
+      "is" => [
+        "text" => "ist",
+        "callable" => function(string $search_input, array $value_to_compare) : bool {
+          return in_array($search_input, $value_to_compare) === true;
+        }
+      ],
+      "is_not" => [
+        "text" => "ist nicht",
+        "callable" => function(string $search_input, array $value_to_compare) : bool {
+          return in_array($search_input, $value_to_compare) === false;
+        }
+      ]
+    ];
   }
 
 }

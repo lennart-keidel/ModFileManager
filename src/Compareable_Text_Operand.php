@@ -1,19 +1,19 @@
 <?php
 
-abstract class Compareable_Text_Operand implements I_Shared_Shema {
+abstract class Compareable_Text_Operand extends Compareable_Operand implements I_Shared_Shema {
 
   public static function get_search_operand() : array {
     return [
       "is" => [
         "text" => "ist",
         "callable" => function(string $search_input, string $value_to_compare) : bool {
-          return !preg_match("/^$value_to_compare$/i",$search_input) ? false : true;
+          return !preg_match("/^".preg_quote($value_to_compare, "/")."$/i",$search_input) ? false : true;
         }
       ],
       "is_not" => [
         "text" => "ist nicht",
         "callable" => function(string $search_input, string $value_to_compare) : bool {
-          return !preg_match("/^$value_to_compare$/i",$search_input) ? true : false;
+          return !preg_match("/^".preg_quote($value_to_compare, "/")."$/i",$search_input) ? true : false;
         }
       ],
       "contains" => [
@@ -31,13 +31,13 @@ abstract class Compareable_Text_Operand implements I_Shared_Shema {
       "starts_with" => [
         "text" => "startet mit",
         "callable" => function(string $search_input, string $value_to_compare) : bool {
-          return !preg_match("/^$value_to_compare/i",$search_input) ? false : true;
+          return !preg_match("/^".preg_quote($value_to_compare, "/")."/i",$search_input) ? false : true;
         }
       ],
       "ends_with" => [
         "text" => "endet mit",
         "callable" => function(string $search_input, string $value_to_compare) : bool {
-          return !preg_match("/$value_to_compare$/i",$search_input) ? false : true;
+          return !preg_match("/".preg_quote($value_to_compare, "/")."$/i",$search_input) ? false : true;
         }
       ],
     ];

@@ -1,6 +1,6 @@
 <?php
 
-abstract class Compareable_Number_Operand implements I_Shared_Shema {
+abstract class Compareable_Number_Operand extends Compareable_Operand implements I_Shared_Shema {
 
   # important: dont use type strict comparison
   # so can string-numbers be compared as well

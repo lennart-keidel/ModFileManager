@@ -20,43 +20,23 @@ abstract class Search_Shema {
     self::$search_operand_array = $ui_data[Ui::ui_search_data_key_operand_root];
   }
 
-
-  # call callback function stored in shema class
-  # compare two values in the context of the selected operand
-  private static function search_compare(string $search_input_value, string $search_input_operand, string $value_to_compare, string $class_reference) : bool {
-    $operand_array = $class_reference::get_search_operand();
-    return $operand_array[$search_input_operand]["callable"]($search_input_value,$value_to_compare);
-  }
-
   # check if filename data for one file matches search input with search connector
   public static function check_if_filename_data_for_one_file_matches_search_input(array $filename_data_for_one_input) : bool {
+    var_dump($filename_data_for_one_input);
 
     # iterate through search-target
     foreach(self::$search_value_array as $search_ui_key => $search_value_array_for_this_key){
       foreach($search_value_array_for_this_key as $index => $search_value){
         $search_operand = self::$search_operand_array[$search_ui_key][$index];
         $value_to_compare = array_key_exists($search_ui_key, $filename_data_for_one_input) === true ? $filename_data_for_one_input[$search_ui_key] : "";
-        if(is_array($value_to_compare) === false){
-          if(self::search_compare($search_value, $search_operand, $value_to_compare, $search_ui_key) === true){
-            if(self::$search_connector === "or"){
-              return true;
-            }
-          }
-          elseif(self::$search_connector === "and") {
-            return false;
+        var_dump($search_value, $search_operand, $value_to_compare, $search_ui_key, $search_ui_key::search_compare($search_value, $search_operand, $value_to_compare, $search_ui_key), "---------");
+        if($search_ui_key::search_compare($search_value, $search_operand, $value_to_compare, $search_ui_key) === true){
+          if(self::$search_connector === "or"){
+            return true;
           }
         }
-        else {
-          foreach($value_to_compare as $value_to_compare_inner){
-            if(self::search_compare($search_value, $search_operand, $value_to_compare_inner, $search_ui_key) === true){
-              if(self::$search_connector === "or"){
-                return true;
-              }
-            }
-            elseif(self::$search_connector === "and") {
-              return false;
-            }
-          }
+        elseif(self::$search_connector === "and") {
+          return false;
         }
       }
     }

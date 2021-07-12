@@ -1,6 +1,6 @@
 <?php
 
-abstract class Compareable_Date_Operand implements I_Shared_Shema {
+abstract class Compareable_Date_Operand extends Compareable_Operand implements I_Shared_Shema {
 
   public static function get_search_operand() : array {
     return [

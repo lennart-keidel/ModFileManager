@@ -31,94 +31,130 @@ class Search_Shema_Test extends TestCase {
   public static function setUpBeforeClass() : void {
     self::$search_input1 = [
       "search_shema_connector" => "or",
-      "select_shema_categorie" => "option_tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_flag_data_depends_on_expansion" => "ep01",
-      "checkbox_shema_flag" => [
-        "option_depends_on_content",
-        "option_depends_on_expansion"
+      Ui::ui_search_data_key_operand_root => [
+        "Filename_Shema_Categorie" => [ "is", ],
+        "Filename_Shema_Description" => [ "is", ],
+        "Filename_Shema_Link" => [ "is", ],
+        "Filename_Shema_Installation_Date" => [ "is_date", ],
+        "Flag_Data_Option_Depends_On_Expansion" => [ "is", ],
+        "Filename_Shema_Flag" => [ "is", "is", ],
+        "Flag_Data_Option_Depends_On_Content" => [ "is", ],
+        "Filename_Shema_Long_Description" => [ "is", ],
+        "Filename_Shema_Creator" => [ "is", ],
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      Ui::ui_search_data_key_value_root => [
+        "Filename_Shema_Categorie" => [ "option_tuning", ],
+        "Filename_Shema_Description" => [ "somtehing to do with this", ],
+        "Filename_Shema_Link" => [ "https://modthesims.info/", ],
+        "Filename_Shema_Installation_Date" => [ "2020-10-29", ],
+        "Flag_Data_Option_Depends_On_Expansion" => [ "ep01", ],
+        "Filename_Shema_Flag" => [
+          "option_depends_on_content",
+          "option_depends_on_expansion"
+        ],
+        "Flag_Data_Option_Depends_On_Content" => [ "https://modthesims.info/", ],
+        "Filename_Shema_Long_Description" => [ "A Longer Description", ],
+        "Filename_Shema_Creator" => [ "Nraas", ],
+      ],
     ];
 
     self::$search_input2 = [
       "search_shema_connector" => "and",
-      "select_shema_categorie" => "option_tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_flag_data_depends_on_expansion" => "ep01",
-      "checkbox_shema_flag" => [
-        "option_depends_on_content",
-        "option_depends_on_expansion"
+      Ui::ui_search_data_key_operand_root => [
+        "Filename_Shema_Categorie" => [ "is", ],
+        "Filename_Shema_Description" => [ "is", ],
+        "Filename_Shema_Link" => [ "is", ],
+        "Filename_Shema_Installation_Date" => [ "is_date", ],
+        "Flag_Data_Option_Depends_On_Expansion" => [ "is", ],
+        "Filename_Shema_Flag" => [ "is", "is", ],
+        "Flag_Data_Option_Depends_On_Content" => [ "is", ],
+        "Filename_Shema_Long_Description" => [ "is", ],
+        "Filename_Shema_Creator" => [ "is", ],
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      Ui::ui_search_data_key_value_root => [
+        "Filename_Shema_Categorie" => [ "option_tuning", ],
+        "Filename_Shema_Description" => [ "somtehing to do with this", ],
+        "Filename_Shema_Link" => [ "https://modthesims.info/", ],
+        "Filename_Shema_Installation_Date" => [ "2020-10-29", ],
+        "Flag_Data_Option_Depends_On_Expansion" => [ "ep01", ],
+        "Filename_Shema_Flag" => [
+          "option_depends_on_content",
+          "option_depends_on_expansion"
+        ],
+        "Flag_Data_Option_Depends_On_Content" => [ "https://modthesims.info/", ],
+        "Filename_Shema_Long_Description" => [ "A Longer Description", ],
+        "Filename_Shema_Creator" => [ "Nraas", ],
+      ],
     ];
 
     self::$search_input3 = [
       "search_shema_connector" => "or",
-      "select_shema_categorie" => "option_tuning",
+      Ui::ui_search_data_key_operand_root => [
+        "Filename_Shema_Categorie" => [ "is", ],
+      ],
+      Ui::ui_search_data_key_value_root => [
+        "Filename_Shema_Categorie" => [ "option_tuning", ],
+      ],
     ];
 
     self::$search_input4 = [
       "search_shema_connector" => "and",
-      "select_shema_categorie" => "option_tuning",
+      Ui::ui_search_data_key_operand_root => [
+        "Filename_Shema_Categorie" => [ "is", ],
+      ],
+      Ui::ui_search_data_key_value_root => [
+        "Filename_Shema_Categorie" => [ "option_tuning", ],
+      ],
     ];
 
     # every data matches search_input1 and search_input2
     self::$filename_data_for_one_file1 = [
-      "select_shema_categorie" => "option_tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_flag_data_depends_on_expansion" => "ep01",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "option_tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
     ];
 
     # two data match search_input1 and search_input2
     self::$filename_data_for_one_file2 = [
-      "select_shema_categorie" => "option_tuning",
-      "text_shema_description" => "some other description",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/asd",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_flag_data_depends_on_expansion" => "ep09",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "option_tuning",
+      "Filename_Shema_Description" => "some other description",
+      "Filename_Shema_Link" => "https://potato-ballad-sims.tumblr.com/post/asd",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Flag_Data_Option_Depends_On_Expansion" => "ep09",
+      "Filename_Shema_Flag" => [
         "option_is_essential"
       ]
     ];
 
     # only one data matches search_input1 and search_input2
     self::$filename_data_for_one_file3 = [
-      "select_shema_categorie" => "option_cc_buy",
-      "text_shema_description" => "some other description",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/asd",
-      "date_shema_installation_date" => "2020-11-12",
-      "select_flag_data_depends_on_expansion" => "ep01",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "option_cc_buy",
+      "Filename_Shema_Description" => "some other description",
+      "Filename_Shema_Link" => "https://potato-ballad-sims.tumblr.com/post/asd",
+      "Filename_Shema_Installation_Date" => "2020-11-12",
+      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Filename_Shema_Flag" => [
         "option_is_essential"
       ]
     ];
 
     # no data matches search_input1 and search_input2
     self::$filename_data_for_one_file4 = [
-      "select_shema_categorie" => "option_cc_buy",
-      "text_shema_description" => "some other description",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/asd",
-      "date_shema_installation_date" => "2020-11-12",
-      "select_flag_data_depends_on_expansion" => "ep11",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "option_cc_buy",
+      "Filename_Shema_Description" => "some other description",
+      "Filename_Shema_Link" => "https://potato-ballad-sims.tumblr.com/post/asd",
+      "Filename_Shema_Installation_Date" => "2020-11-12",
+      "Flag_Data_Option_Depends_On_Expansion" => "ep11",
+      "Filename_Shema_Flag" => [
         "option_is_essential"
       ]
     ];
@@ -181,7 +217,7 @@ class Search_Shema_Test extends TestCase {
   }
 
 
-  public function test_filter_filename_data_by_search_input1_with_and_connector() : void {
+  public function test_filter_filename_data_by_search_input2_with_and_connector() : void {
     Search_Shema::set_search_ui_data(self::$search_input2);
     $filename_data_input = [
       Ui::ui_data_key_root => [
@@ -201,7 +237,7 @@ class Search_Shema_Test extends TestCase {
   }
 
 
-  public function test_filter_filename_data_by_search_input2_with_or_connector() : void {
+  public function test_filter_filename_data_by_search_input3_with_or_connector() : void {
     Search_Shema::set_search_ui_data(self::$search_input3);
     $filename_data_input = [
       Ui::ui_data_key_root => [
@@ -222,7 +258,7 @@ class Search_Shema_Test extends TestCase {
   }
 
 
-  public function test_filter_filename_data_by_search_input2_with_and_connector() : void {
+  public function test_filter_filename_data_by_search_input4_with_and_connector() : void {
     Search_Shema::set_search_ui_data(self::$search_input4);
     $filename_data_input = [
       Ui::ui_data_key_root => [

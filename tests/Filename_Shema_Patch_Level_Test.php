@@ -27,55 +27,55 @@ class Filename_Shema_Patch_Level_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 
     $this->ui_data = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "select_shema_patch_level" => "1.69"
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Patch_Level" => "1.69"
     ];
 
     $this->wrong_ui_data1 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
       "url_shema_lin" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
       "select_shema_patch_leve" => "1.69"
     ];
 
 
     $this->wrong_ui_data2 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "select_shema_patch_level" => "1.609"
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Patch_Level" => "1.609"
     ];
 
 
     $this->wrong_ui_data3 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/61757973",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "select_shema_patch_level" => "16.9"
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://potato-ballad-sims.tumblr.com/post/61757973",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Patch_Level" => "16.9"
     ];
 
     $this->wrong_ui_data4 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/61757973",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "select_shema_patch_level" => "169"
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://potato-ballad-sims.tumblr.com/post/61757973",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Patch_Level" => "169"
     ];
 
     $this->filename = "167";

@@ -46,98 +46,98 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 
 
     $this->ui_data1 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_flag_data_depends_on_expansion" => "ep01",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/d/526207/more-traits-for-all-ages.html",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/d/526207/more-traits-for-all-ages.html",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
     ];
 
     $this->ui_data2 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_flag_data_depends_on_expansion" => "ep11",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Flag_Data_Option_Depends_On_Expansion" => "ep11",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
         // "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
     ];
 
     $this->ui_data3 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_flag_data_depends_on_expansion" => "sp09",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Flag_Data_Option_Depends_On_Expansion" => "sp09",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
         "option_install_in_overrides",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
     ];
 
     $this->ui_data4 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => [
 
       ]
     ];
 
     # "no_flag_option_selected" and any else flag are selected, which is restricted
     $this->wrong_ui_data1 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_flag_data_depends_on_expansion" => "ep01",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
         "option_install_in_overrides",
         "no_flag_option_selected",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
     ];
 
 
     # "option_depends_on_content" misses data
     $this->wrong_ui_data2 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_flag_data_depends_on_expansion" => "ep01",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
         // "option_install_in_packages",
@@ -148,74 +148,74 @@ class Filename_Shema_Flag_Test extends TestCase {
 
     # "option_depends_on_expansion" misses data
     $this->wrong_ui_data3 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
         // "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
     ];
 
 
     # "option_depends_on_expansion" wrong data
     $this->wrong_ui_data4 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_flag_data_depends_on_expansion" => "sp99",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Flag_Data_Option_Depends_On_Expansion" => "sp99",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
         // "option_install_in_packages",
         "option_is_essential"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
     ];
 
 
-    # "checkbox_shema_flag" contains invalid flag
+    # "Filename_Shema_Flag" contains invalid flag
     $this->wrong_ui_data6 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
         // "option_install_in_packages",
         "option_is_e"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
     ];
 
 
-    # "checkbox_shema_flag" contains double flag
+    # "Filename_Shema_Flag" contains double flag
     $this->wrong_ui_data7 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
         "option_install_in_overrides",
         "option_install_in_overrides",
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
     ];
 
 
@@ -476,7 +476,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     assertIsArray($data_from_filename[$main_key]);
     assertCount(1, $data_from_filename[$main_key]);
     assertContains("option_depends_on_expansion",$data_from_filename[$main_key]);
-    assertTrue($data_from_filename["select_flag_data_depends_on_expansion"] === "sp09");
+    assertTrue($data_from_filename["Flag_Data_Option_Depends_On_Expansion"] === "sp09");
   }
 
 
@@ -502,7 +502,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     assertIsArray($data_from_filename[$main_key]);
     assertCount(1, $data_from_filename[$main_key]);
     assertContains("option_depends_on_expansion",$data_from_filename[$main_key]);
-    assertTrue($data_from_filename["select_flag_data_depends_on_expansion"] === "sp07");
+    assertTrue($data_from_filename["Flag_Data_Option_Depends_On_Expansion"] === "sp07");
   }
 
 
@@ -561,7 +561,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     assertCount(2, $data_from_filename);
     assertCount(2, $data_from_filename[$main_key]);
     assertFalse(in_array("option_depends_on_content", $data_from_filename[$main_key]));
-    assertFalse(in_array("url_flag_data_depends_on_content", $data_from_filename));
+    assertFalse(in_array("Flag_Data_Option_Depends_On_Content", $data_from_filename));
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEquals("", $output);

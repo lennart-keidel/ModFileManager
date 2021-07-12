@@ -29,66 +29,66 @@ class Filename_Shema_Installation_Date_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 
 
     $this->ui_data1 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "date_shema_installation_date" => "2020-11-03",
-      "select_shema_patch_level" => "1.69"
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://google.com",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Installation_Date" => "2020-11-03",
+      "Filename_Shema_Patch_Level" => "1.69"
     ];
 
     $this->ui_data2 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://google.com",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "date_shema_installation_date" => "2080-11-03",
-      "select_shema_patch_level" => "1.69"
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://google.com",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Installation_Date" => "2080-11-03",
+      "Filename_Shema_Patch_Level" => "1.69"
     ];
 
     $this->wrong_ui_data1 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
       "url_shema_lin" => "https://google.com",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
       "date_shema_installation_dat" => "2020-11-03",
       "select_shema_patch_leve" => "1.69"
     ];
 
 
     $this->wrong_ui_data2 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "date_shema_installation_date" => "2020-13-03",
-      "select_shema_patch_level" => "1.609"
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Installation_Date" => "2020-13-03",
+      "Filename_Shema_Patch_Level" => "1.609"
     ];
 
 
     $this->wrong_ui_data3 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/61757973",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "date_shema_installation_date" => "2020-11-31",
-      "select_shema_patch_level" => "16.9"
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://potato-ballad-sims.tumblr.com/post/61757973",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Installation_Date" => "2020-11-31",
+      "Filename_Shema_Patch_Level" => "16.9"
     ];
 
 
     $this->wrong_ui_data4 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://potato-ballad-sims.tumblr.com/post/61757973",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "date_shema_installation_date" => "",
-      "select_shema_patch_level" => "16.9"
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://potato-ballad-sims.tumblr.com/post/61757973",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Installation_Date" => "",
+      "Filename_Shema_Patch_Level" => "16.9"
     ];
 
     $this->filename = "03Nov20";
@@ -128,7 +128,7 @@ class Filename_Shema_Installation_Date_Test extends TestCase {
     assertTrue(preg_match("/^([0][1-9]|[12][0-9]|3[01])(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[1-9][0-9]$/",$filename) === 1);
     $date_time_object = DateTime::createFromFormat("dMy",$filename);
     assertTrue($date_time_object->format("dMy") === $filename);
-    $date_time_object = DateTime::createFromFormat("Y-m-d",$this->ui_data1["date_shema_installation_date"]);
+    $date_time_object = DateTime::createFromFormat("Y-m-d",$this->ui_data1["Filename_Shema_Installation_Date"]);
     assertTrue($date_time_object->format("dMy") === $filename);
   }
 
@@ -142,28 +142,28 @@ class Filename_Shema_Installation_Date_Test extends TestCase {
     assertTrue(preg_match("/^([0][1-9]|[12][0-9]|3[01])(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[1-9][0-9]$/",$filename) === 1);
     $date_time_object = DateTime::createFromFormat("dMy",$filename);
     assertTrue($date_time_object->format("dMy") === $filename);
-    $date_time_object = DateTime::createFromFormat("Y-m-d",$this->ui_data2["date_shema_installation_date"]);
+    $date_time_object = DateTime::createFromFormat("Y-m-d",$this->ui_data2["Filename_Shema_Installation_Date"]);
     assertTrue($date_time_object->format("dMy") === $filename);
   }
 
 
   public function test_convert_data_to_filename_with_wrong_ui_data1() : void {
-    $converted_ui_data = Filename_Shema_Installation_Date::convert_ui_data_to_data($this->wrong_ui_data2);
     $this->expectException(Shema_Exception::class);
+    $converted_ui_data = Filename_Shema_Installation_Date::convert_ui_data_to_data($this->wrong_ui_data2);
     Filename_Shema_Installation_Date::convert_data_to_filename($converted_ui_data);
   }
 
 
   public function test_convert_data_to_filename_with_wrong_ui_data2() : void {
-    $converted_ui_data = Filename_Shema_Installation_Date::convert_ui_data_to_data($this->wrong_ui_data3);
     $this->expectException(Shema_Exception::class);
+    $converted_ui_data = Filename_Shema_Installation_Date::convert_ui_data_to_data($this->wrong_ui_data3);
     Filename_Shema_Installation_Date::convert_data_to_filename($converted_ui_data);
   }
 
 
   public function test_convert_data_to_filename_with_wrong_ui_data3() : void {
-    $converted_ui_data = Filename_Shema_Installation_Date::convert_ui_data_to_data($this->wrong_ui_data4);
     $this->expectException(Shema_Exception::class);
+    $converted_ui_data = Filename_Shema_Installation_Date::convert_ui_data_to_data($this->wrong_ui_data4);
     Filename_Shema_Installation_Date::convert_data_to_filename($converted_ui_data);
   }
 

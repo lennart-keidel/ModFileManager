@@ -24,34 +24,34 @@ class Filename_Shema_Description_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 
 
     $this->ui_data = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with 24-.,=][{}()$%\"!\\this__",
-      "url_shema_link" => "http://localhost/mod_files_renamer/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with 24-.,=][{}()$%\"!\\this__",
+      "Filename_Shema_Link" => "http://localhost/mod_files_renamer/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
     ];
 
     $this->wrong_ui_data1 = [
-      "select_shema_categorie" => "Tuning",
+      "Filename_Shema_Categorie" => "Tuning",
       "text_shema_descriptio" => "somtehing to do with this",
-      "url_shema_link" => "http://localhost/mod_files_renamer/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Link" => "http://localhost/mod_files_renamer/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
     ];
 
 
     $this->wrong_ui_data2 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "this string is over the max 75 characteraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      "url_shema_link" => "http://localhost/mod_files_renamer/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "this string is over the max 75 characteraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "Filename_Shema_Link" => "http://localhost/mod_files_renamer/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
     ];
 
     $this->filename = "a_little_mod_description";

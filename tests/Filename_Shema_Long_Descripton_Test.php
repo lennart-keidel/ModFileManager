@@ -23,29 +23,29 @@ class Filename_Shema_Long_Descripton_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 
 
     $this->ui_data = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "some description",
-      "url_shema_link" => "http://localhost/mod_files_renamer/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
-      "text_shema_long_description" => "asdäasd aösdm
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "some description",
+      "Filename_Shema_Link" => "http://localhost/mod_files_renamer/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Long_Description" => "asdäasd aösdm
       a
 
       sa d$!'\"%&{}[]§²³,.;:-_#+~*´`áà"
     ];
 
     $this->wrong_ui_data1 = [
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "something descripton",
-      "url_shema_link" => "http://localhost/mod_files_renamer/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_shema_flag" => "muss in Packages-Ordner installiert werden",
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "something descripton",
+      "Filename_Shema_Link" => "http://localhost/mod_files_renamer/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => "muss in Packages-Ordner installiert werden",
       "text_shema_long_descriptio" => "wrong long description ui-data key"
     ];
 

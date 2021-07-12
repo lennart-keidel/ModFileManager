@@ -34,7 +34,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 
@@ -43,37 +43,37 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
     $this->ui_data_for_one_file1 = [
       "path_source" => "/path/to/a/dir/abc.sims3pack",
-      "select_shema_categorie" => "option_tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
+      "Filename_Shema_Categorie" => "option_tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
 
-      "select_flag_data_depends_on_expansion" => "ep01",
-      "select_shema_patch_level" => "1.67",
-      "checkbox_shema_flag" => [
+      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Filename_Shema_Patch_Level" => "1.67",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
     ];
 
     $this->wrong_ui_data_for_one_file1 = [
       "path_source" => "/path/to/a/dir/abc.sims3pack",
-      "select_shema_categorie" => "option_tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
+      "Filename_Shema_Categorie" => "option_tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
 
-      "select_flag_data_depends_on_expansion" => "ep01",
-      "checkbox_shema_flag" => [
+      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
     ];
 
     $this->filename_list_for_add_index_to_double_filenames_input = [
@@ -130,48 +130,48 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
       Ui::ui_data_key_root => [
         [
           "path_source" => "\\path\\to\\a\\dir\\abc.sims3pack",
-          "select_shema_categorie" => "option_tuning",
-          "text_shema_description" => "somtehing to do with this",
-          "url_shema_link" => "https://modthesims.info/",
-          "date_shema_installation_date" => "2020-10-29",
-          "select_flag_data_depends_on_expansion" => "ep01",
-          "select_shema_patch_level" => "1.67",
-          "checkbox_shema_flag" => [
+          "Filename_Shema_Categorie" => "option_tuning",
+          "Filename_Shema_Description" => "somtehing to do with this",
+          "Filename_Shema_Link" => "https://modthesims.info/",
+          "Filename_Shema_Installation_Date" => "2020-10-29",
+          "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+          "Filename_Shema_Patch_Level" => "1.67",
+          "Filename_Shema_Flag" => [
             "option_depends_on_content",
             "option_depends_on_expansion"
           ],
-          "url_flag_data_depends_on_content" => "https://modthesims.info/",
-          "text_shema_long_description" => "A Longer Description",
-          "text_shema_creator" => "Nraas",
+          "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+          "Filename_Shema_Long_Description" => "A Longer Description",
+          "Filename_Shema_Creator" => "Nraas",
         ],
         [
           "path_source" => "\\path\\to\\a\\dir\\def.sims3pack",
-          "select_shema_categorie" => "option_tuning",
-          "text_shema_description" => "somtehing to do with this",
-          "url_shema_link" => "https://modthesims.info/",
-          "date_shema_installation_date" => "2020-10-29",
-          "select_flag_data_depends_on_expansion" => "ep01",
-          "select_shema_patch_level" => "1.67",
-          "checkbox_shema_flag" => [
+          "Filename_Shema_Categorie" => "option_tuning",
+          "Filename_Shema_Description" => "somtehing to do with this",
+          "Filename_Shema_Link" => "https://modthesims.info/",
+          "Filename_Shema_Installation_Date" => "2020-10-29",
+          "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+          "Filename_Shema_Patch_Level" => "1.67",
+          "Filename_Shema_Flag" => [
             "option_depends_on_content",
             "option_depends_on_expansion"
           ],
-          "url_flag_data_depends_on_content" => "https://modthesims.info/",
-          "text_shema_long_description" => "A Longer Description",
-          "text_shema_creator" => "Nraas",
+          "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+          "Filename_Shema_Long_Description" => "A Longer Description",
+          "Filename_Shema_Creator" => "Nraas",
         ],
         [
           "path_source" => "\\path\\to\\another\\dir\\def.package",
-          "select_shema_categorie" => "option_default_replacemant",
-          "text_shema_description" => "a little description",
-          "url_shema_link" => "https://modthesims.info/",
-          "date_shema_installation_date" => "2020-11-12",
-          "select_shema_patch_level" => "1.67",
-          "checkbox_shema_flag" => [
+          "Filename_Shema_Categorie" => "option_default_replacemant",
+          "Filename_Shema_Description" => "a little description",
+          "Filename_Shema_Link" => "https://modthesims.info/",
+          "Filename_Shema_Installation_Date" => "2020-11-12",
+          "Filename_Shema_Patch_Level" => "1.67",
+          "Filename_Shema_Flag" => [
             "option_is_essential"
           ],
-          "text_shema_long_description" => "A Longer Description",
-          "text_shema_creator" => "Nraas",
+          "Filename_Shema_Long_Description" => "A Longer Description",
+          "Filename_Shema_Creator" => "Nraas",
         ]
       ]
     ];
@@ -202,48 +202,48 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
         Ui::ui_data_key_root => [
           [
             "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ.sims3pack",
-            "select_shema_categorie" => "option_tuning",
-            "text_shema_description" => "somtehing to do with this",
-            "url_shema_link" => "https://modthesims.info/",
-            "date_shema_installation_date" => "2020-10-29",
-            "select_flag_data_depends_on_expansion" => "ep01",
-            "select_shema_patch_level" => "1.67",
-            "checkbox_shema_flag" => [
+            "Filename_Shema_Categorie" => "option_tuning",
+            "Filename_Shema_Description" => "somtehing to do with this",
+            "Filename_Shema_Link" => "https://modthesims.info/",
+            "Filename_Shema_Installation_Date" => "2020-10-29",
+            "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+            "Filename_Shema_Patch_Level" => "1.67",
+            "Filename_Shema_Flag" => [
               "option_depends_on_content",
               "option_depends_on_expansion"
             ],
-            "url_flag_data_depends_on_content" => "https://modthesims.info/",
-            "text_shema_long_description" => "A Longer Description",
-            "text_shema_creator" => "Nraas",
+            "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+            "Filename_Shema_Long_Description" => "A Longer Description",
+            "Filename_Shema_Creator" => "Nraas",
           ],
           [
             "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ__2.sims3pack",
-            "select_shema_categorie" => "option_tuning",
-            "text_shema_description" => "somtehing to do with this",
-            "url_shema_link" => "https://modthesims.info/",
-            "date_shema_installation_date" => "2020-10-29",
-            "select_flag_data_depends_on_expansion" => "ep01",
-            "select_shema_patch_level" => "1.67",
-            "checkbox_shema_flag" => [
+            "Filename_Shema_Categorie" => "option_tuning",
+            "Filename_Shema_Description" => "somtehing to do with this",
+            "Filename_Shema_Link" => "https://modthesims.info/",
+            "Filename_Shema_Installation_Date" => "2020-10-29",
+            "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+            "Filename_Shema_Patch_Level" => "1.67",
+            "Filename_Shema_Flag" => [
               "option_depends_on_content",
               "option_depends_on_expansion"
             ],
-            "url_flag_data_depends_on_content" => "https://modthesims.info/",
-            "text_shema_long_description" => "A Longer Description",
-            "text_shema_creator" => "Nraas",
+            "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+            "Filename_Shema_Long_Description" => "A Longer Description",
+            "Filename_Shema_Creator" => "Nraas",
           ],
           [
             "path_source" => "\\path\\to\\another\\dir\\DR__a_little_description__zd5tW__167__12Nov20__V__q3vcX__f0XFQ.package",
-            "select_shema_categorie" => "option_default_replacemant",
-            "text_shema_description" => "a little description",
-            "url_shema_link" => "https://modthesims.info/",
-            "date_shema_installation_date" => "2020-11-12",
-            "select_shema_patch_level" => "1.67",
-            "checkbox_shema_flag" => [
+            "Filename_Shema_Categorie" => "option_default_replacemant",
+            "Filename_Shema_Description" => "a little description",
+            "Filename_Shema_Link" => "https://modthesims.info/",
+            "Filename_Shema_Installation_Date" => "2020-11-12",
+            "Filename_Shema_Patch_Level" => "1.67",
+            "Filename_Shema_Flag" => [
               "option_is_essential"
             ],
-            "text_shema_long_description" => "A Longer Description",
-            "text_shema_creator" => "Nraas",
+            "Filename_Shema_Long_Description" => "A Longer Description",
+            "Filename_Shema_Creator" => "Nraas",
           ]
         ]
       ]

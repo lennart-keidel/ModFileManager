@@ -1,6 +1,6 @@
 <?php
 
-abstract class Compareable_Operand {
+abstract class Compareable_Operand implements I_Shared_Shema {
 
   # call callback function stored in shema class
   # compare two values in the context of the selected operand

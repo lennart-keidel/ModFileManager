@@ -17,7 +17,7 @@ class Ui_Failed_Files_Test extends TestCase {
 
 
     ## ---------------- DISABLE TESTS IN THIS FILE -----------------------
-    $this->markTestSkipped("Dieser Test ist deaktiviert.");
+    // $this->markTestSkipped("Dieser Test ist deaktiviert.");
 
 
 
@@ -27,34 +27,34 @@ class Ui_Failed_Files_Test extends TestCase {
   public static function setUpBeforeClass(): void {
     self::$filename_data1 = [
       "path_source" => "mods/abc/def.package",
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_flag_data_depends_on_expansion" => "ep01",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
     ];
 
     self::$filename_data2 = [
       "path_source" => "mods/abc/def.package",
-      "select_shema_categorie" => "Tuning",
-      "text_shema_description" => "somtehing to do with this",
-      "url_shema_link" => "https://modthesims.info/",
-      "date_shema_installation_date" => "2020-10-29",
-      "select_flag_data_depends_on_expansion" => "ep01",
-      "checkbox_shema_flag" => [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "url_flag_data_depends_on_content" => "https://modthesims.info/",
-      "text_shema_long_description" => "A Longer Description",
-      "text_shema_creator" => "Nraas",
+      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
     ];
 
     self::$filename_list1 = [

@@ -12,6 +12,12 @@ abstract class Compareable_Number_Operand extends Compareable_Operand implements
           return $value_to_compare == $search_input;
         }
       ],
+      "unequal_to_number" => [
+        "text" => "!=",
+        "callable" => function(string $search_input, string $value_to_compare) : bool {
+          return $value_to_compare != $search_input;
+        }
+      ],
       "lower_than_number" => [
         "text" => "&lt;",
         "callable" => function(string $search_input, string $value_to_compare) : bool {

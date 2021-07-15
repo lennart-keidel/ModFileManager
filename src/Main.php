@@ -52,7 +52,6 @@ abstract class Main {
       self::store_filename_list_from_source_path_in_session($ui_data);
 
       # if search input uploaded
-      var_dump($ui_data);
       self::handle_search_input($ui_data);
 
       # handle uploaded data for files

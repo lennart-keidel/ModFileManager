@@ -7,16 +7,25 @@ function fill_search_input_shema_with_filename_data_list(filename_data_list) {
   operand_key = "operand";
   value_key = "value";
   enable_search_shema_key = "enable_search_shema";
+  search_shema_connector_key = "search_shema_connector";
 
   var operand_array = filename_data_list[root_key][root_sub_key][operand_key];
   var value_array = filename_data_list[root_key][root_sub_key][value_key];
   var enable_search_shema_array = filename_data_list[root_key][root_sub_key][enable_search_shema_key];
+  var search_shema_connector = filename_data_list[root_key][root_sub_key][search_shema_connector_key];
+  var search_shema_connector_element = $("#"+search_shema_connector_key+root_sub_key);
 
+  // set search shema connetor value
+  search_shema_connector_element.val(search_shema_connector);
 
+  // set enable search shema checkboxes
   for(var index in enable_search_shema_array){
     document.getElementById(enable_search_shema_array[index]).checked = true;
   }
 
+  // iterate through values
+  // set operands
+  // set values
   for (var class_id in value_array){
     for (var index in value_array[class_id]){
       var operand = operand_array[class_id][index];
@@ -37,52 +46,6 @@ function fill_search_input_shema_with_filename_data_list(filename_data_list) {
       }
     }
   }
-
-  // for (var array_index in filename_data_list[root_key]) {
-
-  //   var filename_data = filename_data_list[root_key][array_index];
-  //   var path = filename_data["path_source"];
-  //   var index = array_index;
-
-
-  //   // open details tag
-  //   if (document.getElementById("file_details" + index)) {
-  //     index = get_index_of_filename_input_by_path(path);
-  //     document.getElementById("file_details" + index).setAttribute("open", "open");
-  //   }
-
-  //   // iterate through filename data list
-  //   for (key in filename_data) {
-
-  //     if(key == "error") {
-  //       document.getElementById("file_details" + index).className += "error";
-  //       continue;
-  //     }
-
-  //     // if key of filename data list is checkbox (flag option)
-  //     // use different value and id
-  //     // set data in checkbox elementfilename_data_lis
-  //     if (typeof filename_data[key] == 'object') {
-  //       for (inner_key in filename_data[key]) {
-  //         id = filename_data[key][inner_key];
-  //         if(key == "Filename_Shema_Flag"){
-  //           id += index;
-  //         }
-  //         value = filename_data[key][inner_key];
-  //         set_data_in_element(id, value);
-  //       }
-  //     }
-
-  //     // if key of filename data list is not flag
-  //     // create id and value
-  //     // set data in element
-  //     else {
-  //       value = filename_data[key];
-  //       id = key + index;
-  //       set_data_in_element(id, value);
-  //     }
-  //   }
-  // }
 }
 
 

@@ -1,5 +1,92 @@
 
 // fill data in shema input with data from data list
+function fill_search_input_shema_with_filename_data_list(filename_data_list) {
+  var id, value;
+  root_key = "file_data_list";
+  root_sub_key = 1000000;
+  operand_key = "operand";
+  value_key = "value";
+  enable_search_shema_key = "enable_search_shema";
+
+  var operand_array = filename_data_list[root_key][root_sub_key][operand_key];
+  var value_array = filename_data_list[root_key][root_sub_key][value_key];
+  var enable_search_shema_array = filename_data_list[root_key][root_sub_key][enable_search_shema_key];
+
+
+  for(var index in enable_search_shema_array){
+    document.getElementById(enable_search_shema_array[index]).checked = true;
+  }
+
+  for (var class_id in value_array){
+    for (var index in value_array[class_id]){
+      var operand = operand_array[class_id][index];
+      var operand_element = $("[name*="+operand_key+"]."+class_id+root_sub_key);
+      var value = value_array[class_id][index];
+      var value_element = $("[name*="+value_key+"]."+class_id+root_sub_key);
+
+      if(class_id == "Filename_Shema_Flag"){
+        value_element = $("[value*="+value+"]."+class_id+root_sub_key);
+        operand_element = $(value_element).siblings("[name*="+operand_key+"]."+class_id+root_sub_key);
+      }
+      operand_element.val(operand);
+      if (value_element[0].tagName == "INPUT" && value_element.attr("type") == "checkbox"){
+        value_element.attr("checked","checked");
+      }
+      else {
+        value_element.val(value);
+      }
+    }
+  }
+
+  // for (var array_index in filename_data_list[root_key]) {
+
+  //   var filename_data = filename_data_list[root_key][array_index];
+  //   var path = filename_data["path_source"];
+  //   var index = array_index;
+
+
+  //   // open details tag
+  //   if (document.getElementById("file_details" + index)) {
+  //     index = get_index_of_filename_input_by_path(path);
+  //     document.getElementById("file_details" + index).setAttribute("open", "open");
+  //   }
+
+  //   // iterate through filename data list
+  //   for (key in filename_data) {
+
+  //     if(key == "error") {
+  //       document.getElementById("file_details" + index).className += "error";
+  //       continue;
+  //     }
+
+  //     // if key of filename data list is checkbox (flag option)
+  //     // use different value and id
+  //     // set data in checkbox elementfilename_data_lis
+  //     if (typeof filename_data[key] == 'object') {
+  //       for (inner_key in filename_data[key]) {
+  //         id = filename_data[key][inner_key];
+  //         if(key == "Filename_Shema_Flag"){
+  //           id += index;
+  //         }
+  //         value = filename_data[key][inner_key];
+  //         set_data_in_element(id, value);
+  //       }
+  //     }
+
+  //     // if key of filename data list is not flag
+  //     // create id and value
+  //     // set data in element
+  //     else {
+  //       value = filename_data[key];
+  //       id = key + index;
+  //       set_data_in_element(id, value);
+  //     }
+  //   }
+  // }
+}
+
+
+// fill data in shema input with data from data list
 function fill_input_shema_with_filename_data_list(filename_data_list) {
   var id, value;
   root_key = "file_data_list";
@@ -152,9 +239,6 @@ function copyToClipboard(element) {
 function add_search_input_with_plus_button(element){
   var parent = element.closest('.additional_input_root')
   var parent_clone = parent.clone();
-  // var checkbox = parent.siblings('input[type=checkbox]:first');
-  // var checkbox_clone = checkbox.clone();
-  // checkbox_clone.insertAfter(parent);
   parent_clone.insertAfter(parent);
 }
 
@@ -164,8 +248,5 @@ function remove_search_input_with_minus_button(element){
   if($('.'+class_name).length > 1){
     var parent = element.closest('.additional_input_root');
     parent.remove();
-    // var checkbox = parent.siblings('input[type=checkbox]:first');
-    // var checkbox_clone = checkbox.clone();
-    // checkbox_clone.insertAfter(parent);
   }
 }

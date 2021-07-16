@@ -22,7 +22,7 @@ abstract class Filename_Shema_Long_Description extends Compareable_Text_Optinal_
   # input shema template for search ui
   private const search_input_shema_template = '
     <div class="container_label_and_input additional_input_root">
-      <label for="'.self::class.'%1$d">Weitere Informationen</label>
+      <label for="'.self::class.'%1$d">Weitere Informationen (optional)</label>
       <select class="%3$s_operand%1$d %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
         %4$s
       </select>

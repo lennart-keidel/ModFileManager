@@ -235,6 +235,30 @@ abstract class Ui {
   }
 
 
+  # print js code to fill search shema input with received data from filename after page load
+  public static function fill_search_input_shema_with_filename_data_list(array $filename_data_list) : void {
+
+    $js_template_code = '
+    <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      var filename_data_list = %1$s;
+      fill_search_input_shema_with_filename_data_list(filename_data_list);
+    });
+    </script>
+    ';
+
+    try {
+      $filename_data_list_as_json = json_encode($filename_data_list);
+    }
+    catch(Exception $e){
+      throw new Ui_Exception("Fehler beim Verarbeiten der ausgelesenen Daten. Die ausgelesenen Daten konnten nicht nach JSON konvertiert werden.\\nHier die PHP-Fehlermeldung: ".$e->getMessage(), false);
+      return;
+    }
+
+    printf($js_template_code, $filename_data_list_as_json);
+  }
+
+
   # print input shema by filename data list and print js code to fill it with the data
   protected static function print_input_shema_for_filename_data_list(array $filename_data_list) : void {
     foreach($filename_data_list[self::ui_data_key_root] as $filename_data_for_one_file){

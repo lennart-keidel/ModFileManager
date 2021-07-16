@@ -358,7 +358,7 @@ abstract class Main {
     # print search input
     if($_SESSION[Ui::ui_path_source_root_option_mode_key] === Ui::ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data){
       Ui::print_filename_shema_search_input();
-      Ui::fill_input_shema_with_filename_data_list([Ui::ui_data_key_root => $_SESSION[Ui::ui_search_data_key_root]]);
+      Ui::fill_search_input_shema_with_filename_data_list([Ui::ui_data_key_root => $_SESSION[Ui::ui_search_data_key_root]]);
     }
 
     # if data for files exists in session

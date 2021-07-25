@@ -31,12 +31,12 @@ class Ui_Failed_Files_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -47,12 +47,12 @@ class Ui_Failed_Files_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];

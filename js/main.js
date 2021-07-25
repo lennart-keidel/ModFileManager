@@ -28,6 +28,9 @@ function fill_search_input_shema_with_filename_data_list(filename_data_list) {
   // set values
   for (var class_id in value_array){
     for (var index in value_array[class_id]){
+      if(index > 0){
+        add_search_input_with_plus_button();
+      }
       var operand = operand_array[class_id][index];
       var operand_element = $("[name*="+operand_key+"]."+class_id+root_sub_key);
       var value = value_array[class_id][index];
@@ -38,7 +41,7 @@ function fill_search_input_shema_with_filename_data_list(filename_data_list) {
         operand_element = $(value_element).siblings("[name*="+operand_key+"]."+class_id+root_sub_key);
       }
       operand_element.val(operand);
-      if (value_element[0].tagName == "INPUT" && value_element.attr("type") == "checkbox"){
+      if (value_element[index].tagName == "INPUT" && value_element.attr("type") == "checkbox"){
         value_element.attr("checked","checked");
       }
       else {
@@ -85,7 +88,7 @@ function fill_input_shema_with_filename_data_list(filename_data_list) {
             id += index;
           }
           value = filename_data[key][inner_key];
-          set_data_in_element(id, value);
+          set_data_in_element_by_id(id, value);
         }
       }
 
@@ -95,7 +98,7 @@ function fill_input_shema_with_filename_data_list(filename_data_list) {
       else {
         value = filename_data[key];
         id = key + index;
-        set_data_in_element(id, value);
+        set_data_in_element_by_id(id, value);
       }
     }
   }
@@ -117,7 +120,7 @@ function get_index_of_filename_input_by_path(path) {
 
 
 // set data in element
-function set_data_in_element(id, value) {
+function set_data_in_element_by_id(id, value) {
   var element = document.getElementById(id);
 
   // if element is checkbox
@@ -131,6 +134,28 @@ function set_data_in_element(id, value) {
   else {
     element.value = value;
   }
+}
+
+
+// set data in element
+function set_data_in_element_by_class(class_name, value) {
+  var element_array = document.getElementsByClassName(class_name);
+
+  for(index in element_array){
+    element = element_array[index];
+    // if element is checkbox
+    // set checked instead of value
+    if (element.tagName == "INPUT" && element.getAttribute("type") == "checkbox") {
+      element.checked = true;
+    }
+
+    // if element is not checkbox
+    // set value
+    else {
+      element.value = value;
+    }
+  }
+
 }
 
 

@@ -4,6 +4,12 @@ abstract class File_Handler {
 
   public const fileextension_filter = ["sims3pack", "package"];
   public const path_seperator = "\\"; # path seperator, different in windows than in macOs or linux
+  private static $ui_data = [];
+
+  # set ui_data to intern variable
+  public static function set_ui_data(array $ui_data) : void {
+    self::$ui_data = $ui_data;
+  }
 
   # get list of filenames and filter for fileextensions
   # return array in format: [path => [filename1, filename2]]
@@ -184,13 +190,44 @@ abstract class File_Handler {
   }
 
 
+  # get one filename data array by filtering by source path of file
+  private static function get_filename_data_from_one_file_by_source_path(string $source_path) : array {
+    foreach(self::$ui_data[Ui::ui_data_key_root] as $filename_data_for_one_file){
+      if($filename_data_for_one_file[Ui::ui_key_path_source] === $source_path){
+        return $filename_data_for_one_file;
+      }
+    }
+    return $filename_data_for_one_file;
+  }
+
+
+  # get target path
+  # call get_target_path_by_condition of the specific class
+  private static function get_target_path(string $path, array $filename_data_for_one_file) : string {
+    unset($filename_data_for_one_file[Ui::ui_key_path_source]);
+    foreach($filename_data_for_one_file as $class_reference => $value){
+      $new_path = $class_reference::get_target_path_by_condition($filename_data_for_one_file);
+      if(empty($new_path) === false){
+        $path = $new_path;
+      }
+    }
+    return $path;
+  }
+
+
   # rename files form filename list
   # in format [ path => [ old_filename => new_filename ] ]
   public static function rename_file_from_filename_list(array $filename_list) : void {
     foreach($filename_list as $path => $array_filename){
       foreach($array_filename as $old_filename => $new_filename){
         File_Handler_Exception::set_source_path($path);
-        File_Handler::rename_file($path.self::path_seperator.$old_filename, $path.self::path_seperator.$new_filename);
+        if(isset(self::$ui_data[Ui::ui_key_auto_move_file]) === true){
+          $target_path = self::get_target_path($path, self::get_filename_data_from_one_file_by_source_path($path.self::path_seperator.$old_filename));
+        }
+        else {
+          $target_path = $path;
+        }
+        File_Handler::rename_file($path.self::path_seperator.$old_filename, $target_path.self::path_seperator.$new_filename);
       }
     }
   }

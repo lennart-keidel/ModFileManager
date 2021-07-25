@@ -85,11 +85,6 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
   ';
 
 
-  private const input_shema_search_template = '
-
-  ';
-
-
   # convert data collected from ui to usable data for following process
   public static function convert_ui_data_to_data(array $data_from_ui) : array {
 
@@ -157,6 +152,13 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     $operand_select_option_html = Ui::generate_search_operand_select_options_ui(self::class);
     $additional_search_buttons = Ui::generate_additional_search_buttons_ui(self::class);
     printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $additional_search_buttons);
+  }
+
+
+  # get target path considering the conditions of this shema input
+  public static function get_target_path_by_condition(array $data_for_one_filename) : string {
+    Ui::print_error("jey");
+    return "C:\Users\U\Desktop";
   }
 
 }

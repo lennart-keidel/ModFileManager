@@ -56,12 +56,12 @@ class Filename_Shema_Flag_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/d/526207/more-traits-for-all-ages.html",
+      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/d/526207/more-traits-for-all-ages.html",
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -71,14 +71,14 @@ class Filename_Shema_Flag_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Flag_Data_Option_Depends_On_Expansion" => "ep11",
+      "Sub_Data_Flag_Depends_On_Expansion" => "ep11",
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
         // "option_install_in_packages",
         "option_is_essential"
       ],
-      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -88,14 +88,14 @@ class Filename_Shema_Flag_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Flag_Data_Option_Depends_On_Expansion" => "sp09",
+      "Sub_Data_Flag_Depends_On_Expansion" => "sp09",
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
         "option_install_in_overrides",
         "option_is_essential"
       ],
-      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -116,7 +116,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
@@ -124,7 +124,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "no_flag_option_selected",
         "option_is_essential"
       ],
-      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -136,7 +136,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Flag_Data_Option_Depends_On_Expansion" => "ep01",
+      "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
@@ -158,7 +158,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         // "option_install_in_packages",
         "option_is_essential"
       ],
-      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -170,14 +170,14 @@ class Filename_Shema_Flag_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Flag_Data_Option_Depends_On_Expansion" => "sp99",
+      "Sub_Data_Flag_Depends_On_Expansion" => "sp99",
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
         // "option_install_in_packages",
         "option_is_essential"
       ],
-      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -195,7 +195,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         // "option_install_in_packages",
         "option_is_e"
       ],
-      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -213,7 +213,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_overrides",
         "option_install_in_overrides",
       ],
-      "Flag_Data_Option_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -476,7 +476,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     assertIsArray($data_from_filename[$main_key]);
     assertCount(1, $data_from_filename[$main_key]);
     assertContains("option_depends_on_expansion",$data_from_filename[$main_key]);
-    assertTrue($data_from_filename["Flag_Data_Option_Depends_On_Expansion"] === "sp09");
+    assertTrue($data_from_filename["Sub_Data_Flag_Depends_On_Expansion"] === "sp09");
   }
 
 
@@ -502,7 +502,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     assertIsArray($data_from_filename[$main_key]);
     assertCount(1, $data_from_filename[$main_key]);
     assertContains("option_depends_on_expansion",$data_from_filename[$main_key]);
-    assertTrue($data_from_filename["Flag_Data_Option_Depends_On_Expansion"] === "sp07");
+    assertTrue($data_from_filename["Sub_Data_Flag_Depends_On_Expansion"] === "sp07");
   }
 
 
@@ -561,7 +561,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     assertCount(2, $data_from_filename);
     assertCount(2, $data_from_filename[$main_key]);
     assertFalse(in_array("option_depends_on_content", $data_from_filename[$main_key]));
-    assertFalse(in_array("Flag_Data_Option_Depends_On_Content", $data_from_filename));
+    assertFalse(in_array("Sub_Data_Flag_Depends_On_Content", $data_from_filename));
     $output = $this->getActualOutput();
     assertIsString($output);
     assertNotEquals("", $output);

@@ -48,6 +48,8 @@ abstract class Ui {
 
   public const ui_key_enable_search_shema = "enable_search_shema";
 
+  public const ui_key_auto_move_file = "auto_move_file";
+
   # html template for error messages
   private const template_error_message = '<script>console.log("%1$s");alert("%1$s")</script>';
 
@@ -170,6 +172,12 @@ abstract class Ui {
   # template for buttons to remove additional search input
   private const search_remove_additional_input_buttons_template = '<button type="button" class="%2$s%1$d search_minus_button" onclick="remove_search_input_with_minus_button($(this))">-</button>'."\n";
 
+  # template for checkbox to auto move file
+  private const template_auto_move_file = '
+  <input type="checkbox" class="%2$s" name="%2$s" id="%2$s%1$d" value="%2$s">
+  <label for="%2$s%1$d">Datei automatisch zum Installationsort verschieben</label>
+  ';
+
 
   public static $out_input_shema_index = 0;
 
@@ -194,6 +202,7 @@ abstract class Ui {
       $class_name::print_filename_shema_input_for_ui(self::$out_input_shema_index);
     }
     printf(self::template_shema_input_submit_button, "");
+    printf(self::template_auto_move_file, "", self::ui_key_auto_move_file);
     printf(self::template_shema_input_form_end, "");
     printf(self::template_shema_input_container_end,"");
     self::$out_input_shema_index++;
@@ -259,6 +268,23 @@ abstract class Ui {
   }
 
 
+  # print js code to fill search shema input with received data from filename after page load
+  public static function print_set_data_in_element_by_class(string $id, mixed $value) : void {
+
+    $js_template_code = '
+    <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      var id = "%1$s";
+      var value = "%2$s";
+      set_data_in_element_by_class(id, value);
+    });
+    </script>
+    ';
+
+    printf($js_template_code, $id, $value);
+  }
+
+
   # print input shema by filename data list and print js code to fill it with the data
   protected static function print_input_shema_for_filename_data_list(array $filename_data_list) : void {
     foreach($filename_data_list[self::ui_data_key_root] as $filename_data_for_one_file){
@@ -282,6 +308,7 @@ abstract class Ui {
     $source_path_value = (isset($_COOKIE[self::ui_path_source_root_key]) === true ? str_replace("+"," ",$_COOKIE[self::ui_path_source_root_key]) : "");
     printf(self::input_path_source_template, self::$out_input_shema_index, $source_path_value);
     printf(self::template_source_input_submit_button, "");
+    printf(self::template_auto_move_file, "", self::ui_key_auto_move_file);
     printf(self::template_source_input_form_end, "");
   }
 
@@ -339,7 +366,7 @@ abstract class Ui {
 
 
   # print error message as js alert
-  public static function print_error(string $message, string $class_name) : void {
+  public static function print_error(string $message, string $class_name = "") : void {
     if(!empty($message) && in_array($class_name, self::$dont_print_errors_from_this_exceptions) === false){
       printf(self::template_error_message, $message);
     }

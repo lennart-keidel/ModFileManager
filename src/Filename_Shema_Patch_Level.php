@@ -225,6 +225,12 @@ abstract class Filename_Shema_Patch_Level extends Compareable_Number_Operand imp
     printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $additional_search_buttons);
   }
 
+
+  # get target path considering the conditions of this shema input
+  public static function get_target_path_by_condition(array $data_for_one_filename) : string {
+    return "";
+  }
+
 }
 
 ?>

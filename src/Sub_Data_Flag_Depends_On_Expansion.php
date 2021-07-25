@@ -2,7 +2,7 @@
 
 # this class is only required for a clean structuring of the ui and filename data
 # it's only for ment to be a sub class of Filename_Shema_Flag
-abstract class Flag_Data_Option_Depends_On_Expansion extends Compareable_Is_Operand implements I_Filename_Shema {
+abstract class Sub_Data_Flag_Depends_On_Expansion extends Compareable_Is_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
     self::class
@@ -106,6 +106,12 @@ abstract class Flag_Data_Option_Depends_On_Expansion extends Compareable_Is_Oper
   public static function generate_filename_shema_search_input_for_ui(int $index) : string {
     $operand_select_option_html = Ui::generate_search_operand_select_options_ui(self::class);
     return sprintf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html);
+  }
+
+
+  # get target path considering the conditions of this shema input
+  public static function get_target_path_by_condition(array $data_for_one_filename) : string {
+    return "";
   }
 
 }

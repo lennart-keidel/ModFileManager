@@ -25,7 +25,7 @@ abstract class Main {
     7 => "Flag"
   ];
 
-  public static function handle_ui_data(array $ui_data=[]) : void {
+  public static function handle_ui_data(array $ui_data) : void {
 
     # reset POST and GET array
     $_POST = [];
@@ -233,6 +233,7 @@ abstract class Main {
       #    data of failed filename creations is stored in $failed_filename_data
       # store data from error filenames in session
       try {
+        File_Handler::set_ui_data($ui_data);
         File_Handler::rename_file_from_filename_list($new_filename_list);
       }
       catch(Exception $exception){
@@ -342,6 +343,10 @@ abstract class Main {
     if(isset($_SESSION[Ui::ui_path_source_root_option_mode_key]) === false && isset($ui_data[Ui::ui_source_input_key_root][Ui::ui_path_source_root_option_mode_key]) === true){
       $_SESSION[Ui::ui_path_source_root_option_mode_key] = $ui_data[Ui::ui_source_input_key_root][Ui::ui_path_source_root_option_mode_key];
     }
+
+    if(isset($ui_data[Ui::ui_key_auto_move_file]) === true){
+      $_SESSION[Ui::ui_key_auto_move_file] = $ui_data[Ui::ui_key_auto_move_file];
+    }
   }
 
 
@@ -369,6 +374,12 @@ abstract class Main {
     # if source existing in session data
     if(isset($_SESSION[Ui::ui_file_list_key_root]) === true && empty($_SESSION[Ui::ui_file_list_key_root]) === false){
       Ui::print_filename_shema_input_for_filename_list($_SESSION[Ui::ui_file_list_key_root]);
+    }
+
+    # if auto move file is enabled
+    # print js for enabling checkbox on all file inputs
+    if(isset($_SESSION[Ui::ui_key_auto_move_file]) === true && empty($_SESSION[Ui::ui_key_auto_move_file]) === false){
+      Ui::print_set_data_in_element_by_class(Ui::ui_key_auto_move_file, true);
     }
 
     # print delete session button

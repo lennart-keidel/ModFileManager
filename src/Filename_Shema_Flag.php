@@ -52,10 +52,10 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   # format: option-value => key or sub-content in ui-data
   public const array_ui_data_key_sub_data = [
     "option_depends_on_expansion" => [
-      "Flag_Data_Option_Depends_On_Expansion"
+      "Sub_Data_Flag_Depends_On_Expansion"
     ],
     "option_depends_on_content" => [
-      "Flag_Data_Option_Depends_On_Content"
+      "Sub_Data_Flag_Depends_On_Content"
     ]
   ];
 
@@ -524,9 +524,9 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
 
   # print filename shema input to ui
   public static function print_filename_shema_input_for_ui(int $index) : void {
-    $flag_data_option_depends_on_content_input_html = Flag_Data_Option_Depends_On_Content::generate_filename_shema_input_for_ui($index);
-    $flag_data_option_depends_on_expansion_input_html = Flag_Data_Option_Depends_On_Expansion::generate_filename_shema_input_for_ui($index);
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class, $flag_data_option_depends_on_content_input_html, $flag_data_option_depends_on_expansion_input_html);
+    $sub_data_flag_depends_on_content_input_html = Sub_Data_Flag_Depends_On_Content::generate_filename_shema_input_for_ui($index);
+    $sub_data_flag_depends_on_expansion_input_html = Sub_Data_Flag_Depends_On_Expansion::generate_filename_shema_input_for_ui($index);
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class, $sub_data_flag_depends_on_content_input_html, $sub_data_flag_depends_on_expansion_input_html);
   }
 
 
@@ -534,9 +534,9 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   public static function print_filename_shema_search_input_for_ui(int $index) : void {
     $operand_select_option_html = Ui::generate_search_operand_select_options_ui(self::class);
     $additional_search_buttons = Ui::generate_additional_search_buttons_ui(self::class);
-    $flag_data_option_depends_on_content_input_html = Flag_Data_Option_Depends_On_Content::generate_filename_shema_search_input_for_ui($index);
-    $flag_data_option_depends_on_expansion_input_html = Flag_Data_Option_Depends_On_Expansion::generate_filename_shema_search_input_for_ui($index);
-    printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $additional_search_buttons, $flag_data_option_depends_on_content_input_html, $flag_data_option_depends_on_expansion_input_html);
+    $sub_data_flag_depends_on_content_input_html = Sub_Data_Flag_Depends_On_Content::generate_filename_shema_search_input_for_ui($index);
+    $sub_data_flag_depends_on_expansion_input_html = Sub_Data_Flag_Depends_On_Expansion::generate_filename_shema_search_input_for_ui($index);
+    printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $additional_search_buttons, $sub_data_flag_depends_on_content_input_html, $sub_data_flag_depends_on_expansion_input_html);
   }
 
 
@@ -556,6 +556,12 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
         }
       ]
     ];
+  }
+
+
+  # get target path considering the conditions of this shema input
+  public static function get_target_path_by_condition(array $data_for_one_filename) : string {
+    return "";
   }
 
 }

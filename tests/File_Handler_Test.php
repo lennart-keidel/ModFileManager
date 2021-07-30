@@ -34,6 +34,7 @@ class File_Handler_Test extends TestCase {
   private $get_fileextension_from_path_input_and_expected_output = [
     "/a/b/filename.txt" => "txt",
     "filename.txt" => "txt",
+    "filename.TxT" => "txt",
     "a.txt" => "txt",
     ".hidden_filename.txt" => "txt",
     ".hidden_filename_wihout_filextension" => "",

@@ -227,8 +227,11 @@ abstract class Filename_Shema_Patch_Level extends Compareable_Number_Operand imp
 
 
   # get target path considering the conditions of this shema input
-  public static function get_target_path_by_condition(array $data_for_one_filename) : string {
-    return "";
+  public static function get_target_path_by_condition(array $data_for_one_filename, string $source_path) : array {
+    $path_result = "";
+    $success_heading = "";
+    $error_heading = "";
+    return [$path_result, $success_heading, $error_heading];
   }
 
 }

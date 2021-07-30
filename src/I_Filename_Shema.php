@@ -22,7 +22,7 @@ Interface I_Filename_Shema {
   public static function print_filename_shema_search_input_for_ui(int $index) : void;
 
   # get target path considering the conditions of this shema input
-  public static function get_target_path_by_condition(array $data_for_one_filename) : string;
+  public static function get_target_path_by_condition(array $data_for_one_filename, string $source_path) : array;
 }
 
 ?>

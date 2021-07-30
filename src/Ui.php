@@ -202,7 +202,7 @@ abstract class Ui {
       $class_name::print_filename_shema_input_for_ui(self::$out_input_shema_index);
     }
     printf(self::template_shema_input_submit_button, "");
-    printf(self::template_auto_move_file, "", self::ui_key_auto_move_file);
+    printf(self::template_auto_move_file, self::$out_input_shema_index, self::ui_key_auto_move_file);
     printf(self::template_shema_input_form_end, "");
     printf(self::template_shema_input_container_end,"");
     self::$out_input_shema_index++;

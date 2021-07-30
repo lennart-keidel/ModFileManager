@@ -23,9 +23,16 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     "option_cc_script" => "CCSCR",
     "option_cc_buy" => "CCBUY",
     "option_cc_build" => "CCBUI",
-    "option_other" => "OTH",
     "option_fix" => "FIX",
     "option_mod_tuning" => "MODTUN",
+    "option_pattern" => "PATTN",
+    "option_store" => "STORE",
+    "option_music" => "MUSIC",
+    "option_lot" => "LOT",
+    "option_household" => "HSHLD",
+    "option_world" => "WORLD",
+    "option_cas_sim" => "CASSIM",
+    "option_other" => "OTH",
   ];
 
   # input shema template for ui
@@ -39,15 +46,24 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_cc_build">Custom Content Objekt für Baumodus</option>
           <option value="option_cc_script">Custom Content Objekt mit eigenem Script/Funktion</option>
           <option value="option_cc_create_a_sim">Cutom Content für Create-A-Sim</option>
+          <option value="option_pattern">Muster für Create-A-Style</option>
+          <option value="option_store">Store-Content</option>
         </optgroup>
         <optgroup label="Mod">
           <option value="option_tuning">Tuning</option>
+          <option value="option_script">Script-Mod</option>
           <option value="option_default_replacemant">Default Replacemant</option>
           <option value="option_fix">Fix</option>
-          <option value="option_script">Script-Mod</option>
           <option value="option_mod_create_a_sim">Slider oder Mod für Create-A-Sim</option>
           <option value="option_core_mod">Core Mod</option>
           <option value="option_mod_tuning">Mod Tuning</option>
+          <option value="option_music">Soundtrack oder Radio Musik</option>
+        </optgroup>
+        <optgroup label="Download">
+          <option value="option_lot">Grundstück</option>
+          <option value="option_household">Haushalt</option>
+          <option value="option_world">Welt</option>
+          <option value="option_cas_sim">gespeicherter Sim für Create-A-Sim (SavedSims)</option>
         </optgroup>
         <option value="option_other">keine der anderen Kategorien</option>
       </select>
@@ -67,16 +83,25 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_cc_buy">Custom Content Objekt für Kaufmodus</option>
           <option value="option_cc_build">Custom Content Objekt für Baumodus</option>
           <option value="option_cc_script">Custom Content Objekt mit eigenem Script/Funktion</option>
-          <option value="option_cc_create_a_sim">Cutom Content für Create-A-Sim</option>
+          <option value="option_cc_create_a_sim">Custom Content für Create-A-Sim</option>
+          <option value="option_pattern">Muster für Create-A-Style</option>
+          <option value="option_store">Store-Content</option>
         </optgroup>
         <optgroup label="Mod">
           <option value="option_tuning">Tuning</option>
+          <option value="option_script">Script-Mod</option>
           <option value="option_default_replacemant">Default Replacemant</option>
           <option value="option_fix">Fix</option>
-          <option value="option_script">Script-Mod</option>
           <option value="option_mod_create_a_sim">Slider oder Mod für Create-A-Sim</option>
           <option value="option_core_mod">Core Mod</option>
           <option value="option_mod_tuning">Mod Tuning</option>
+          <option value="option_music">Soundtrack oder Radio Musik</option>
+        </optgroup>
+        <optgroup label="Download">
+          <option value="option_lot">Grundstück</option>
+          <option value="option_household">Haushalt</option>
+          <option value="option_world">Welt</option>
+          <option value="option_cas_sim">gespeicherter Sim für Create-A-Sim (SavedSims)</option>
         </optgroup>
         <option value="option_other">keine der anderen Kategorien</option>
       </select>
@@ -99,7 +124,6 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
       $data_from_ui[$key]
     ];
   }
-
 
 
   # convert data to filename part using this shema
@@ -156,9 +180,86 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
 
 
   # get target path considering the conditions of this shema input
-  public static function get_target_path_by_condition(array $data_for_one_filename) : string {
-    Ui::print_error("jey");
-    return "C:\Users\U\Desktop";
+  public static function get_target_path_by_condition(array $data_for_one_filename, string $source_path) : array {
+    $path_result = "";
+    $success_heading = "";
+    $error_heading = "";
+    $path_base = File_Handler::get_path_home_directory().File_Handler::path_seperator."Documents".File_Handler::path_seperator."Electronic Arts".File_Handler::path_seperator."The Sims 3";
+    $categorie_value = $data_for_one_filename[current(self::array_ui_data_key)];
+    if(
+    $categorie_value == "option_default_replacemant"
+    || $categorie_value == "option_tuning"
+    || $categorie_value == "option_script"
+    || $categorie_value == "option_mod_create_a_sim"
+    || $categorie_value == "option_cc_create_a_sim"
+    || $categorie_value == "option_cc_script"
+    || $categorie_value == "option_cc_buy"
+    || $categorie_value == "option_cc_build"
+    || $categorie_value == "option_fix"
+    || $categorie_value == "option_mod_tuning"
+    || $categorie_value == "option_pattern"
+    || $categorie_value == "option_store"
+    || $categorie_value == "option_music"
+    ){
+      $success_heading = "Refresh-Button in CC-Magic ausführen damit die neue Datei geladen wird.";
+      $path_result = $path_base.File_Handler::path_seperator."Downloads";
+    }
+
+    elseif($categorie_value == "option_lot"){
+      if(File_Handler::get_fileextension_from_path($source_path) === "sims3pack"){
+        $error_heading = "Grundstücke im Sims3Pack-Dateiformart müssen über den Sims-3-Launcher <span style='text-decoration:underline;'>manuell</span> installiert werden.";
+        $path_result = "";
+      }
+      if(File_Handler::get_fileextension_from_path($source_path) === "package"){
+        $path_result = $path_base.File_Handler::path_seperator."Library";
+      }
+      else {
+        $path_result = "";
+      }
+    }
+
+    elseif($categorie_value == "option_household"){
+      if(File_Handler::get_fileextension_from_path($source_path) === "sims3pack"){
+        $error_heading = "Haushalte im Sims3Pack-Dateiformart müssen über den Sims-3-Launcher <span style='text-decoration:underline;'>manuell</span> installiert werden.";
+        $path_result = "";
+      }
+      if(File_Handler::get_fileextension_from_path($source_path) === "package"){
+        $path_result = $path_base.File_Handler::path_seperator."Library";
+      }
+      else {
+        $path_result = "";
+      }
+    }
+
+    elseif($categorie_value == "option_world"){
+      if(File_Handler::get_fileextension_from_path($source_path) === "sims3pack"){
+        $error_heading = "Welten müssen über den Sims-3-Launcher <span style='text-decoration:underline;'>manuell</span> installiert werden.";
+      }
+      else {
+        $error_heading = "Welten können nur im Sims3Pack-Dateiformat und über den Sims-3-Launcher <span style='text-decoration:underline;'>manuell</span> installiert werden.";
+      }
+      $path_result = "";
+    }
+
+    elseif($categorie_value == "option_cas_sim"){
+      if(File_Handler::get_fileextension_from_path($source_path) === "package"){
+        $path_result = $path_base.File_Handler::path_seperator."SavedSims";
+      }
+      else {
+        $error_heading = "gespeicherte Sims für Create-A-Sim können nur im Package-Dateiformat installiert werden";
+        $path_result = "";
+      }
+    }
+
+    elseif($categorie_value == "option_core_mod"){
+      $path_result = $path_base.File_Handler::path_seperator."Mods".File_Handler::path_seperator."Packages";
+    }
+
+    elseif($categorie_value == "option_other"){
+      $path_result = "";
+    }
+
+    return [$path_result, $success_heading, $error_heading];
   }
 
 }

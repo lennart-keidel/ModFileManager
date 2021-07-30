@@ -560,8 +560,22 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
 
 
   # get target path considering the conditions of this shema input
-  public static function get_target_path_by_condition(array $data_for_one_filename) : string {
-    return "";
+  public static function get_target_path_by_condition(array $data_for_one_filename, string $source_path) : array {
+    $path_result = "";
+    $success_heading = "";
+    $error_heading = "";
+    $path_base = File_Handler::get_path_home_directory().File_Handler::path_seperator."Documents".File_Handler::path_seperator."Electronic Arts".File_Handler::path_seperator."The Sims 3";
+    $flag_value = $data_for_one_filename[current(self::array_ui_data_key)];
+    if(in_array("option_install_in_overrides", $flag_value)){
+      if(File_Handler::get_fileextension_from_path($source_path) !== "package"){
+        $error_heading = "Dateien im Overrides-Ordner müssen im Package-Dateiformat sein.";
+        $path_result = "";
+      }
+      else {
+        $path_result = $path_base.File_Handler::path_seperator."Mods".File_Handler::path_seperator."Overrides";
+      }
+    }
+    return [$path_result, $success_heading, $error_heading];
   }
 
 }

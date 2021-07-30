@@ -91,7 +91,7 @@ abstract class File_Handler {
     if($pos_dot === 0 || $pos_dot === false){
       return "";
     }
-    return substr($filename, $pos_dot+1);
+    return strtolower(substr($filename, $pos_dot+1));
   }
 
 
@@ -203,15 +203,30 @@ abstract class File_Handler {
 
   # get target path
   # call get_target_path_by_condition of the specific class
-  private static function get_target_path(string $path, array $filename_data_for_one_file) : string {
+  private static function get_target_path(string $source_path, array $filename_data_for_one_file) : string {
     unset($filename_data_for_one_file[Ui::ui_key_path_source]);
+    $result_path = dirname($source_path);
+    $success_heading = "";
+    $error_heading = "";
     foreach($filename_data_for_one_file as $class_reference => $value){
-      $new_path = $class_reference::get_target_path_by_condition($filename_data_for_one_file);
-      if(empty($new_path) === false){
-        $path = $new_path;
+      list($new_path, $new_success_heading, $new_error_heading) = $class_reference::get_target_path_by_condition($filename_data_for_one_file, $source_path);
+      if(empty($new_path) === false || empty($new_error_heading) === false || empty($new_success_heading) === false){
+        $success_heading = $new_success_heading;
+        $error_heading = $new_error_heading;
+        $result_path = $new_path;
       }
     }
-    return $path;
+    if(empty($success_heading) === false){
+      Ui::print_success_heading($success_heading);
+    }
+    if(empty($error_heading) === false){
+      Ui::print_error_heading($error_heading);
+    }
+    if(empty($result_path) === true){
+      $result_path = dirname($source_path);
+    }
+
+    return $result_path;
   }
 
 
@@ -220,14 +235,19 @@ abstract class File_Handler {
   public static function rename_file_from_filename_list(array $filename_list) : void {
     foreach($filename_list as $path => $array_filename){
       foreach($array_filename as $old_filename => $new_filename){
+        $path_original_filename = $path.self::path_seperator.$old_filename;
         File_Handler_Exception::set_source_path($path);
         if(isset(self::$ui_data[Ui::ui_key_auto_move_file]) === true){
-          $target_path = self::get_target_path($path, self::get_filename_data_from_one_file_by_source_path($path.self::path_seperator.$old_filename));
+          $target_path = self::get_target_path($path_original_filename, self::get_filename_data_from_one_file_by_source_path($path_original_filename));
         }
         else {
           $target_path = $path;
         }
-        File_Handler::rename_file($path.self::path_seperator.$old_filename, $target_path.self::path_seperator.$new_filename);
+
+        if($target_path !== $path){
+          Ui::print_success_heading("Datei wurde automatisch nach $target_path verschoben.");
+        }
+        File_Handler::rename_file($path_original_filename, $target_path.self::path_seperator.$new_filename);
       }
     }
   }
@@ -240,6 +260,18 @@ abstract class File_Handler {
       $path = substr($path, 0, strlen($path)-1);
     }
     return $path;
+  }
+
+
+  # return path to home directory
+  # specific for each system
+  # if path_seperator is / -> it's unix based system
+  # else it's windows
+  public static function get_path_home_directory() : string {
+    if(self::path_seperator === "/"){
+      return getenv("HOME");
+    }
+    return getenv("USERPROFILE");
   }
 
 

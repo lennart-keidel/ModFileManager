@@ -136,8 +136,11 @@ abstract class Filename_Shema_Installation_Date extends Compareable_Date_Operand
 
 
   # get target path considering the conditions of this shema input
-  public static function get_target_path_by_condition(array $data_for_one_filename) : string {
-    return "";
+  public static function get_target_path_by_condition(array $data_for_one_filename, string $source_path) : array {
+    $path_result = "";
+    $success_heading = "";
+    $error_heading = "";
+    return [$path_result, $success_heading, $error_heading];
   }
 
 }

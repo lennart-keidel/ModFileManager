@@ -367,7 +367,7 @@ abstract class Ui {
 
   # print error message as js alert
   public static function print_error(string $message, string $class_name = "") : void {
-    if(!empty($message) && in_array($class_name, self::$dont_print_errors_from_this_exceptions) === false){
+    if(empty($message) === false && in_array($class_name, self::$dont_print_errors_from_this_exceptions) === false){
       printf(self::template_error_message, $message);
     }
   }

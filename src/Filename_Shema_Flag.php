@@ -9,6 +9,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   # array of valid flag options
   private const array_ui_data_option_valid = [
     "option_install_in_overrides",
+    "option_not_merge",
     // "option_install_in_packages",
     "option_depends_on_content",
     "option_depends_on_expansion",
@@ -22,8 +23,9 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   # short id for each valid flag-option
   public const array_option_short_id = [
     "option_install_in_overrides" => "O",
+    "option_not_merge" => "M",
     // "option_install_in_packages" => "P",
-    "option_depends_on_content" => "D",
+    "option_depends_on_content" => "C",
     "option_depends_on_expansion" => "E",
     "option_is_essential" => "V",
     "no_flag_option_selected" => "I"
@@ -37,6 +39,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     // ],
     "no_flag_option_selected" => [
       "option_install_in_overrides",
+      "option_not_merge",
       // "option_install_in_packages",
       "option_depends_on_content",
       "option_depends_on_expansion",
@@ -68,6 +71,10 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   <div class="container_label_and_input">
     <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
     <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
+  </div>
+  <div class="container_label_and_input">
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_not_merge%1$d" value="option_not_merge">
+    <label for="option_not_merge%1$d">darf nicht mit anderen Dateien gemerget werden</label>
   </div>
   '.
   // <div class="container_label_and_input">
@@ -131,6 +138,13 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     </select>
     <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides" onclick="disable_input_by_id_name_if_source_element_is_not_checked(\'option_install_in_overrides%1$d\',\'%3$s_operand%1$d_deaktivate_1\');">
     <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
+  </div>
+  <div class="container_label_and_input">
+    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_1" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+      %4$s
+    </select>
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_not_merge%1$d" value="option_not_merge" onclick="disable_input_by_id_name_if_source_element_is_not_checked(\'option_not_merge%1$d\',\'%3$s_operand%1$d_deaktivate_1\');">
+    <label for="option_not_merge%1$d">darf nicht mit anderen Dateien gemerget werden</label>
   </div>
   '.
   // <div class="container_label_and_input">
@@ -281,6 +295,13 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     return $result;
   }
 
+  # convert data to file for install in ovverides flag option
+  private static function convert_data_to_filename_option_not_merge(array $data, string $option_key) : string {
+    $result = "";
+    $result .= self::array_option_short_id[$option_key];
+    return $result;
+  }
+
   # convert data to file for install in packages flag option
   // private static function convert_data_to_filename_option_install_in_packages(array $data, string $option_key) : string {
   //   $result = "";
@@ -364,6 +385,10 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     foreach($filename_as_array as $filename_flag_part){
 
       $short_id = substr($filename_flag_part,0,1);
+      if(in_array($short_id,self::array_option_short_id) === false){
+        throw new Shema_Exception("Fehler beim Auslesen der Daten.\\nDas Flag '$short_id' im Dateinamen ist nicht gültig. Das Flag '$short_id' wird daher für diese Datei übersprungen.", false);
+        continue;
+      }
       $option = array_search($short_id, self::array_option_short_id);
 
       # if flag not valid, skip this flag for this file
@@ -391,32 +416,32 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
 
     # error if flag option not valid
     if($option === false){
-      new Shema_Exception("Fehler beim Auslesen der Daten.\\nDas Flag '$short_id' im Dateinamen ist nicht gültig. Das Flag '$short_id' wird daher für diese Datei übersprungen.", false);
+      throw new Shema_Exception("Fehler beim Auslesen der Daten.\\nDas Flag '$short_id' im Dateinamen ist nicht gültig. Das Flag '$short_id' wird daher für diese Datei übersprungen.", false);
       return false;
     }
 
     # if no-options-selected flag
     # error if no-options-selected flag but additional flags are available
     if($option === self::default_flag_if_no_options_selected && count($filename_as_array) > 1){
-      new Shema_Exception("Fehler beim Auslesen der Daten.\\nDas Flag '$short_id' im Dateinamen darf nur existieren, wenn kein Flag für diese Datei gewählt wurde. Das Flag '$short_id' wird für diese Datei übersprungen und die restlichen Flags und deren Daten bleiben erhalten.", false);
+      throw new Shema_Exception("Fehler beim Auslesen der Daten.\\nDas Flag '$short_id' im Dateinamen darf nur existieren, wenn kein Flag für diese Datei gewählt wurde. Das Flag '$short_id' wird für diese Datei übersprungen und die restlichen Flags und deren Daten bleiben erhalten.", false);
       return false;
     }
 
     # if option has duplicate in result
     if(in_array($option, $result_stored_options) === true){
-      new Shema_Exception("Fehler beim Auslesen der Daten.\\nDas Flag '$short_id' ist doppelt vorhanden. Das zweite Flag '$short_id' wird für diese Datei übersprungen.", false);
+      throw new Shema_Exception("Fehler beim Auslesen der Daten.\\nDas Flag '$short_id' ist doppelt vorhanden. Das zweite Flag '$short_id' wird für diese Datei übersprungen.", false);
       return false;
     }
 
     # if flag requires sub data, but no so sub data existing
     if(isset(self::array_ui_data_key_sub_data[$option]) && strlen($filename_flag_part) <= 1) {
-      new Shema_Exception("Fehler beim Auslesen der Daten.\\nDas Shema sieht für das Flag '$short_id' weitere Daten vor, doch im Dateinamen sind keine für dieses Flag vorhanden. Das Flag '$short_id' wird daher für diese Datei übersprungen.", false);
+      throw new Shema_Exception("Fehler beim Auslesen der Daten.\\nDas Shema sieht für das Flag '$short_id' weitere Daten vor, doch im Dateinamen sind keine für dieses Flag vorhanden. Das Flag '$short_id' wird daher für diese Datei übersprungen.", false);
       return false;
     }
 
     # if no so sub data required, but sub data is existing
     if(isset(self::array_ui_data_key_sub_data[$option]) === false && strlen($filename_flag_part) > 1){
-      new Shema_Exception("Fehler beim Auslesen der Daten.\\nDas Shema sieht für das Flag '$short_id' keine weitere Daten vor, doch im Dateinamen sind für dieses Flag vorhanden weitere Daten vorhanden. Die weiteren Daten unter dem Flag '$short_id' werden für diese Datei ignoriert.", false);
+      throw new Shema_Exception("Fehler beim Auslesen der Daten.\\nDas Shema sieht für das Flag '$short_id' keine weitere Daten vor, doch im Dateinamen sind für dieses Flag vorhanden weitere Daten vorhanden. Die weiteren Daten unter dem Flag '$short_id' werden für diese Datei ignoriert.", false);
       return true;
     }
 
@@ -425,6 +450,10 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
 
 
   private static function convert_filename_to_data_option_install_in_overrides(string $filename_part, array &$array_result) : bool {
+    return true;
+  }
+
+  private static function convert_filename_to_data_option_not_merge(string $filename_part, array &$array_result) : bool {
     return true;
   }
 
@@ -568,11 +597,20 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     $flag_value = $data_for_one_filename[current(self::array_ui_data_key)];
     if(in_array("option_install_in_overrides", $flag_value)){
       if(File_Handler::get_fileextension_from_path($source_path) !== "package"){
-        $error_heading = "Dateien im Overrides-Ordner müssen im Package-Dateiformat sein.";
+        $error_heading = "nur Package-Dateien können in den Mods/Overrides-Ordner verschoben werden.";
         $path_result = "";
       }
       else {
         $path_result = $path_base.File_Handler::path_seperator."Mods".File_Handler::path_seperator."Overrides";
+      }
+    }
+
+    if(in_array("option_not_merge", $flag_value) === true){
+      if(in_array("option_install_in_overrides", $flag_value) === false){
+        $path_result = $path_base.File_Handler::path_seperator."Mods".File_Handler::path_seperator."Packages";
+      }
+      if(File_Handler::get_fileextension_from_path($source_path) !== "package"){
+        $error_heading = "Package-Dateien können in den Mods/Packages-Ordner verschoben werden.";
       }
     }
     return [$path_result, $success_heading, $error_heading];

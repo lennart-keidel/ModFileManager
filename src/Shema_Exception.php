@@ -32,7 +32,7 @@ class Shema_Exception extends Exception implements I_Custom_Exception {
 
   # print error to ui
   public function print_error(string $message) : void {
-    if(empty($message)){
+    if(empty($message) === true){
       $message = $this->$message;
     }
     if(empty(self::$path) === false){

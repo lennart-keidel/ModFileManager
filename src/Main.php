@@ -5,12 +5,12 @@ abstract class Main {
   public const shema_order_global = [
     0 => "Categorie",
     1 => "Description",
-    2 => "Link",
-    3 => "Patch_Level",
-    4 => "Installation_Date",
-    5 => "Flag",
-    6 => "Creator",
-    7 => "Long_Description"
+    2 => "Patch_Level",
+    3 => "Installation_Date",
+    4 => "Flag",
+    5 => "Creator",
+    6 => "Long_Description",
+    7 => "Link",
   ];
 
 
@@ -22,7 +22,7 @@ abstract class Main {
     4 => "Long_Description",
     5 => "Patch_Level",
     6 => "Installation_Date",
-    7 => "Flag"
+    7 => "Flag",
   ];
 
   public static function handle_ui_data(array $ui_data) : void {

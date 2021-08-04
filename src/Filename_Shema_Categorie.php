@@ -6,6 +6,9 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     self::class
   ];
 
+  # string-delimiter to connect flag-segments in filename
+  public const filename_flag_delimiter = "_";
+
   # format-string to use with printf to print in ui
   private const string_ui_format = "<span>%s</span>";
 
@@ -31,15 +34,23 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     "option_lot" => "LOT",
     "option_household" => "HSHLD",
     "option_world" => "WORLD",
-    "option_cas_sim" => "CASSIM",
+    "option_cas_sim" => "SIMCAS",
     "option_other" => "OTH",
+  ];
+
+  # array of option-values and their keys for sub-content in ui-data
+  # format: option-value => key or sub-content in ui-data
+  public const array_ui_data_key_sub_data = [
+    "option_cc_create_a_sim" => [
+      "Sub_Data_Categorie_CCCAS_Gender"
+    ],
   ];
 
   # input shema template for ui
   private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="'.self::class.'%1$d">Kategorie</label>
-      <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.self::class.']" required>
+      <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.self::class.']" required onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_gender%1$d\');">
         <option value="" selected disabled>Auswählen</option>
         <optgroup label="CC">
           <option value="option_cc_buy">Custom Content Objekt für Kaufmodus</option>
@@ -68,13 +79,15 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
         <option value="option_other">keine der anderen Kategorien</option>
       </select>
     </div>
+
+    %4$s
   ';
 
   # input shema template for search ui
   private const search_input_shema_template = '
-    <div class="container_label_and_input additional_input_root">
+    <div class="container_label_and_input additional_input_root %3$s_root%1$d">
       <label for="'.self::class.'%1$d">Kategorie</label>
-      <select class="%3$s_operand%1$d %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+      <select class="%3$s_operand%1$d %3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
         %4$s
       </select>
       <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" required>
@@ -106,7 +119,9 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
         <option value="option_other">keine der anderen Kategorien</option>
       </select>
       %5$s
+      %6$s
     </div>
+
   ';
 
 
@@ -167,7 +182,8 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
 
   # print filename shema input to ui
   public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class);
+    $sub_data_cccas_gender = Sub_Data_Categorie_CCCAS_Gender::generate_filename_shema_input_for_ui($index);
+    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class, $sub_data_cccas_gender);
   }
 
 
@@ -175,7 +191,8 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
   public static function print_filename_shema_search_input_for_ui(int $index) : void {
     $operand_select_option_html = Ui::generate_search_operand_select_options_ui(self::class);
     $additional_search_buttons = Ui::generate_additional_search_buttons_ui(self::class);
-    printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $additional_search_buttons);
+    $sub_data_cccas_gender = Sub_Data_Categorie_CCCAS_Gender::generate_filename_shema_search_input_for_ui($index);
+    printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $additional_search_buttons, $sub_data_cccas_gender);
   }
 
 

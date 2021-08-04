@@ -27,7 +27,7 @@ abstract class Search_Shema {
     foreach(self::$search_value_array as $search_ui_key => $search_value_array_for_this_key){
       foreach($search_value_array_for_this_key as $index => $search_value){
         $search_operand = self::$search_operand_array[$search_ui_key][$index];
-        $value_to_compare = array_key_exists($search_ui_key, $filename_data_for_one_input) === true ? $filename_data_for_one_input[$search_ui_key] : "";
+        $value_to_compare = array_key_exists($search_ui_key, $filename_data_for_one_input) === true ? $filename_data_for_one_input[$search_ui_key] : [];
         if($search_ui_key::search_compare($search_value, $search_operand, $value_to_compare, $search_ui_key) === true){
           if(self::$search_connector === "or"){
             return true;

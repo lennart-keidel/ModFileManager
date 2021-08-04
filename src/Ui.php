@@ -83,8 +83,8 @@ abstract class Ui {
   ';
 
   private const search_disable_input_template = '
-  <script>window.addEventListener("load", function () {disable_input_by_class_name_if_source_element_is_not_checked("'.self::ui_key_enable_search_shema.'%1$d", "%2$s%3$d");});</script>
-  <input type="checkbox" name="search['.self::ui_search_index.']['.self::ui_key_enable_search_shema.'][]" value="'.self::ui_key_enable_search_shema.'%1$d" class="'.self::ui_key_enable_search_shema.'" id="'.self::ui_key_enable_search_shema.'%1$d" onclick="disable_input_by_class_name_if_source_element_is_not_checked(\''.self::ui_key_enable_search_shema.'%1$d\', \'%2$s%3$d\')">
+  <script>window.addEventListener("load", function () {disable_input_by_class_name_if_source_element_is_not_checked("'.self::ui_key_enable_search_shema.'%1$d", "%2$s_root%3$d");});</script>
+  <input type="checkbox" name="search['.self::ui_search_index.']['.self::ui_key_enable_search_shema.'][]" value="'.self::ui_key_enable_search_shema.'%1$d" class="'.self::ui_key_enable_search_shema.'" id="'.self::ui_key_enable_search_shema.'%1$d" onclick="disable_input_by_class_name_if_source_element_is_not_checked(\''.self::ui_key_enable_search_shema.'%1$d\', \'%2$s_root%3$d\')">
   ';
 
   # html template for begin/end of shema input container
@@ -98,7 +98,7 @@ abstract class Ui {
 
   # html template for begin/end of shema input form
   private const template_source_input_form_begin = '
-  <form class="source_input" method="post" action=".">
+  <form class="source_input" method="post" action="." autocomplete="on">
   ';
   private const template_source_input_form_end = '
   </form>
@@ -106,7 +106,7 @@ abstract class Ui {
 
   # html template for begin/end of shema input form
   private const template_shema_input_form_begin = '
-  <form class="shema_input" method="post" action=".">
+  <form class="shema_input" method="post" action="." autocomplete="on">
   ';
   private const template_shema_input_form_end = '
   </form>
@@ -114,7 +114,7 @@ abstract class Ui {
 
   # html template for begin/end of shema search form
   private const template_shema_search_input_form_begin = '
-  <form class="shema_search" method="post" action=".">
+  <form class="shema_search" method="post" action="." autocomplete="on">
   ';
   private const template_shema_search_input_form_end = '
   </form>

@@ -72,6 +72,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
     <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
   </div>
+
   <div class="container_label_and_input">
     <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_not_merge%1$d" value="option_not_merge">
     <label for="option_not_merge%1$d">darf nicht mit anderen Dateien gemerget werden</label>
@@ -125,13 +126,15 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
         disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\',\'option_depends_on_content%1$d\');
         disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\',\'option_depends_on_expansion%1$d\');
         disable_input_by_id_name_if_source_element_is_not_checked(\'option_install_in_overrides%1$d\',\'%3$s_operand%1$d_deaktivate_1\');
-        disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\',\'%3$s_operand%1$d_deaktivate_2\');
-        disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\',\'%3$s_operand%1$d_deaktivate_3\');
-        disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_essential%1$d\',\'%3$s_operand%1$d_deaktivate_4\');
+        disable_input_by_id_name_if_source_element_is_not_checked(\'option_not_merge%1$d\',\'%3$s_operand%1$d_deaktivate_2\');
+        disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\',\'%3$s_operand%1$d_deaktivate_3\');
+        disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\',\'%3$s_operand%1$d_deaktivate_4\');
+        disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_essential%1$d\',\'%3$s_operand%1$d_deaktivate_5\');
       },100);
     });
   </script>
-  <span class="toggle_rowbreak additional_input_root"></span>
+
+  <span class="toggle_rowbreak additional_input_root %3$s_root%1$d"></span>
   <div class="container_label_and_input">
     <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_1" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
       %4$s
@@ -139,11 +142,12 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides" onclick="disable_input_by_id_name_if_source_element_is_not_checked(\'option_install_in_overrides%1$d\',\'%3$s_operand%1$d_deaktivate_1\');">
     <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
   </div>
-  <div class="container_label_and_input">
-    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_1" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+
+  <div class="container_label_and_input %3$s_root%1$d">
+    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_2" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
       %4$s
     </select>
-    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_not_merge%1$d" value="option_not_merge" onclick="disable_input_by_id_name_if_source_element_is_not_checked(\'option_not_merge%1$d\',\'%3$s_operand%1$d_deaktivate_1\');">
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_not_merge%1$d" value="option_not_merge" onclick="disable_input_by_id_name_if_source_element_is_not_checked(\'option_not_merge%1$d\',\'%3$s_operand%1$d_deaktivate_2\');">
     <label for="option_not_merge%1$d">darf nicht mit anderen Dateien gemerget werden</label>
   </div>
   '.
@@ -152,31 +156,35 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   //   <label for="option_install_in_packages%1$d">muss in Packages-Ordner installiert werden</label>
   // </div>
   '
-  <div class="container_label_and_input">
-    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_2" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
-      %4$s
-    </select>
-    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_depends_on_content%1$d" value="option_depends_on_content" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\', \'option_depends_on_content%1$d\'); disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\',\'%3$s_operand%1$d_deaktivate_2\');">
-    <label for="option_depends_on_content%1$d">abhängig von anderem Mod, CC, Store oder ähnlichem</label>
-  </div>
-
-  %6$s
-
-  <div class="container_label_and_input">
+  <div class="container_label_and_input %3$s_root%1$d">
     <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_3" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
       %4$s
     </select>
-    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\', \'option_depends_on_expansion%1$d\'); disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\',\'%3$s_operand%1$d_deaktivate_3\');">
-    <label for="option_depends_on_expansion%1$d">abhängig von Erweiterungspack oder Accessoirepack</label>
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_depends_on_content%1$d" value="option_depends_on_content" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\', \'option_depends_on_content%1$d\'); disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\',\'%3$s_operand%1$d_deaktivate_3\');">
+    <label for="option_depends_on_content%1$d">abhängig von anderem Mod, CC, Store oder ähnlichem</label>
+
+    %6$s
+
   </div>
 
-  %7$s
 
-  <div class="container_label_and_input">
+  <div class="container_label_and_input %3$s_root%1$d">
     <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_4" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
       %4$s
     </select>
-    <input type="checkbox" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" class="%3$s%1$d" id="option_is_essential%1$d" value="option_is_essential" onclick="disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_essential%1$d\',\'%3$s_operand%1$d_deaktivate_4\');">
+    <input type="checkbox" class="%3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\', \'option_depends_on_expansion%1$d\'); disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\',\'%3$s_operand%1$d_deaktivate_4\');">
+    <label for="option_depends_on_expansion%1$d">abhängig von Erweiterungspack oder Accessoirepack</label>
+
+    %7$s
+
+  </div>
+
+
+  <div class="container_label_and_input %3$s_root%1$d">
+    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_5" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+      %4$s
+    </select>
+    <input type="checkbox" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" class="%3$s%1$d" id="option_is_essential%1$d" value="option_is_essential" onclick="disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_essential%1$d\',\'%3$s_operand%1$d_deaktivate_5\');">
     <label for="option_is_essential%1$d">gehört zu den absolut wichtigsten Mods/CC, die immer installiert sein sollen</label>
   </div>
   ';

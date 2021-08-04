@@ -19,7 +19,7 @@ abstract class Filename_Shema_Installation_Date extends Compareable_Date_Operand
 
   # input shema template for search ui
   private const search_input_shema_template = '
-    <div class="container_label_and_input additional_input_root">
+    <div class="container_label_and_input additional_input_root %4$s_root%1$d">
       <label for="'.self::class.'%1$d">Installationsdatum</label>
       <select class="%4$s_operand%1$d %4$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
         %5$s

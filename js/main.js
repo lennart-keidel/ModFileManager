@@ -1,6 +1,7 @@
 
 // fill data in shema input with data from data list
 function fill_search_input_shema_with_filename_data_list(filename_data_list) {
+
   var id, value;
   root_key = "file_data_list";
   root_sub_key = 1000000;
@@ -9,6 +10,9 @@ function fill_search_input_shema_with_filename_data_list(filename_data_list) {
   enable_search_shema_key = "enable_search_shema";
   search_shema_connector_key = "search_shema_connector";
 
+  if(!filename_data_list[root_key]){
+    return;
+  }
   var operand_array = filename_data_list[root_key][root_sub_key][operand_key];
   var value_array = filename_data_list[root_key][root_sub_key][value_key];
   var enable_search_shema_array = filename_data_list[root_key][root_sub_key][enable_search_shema_key];
@@ -28,14 +32,14 @@ function fill_search_input_shema_with_filename_data_list(filename_data_list) {
   // set values
   for (var class_id in value_array){
     for (var index in value_array[class_id]){
-      if(index > 0){
-        add_search_input_with_plus_button();
-      }
       var operand = operand_array[class_id][index];
       var operand_element = $("[name*="+operand_key+"]."+class_id+root_sub_key);
       var value = value_array[class_id][index];
       var value_element = $("[name*="+value_key+"]."+class_id+root_sub_key);
 
+      if(index > 0){
+        add_search_input_with_plus_button(value_element);
+      }
       if(class_id == "Filename_Shema_Flag"){
         value_element = $("[value*="+value+"]."+class_id+root_sub_key);
         operand_element = $(value_element).siblings("[name*="+operand_key+"]."+class_id+root_sub_key);
@@ -168,16 +172,19 @@ function highlight_shema_input_element(index) {
 
 // disable all elements by a class name if an checkbox element with a id is not checked
 function disable_input_by_class_name_if_source_element_is_not_checked(id_source_element, class_element_to_disable) {
-  all_elements = document.getElementsByClassName(class_element_to_disable);
-  source = document.getElementById(id_source_element);
-  for (f = 0; f < all_elements.length; f++) {
-    if (source.checked) {
-      all_elements[f].removeAttribute("disabled");
-    }
-    else {
-      all_elements[f].setAttribute("disabled", "disabled");
-    }
-  }
+  var all_elements = $("."+class_element_to_disable);
+  var source = document.getElementById(id_source_element);
+  all_elements.each(function(){
+    var current_root_element = $(this);
+    $(this).find("input, select, textarea, button").each(function(){
+      if (source.checked) {
+        $(this).removeAttr("disabled");
+      }
+      else {
+        $(this).attr("disabled", "disabled");
+      }
+    })
+  });
 }
 
 
@@ -200,6 +207,25 @@ function disable_and_hide_input_by_class_name_if_source_element_is_not_checked(i
   source = document.getElementById(id_source_element);
   for (f = 0; f < all_elements.length; f++) {
     if (source.checked) {
+      all_elements[f].removeAttribute("disabled");
+      all_elements[f].removeAttribute("required");
+      all_elements[f].style.display = "block";
+    }
+    else {
+      all_elements[f].setAttribute("disabled", "disabled");
+      all_elements[f].setAttribute("required", "required");
+      all_elements[f].style.display = "none";
+    }
+  }
+}
+
+
+// disable and hide all elements by a class name if an checkbox element with a id is not checked
+function disable_and_hide_input_by_class_name_if_source_element_is_not_selected(id_source_element, expected_value, class_elements_to_disable) {
+  all_elements = document.getElementsByClassName(class_elements_to_disable);
+  source = document.getElementById(id_source_element);
+  for (f = 0; f < all_elements.length; f++) {
+    if(source.value == expected_value){
       all_elements[f].removeAttribute("disabled");
       all_elements[f].removeAttribute("required");
       all_elements[f].style.display = "block";

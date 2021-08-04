@@ -571,7 +571,6 @@ class Filename_Shema_Flag_Test extends TestCase {
 
   public function test_convert_filename_to_data_with_wrong_data8() : void {
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename8);
-    var_dump($data_from_filename);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(3, $data_from_filename);
     assertCount(4, $data_from_filename[$main_key]);

@@ -66,7 +66,7 @@ class Filename_Shema_Categorie_Test extends TestCase {
     assertIsArray($converted_ui_data);
     assertCount(1, $converted_ui_data);
     assertIsString(current($converted_ui_data));
-    assertEquals(key($converted_ui_data),0);
+    assertEquals(key($converted_ui_data),Filename_Shema_Categorie::class);
   }
 
   public function test_convert_ui_data_to_data_with_wrong_ui_data1() : void {
@@ -74,7 +74,7 @@ class Filename_Shema_Categorie_Test extends TestCase {
     assertIsArray($converted_ui_data);
     assertCount(1, $converted_ui_data);
     assertIsString(current($converted_ui_data));
-    assertEquals(key($converted_ui_data),0);
+    assertEquals(key($converted_ui_data),Filename_Shema_Categorie::class);
   }
 
 

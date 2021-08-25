@@ -26,7 +26,7 @@ abstract class Filename_Shema_Creator extends Compareable_Text_Operand implement
       <select class="%3$s_operand%1$d %3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
         %4$s
       </select>
-      <input class="%3$s_value%1$d %3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" maxlength="'.self::max_creator_length.'" autocomplete>
+      <input class="%3$s_value%1$d %3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" maxlength="'.self::max_creator_length.'" autocomplete="on">
       %5$s
     </div>
   ';

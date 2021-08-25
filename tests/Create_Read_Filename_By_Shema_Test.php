@@ -179,11 +179,11 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
 
     $this->test_create_filename_list_by_shema_from_ui_data_expected_result = [
       "\\path\\to\\a\\dir" => [
-        "abc.sims3pack" => "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ.sims3pack",
-        "def.sims3pack" => "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ__2.sims3pack"
+        "abc.sims3pack" => "TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01__q3vcX__f0XFQ__zd5tW.sims3pack",
+        "def.sims3pack" => "TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01__q3vcX__f0XFQ__zd5tW__2.sims3pack"
       ],
       "\\path\\to\\another\\dir" => [
-        "def.package" => "DR__a_little_description__zd5tW__167__12Nov20__V__q3vcX__f0XFQ.package"
+        "def.package" => "DR__a_little_description__167__12Nov20__V__q3vcX__f0XFQ__zd5tW.package"
       ]
     ];
 
@@ -191,17 +191,17 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
     $this->test_read_data_from_filename_list_by_shema_input_and_expected_output = [
       "input" => [
         "\\path\\to\\a\\dir" => [
-          "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ.sims3pack",
-          "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ__2.sims3pack"
+          "TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01__q3vcX__f0XFQ__zd5tW.sims3pack",
+          "TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01__q3vcX__f0XFQ__zd5tW__2.sims3pack"
         ],
         "\\path\\to\\another\\dir" => [
-          "DR__a_little_description__zd5tW__167__12Nov20__V__q3vcX__f0XFQ.package"
+          "DR__a_little_description__167__12Nov20__V__q3vcX__f0XFQ__zd5tW.package"
         ]
       ],
       "expected_output" => [
         Ui::ui_data_key_root => [
           [
-            "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ.sims3pack",
+            "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01__q3vcX__f0XFQ__zd5tW.sims3pack",
             "Filename_Shema_Categorie" => "option_tuning",
             "Filename_Shema_Description" => "somtehing to do with this",
             "Filename_Shema_Link" => "https://modthesims.info/",
@@ -217,7 +217,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
             "Filename_Shema_Creator" => "Nraas",
           ],
           [
-            "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ__2.sims3pack",
+            "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01__q3vcX__f0XFQ__zd5tW__2.sims3pack",
             "Filename_Shema_Categorie" => "option_tuning",
             "Filename_Shema_Description" => "somtehing to do with this",
             "Filename_Shema_Link" => "https://modthesims.info/",
@@ -233,7 +233,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
             "Filename_Shema_Creator" => "Nraas",
           ],
           [
-            "path_source" => "\\path\\to\\another\\dir\\DR__a_little_description__zd5tW__167__12Nov20__V__q3vcX__f0XFQ.package",
+            "path_source" => "\\path\\to\\another\\dir\\DR__a_little_description__167__12Nov20__V__q3vcX__f0XFQ__zd5tW.package",
             "Filename_Shema_Categorie" => "option_default_replacemant",
             "Filename_Shema_Description" => "a little description",
             "Filename_Shema_Link" => "https://modthesims.info/",
@@ -249,15 +249,15 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
       ]
     ];
 
-    $this->wrong_filename1 = "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01.sims3pack";
+    $this->wrong_filename1 = "TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01__zd5tW.sims3pack";
 
     $this->test_read_data_from_filename_list_by_shema_wrong_data = [
       "\\path\\to\\a\\dir" => [
-        "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep01__q3vcX__f0XFQ.sims3pack",
-        "TUN__somtehing_to_do_with_this__zd5tW__167__29Oct20__Dzd5tW_Eep99__q3vcX__f0XFQ__2.sims3pack"
+        "TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01__q3vcX__f0XFQ__zd5tW.sims3pack",
+        "TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep99__q3vcX__f0XFQ__zd5tW__2.sims3pack"
       ],
       "\\path\\to\\another\\dir" => [
-        "DR__a_little_description__zd5tW__167__12Nov20__V__q3vcX__f0XFQ.package"
+        "DR__a_little_description__167__12Nov20__V__q3vcX__f0XFQ__zd5tW.package"
       ]
     ];
   }

@@ -117,11 +117,11 @@ label::selection {
 
 
 
-#delete_session_button {
+.delete_session_button {
   margin-top: 1em;
 }
 
-#delete_session_button_divider {
+.delete_session_button_divider {
   margin-top: 1em;
 }
 

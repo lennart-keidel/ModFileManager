@@ -74,9 +74,8 @@ abstract class Ui {
   ';
 
   private const search_connector_input_template = '
-  <label class="'.Search_Shema::ui_key_search_connector.'" for="'.Search_Shema::ui_key_search_connector.'">Suche verbinden mit: </label>
+  <label class="'.Search_Shema::ui_key_search_connector.'" for="'.Search_Shema::ui_key_search_connector.'%1$d">Suche verbinden mit: </label>
   <select class="'.Search_Shema::ui_key_search_connector.'" id="'.Search_Shema::ui_key_search_connector.'%1$d" name="%2$s[%1$d]['.Search_Shema::ui_key_search_connector.']" required>
-    <option value="" selected disabled>Auswählen</option>
     <option value="or" selected>Oder</option>
     <option value="and">Und</option>
   </select>
@@ -144,10 +143,9 @@ abstract class Ui {
 
   private const template_delete_session_button = '
   <form class="delete_session" method="post" action=".">
-    <button type="submit" id="delete_session_button" name="delete_session_button" onclick="return confirm(this.value);" value="alle offenen eingetragenen Daten löschen und zurück zum Anfang">alle offenen eingetragenen Daten löschen und zurück zum Anfang</button>
+    <button type="submit" class="delete_session_button" name="delete_session_button" onclick="return confirm(this.value);" value="alle offenen eingetragenen Daten löschen und zurück zum Anfang">alle offenen eingetragenen Daten löschen und zurück zum Anfang</button>
     <br>
     <br>
-    <!hr id="delete_session_button_divider">
   </form>
   ';
 
@@ -164,7 +162,7 @@ abstract class Ui {
   ';
 
   # templpate for search operand select option input
-  private const search_operand_select_option_template = '<option value="%1$s">%2$s</option>\n';
+  private const search_operand_select_option_template = '<option value="%1$s">%2$s</option>'."\n";
 
   # template for buttons to add additional search input
   private const search_add_additional_input_buttons_template = '<button type="button" class="%2$s%1$d search_plus_button" onclick="add_search_input_with_plus_button($(this))">+</button>'."\n";
@@ -296,7 +294,7 @@ abstract class Ui {
 
   # print input shema by filename data list and print js code to fill it with the data
   public static function print_input_shema_for_filename_data_list_and_fill(array $filename_data_list) : void {
-    $filename_data_list[self::ui_data_key_root] = array_values($filename_data_list[self::ui_data_key_root]); # remove bug where id for frontend starts not at 0
+    $filename_data_list[self::ui_data_key_root] = array_values($filename_data_list[self::ui_data_key_root]);
     self::print_input_shema_for_filename_data_list($filename_data_list);
     self::fill_input_shema_with_filename_data_list($filename_data_list);
   }

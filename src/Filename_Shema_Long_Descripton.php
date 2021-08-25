@@ -23,7 +23,7 @@ abstract class Filename_Shema_Long_Description extends Compareable_Text_Optinal_
   private const search_input_shema_template = '
     <div class="container_label_and_input additional_input_root %3$s_root%1$d">
       <label for="'.self::class.'%1$d">Weitere Informationen (optional)</label>
-      <select class="%3$s_operand%1$d %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+      <select class="%3$s_operand%1$d %3$s%1$d" id="'.self::class.'_operand%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
         %4$s
       </select>
       <textarea class="special_vertical_align %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" maxlength="'.self::max_long_description_length.'" cols="40" rows="1"></textarea>

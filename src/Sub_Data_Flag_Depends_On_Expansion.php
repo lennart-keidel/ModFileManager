@@ -10,9 +10,9 @@ abstract class Sub_Data_Flag_Depends_On_Expansion extends Compareable_Is_Operand
 
   # input shema template for ui
   private const input_shema_template = '
-  <div class="option_depends_on_expansion%1$d container_label_and_input sub_input">
-    <label class="option_depends_on_expansion%1$d" for="'.self::class.'%1$d">Erweiterung von dem dieser Mod, CC abhängig ist</label>
-    <select class="option_depends_on_expansion%1$d %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.self::class.']" required disabled>
+  <div class="sub_data_option_depends_on_expansion%1$d container_label_and_input sub_input">
+    <label class="sub_data_option_depends_on_expansion%1$d" for="'.self::class.'%1$d">Erweiterung von dem dieser Mod, CC abhängig ist</label>
+    <select class="sub_data_option_depends_on_expansion%1$d %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.self::class.']" required disabled>
       <option value="" selected disabled>Auswählen</option>
       <optgroup label="Erweiterungspack">
         <option value="ep01">Reiseabenteuer</option>
@@ -45,12 +45,12 @@ abstract class Sub_Data_Flag_Depends_On_Expansion extends Compareable_Is_Operand
 
   # input shema template for search ui
   private const search_input_shema_template = '
-  <div class="option_depends_on_expansion%1$d container_label_and_input sub_input">
-    <label class="option_depends_on_expansion%1$d" for="'.self::class.'%1$d">Erweiterung von dem dieser Mod, CC abhängig ist</label>
-    <select class="option_depends_on_expansion%1$d %3$s_operand%1$d %3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+  <div class="sub_data_option_depends_on_expansion%1$d container_label_and_input sub_input">
+    <label class="sub_data_option_depends_on_expansion%1$d" for="'.self::class.'%1$d">Erweiterung von dem dieser Mod, CC abhängig ist</label>
+    <select class="sub_data_option_depends_on_expansion%1$d %3$s_operand%1$d %3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
       %4$s
     </select>
-    <select class="option_depends_on_expansion%1$d %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" required disabled>
+    <select class="sub_data_option_depends_on_expansion%1$d %3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" required disabled>
       <option value="" selected disabled>Auswählen</option>
       <optgroup label="Erweiterungspack">
         <option value="ep01">Reiseabenteuer</option>

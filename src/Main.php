@@ -175,6 +175,9 @@ abstract class Main {
         foreach($filename_array as $index => $filename){
           try {
             $filename_data = Create_Read_Filename_By_Shema::read_data_from_filename_by_shema($filename);
+            if(empty($filename_data) === true){
+              continue;
+            }
             $filename_data[Ui::ui_key_path_source] = $path_directory.File_Handler::path_seperator.$filename;
             $filename_data_list[] = $filename_data;
             unset($filename_list[$path_directory][$index]);

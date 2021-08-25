@@ -31,25 +31,32 @@ function fill_search_input_shema_with_filename_data_list(filename_data_list) {
   // set operands
   // set values
   for (var class_id in value_array){
+    if(class_id != "Filename_Shema_Flag"){
+      var w = value_array[class_id].length;
+      while(w-- > 1){
+        add_search_input_with_plus_button($("[name*="+operand_key+"]."+class_id+root_sub_key)[0]);
+      }
+    }
     for (var index in value_array[class_id]){
       var operand = operand_array[class_id][index];
-      var operand_element = $("[name*="+operand_key+"]."+class_id+root_sub_key);
       var value = value_array[class_id][index];
-      var value_element = $("[name*="+value_key+"]."+class_id+root_sub_key);
-
-      if(index > 0){
-        add_search_input_with_plus_button(value_element);
-      }
       if(class_id == "Filename_Shema_Flag"){
         value_element = $("[value*="+value+"]."+class_id+root_sub_key);
         operand_element = $(value_element).siblings("[name*="+operand_key+"]."+class_id+root_sub_key);
+        index = 0;
       }
-      operand_element.val(operand);
-      if (value_element[index].tagName == "INPUT" && value_element.attr("type") == "checkbox"){
-        value_element.attr("checked","checked");
+
+      else {
+        var operand_element = $("[name*="+operand_key+"]."+class_id+root_sub_key);
+        var value_element = $("[name*="+value_key+"]."+class_id+root_sub_key);
+      }
+
+      $(operand_element[index]).val(operand);
+      if ($(value_element[index]).tagName == "INPUT" && value_element.attr("type") == "checkbox"){
+        $(value_element[index]).attr("checked","checked");
       }
       else {
-        value_element.val(value);
+        $(value_element[index]).val(value);
       }
     }
   }
@@ -58,7 +65,7 @@ function fill_search_input_shema_with_filename_data_list(filename_data_list) {
 
 // fill data in shema input with data from data list
 function fill_input_shema_with_filename_data_list(filename_data_list) {
-  var id, value;
+  var class_name, value;
   root_key = "file_data_list";
 
   for (var array_index in filename_data_list[root_key]) {
@@ -83,26 +90,26 @@ function fill_input_shema_with_filename_data_list(filename_data_list) {
       }
 
       // if key of filename data list is checkbox (flag option)
-      // use different value and id
+      // use different value and class_name
       // set data in checkbox elementfilename_data_lis
       if (typeof filename_data[key] == 'object') {
         for (inner_key in filename_data[key]) {
-          id = filename_data[key][inner_key];
+          class_name = filename_data[key][inner_key];
           if(key == "Filename_Shema_Flag"){
-            id += index;
+            class_name += index;
           }
           value = filename_data[key][inner_key];
-          set_data_in_element_by_id(id, value);
+          set_data_in_element_by_class(class_name, value);
         }
       }
 
       // if key of filename data list is not flag
-      // create id and value
+      // create class_name and value
       // set data in element
       else {
         value = filename_data[key];
-        id = key + index;
-        set_data_in_element_by_id(id, value);
+        class_name = key + index;
+        set_data_in_element_by_class(class_name, value);
       }
     }
   }
@@ -174,16 +181,23 @@ function highlight_shema_input_element(index) {
 function disable_input_by_class_name_if_source_element_is_not_checked(id_source_element, class_element_to_disable) {
   var all_elements = $("."+class_element_to_disable);
   var source = document.getElementById(id_source_element);
+
+  // anonymus function for disabeling
+  var disable = function(source, element){
+    if (source.checked) {
+      element.removeAttr("disabled");
+    }
+    else {
+      element.attr("disabled", "disabled");
+    }
+  };
+
+  // disable all elments with the class and it's child-input-elements
   all_elements.each(function(){
-    var current_root_element = $(this);
+    disable(source, $(this));
     $(this).find("input, select, textarea, button").each(function(){
-      if (source.checked) {
-        $(this).removeAttr("disabled");
-      }
-      else {
-        $(this).attr("disabled", "disabled");
-      }
-    })
+      disable(source, $(this));
+    });
   });
 }
 
@@ -227,12 +241,12 @@ function disable_and_hide_input_by_class_name_if_source_element_is_not_selected(
   for (f = 0; f < all_elements.length; f++) {
     if(source.value == expected_value){
       all_elements[f].removeAttribute("disabled");
-      all_elements[f].removeAttribute("required");
+      all_elements[f].setAttribute("required", "required");
       all_elements[f].style.display = "block";
     }
     else {
       all_elements[f].setAttribute("disabled", "disabled");
-      all_elements[f].setAttribute("required", "required");
+      all_elements[f].removeAttribute("required");
       all_elements[f].style.display = "none";
     }
   }
@@ -251,8 +265,8 @@ function copyToClipboard(element) {
 
 // add additional search input onclick on plus button
 function add_search_input_with_plus_button(element){
-  var parent = element.closest('.additional_input_root')
-  var parent_clone = parent.clone();
+  var parent = element.closest('.additional_input_root');
+  var parent_clone = $(parent).clone();
   parent_clone.insertAfter(parent);
 }
 

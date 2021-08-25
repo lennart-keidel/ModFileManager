@@ -221,39 +221,39 @@ class Filename_Shema_Flag_Test extends TestCase {
 
     $this->filename1 = "I";
 
-    $this->filename2 = "O_Dzd5tW_Eep11_V";
+    $this->filename2 = "O_Czd5tW_Eep11_V";
 
     $this->filename3 = "O";
 
-    $this->filename4 = "Dzd5tW";
+    $this->filename4 = "Czd5tW";
 
     # expansion id is uppercase, assume it's converted to lowercase
     $this->filename5 = "ESP09";
 
 
     # empty flag, that only is valid if it's the only flag
-    $this->wrong_filename1 = "Dzd5tW_Eep11_I";
+    $this->wrong_filename1 = "Czd5tW_Eep11_I";
 
     # double flag
     $this->wrong_filename2 = "Esp07_Eep01";
 
     # data for Flag that should have no data
-    $this->wrong_filename3 = "Dzd5tW_Eep11_Va";
+    $this->wrong_filename3 = "Czd5tW_Eep11_Va";
 
     # not existing short link
-    $this->wrong_filename4 = "D7qcva123asd_Eep11_V";
+    $this->wrong_filename4 = "C7qcva123asd_Eep11_V";
 
     # not existing expansion id
-    $this->wrong_filename5 = "Dzd5tW_Eep99_V";
+    $this->wrong_filename5 = "Czd5tW_Eep99_V";
 
     # no flag selected and any other flag are not combinable
-    $this->wrong_filename6 = "I_Dzd5tW_Eep01_O_V";
+    $this->wrong_filename6 = "I_Czd5tW_Eep01_O_V";
 
     # flag that requires sub data has no data
-    $this->wrong_filename7 = "D_Eep07_V";
+    $this->wrong_filename7 = "C_Eep07_V";
 
     # no flag selected and any other flag are not combinable, but in different order
-    $this->wrong_filename8 = "O_Dzd5tW_Eep01_I_V";
+    $this->wrong_filename8 = "O_Czd5tW_Eep01_I_V";
 
   }
 
@@ -482,6 +482,7 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
   public function test_convert_filename_to_data_with_wrong_data1() : void {
+    $this->expectException(Shema_Exception::class);
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename1);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(3,$data_from_filename);
@@ -495,6 +496,7 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
   public function test_convert_filename_to_data_with_wrong_data2() : void {
+    $this->expectException(Shema_Exception::class);
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename2);
     assertIsArray($data_from_filename);
     assertCount(2, $data_from_filename);
@@ -507,6 +509,7 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
   public function test_convert_filename_to_data_with_wrong_data3() : void {
+    $this->expectException(Shema_Exception::class);
     $result = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename3);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(3, $result);
@@ -544,6 +547,7 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
   public function test_convert_filename_to_data_with_wrong_data6() : void {
+    $this->expectException(Shema_Exception::class);
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename6);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(3, $data_from_filename);
@@ -556,6 +560,7 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
   public function test_convert_filename_to_data_with_wrong_data7() : void {
+    $this->expectException(Shema_Exception::class);
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename7);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(2, $data_from_filename);
@@ -570,6 +575,7 @@ class Filename_Shema_Flag_Test extends TestCase {
 
 
   public function test_convert_filename_to_data_with_wrong_data8() : void {
+    $this->expectException(Shema_Exception::class);
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->wrong_filename8);
     $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertCount(3, $data_from_filename);

@@ -9,7 +9,6 @@ abstract class Create_Read_Filename_By_Shema {
   public static function create_filename_by_shema_from_ui_data(array $ui_data_for_one_file) : string {
     $result = "";
 
-    var_dump($ui_data_for_one_file);
     Shema_Exception::set_source_path($ui_data_for_one_file[Ui::ui_key_path_source]);
     $original_fileextension = File_Handler::get_fileextension_from_path($ui_data_for_one_file[Ui::ui_key_path_source]);
     foreach(Main::shema_order_global as $shema_index => $shema_class_name){

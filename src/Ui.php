@@ -12,6 +12,8 @@ abstract class Ui {
   # ui data root key for search input
   public const ui_search_data_key_root = "search";
 
+  public const ui_url_api_cache_data_key_root = "url_api_cache";
+
   public const ui_search_index = 1000000;
 
   # ui data root key for values to search for

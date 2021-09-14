@@ -17,12 +17,12 @@ abstract class Url_Shortener_API_Handler {
 
     // Init the CURL session
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, Url_Shortener_API_Handler::api_url);
+    curl_setopt($ch, CURLOPT_URL, self::api_url);
     curl_setopt($ch, CURLOPT_HEADER, 0);            // No header in the result
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return, do not echo result
     curl_setopt($ch, CURLOPT_POST, 1);              // This is a POST request
     curl_setopt($ch, CURLOPT_POSTFIELDS, array(     // Data to POST
-            'signature'=> Url_Shortener_API_Handler::signature,
+            'signature'=> self::signature,
             'action'   => 'shorturl',
             'format'   => 'json',
             'url'      => "$ipt_long_url"
@@ -37,11 +37,11 @@ abstract class Url_Shortener_API_Handler {
 
     # error if empty response and not valid
     if(empty($response)){
-      if(Url_Shortener_API_Handler::get_http_response_code(Url_Shortener_API_Handler::api_url)){
-        throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nUrl-Shortener API unter: '".Url_Shortener_API_Handler::api_url."' gibt keinen validen HTTP-Response-Code zurück. Die Url zum Url-Shortener API funktioniert nicht mehr.\\n");
+      if(self::get_http_response_code(self::api_url)){
+        throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nUrl-Shortener API unter: '".self::api_url."' gibt keinen validen HTTP-Response-Code zurück. Die Url zum Url-Shortener API funktioniert nicht mehr.\\n");
       }
       else {
-        throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nUrl-Shortener API unter: '".Url_Shortener_API_Handler::api_url."' gibt keinen eine leere Antwort zurück. Die Url zum Url-Shortener API funktioniert nicht mehr.\\n");
+        throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nUrl-Shortener API unter: '".self::api_url."' gibt keinen eine leere Antwort zurück. Die Url zum Url-Shortener API funktioniert nicht mehr.\\n");
       }
     }
 
@@ -59,6 +59,9 @@ abstract class Url_Shortener_API_Handler {
       throw new Shema_Exception("Fehler beim Erstellen der Short-Url. Keine gültige Antwort von Url-Api erhalten.\\nEingegebene Url: '".$ipt_long_url."'\\nServer-Response: '".$response."'");
     }
 
+    # cache short url with long url in session
+    self::cache_result_in_session($data->url->keyword, $ipt_long_url);
+
     # return url short id
     return $data->url->keyword;
   }
@@ -68,14 +71,20 @@ abstract class Url_Shortener_API_Handler {
   # reverse process of short_url
   public static function expand_url(string $ipt_short_url) : string {
 
+    # return cached value if existing
+    $cached_result = self::get_cached_result_from_session($ipt_short_url);
+    if(empty($cached_result) === false){
+      return $cached_result;
+    }
+
     // Init the CURL session
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, Url_Shortener_API_Handler::api_url);
+    curl_setopt($ch, CURLOPT_URL, self::api_url);
     curl_setopt($ch, CURLOPT_HEADER, 0);            // No header in the result
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return, do not echo result
     curl_setopt($ch, CURLOPT_POST, 1);              // This is a POST request
     curl_setopt($ch, CURLOPT_POSTFIELDS, array(     // Data to POST
-            'signature'=> Url_Shortener_API_Handler::signature,
+            'signature'=> self::signature,
             'action'   => 'expand',
             'format'   => 'json',
             'shorturl' => "$ipt_short_url"
@@ -90,11 +99,11 @@ abstract class Url_Shortener_API_Handler {
 
     # error if empty response and not valid
     if(empty($response)){
-      if(Url_Shortener_API_Handler::get_http_response_code(Url_Shortener_API_Handler::api_url)){
-        throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nUrl-Shortener API unter: '".Url_Shortener_API_Handler::api_url."' gibt keinen validen HTTP-Response-Code zurück. Die Url zum Url-Shortener API funktioniert nicht mehr.\\n");
+      if(self::get_http_response_code(self::api_url)){
+        throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nUrl-Shortener API unter: '".self::api_url."' gibt keinen validen HTTP-Response-Code zurück. Die Url zum Url-Shortener API funktioniert nicht mehr.\\n");
       }
       else {
-        throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nUrl-Shortener API unter: '".Url_Shortener_API_Handler::api_url."' gibt keinen eine leere Antwort zurück. Die Url zum Url-Shortener API funktioniert nicht mehr.\\n");
+        throw new Shema_Exception("Fehler beim Erstellen der Short-Url.\\nUrl-Shortener API unter: '".self::api_url."' gibt keinen eine leere Antwort zurück. Die Url zum Url-Shortener API funktioniert nicht mehr.\\n");
       }
     }
 
@@ -112,6 +121,9 @@ abstract class Url_Shortener_API_Handler {
       throw new Shema_Exception("Fehler beim Abrufen der Short-Url durch die Short-Url-ID. Der Link ist nicht gültig. Keine gültige Antwort von Url-Api erhalten.\\nShort-Url: '".$ipt_short_url."'\\nServer-Response: '".$response."'");
     }
 
+    # cache short url and value in session
+    self::cache_result_in_session($ipt_short_url, $data->longurl);
+
     return $data->longurl;
   }
 
@@ -122,7 +134,7 @@ abstract class Url_Shortener_API_Handler {
     $short_url = "";
     if(!empty($original_text)){
       $encode = rawurlencode($original_text);
-      $short_url = Url_Shortener_API_Handler::short_url($encode);
+      $short_url = self::short_url($encode);
     }
     return $short_url;
   }
@@ -133,10 +145,22 @@ abstract class Url_Shortener_API_Handler {
   public static function expand_text(string $short_url) : string {
     $decode = "";
     if(!empty($short_url)){
-      $expand = Url_Shortener_API_Handler::expand_url($short_url);
+      $expand = self::expand_url($short_url);
       $decode = rawurldecode($expand);
     }
     return $decode;
+  }
+
+
+  # store a result in session as cache
+  public static function cache_result_in_session(string $short_url, string $value) : void {
+    $_SESSION[Ui::ui_url_api_cache_data_key_root][$short_url] = $value;
+  }
+
+
+  # get a cached result from session
+  public static function get_cached_result_from_session(string $short_url) : string {
+    return array_key_exists(Ui::ui_url_api_cache_data_key_root, $_SESSION) && array_key_exists($short_url, $_SESSION[Ui::ui_url_api_cache_data_key_root]) === true ? $_SESSION[Ui::ui_url_api_cache_data_key_root][$short_url] : "";
   }
 
 
@@ -180,7 +204,7 @@ abstract class Url_Shortener_API_Handler {
 
   # test if website exists by checking the http-response-code
   public static function test_if_url_is_valid(string $url) : bool {
-    $response_code = Url_Shortener_API_Handler::get_http_response_code($url);
+    $response_code = self::get_http_response_code($url);
     return $response_code > 100 && $response_code < 300;
   }
 

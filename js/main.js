@@ -1,6 +1,7 @@
 
-// fill data in shema input with data from data list
+// fill data in search shema input with data from data list
 function fill_search_input_shema_with_filename_data_list(filename_data_list) {
+  console.log(filename_data_list);
 
   var id, value;
   root_key = "file_data_list";
@@ -52,8 +53,8 @@ function fill_search_input_shema_with_filename_data_list(filename_data_list) {
       }
 
       $(operand_element[index]).val(operand);
-      if ($(value_element[index]).tagName == "INPUT" && value_element.attr("type") == "checkbox"){
-        $(value_element[index]).attr("checked","checked");
+      if (value_element[index].tagName == "INPUT" && $(value_element[index]).attr("type") == "checkbox"){
+        $(value_element[index]).attr("checked","true");
       }
       else {
         $(value_element[index]).val(value);
@@ -239,6 +240,7 @@ function disable_and_hide_input_by_class_name_if_source_element_is_not_selected(
   all_elements = document.getElementsByClassName(class_elements_to_disable);
   source = document.getElementById(id_source_element);
   for (f = 0; f < all_elements.length; f++) {
+    console.log(source.value, expected_value);
     if(source.value == expected_value){
       all_elements[f].removeAttribute("disabled");
       all_elements[f].setAttribute("required", "required");

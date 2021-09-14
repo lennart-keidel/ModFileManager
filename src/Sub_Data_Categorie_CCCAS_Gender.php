@@ -87,7 +87,10 @@ abstract class Sub_Data_Categorie_CCCAS_Gender extends Compareable_Is_Operand im
   private const search_input_shema_template = '
   <div class="container_label_and_input sub_input option_cc_create_a_sim_sub_data_gender%1$d">
     <label for="%3$s%1$d">Geschlecht</label>
-    <select class="%3$s%1$d option_cc_create_a_sim_sub_data_gender%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.']" id="%3$s%1$d" required>
+    <select class="%3$s_operand%1$d %3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+      %4$s
+    </select>
+    <select class="%3$s%1$d option_cc_create_a_sim_sub_data_gender%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="%3$s%1$d" required>
       <option value="" selected disabled>Auswählen</option>
       <optgroup label="Senioren">
         <option value="option_elder_female">Weiblich</option>

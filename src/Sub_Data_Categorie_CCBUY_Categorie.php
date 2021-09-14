@@ -2,7 +2,7 @@
 
 # this class is only required for a clean structuring of the ui and filename data
 # it's only for ment to be a sub class of Filename_Shema_Flag
-abstract class Sub_Data_Categorie_CCCAS_Categorie extends Compareable_Is_Operand implements I_Filename_Shema {
+abstract class Sub_Data_Categorie_CCBUY_Categorie extends Compareable_Is_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
     self::class
@@ -13,45 +13,45 @@ abstract class Sub_Data_Categorie_CCCAS_Categorie extends Compareable_Is_Operand
   # value: short id
   # SHORT IDs CAN HAVE MAX 6 CHARACTERS
   private const array_option_id = [
-    "option_top" => "TP",
-    "option_bottom" => "BT",
-    "option_outfit" => "OT",
-    "option_shoe" => "SS",
-    "option_accessories" => "AS",
-    "option_hair" => "HR",
-    "option_hair" => "HA",
-    "option_eyebrow" => "EB",
-    "option_beard" => "BD",
-    "option_bodyhear" => "BH",
-    "option_makeup" => "MP",
-    "option_tatoo" => "TO",
-    "option_other" => "OR",
+    "option_plumbing" => "PL",
+    "option_appliances" => "AP",
+    "option_surfaces" => "SU",
+    "option_comfort" => "CO",
+    "option_electronics" => "EL",
+    "option_entertainment" => "EN",
+    "option_lighting" => "LI",
+    "option_decor" => "DE",
+    "option_storage" => "ST",
+    "option_kids" => "KI",
+    "option_vehicles" => "VE",
+    "option_pets" => "PE",
+    "option_other" => "OT",
   ];
 
   # input shema template for ui
   private const input_shema_template = '
-  <div class="container_label_and_input sub_input option_cc_create_a_sim_sub_data_categorie%1$d">
-    <label for="%3$s%1$d">CAS-Kategorie</label>
-    <select class="%3$s%1$d option_cc_create_a_sim_sub_data_categorie%1$d" name="%2$s[%1$d]['.self::class.']" id="%3$s%1$d" required>
+  <div class="container_label_and_input sub_input option_cc_buy_sub_data_categorie%1$d">
+    <label for="%3$s%1$d">Buy-Kategorie</label>
+    <select class="%3$s%1$d option_cc_buy_sub_data_categorie%1$d" name="%2$s[%1$d]['.self::class.']" id="%3$s%1$d" required>
       <option value="" selected disabled>Auswählen</option>
-      <option value="option_top">Oberteil</option>
-      <option value="option_bottom">Unterteil</option>
-      <option value="option_outfit">Outfit</option>
-      <option value="option_shoe">Schuhe</option>
-      <option value="option_accessories">Accessories</option>
-      <option value="option_hair">Haare</option>
-      <option value="option_hair">Haare mit Accessories</option>
-      <option value="option_eyebrow">Augenbrauen</option>
-      <option value="option_beard">Bart</option>
-      <option value="option_bodyhear">Körperbehaarung</option>
-      <option value="option_makeup">Makeup</option>
-      <option value="option_tatoo">Tatoo</option>
+      <option value="option_plumbing">Sanitär</option>
+      <option value="option_appliances">Geräte</option>
+      <option value="option_surfaces">Oberflächen</option>
+      <option value="option_comfort">Komfort</option>
+      <option value="option_electronics">Elektronic</option>
+      <option value="option_entertainment">Unterhaltung</option>
+      <option value="option_lighting">Licht</option>
+      <option value="option_decor">Deco</option>
+      <option value="option_storage">Stauraum</option>
+      <option value="option_kids">Kinder</option>
+      <option value="option_vehicles">Fahrzeuge</option>
+      <option value="option_pets">Tiere</option>
       <option value="option_other">Other</option>
     </select>
     <script>
       document.addEventListener("DOMContentLoaded", function(){
         setTimeout(function(){
-          disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.Filename_Shema_Categorie::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_categorie%1$d\');
+          disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.Filename_Shema_Categorie::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_categorie%1$d\');
         },100);
       });
     </script>
@@ -61,31 +61,31 @@ abstract class Sub_Data_Categorie_CCCAS_Categorie extends Compareable_Is_Operand
 
   # input shema template for search ui
   private const search_input_shema_template = '
-  <div class="container_label_and_input sub_input option_cc_create_a_sim_sub_data_categorie%1$d">
-    <label for="%3$s%1$d">CAS-Kategorie</label>
+  <div class="container_label_and_input sub_input option_cc_buy_sub_data_categorie%1$d">
+    <label for="%3$s%1$d">Buy-Kategorie</label>
     <select class="%3$s_operand%1$d %3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
       %4$s
     </select>
-    <select class="%3$s%1$d option_cc_create_a_sim_sub_data_categorie%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="%3$s%1$d" required>
+    <select class="%3$s%1$d option_cc_buy_sub_data_categorie%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="%3$s%1$d" required>
       <option value="" selected disabled>Auswählen</option>
-      <option value="option_top">Oberteil</option>
-      <option value="option_bottom">Unterteil</option>
-      <option value="option_outfit">Outfit</option>
-      <option value="option_shoe">Schuhe</option>
-      <option value="option_accessories">Accessories</option>
-      <option value="option_hair">Haare</option>
-      <option value="option_hair">Haare mit Accessories</option>
-      <option value="option_eyebrow">Augenbrauen</option>
-      <option value="option_beard">Bart</option>
-      <option value="option_bodyhear">Körperbehaarung</option>
-      <option value="option_makeup">Makeup</option>
-      <option value="option_tatoo">Tatoo</option>
+      <option value="option_plumbing">Sanitär</option>
+      <option value="option_appliances">Geräte</option>
+      <option value="option_surfaces">Oberflächen</option>
+      <option value="option_comfort">Komfort</option>
+      <option value="option_electronics">Elektronic</option>
+      <option value="option_entertainment">Unterhaltung</option>
+      <option value="option_lighting">Licht</option>
+      <option value="option_decor">Deco</option>
+      <option value="option_storage">Stauraum</option>
+      <option value="option_kids">Kinder</option>
+      <option value="option_vehicles">Fahrzeuge</option>
+      <option value="option_pets">Tiere</option>
       <option value="option_other">Other</option>
     </select>
     <script>
       document.addEventListener("DOMContentLoaded", function(){
         setTimeout(function(){
-          disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.Filename_Shema_Categorie::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_categorie%1$d\');
+          disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.Filename_Shema_Categorie::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_categorie%1$d\');
         },100);
       });
     </script>

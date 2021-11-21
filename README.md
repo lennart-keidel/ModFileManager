@@ -2,11 +2,6 @@
 
 Datum Zusammenfassung: Sep 14, 2020
 Datum letzte Bearbeitung: Jan 13, 2021 1:57 AM
-Einstufung: In Bearbeitung (3-4)
-Meilenstein: https://www.notion.so/Basics-und-CC-Magic-1-431ed66fc15149fb9cf472bc16810820
-Meilenstein Datum: September 14, 2020
-Meilenstein Status: Aktiv
-Warnung: ❌ Fälligkeit überschritten
 
 [❗ CC Magic - Anleitung, sehr wichtige Erkenntnisse](https://www.notion.so/CC-Magic-Anleitung-sehr-wichtige-Erkenntnisse-eca028c6bd534e16984c7c902a43919a)
 

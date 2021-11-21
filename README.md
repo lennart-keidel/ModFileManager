@@ -1,7 +1,7 @@
 # CC-Magic - einrichten, Dateinamen festlegen,  dokumentieren, genau überlegen, wie am besten
 
 Datum Zusammenfassung: Sep 14, 2020
-Datum letzte Bearbeitung: Nov 21, 2021 4:43 PM
+Datum letzte Bearbeitung: Nov 21, 2021 4:49 PM
 
 [❗ CC Magic - Anleitung, sehr wichtige Erkenntnisse](https://www.notion.so/CC-Magic-Anleitung-sehr-wichtige-Erkenntnisse-eca028c6bd534e16984c7c902a43919a)
 

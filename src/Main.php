@@ -58,12 +58,15 @@ abstract class Main {
       # rename files with shema
       # store data for files with errors in session data, gets printed later on
       self::handle_uploaded_file_data($ui_data);
+
     }
     catch(Exception $e){
     }
 
     # print ui
     self::print_ui();
+
+    // var_dump($_SESSION);
   }
 
 
@@ -355,14 +358,20 @@ abstract class Main {
 
   private static function print_ui() : void {
 
-    Ui::print_delete_session_button();
 
     # if no source existing in session data
     if(empty($_SESSION) === true){
+      Ui::print_start_page_heading();
       Ui::print_source_path_input();
 
       # pull recent data from git on printing start page
       Git_Auto_Pull_Push::pull();
+    }
+
+    # if not start page
+    # print delete session button
+    else {
+      Ui::print_delete_session_button();
     }
 
     # if source path option mode is search
@@ -388,8 +397,24 @@ abstract class Main {
       Ui::print_set_data_in_element_by_class(Ui::ui_key_auto_move_file, true);
     }
 
+    # if not start page
     # print delete session button
-    Ui::print_delete_session_button();
+    if(empty($_SESSION) === false){
+      self::store_blacklist_entries_in_session();
+      Ui::print_delete_session_button();
+    }
+
+    # if start page
+    # print open blacklist site button, to navigate to the mod-blacklist page
+    else {
+      Ui::print_open_blacklist_site_button();
+    }
+  }
+
+
+  # store blacklist entries in session data
+  private static function store_blacklist_entries_in_session() : void {
+    $_SESSION[Ui::ui_blacklist_entries_session_key] = Blacklist::get_all_blacklist_entries();
   }
 
 

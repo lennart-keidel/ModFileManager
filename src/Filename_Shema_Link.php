@@ -61,6 +61,14 @@ abstract class Filename_Shema_Link extends Compareable_Is_Operand implements I_F
     //   throw new Shema_Exception("Fehler beim Einlesen der Daten. Der eingegebene Link ist nicht gültig.\\nHTTP-Response-Code: ".Url_Shortener_API_Handler::get_http_response_code($url).".\\nLink: '".$url."'");
     // }
 
+    # error if link is on blacklist
+    foreach($_SESSION[Ui::ui_blacklist_entries_session_key] as $entry){
+      if($entry[Blacklist::json_key_link] === $url){
+        throw new Shema_Exception("Der Link für diesen Mod befindet sich auf der Blacklist.\\nBegründung: ".$entry[Blacklist::json_key_description]);
+      }
+    }
+
+
     # create short-url-id of url
     $short_url_id = Url_Shortener_API_Handler::short_url($url);
 

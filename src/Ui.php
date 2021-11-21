@@ -12,6 +12,9 @@ abstract class Ui {
   # ui data root key for search input
   public const ui_search_data_key_root = "search";
 
+  # ui key blacklist entries
+  public const ui_blacklist_entries_session_key = "blacklist_entries";
+
   public const ui_url_api_cache_data_key_root = "url_api_cache";
 
   public const ui_search_index = 1000000;
@@ -390,6 +393,16 @@ abstract class Ui {
     $result = sprintf(self::search_add_additional_input_buttons_template, self::ui_search_index, $class_reference);
     $result .= sprintf(self::search_remove_additional_input_buttons_template, self::ui_search_index, $class_reference);
     return $result;
+  }
+
+  # print open blacklist site button, to open the blacklisting feature site
+  public static function print_open_blacklist_site_button() : void {
+    echo '<br><br><br><a href="./blacklist.php"><button>Mod-Blacklisting öffnen</button></a>';
+  }
+
+
+  public static function print_start_page_heading() : void {
+    echo "<h3>Mod-Dateinamen-Manager</h3>";
   }
 
 }

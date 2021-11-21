@@ -12,5 +12,8 @@
     "classmap": [
       "src"
     ]
+  },
+  "require": {
+    "tmd/auto-git-pull": "^2.1"
   }
 }

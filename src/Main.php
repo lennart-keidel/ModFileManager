@@ -360,6 +360,9 @@ abstract class Main {
     # if no source existing in session data
     if(empty($_SESSION) === true){
       Ui::print_source_path_input();
+
+      # pull recent data from git on printing start page
+      Git_Auto_Pull_Push::pull();
     }
 
     # if source path option mode is search

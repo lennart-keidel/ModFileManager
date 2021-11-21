@@ -17,8 +17,6 @@ require 'vendor/autoload.php';
 
 
     <?php
-      $git_auto_pull_object = new Git_Auto_Pull();
-      // $git_auto_pull_object->deploy();
       @Main::handle_ui_data($_POST);
     ?>
 

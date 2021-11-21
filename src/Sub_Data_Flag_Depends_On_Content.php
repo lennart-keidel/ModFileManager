@@ -24,7 +24,7 @@ abstract class Sub_Data_Flag_Depends_On_Content extends Compareable_Text_Operand
     <select class="sub_data_option_depends_on_content%1$d %3$s_operand%1$d %3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
       %4$s
     </select>
-    <input class="sub_data_option_depends_on_content%1$d %3$s%1$d" id="'.self::class.'%1$d" type="url" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" required disabled>
+    <input class="sub_data_option_depends_on_content%1$d %3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" required disabled>
   </div>
   ';
 

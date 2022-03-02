@@ -62,7 +62,7 @@ abstract class Ui {
   private const input_path_source_template = '
   <div class="container_label_and_input">
     <label for="input_source_path_root%1$d">Pfad zum Quellordner</label>
-    <input id="input_source_path_root%1$d" type="text" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_key.']" value="%2$s" required>
+    <input id="input_source_path_root%1$d" type="text" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_key.']" value="%2$s" size="120" required>
   </div>
   <div class="container_label_and_input">
     <input id="input_source_path_root_recursive%1$d" type="checkbox" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_recursive_key.']" value="'.self::ui_path_source_root_recursive_value.'">

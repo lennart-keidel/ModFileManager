@@ -55,6 +55,10 @@ abstract class Ui {
 
   public const ui_key_auto_move_file = "auto_move_file";
 
+  public const ui_key_auto_move_file_into_sub_dir = "auto_move_file_into_sub_dir";
+
+  public const ui_key_disable_auto_move_file = "disbale_auto_move_file";
+
   # html template for error messages
   private const template_error_message = '<script>console.log("%1$s");alert("%1$s")</script>';
 
@@ -177,9 +181,14 @@ abstract class Ui {
 
   # template for checkbox to auto move file
   private const template_auto_move_file = '
-  <input type="checkbox" class="%2$s" name="%2$s" id="%2$s%1$d" value="%2$s">
-  <label for="%2$s%1$d">Datei automatisch zum Installationsort verschieben</label>
+  <select class="%2$s" name="%2$s" id="%2$s%1$d">
+    <option value="%3$s">Datei nicht automatisch verschieben</option>
+    <option value="%2$s">Datei automatisch zum Installationsort verschieben</option>
+    <option value="%4$s">Datei automatisch in einen Sub-Ordner vom Quellordner verschieben</option>
+  </select>
   ';
+  // <input type="checkbox" class="%2$s" name="%2$s" id="%2$s%1$d" value="%2$s">
+  // <label for="%2$s%1$d">Datei automatisch zum Installationsort verschieben</label>
 
 
   public static $out_input_shema_index = 0;
@@ -205,7 +214,7 @@ abstract class Ui {
       $class_name::print_filename_shema_input_for_ui(self::$out_input_shema_index);
     }
     printf(self::template_shema_input_submit_button, "");
-    printf(self::template_auto_move_file, self::$out_input_shema_index, self::ui_key_auto_move_file);
+    printf(self::template_auto_move_file, self::$out_input_shema_index, self::ui_key_auto_move_file, self::ui_key_disable_auto_move_file, self::ui_key_auto_move_file_into_sub_dir);
     printf(self::template_shema_input_form_end, "");
     printf(self::template_shema_input_container_end,"");
     self::$out_input_shema_index++;
@@ -311,7 +320,7 @@ abstract class Ui {
     $source_path_value = (isset($_COOKIE[self::ui_path_source_root_key]) === true ? str_replace("+"," ",$_COOKIE[self::ui_path_source_root_key]) : "");
     printf(self::input_path_source_template, self::$out_input_shema_index, $source_path_value);
     printf(self::template_source_input_submit_button, "");
-    printf(self::template_auto_move_file, "", self::ui_key_auto_move_file);
+    printf(self::template_auto_move_file, "", self::ui_key_auto_move_file, self::ui_key_disable_auto_move_file, self::ui_key_auto_move_file_into_sub_dir);
     printf(self::template_source_input_form_end, "");
   }
 

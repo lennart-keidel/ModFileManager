@@ -394,7 +394,7 @@ abstract class Main {
     # if auto move file is enabled
     # print js for enabling checkbox on all file inputs
     if(isset($_SESSION[Ui::ui_key_auto_move_file]) === true && empty($_SESSION[Ui::ui_key_auto_move_file]) === false){
-      Ui::print_set_data_in_element_by_class(Ui::ui_key_auto_move_file, true);
+      Ui::print_set_data_in_element_by_class(Ui::ui_key_auto_move_file, $_SESSION[Ui::ui_key_auto_move_file]);
     }
 
     # if not start page

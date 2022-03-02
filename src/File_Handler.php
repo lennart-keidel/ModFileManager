@@ -237,13 +237,28 @@ abstract class File_Handler {
       foreach($array_filename as $old_filename => $new_filename){
         $path_original_filename = $path.self::path_seperator.$old_filename;
         File_Handler_Exception::set_source_path($path);
-        if(isset(self::$ui_data[Ui::ui_key_auto_move_file]) === true){
-          $target_path = self::get_target_path($path_original_filename, self::get_filename_data_from_one_file_by_source_path($path_original_filename));
-        }
-        else {
+
+        # don't auto move file at renaming
+        # set target path source path
+        if(self::$ui_data[Ui::ui_key_auto_move_file] === Ui::ui_key_disable_auto_move_file){
           $target_path = $path;
         }
 
+        # move file into it's specific installation directory depending on it's filenmae data and many other factors
+        # set target path to specific installation direcetory
+        if(self::$ui_data[Ui::ui_key_auto_move_file] === Ui::ui_key_auto_move_file){
+          $target_path = self::get_target_path($path_original_filename, self::get_filename_data_from_one_file_by_source_path($path_original_filename));
+        }
+
+        # create sub directory
+        # set target path to sub directory
+        if(self::$ui_data[Ui::ui_key_auto_move_file] === Ui::ui_key_auto_move_file_into_sub_dir){
+          $path_sub_dir = $path.self::path_seperator."mit MDM umbenannt";
+          mkdir($path_sub_dir);
+          $target_path = $path_sub_dir;
+        }
+
+        # log
         if($target_path !== $path){
           Ui::print_success_heading("Datei wurde automatisch nach $target_path verschoben.");
         }

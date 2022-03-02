@@ -4,6 +4,7 @@ abstract class File_Handler {
 
   public const fileextension_filter = ["sims3pack", "package"];
   public const path_seperator = "\\"; # path seperator, different in windows than in macOs or linux
+  public const sub_dir_name_for_auto_move_file_into_sub_dir = "mit MDM umbenannt";
   private static $ui_data = [];
 
   # set ui_data to intern variable
@@ -68,6 +69,12 @@ abstract class File_Handler {
       }
 
       $path_directory = File_Handler::remove_trailing_slash_from_path(dirname($file->getPathname()));
+
+      # skip files in sub-directory if sub-directory name is matching the name for auto moving files in sub directory
+      # except if the fixed name for the sub-directory is contained in the root path
+      if(strpos($path_root, self::sub_dir_name_for_auto_move_file_into_sub_dir) === false && strpos($path_directory, self::sub_dir_name_for_auto_move_file_into_sub_dir) === true){
+        continue;
+      }
       $result[$path_directory][] = $file->getFilename();
 
       # if result not empty and current path is not previous path, to sort only if all files of this directory are done
@@ -253,7 +260,7 @@ abstract class File_Handler {
         # create sub directory
         # set target path to sub directory
         if(self::$ui_data[Ui::ui_key_auto_move_file] === Ui::ui_key_auto_move_file_into_sub_dir){
-          $path_sub_dir = $path.self::path_seperator."mit MDM umbenannt";
+          $path_sub_dir = $path.self::path_seperator.self::sub_dir_name_for_auto_move_file_into_sub_dir;
           mkdir($path_sub_dir);
           $target_path = $path_sub_dir;
         }

@@ -15,7 +15,7 @@ abstract class Filename_Shema_Long_Description extends Compareable_Text_Optinal_
   private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="'.self::class.'%1$d">Weitere Informationen</label>
-      <textarea class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.self::class.']" maxlength="'.self::max_long_description_length.'" cols="40" rows="3"></textarea>
+      <textarea class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.self::class.']" %4$s maxlength="'.self::max_long_description_length.'" cols="40" rows="3"></textarea>
     </div>
   ';
 
@@ -91,8 +91,8 @@ abstract class Filename_Shema_Long_Description extends Compareable_Text_Optinal_
 
 
   # print filename shema input to ui
-  public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class);
+  public static function print_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = false) : void {
+    printf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, ($is_required === true ? "required" : ""));
   }
 
 

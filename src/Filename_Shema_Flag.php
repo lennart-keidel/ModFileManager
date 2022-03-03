@@ -69,12 +69,12 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   private const input_shema_template = '
   <span class="toggle_rowbreak"></span>
   <div class="container_label_and_input">
-    <input type="checkbox" class="%3$s%1$d option_install_in_overrides%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
+    <input type="checkbox" %6$s class="%3$s%1$d option_install_in_overrides%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
     <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
   </div>
 
   <div class="container_label_and_input">
-    <input type="checkbox" class="%3$s%1$d option_not_merge%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_not_merge%1$d" value="option_not_merge">
+    <input type="checkbox" %6$s class="%3$s%1$d option_not_merge%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_not_merge%1$d" value="option_not_merge">
     <label for="option_not_merge%1$d">darf nicht mit anderen Dateien gemerget werden</label>
   </div>
   '.
@@ -84,7 +84,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   // </div>
   '
   <div class="container_label_and_input">
-    <input type="checkbox" class="%3$s%1$d option_depends_on_content%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_depends_on_content%1$d" value="option_depends_on_content" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\', \'sub_data_option_depends_on_content%1$d\')">
+    <input type="checkbox" %6$s class="%3$s%1$d option_depends_on_content%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_depends_on_content%1$d" value="option_depends_on_content" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\', \'sub_data_option_depends_on_content%1$d\')">
     <label for="option_depends_on_content%1$d">abhängig von anderem Mod, CC, Store oder ähnlichem</label>
     <script>
       document.addEventListener("DOMContentLoaded", function(){
@@ -98,7 +98,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   %4$s
 
   <div class="container_label_and_input">
-    <input type="checkbox" class="%3$s%1$d option_depends_on_expansion%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\', \'sub_data_option_depends_on_expansion%1$d\')">
+    <input type="checkbox" %6$s class="%3$s%1$d option_depends_on_expansion%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\', \'sub_data_option_depends_on_expansion%1$d\')">
     <label for="option_depends_on_expansion%1$d">abhängig von Erweiterungspack oder Accessoirepack</label>
     <script>
       document.addEventListener("DOMContentLoaded", function(){
@@ -112,7 +112,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   %5$s
 
   <div class="container_label_and_input">
-    <input type="checkbox" name="%2$s[%1$d]['.self::class.'][]" class="%3$s%1$d option_is_essential%1$d" id="option_is_essential%1$d" value="option_is_essential">
+    <input type="checkbox" %6$s name="%2$s[%1$d]['.self::class.'][]" class="%3$s%1$d option_is_essential%1$d" id="option_is_essential%1$d" value="option_is_essential">
     <label for="option_is_essential%1$d">gehört zu den absolut wichtigsten Mods/CC, die immer installiert sein sollen</label>
   </div>
   ';
@@ -560,10 +560,10 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
 
 
   # print filename shema input to ui
-  public static function print_filename_shema_input_for_ui(int $index) : void {
-    $sub_data_flag_depends_on_content_input_html = Sub_Data_Flag_Depends_On_Content::generate_filename_shema_input_for_ui($index);
-    $sub_data_flag_depends_on_expansion_input_html = Sub_Data_Flag_Depends_On_Expansion::generate_filename_shema_input_for_ui($index);
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class, $sub_data_flag_depends_on_content_input_html, $sub_data_flag_depends_on_expansion_input_html);
+  public static function print_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = false) : void {
+    $sub_data_flag_depends_on_content_input_html = Sub_Data_Flag_Depends_On_Content::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
+    $sub_data_flag_depends_on_expansion_input_html = Sub_Data_Flag_Depends_On_Expansion::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
+    printf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, $sub_data_flag_depends_on_content_input_html, $sub_data_flag_depends_on_expansion_input_html, ($is_required === true ? "required" : ""));
   }
 
 

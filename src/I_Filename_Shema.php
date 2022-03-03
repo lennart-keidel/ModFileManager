@@ -16,7 +16,7 @@ Interface I_Filename_Shema {
   public static function print_filename_data_for_ui(array $filename_data) : void;
 
   # print filename shema input to ui
-  public static function print_filename_shema_input_for_ui(int $index) : void;
+  public static function print_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = true) : void;
 
   # print filename shema input to ui
   public static function print_filename_shema_search_input_for_ui(int $index) : void;

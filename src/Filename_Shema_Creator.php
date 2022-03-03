@@ -15,7 +15,7 @@ abstract class Filename_Shema_Creator extends Compareable_Text_Operand implement
   private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="'.self::class.'%1$d">Name des Erstellers</label>
-      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.self::class.']" maxlength="'.self::max_creator_length.'">
+      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="text" %4$s name="%2$s[%1$d]['.self::class.']" maxlength="'.self::max_creator_length.'">
     </div>
   ';
 
@@ -26,7 +26,7 @@ abstract class Filename_Shema_Creator extends Compareable_Text_Operand implement
       <select class="%3$s_operand%1$d %3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
         %4$s
       </select>
-      <input class="%3$s_value%1$d %3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" maxlength="'.self::max_creator_length.'" autocomplete="on">
+      <input class="%3$s_value%1$d %3$s%1$d" id="'.self::class.'%1$d" type="text" required name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" maxlength="'.self::max_creator_length.'" autocomplete="on">
       %5$s
     </div>
   ';
@@ -93,8 +93,8 @@ abstract class Filename_Shema_Creator extends Compareable_Text_Operand implement
 
 
   # print filename shema input to ui
-  public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class);
+  public static function print_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = true) : void {
+    printf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, ($is_required === true ? "required" : ""));
   }
 
 

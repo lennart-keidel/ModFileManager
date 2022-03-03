@@ -15,7 +15,7 @@ abstract class Filename_Shema_Description extends Compareable_Text_Operand imple
       <label for="'.self::class.'%1$d">Beschreibung
         <span class="sub">max. '.self::max_description_length.' Zeichen; Sonderzeichen werden ersetzt</span>
       </label>
-      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.self::class.']" required>
+      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.self::class.']" %4$s>
     </div>
   ';
 
@@ -123,8 +123,8 @@ abstract class Filename_Shema_Description extends Compareable_Text_Operand imple
 
 
   # print filename shema input to ui
-  public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class);
+  public static function print_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = true) : void {
+    printf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, ($is_required === true ? "required" : ""));
   }
 
 

@@ -44,6 +44,8 @@ abstract class Main {
       # store source path in cookie
       self::store_source_path_in_cookie($ui_data);
 
+      self::store_fast_edit_input_in_session($ui_data);
+
       # if source path option mode uploaded
       # store source option mode in session for later use
       self::store_source_path_and_source_options_in_session($ui_data);
@@ -124,14 +126,20 @@ abstract class Main {
   }
 
 
-  # if source path uploaded
-  # store source path in cookie
+  # if search input uploaded
+  # store search input in session
   private static function store_search_input_in_session(array $ui_data) : void {
-
-    # if source path key exists in ui data
-    # set expire date: now + 1 month
     if(isset($ui_data[Ui::ui_search_data_key_root]) === true){
       $_SESSION[Ui::ui_search_data_key_root] = $ui_data[Ui::ui_search_data_key_root];
+    }
+  }
+
+
+  # if fast edit input uploaded
+  # store fast edit data in session
+  private static function store_fast_edit_input_in_session(array $ui_data) : void {
+    if(isset($ui_data[Ui::ui_fast_edit_data_key_root]) === true){
+      $_SESSION[Ui::ui_fast_edit_data_key_root] = $ui_data[Ui::ui_fast_edit_data_key_root];
     }
   }
 
@@ -310,8 +318,10 @@ abstract class Main {
           $full_path = $path_session . File_Handler::path_seperator . $filename_session;
           if($full_path === $fe_input[UI::ui_key_path_source]){
             unset($_SESSION[UI::ui_file_list_key_root][$path_session][$key_filename_session]);
-            $new_key = count($_SESSION[UI::ui_data_key_root]);
-            $_SESSION[UI::ui_data_key_root][$new_key] = current($filename_data[UI::ui_data_key_root]);
+            if($_SESSION[UI::ui_data_key_root] === true){
+              $new_key = count($_SESSION[UI::ui_data_key_root]);
+              $_SESSION[UI::ui_data_key_root][$new_key] = current($filename_data[UI::ui_data_key_root]);
+            }
             if($is_failed_filename_data === true){
               $_SESSION[UI::ui_data_key_root][$new_key][UI::ui_key_error_flag_for_filename_data] = true;
             }
@@ -356,6 +366,7 @@ abstract class Main {
   }
 
 
+
   private static function print_ui() : void {
 
 
@@ -381,6 +392,12 @@ abstract class Main {
       Ui::fill_search_input_shema_with_filename_data_list([Ui::ui_data_key_root => $_SESSION[Ui::ui_search_data_key_root]]);
     }
 
+
+    # print fast edit input form
+    if(empty($_SESSION) === false){
+      Ui::print_filename_shema_fast_edit_input_and_fill($_SESSION);
+    }
+
     # if data for files exists in session
     if(isset($_SESSION[Ui::ui_data_key_root]) === true && empty($_SESSION[Ui::ui_data_key_root]) === false){
       Ui::print_input_shema_for_filename_data_list_and_fill($_SESSION);
@@ -392,7 +409,7 @@ abstract class Main {
     }
 
     # if auto move file is enabled
-    # print js for enabling checkbox on all file inputs
+    # print js for the right select value to all file inputs
     if(isset($_SESSION[Ui::ui_key_auto_move_file]) === true && empty($_SESSION[Ui::ui_key_auto_move_file]) === false){
       Ui::print_set_data_in_element_by_class(Ui::ui_key_auto_move_file, $_SESSION[Ui::ui_key_auto_move_file]);
     }

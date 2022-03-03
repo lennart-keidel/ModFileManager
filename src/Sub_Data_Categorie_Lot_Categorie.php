@@ -21,7 +21,7 @@ abstract class Sub_Data_Categorie_Lot_Categorie extends Compareable_Is_Operand i
   private const input_shema_template = '
   <div class="container_label_and_input sub_input option_lot_sub_data_categorie%1$d">
     <label for="%3$s%1$d">Lot-Kategorie</label>
-    <select class="%3$s%1$d option_lot_sub_data_categorie%1$d" name="%2$s[%1$d]['.self::class.']" id="%3$s%1$d" required>
+    <select class="%3$s%1$d option_lot_sub_data_categorie%1$d" name="%2$s[%1$d]['.self::class.']" id="%3$s%1$d" %4$s>
       <option value="" selected disabled>Auswählen</option>
       <option value="option_residential">Wohngrundstück</option>
       <option value="option_community">Gemeinschaftsgrundstück</option>
@@ -61,15 +61,15 @@ abstract class Sub_Data_Categorie_Lot_Categorie extends Compareable_Is_Operand i
 
 
   # print filename shema input to ui
-  public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class);
+  public static function print_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = true) : void {
+    printf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, ($is_required === true ? "required" : ""));
   }
 
 
   # generate filename shema input to ui
   # return html string
-  public static function generate_filename_shema_input_for_ui(int $index) : string {
-    return sprintf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class);
+  public static function generate_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = true) : string {
+    return sprintf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, ($is_required === true ? "required" : ""));
   }
 
 

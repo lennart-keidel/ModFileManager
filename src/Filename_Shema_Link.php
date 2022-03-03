@@ -16,7 +16,7 @@ abstract class Filename_Shema_Link extends Compareable_Is_Operand implements I_F
   private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="'.self::class.'%1$d">Link zum Mod, CC</label>
-      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="url" name="%2$s[%1$d]['.self::class.']" autocomplete="off" required>
+      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="url" name="%2$s[%1$d]['.self::class.']" autocomplete="off" $4%s>
     </div>
   ';
 
@@ -62,9 +62,11 @@ abstract class Filename_Shema_Link extends Compareable_Is_Operand implements I_F
     // }
 
     # error if link is on blacklist
-    foreach($_SESSION[Ui::ui_blacklist_entries_session_key] as $entry){
-      if($entry[Blacklist::json_key_link] === $url){
-        throw new Shema_Exception("Der Link für diesen Mod befindet sich auf der Blacklist.\\nBegründung: ".$entry[Blacklist::json_key_description]);
+    if(isset($_SESSION[Ui::ui_blacklist_entries_session_key]) === true){
+      foreach($_SESSION[Ui::ui_blacklist_entries_session_key] as $entry){
+        if($entry[Blacklist::json_key_link] === $url){
+          throw new Shema_Exception("Der Link für diesen Mod befindet sich auf der Blacklist.\\nBegründung: ".$entry[Blacklist::json_key_description]);
+        }
       }
     }
 
@@ -95,8 +97,8 @@ abstract class Filename_Shema_Link extends Compareable_Is_Operand implements I_F
 
 
   # print filename shema input to ui
-  public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class);
+  public static function print_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = true) : void {
+    printf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, ($is_required === true ? "required" : ""));
   }
 
 

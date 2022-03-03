@@ -12,6 +12,9 @@ abstract class Ui {
   # ui data root key for search input
   public const ui_search_data_key_root = "search";
 
+  # ui data root key for fast edit input
+  public const ui_fast_edit_data_key_root = "fast_edit";
+
   # ui key blacklist entries
   public const ui_blacklist_entries_session_key = "blacklist_entries";
 
@@ -19,13 +22,15 @@ abstract class Ui {
 
   public const ui_search_index = 1000000;
 
+  public const ui_fast_edit_index = 11111111;
+
   # ui data root key for values to search for
   public const ui_search_data_key_value_root = "value";
 
   # ui data root key for operands to search with
   public const ui_search_data_key_operand_root = "operand";
 
-  # ui data root key for source path input
+  # ui data root key for source path inputf
   public const ui_source_input_key_root = "source";
 
   # ui data key for source path input
@@ -114,7 +119,7 @@ abstract class Ui {
 
   # html template for begin/end of shema input form
   private const template_shema_input_form_begin = '
-  <form class="shema_input" method="post" action="." autocomplete="on">
+  <form class="shema_input%1$d" id="shema_input%1$d" method="post" action="." autocomplete="on">
   ';
   private const template_shema_input_form_end = '
   </form>
@@ -126,6 +131,35 @@ abstract class Ui {
   ';
   private const template_shema_search_input_form_end = '
   </form>
+  ';
+
+  # html template for begin/end of shema fast edit form
+  private const template_shema_fast_edit_input_form_begin = '
+  <br>
+  <br>
+  <hr>
+  <h3>Zum Kopieren der Daten</h3>
+  <form class="shema_fast_edit" id="shema_fast_edit" method="post" action="." autocomplete="on">
+  ';
+  private const template_shema_fast_edit_input_form_end = '
+  <input type="submit" value="speichern">
+  <hr>
+  <br>
+  <br>
+  </form>
+  ';
+
+  # html template for hidden input for source path
+  private const template_shema_template_button_copy_from_fast_edit_form = '
+  <br>
+  <div class="input_shema_source_path_ui">
+    <button type="button" class="copy_button_source_path_file" onclick="copy_data_from_fast_edit_form_into_file_input_form(\'#shema_fast_edit\',\'#shema_input%1$d\', false)">Daten von oben übernehmen</button>
+    <br>
+    <br>
+    <button type="button" class="copy_button_source_path_file" onclick="copy_data_from_fast_edit_form_into_file_input_form(\'#shema_fast_edit\',\'#shema_input%1$d\', true)">Daten von oben übernehmen und überschreiben</button>
+  </div>
+  <br>
+  <br>
   ';
 
   # html template for hidden input for source path
@@ -187,9 +221,6 @@ abstract class Ui {
     <option value="%4$s">Datei automatisch in einen Sub-Ordner vom Quellordner verschieben</option>
   </select>
   ';
-  // <input type="checkbox" class="%2$s" name="%2$s" id="%2$s%1$d" value="%2$s">
-  // <label for="%2$s%1$d">Datei automatisch zum Installationsort verschieben</label>
-
 
   public static $out_input_shema_index = 0;
 
@@ -206,7 +237,8 @@ abstract class Ui {
     $filename = basename($path_source);
     $dirname = dirname($path_source);
     printf(self::template_shema_input_container_begin, self::$out_input_shema_index, $filename);
-    printf(self::template_shema_input_form_begin, "");
+    printf(self::template_shema_template_button_copy_from_fast_edit_form,self::$out_input_shema_index);
+    printf(self::template_shema_input_form_begin, self::$out_input_shema_index);
     printf(self::input_shema_template_path_source, self::$out_input_shema_index, self::ui_data_key_root, $path_source);
     printf(self::template_shema_template_path_source_for_ui, self::$out_input_shema_index, $dirname);
     foreach(Main::ui_shema_order_global as $class_id){
@@ -280,6 +312,31 @@ abstract class Ui {
   }
 
 
+  # print js code to fill shema input with received data from filename after page load
+  public static function fill_fast_edit_input_shema_with_filename_data_list(array $filename_data_list) : void {
+
+    $js_template_code = '
+    <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      var filename_data_list = %1$s;
+      fill_fast_edit_input_shema_with_filename_data_list(filename_data_list);
+    });
+    </script>
+    ';
+
+    try {
+      $filename_data_list_as_json = json_encode($filename_data_list);
+    }
+    catch(Exception $e){
+      throw new Ui_Exception("Fehler beim Verarbeiten der ausgelesenen Daten. Die ausgelesenen Daten konnten nicht nach JSON konvertiert werden.\\nHier die PHP-Fehlermeldung: ".$e->getMessage(), false);
+      return;
+    }
+
+    printf($js_template_code, $filename_data_list_as_json);
+  }
+
+
+
   # print js code to fill search shema input with received data from filename after page load
   public static function print_set_data_in_element_by_class(string $id, mixed $value) : void {
 
@@ -314,6 +371,18 @@ abstract class Ui {
   }
 
 
+  # print input shema by filename data list and print js code to fill it with the data
+  public static function print_filename_shema_fast_edit_input_and_fill(array $filename_data_list) : void {
+    self::print_filename_shema_fast_edit_input();
+    if(isset($filename_data_list[self::ui_fast_edit_data_key_root]) === true){
+      // var_dump($filename_data_list[self::ui_fast_edit_data_key_root]);
+      // $filename_data_list[self::ui_fast_edit_data_key_root] = array_values($filename_data_list[self::ui_fast_edit_data_key_root]);
+      // var_dump($filename_data_list[self::ui_fast_edit_data_key_root]);
+      self::fill_fast_edit_input_shema_with_filename_data_list($filename_data_list);
+    }
+  }
+
+
   # print source path input for the root path of files
   public static function print_source_path_input() : void {
     printf(self::template_source_input_form_begin, "");
@@ -338,6 +407,17 @@ abstract class Ui {
     }
     printf(self::template_shema_search_submit_button, "");
     printf(self::template_shema_search_input_form_end,"");
+  }
+
+
+  # print shema fast edit input
+  public static function print_filename_shema_fast_edit_input() : void {
+    printf(self::template_shema_fast_edit_input_form_begin,"");
+    foreach(Main::ui_shema_order_global as $class_id){
+      $class_name = "Filename_Shema_$class_id";
+      $class_name::print_filename_shema_input_for_ui(self::ui_fast_edit_index, self::ui_fast_edit_data_key_root, false);
+    }
+    printf(self::template_shema_fast_edit_input_form_end,"");
   }
 
 

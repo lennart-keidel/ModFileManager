@@ -1,7 +1,6 @@
 
 // fill data in search shema input with data from data list
 function fill_search_input_shema_with_filename_data_list(filename_data_list) {
-  console.log(filename_data_list);
 
   var id, value;
   root_key = "file_data_list";
@@ -58,6 +57,60 @@ function fill_search_input_shema_with_filename_data_list(filename_data_list) {
       }
       else {
         $(value_element[index]).val(value);
+      }
+    }
+  }
+}
+
+
+// fill data in search shema input with data from data list
+function fill_fast_edit_input_shema_with_filename_data_list(filename_data_list) {
+
+  var class_name, value;
+  root_key = "fast_edit";
+
+  for (var array_index in filename_data_list[root_key]) {
+
+    var filename_data = filename_data_list[root_key][array_index];
+    var path = filename_data["path_source"];
+    var index = array_index;
+
+
+    // // open details tag
+    // if (document.getElementById("file_details" + index)) {
+    //   index = get_index_of_filename_input_by_path(path);
+    //   document.getElementById("file_details" + index).setAttribute("open", "open");
+    // }
+
+    // iterate through filename data list
+    for (key in filename_data) {
+
+      // if(key == "error") {
+      //   document.getElementById("file_details" + index).className += "error";
+      //   continue;
+      // }
+
+      // if key of filename data list is checkbox (flag option)
+      // use different value and class_name
+      // set data in checkbox element
+      if (typeof filename_data[key] == 'object') {
+        for (inner_key in filename_data[key]) {
+          class_name = filename_data[key][inner_key];
+          if(key == "Filename_Shema_Flag"){
+            class_name += index;
+          }
+          value = filename_data[key][inner_key];
+          set_data_in_element_by_class(class_name, value);
+        }
+      }
+
+      // if key of filename data list is not flag
+      // create class_name and value
+      // set data in element
+      else {
+        value = filename_data[key];
+        class_name = key + index;
+        set_data_in_element_by_class(class_name, value);
       }
     }
   }
@@ -223,12 +276,12 @@ function disable_and_hide_input_by_class_name_if_source_element_is_not_checked(i
   for (f = 0; f < all_elements.length; f++) {
     if (source.checked) {
       all_elements[f].removeAttribute("disabled");
-      all_elements[f].removeAttribute("required");
+      // all_elements[f].removeAttribute("required");
       all_elements[f].style.display = "block";
     }
     else {
       all_elements[f].setAttribute("disabled", "disabled");
-      all_elements[f].setAttribute("required", "required");
+      // all_elements[f].setAttribute("required", "required");
       all_elements[f].style.display = "none";
     }
   }
@@ -240,15 +293,14 @@ function disable_and_hide_input_by_class_name_if_source_element_is_not_selected(
   all_elements = document.getElementsByClassName(class_elements_to_disable);
   source = document.getElementById(id_source_element);
   for (f = 0; f < all_elements.length; f++) {
-    console.log(source.value, expected_value);
     if(source.value == expected_value){
       all_elements[f].removeAttribute("disabled");
-      all_elements[f].setAttribute("required", "required");
+      // all_elements[f].setAttribute("required", "required");
       all_elements[f].style.display = "block";
     }
     else {
       all_elements[f].setAttribute("disabled", "disabled");
-      all_elements[f].removeAttribute("required");
+      // all_elements[f].removeAttribute("required");
       all_elements[f].style.display = "none";
     }
   }
@@ -279,4 +331,36 @@ function remove_search_input_with_minus_button(element){
     var parent = element.closest('.additional_input_root');
     parent.remove();
   }
+}
+
+//
+function copy_data_from_fast_edit_form_into_file_input_form(parent_form_source, parent_form_target, override_existing_data){
+  var all_elements_source = $(parent_form_source+" input, "+parent_form_source+" select, "+parent_form_source+" textarea");
+
+  all_elements_source.each(function(){
+    var source_value = this.value;
+    var source_checked = this.checked;
+    var source_type = this.getAttribute("type");
+    if(source_value != undefined){
+      var source_id = remove_trailing_index_from_name(this.id);
+      var target_element = $(parent_form_target+" "+"*[id*="+source_id+"]");
+      var target_checked = target_element.get(0).checked;
+      if(source_type == "checkbox"){
+        if(override_existing_data === false ? source_checked == true && target_checked == false : source_checked != target_checked){
+          target_element.trigger("click");
+        }
+      }
+      else {
+        if(override_existing_data === false ? !target_element.val() : source_value){
+          target_element.val(source_value);
+          target_element.trigger("click");
+        }
+      }
+    }
+  });
+}
+
+
+function remove_trailing_index_from_name(string_name){
+  return string_name.replace(/\d+$/, "");
 }

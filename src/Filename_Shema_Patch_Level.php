@@ -13,7 +13,7 @@ abstract class Filename_Shema_Patch_Level extends Compareable_Number_Operand imp
     private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="'.self::class.'%1$d">Patch-Level</label>
-      <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.self::class.']" required>
+      <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.self::class.']" %4$s>
         <option value="1.70">1.70</option>
         <option value="1.69" selected>1.69</option>
         <option value="1.67">1.67</option>
@@ -213,8 +213,8 @@ abstract class Filename_Shema_Patch_Level extends Compareable_Number_Operand imp
 
 
   # print filename shema input to ui
-  public static function print_filename_shema_input_for_ui(int $index) : void {
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class);
+  public static function print_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = true) : void {
+    printf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, ($is_required === true ? "required" : ""));
   }
 
 

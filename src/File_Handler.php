@@ -245,29 +245,28 @@ abstract class File_Handler {
         $path_original_filename = $path.self::path_seperator.$old_filename;
         File_Handler_Exception::set_source_path($path);
 
-        # don't auto move file at renaming
         # set target path source path
-        if(self::$ui_data[Ui::ui_key_auto_move_file] === Ui::ui_key_disable_auto_move_file){
-          $target_path = $path;
-        }
+        $target_path = $path;
+        if(isset(self::$ui_data[Ui::ui_key_auto_move_file]) === true){
 
-        # move file into it's specific installation directory depending on it's filenmae data and many other factors
-        # set target path to specific installation direcetory
-        if(self::$ui_data[Ui::ui_key_auto_move_file] === Ui::ui_key_auto_move_file){
-          $target_path = self::get_target_path($path_original_filename, self::get_filename_data_from_one_file_by_source_path($path_original_filename));
-        }
+          # move file into it's specific installation directory depending on it's filenmae data and many other factors
+          # set target path to specific installation direcetory
+          if(self::$ui_data[Ui::ui_key_auto_move_file] === Ui::ui_key_auto_move_file){
+            $target_path = self::get_target_path($path_original_filename, self::get_filename_data_from_one_file_by_source_path($path_original_filename));
+          }
 
-        # create sub directory
-        # set target path to sub directory
-        if(self::$ui_data[Ui::ui_key_auto_move_file] === Ui::ui_key_auto_move_file_into_sub_dir){
-          $path_sub_dir = $path.self::path_seperator.self::sub_dir_name_for_auto_move_file_into_sub_dir;
-          mkdir($path_sub_dir);
-          $target_path = $path_sub_dir;
+          # create sub directory
+          # set target path to sub directory
+          if(self::$ui_data[Ui::ui_key_auto_move_file] === Ui::ui_key_auto_move_file_into_sub_dir){
+            $path_sub_dir = $path.self::path_seperator.self::sub_dir_name_for_auto_move_file_into_sub_dir;
+            mkdir($path_sub_dir);
+            $target_path = $path_sub_dir;
+          }
         }
 
         # log
         if($target_path !== $path){
-          Ui::print_success_heading("Datei wurde automatisch nach $target_path verschoben.");
+          Ui::print_success_heading("Datei wurde automatisch nach \"$target_path\" verschoben.");
         }
         File_Handler::rename_file($path_original_filename, $target_path.self::path_seperator.$new_filename);
       }

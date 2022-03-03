@@ -60,7 +60,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
   private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="'.self::class.'%1$d">Kategorie</label>
-      <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.self::class.']" required onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_gender%1$d\');disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_build\', \'option_cc_build_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_lot\', \'option_lot_sub_data_categorie%1$d\');">
+      <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.self::class.']" %9$s onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_gender%1$d\');disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_build\', \'option_cc_build_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_lot\', \'option_lot_sub_data_categorie%1$d\');">
         <option value="" selected disabled>Auswählen</option>
         <optgroup label="CC">
           <option value="option_cc_buy">Custom Content Objekt für Kaufmodus</option>
@@ -245,13 +245,13 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
 
 
   # print filename shema input to ui
-  public static function print_filename_shema_input_for_ui(int $index) : void {
-    $sub_data_cccas_gender = Sub_Data_Categorie_CCCAS_Gender::generate_filename_shema_input_for_ui($index);
-    $sub_data_cccas_categorie = Sub_Data_Categorie_CCCAS_Categorie::generate_filename_shema_input_for_ui($index);
-    $sub_data_ccbuy_categorie = Sub_Data_Categorie_CCBUY_Categorie::generate_filename_shema_input_for_ui($index);
-    $sub_data_ccbui_categorie = Sub_Data_Categorie_CCBUI_Categorie::generate_filename_shema_input_for_ui($index);
-    $sub_data_lot_categorie = Sub_Data_Categorie_Lot_Categorie::generate_filename_shema_input_for_ui($index);
-    printf(self::input_shema_template, $index, Ui::ui_data_key_root, self::class, $sub_data_cccas_gender, $sub_data_cccas_categorie, $sub_data_ccbuy_categorie, $sub_data_ccbui_categorie, $sub_data_lot_categorie);
+  public static function print_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = true) : void {
+    $sub_data_cccas_gender = Sub_Data_Categorie_CCCAS_Gender::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
+    $sub_data_cccas_categorie = Sub_Data_Categorie_CCCAS_Categorie::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
+    $sub_data_ccbuy_categorie = Sub_Data_Categorie_CCBUY_Categorie::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
+    $sub_data_ccbui_categorie = Sub_Data_Categorie_CCBUI_Categorie::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
+    $sub_data_lot_categorie = Sub_Data_Categorie_Lot_Categorie::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
+    printf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, $sub_data_cccas_gender, $sub_data_cccas_categorie, $sub_data_ccbuy_categorie, $sub_data_ccbui_categorie, $sub_data_lot_categorie, ($is_required === true ? "required" : ""));
   }
 
 

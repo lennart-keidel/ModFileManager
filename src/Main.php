@@ -61,6 +61,11 @@ abstract class Main {
       # store data for files with errors in session data, gets printed later on
       self::handle_uploaded_file_data($ui_data);
 
+      # handle uploaded data for duplicate file check
+      self::handle_uploaded_duplicate_file_check_input($ui_data);
+
+      // var_dump($ui_data);
+
     }
     catch(Exception $e){
     }
@@ -274,6 +279,28 @@ abstract class Main {
   }
 
 
+  private static function handle_uploaded_duplicate_file_check_input(array $ui_data) : void {
+    if(isset($ui_data[Ui::ui_key_duplicate_file_check]) === true){
+      # transform input into array
+      $duplicate_files_path_list = self::transform_duplicate_file_check_input_path_into_array($ui_data[Ui::ui_key_duplicate_file_check]);
+
+      # read files from paths
+      $ret = [];
+      foreach($duplicate_files_path_list as $path_source_duplicate_list){
+        $ret = array_merge($ret,File_Handler::get_filename_list_from_path_recursive($path_source_duplicate_list));
+      }
+      var_dump($ret);
+    }
+  }
+
+
+  private static function transform_duplicate_file_check_input_path_into_array(string $duplicate_file_check_input) : array {
+    return array_filter(explode("\n",$duplicate_file_check_input), function($item){
+      return empty(trim($item)) === false;
+    });
+  }
+
+
   private static function remove_original_filename_from_session_data(array $filename_list) : void {
 
     # get original filename from filename list
@@ -424,6 +451,7 @@ abstract class Main {
     # if start page
     # print open blacklist site button, to navigate to the mod-blacklist page
     else {
+      Ui::print_duplicate_file_check_input();
       Ui::print_open_blacklist_site_button();
     }
   }

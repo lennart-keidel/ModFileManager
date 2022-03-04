@@ -64,6 +64,8 @@ abstract class Ui {
 
   public const ui_key_disable_auto_move_file = "disbale_auto_move_file";
 
+  public const ui_key_duplicate_file_check = "duplicate_file_check";
+
   # html template for error messages
   private const template_error_message = '<script>console.log("%1$s");alert("%1$s")</script>';
 
@@ -222,6 +224,24 @@ abstract class Ui {
   </select>
   ';
 
+  private const template_duplicate_file_check_input_source_path_list = '
+  <div class="input_shema_source_path_ui">
+    <br>
+    <hr>
+    <br>
+    <form method="post" action=".">
+      <label for="duplicate_file_check_input_source_path_list">Doppelte Dateien vermeiden: Pfade zu Sims3Pack-, Package-Dateien</label>
+      <br>
+      <textarea style="white-space: nowrap" wrap="hard" class="%1$s" name="%1$s" id="duplicate_file_check_input_source_path_list" cols="60" rows="15" placeholder="Pfade einfügen, in denen nach doppelten Dateien geschaut werden soll"></textarea>
+      <br>
+      <input type="submit" value="speichern">
+    </form>
+    <br>
+    <br>
+    <hr>
+  </div>
+  ';
+
   public static $out_input_shema_index = 0;
 
   public static $out_individual_index = 0;
@@ -237,7 +257,7 @@ abstract class Ui {
     $filename = basename($path_source);
     $dirname = dirname($path_source);
     printf(self::template_shema_input_container_begin, self::$out_input_shema_index, $filename);
-    printf(self::template_shema_template_button_copy_from_fast_edit_form,self::$out_input_shema_index);
+    printf(self::template_shema_template_button_copy_from_fast_edit_form, self::$out_input_shema_index);
     printf(self::template_shema_input_form_begin, self::$out_input_shema_index);
     printf(self::input_shema_template_path_source, self::$out_input_shema_index, self::ui_data_key_root, $path_source);
     printf(self::template_shema_template_path_source_for_ui, self::$out_input_shema_index, $dirname);
@@ -460,7 +480,7 @@ abstract class Ui {
   # print error message as js alert
   public static function print_error(string $message, string $class_name = "") : void {
     if(empty($message) === false && in_array($class_name, self::$dont_print_errors_from_this_exceptions) === false){
-      printf(self::template_error_message, $message);
+      printf(self::template_error_message, trim($message));
     }
   }
 
@@ -492,6 +512,11 @@ abstract class Ui {
 
   public static function print_start_page_heading() : void {
     echo "<h3>Mod-Dateinamen-Manager</h3>";
+  }
+
+
+  public static function print_duplicate_file_check_input() : void {
+    printf(self::template_duplicate_file_check_input_source_path_list, self::ui_key_duplicate_file_check, "");
   }
 
 }

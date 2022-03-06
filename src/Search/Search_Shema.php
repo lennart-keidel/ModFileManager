@@ -13,6 +13,28 @@ abstract class Search_Shema {
   public const ui_key_search_connector = "search_shema_connector";
 
 
+  # handle uploaded data from search input
+  public static function handle_search_input(array $ui_data) : void {
+    if(isset($ui_data[Ui::ui_search_data_key_root]) === true){
+      Session_Cookie_Handler::store_search_input_in_session($ui_data);
+      self::set_search_ui_data(current($ui_data[Ui::ui_search_data_key_root]));
+      $filename_list = Main::get_filename_list_from_source_path();
+      Ui::dont_print_errors_from_this_exceptions(Shema_Exception::class);
+      $filename_data = Create_Read_Filename_By_Shema::read_data_from_filename_list_by_shema($filename_list);
+      Ui::reset_dont_print_errors_from_this_exceptions();
+      $filtered_filename_data = Search_Shema::filter_filename_data_by_search_input($filename_data);
+
+      if(empty($filtered_filename_data) === true){
+        Ui::print_error_heading("Keine Dateien gefunden, die zu deinen Eingaben passen.");
+      }
+      else {
+        Ui::print_success_heading("Diese Dateien passen zu deinen Eingaben.");
+      }
+      $_SESSION[Ui::ui_data_key_root] = $filtered_filename_data;
+    }
+  }
+
+
   # set search connector, remove search connector element from search ui data, set search ui data
   public static function set_search_ui_data(array $ui_data) : void {
     self::$search_connector = $ui_data[self::ui_key_search_connector];

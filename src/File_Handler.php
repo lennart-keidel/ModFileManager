@@ -72,9 +72,10 @@ abstract class File_Handler {
 
       # skip files in sub-directory if sub-directory name is matching the name for auto moving files in sub directory
       # except if the fixed name for the sub-directory is contained in the root path
-      if(strpos($path_root, self::sub_dir_name_for_auto_move_file_into_sub_dir) === false && strpos($path_directory, self::sub_dir_name_for_auto_move_file_into_sub_dir) === true){
+      if(strpos($path_root, self::sub_dir_name_for_auto_move_file_into_sub_dir) === false && strpos($path_directory, self::sub_dir_name_for_auto_move_file_into_sub_dir) !== false){
         continue;
       }
+
       $result[$path_directory][] = $file->getFilename();
 
       # if result not empty and current path is not previous path, to sort only if all files of this directory are done

@@ -64,7 +64,14 @@ abstract class Ui {
 
   public const ui_key_disable_auto_move_file = "disbale_auto_move_file";
 
-  public const ui_key_duplicate_file_check = "duplicate_file_check";
+  public const ui_key_duplicate_file_check_root_key = "duplicate_file_check";
+
+  public const ui_key_duplicate_file_check_file_list_input = "file_list_input";
+
+  public const ui_key_duplicate_file_check_search_recursive = "search_duplicate_file_check_recursive";
+
+  public const ui_key_duplicate_file_check_file_list_for_check = "file_list_for_check";
+
 
   # html template for error messages
   private const template_error_message = '<script>console.log("%1$s");alert("%1$s")</script>';
@@ -117,6 +124,8 @@ abstract class Ui {
   ';
   private const template_source_input_form_end = '
   </form>
+  <br>
+  <hr>
   ';
 
   # html template for begin/end of shema input form
@@ -175,7 +184,7 @@ abstract class Ui {
   ';
 
   private const template_source_input_submit_button = '
-  <input type="submit" value="Quellordner eintragen">
+  <input type="submit" value="Fortfahren">
   ';
 
   private const template_shema_search_submit_button = '
@@ -217,29 +226,42 @@ abstract class Ui {
 
   # template for checkbox to auto move file
   private const template_auto_move_file = '
-  <select class="%2$s" name="%2$s" id="%2$s%1$d">
-    <option value="%3$s">Datei nicht automatisch verschieben</option>
-    <option value="%2$s">Datei automatisch zum Installationsort verschieben</option>
-    <option value="%4$s">Datei automatisch in einen Sub-Ordner vom Quellordner verschieben</option>
-  </select>
+  <br>
+  <div class="container_label_and_input">
+    <label>Aktion nach erfolgreichem umbenennen</label>
+    <select class="%2$s" name="%2$s" id="%2$s%1$d">
+      <option value="%3$s">Datei nicht automatisch verschieben</option>
+      <option value="%2$s">Datei automatisch zum Installationsort verschieben</option>
+      <option value="%4$s">Datei automatisch in einen Sub-Ordner vom Quellordner verschieben</option>
+    </select>
+  </div>
   ';
 
+  # template for duplicate file check input path list on start page
   private const template_duplicate_file_check_input_source_path_list = '
-  <div class="input_shema_source_path_ui">
+  <div class="container_label_and_input">
     <br>
-    <hr>
+    <label for="%3$s">Doppelte Dateien vermeiden: Pfade zu Sims3Pack- und Package-Dateien</label>
+    <textarea style="white-space: nowrap" wrap="hard" class="%1$s" name="%1$s[%3$s]" id="%3$s" cols="60" rows="15" placeholder="Füge hier Pfade zu Odnern mit Sims3Pack- und Package-Dateien ein. Diese werden, mit den Dateien die umbenannt werden sollen, auf Duplikate geprüft.">%5$s</textarea>
     <br>
-    <form method="post" action=".">
-      <label for="duplicate_file_check_input_source_path_list">Doppelte Dateien vermeiden: Pfade zu Sims3Pack-, Package-Dateien</label>
-      <br>
-      <textarea style="white-space: nowrap" wrap="hard" class="%1$s" name="%1$s" id="duplicate_file_check_input_source_path_list" cols="60" rows="15" placeholder="Pfade einfügen, in denen nach doppelten Dateien geschaut werden soll"></textarea>
-      <br>
-      <input type="submit" value="speichern">
-    </form>
-    <br>
-    <br>
-    <hr>
+    <input type="checkbox" id="%4$s" name="%1$s[%4$s]" %6$s>
+    <label for="%4$s">Auch Unterordner auf Dupliakte durchsuchen</label>
   </div>
+  ';
+
+  # template for copy buttons of the duplicate file error
+  private const template_duplicate_file_error_copy_button = '
+  <br>
+  <h3 class="error_heading">Pfad #%3$s: %1$s</h3>
+  <div class="input_shema_source_path_ui">
+    <span style="display:none;" id="duplicate_file_error_path_to_file_full_%5$s">%1$s</span>
+    <span style="display:none;" id="duplicate_file_error_path_to_file_directory_%5$s">%2$s</span>
+    <button type="button" onclick="copyToClipboard(\'#duplicate_file_error_path_to_file_full_%5$s\')">Pfad zur Datei kopieren</button>
+    <button type="button" onclick="copyToClipboard(\'#duplicate_file_error_path_to_file_directory_%5$s\')">Pfad zum Ordner kopieren</button>
+  </div>
+  <br>
+  <br>
+  %4$s
   ';
 
   public static $out_input_shema_index = 0;
@@ -395,22 +417,23 @@ abstract class Ui {
   public static function print_filename_shema_fast_edit_input_and_fill(array $filename_data_list) : void {
     self::print_filename_shema_fast_edit_input();
     if(isset($filename_data_list[self::ui_fast_edit_data_key_root]) === true){
-      // var_dump($filename_data_list[self::ui_fast_edit_data_key_root]);
       // $filename_data_list[self::ui_fast_edit_data_key_root] = array_values($filename_data_list[self::ui_fast_edit_data_key_root]);
-      // var_dump($filename_data_list[self::ui_fast_edit_data_key_root]);
       self::fill_fast_edit_input_shema_with_filename_data_list($filename_data_list);
     }
   }
 
 
   # print source path input for the root path of files
-  public static function print_source_path_input() : void {
+  public static function print_source_path_input_end() : void {
+    printf(self::template_source_input_submit_button, "");
+    printf(self::template_source_input_form_end, "");
+  }
+
+  public static function print_source_path_input_start() : void {
     printf(self::template_source_input_form_begin, "");
     $source_path_value = (isset($_COOKIE[self::ui_path_source_root_key]) === true ? str_replace("+"," ",$_COOKIE[self::ui_path_source_root_key]) : "");
     printf(self::input_path_source_template, self::$out_input_shema_index, $source_path_value);
-    printf(self::template_source_input_submit_button, "");
     printf(self::template_auto_move_file, "", self::ui_key_auto_move_file, self::ui_key_disable_auto_move_file, self::ui_key_auto_move_file_into_sub_dir);
-    printf(self::template_source_input_form_end, "");
   }
 
 
@@ -430,7 +453,7 @@ abstract class Ui {
   }
 
 
-  # print shema fast edit input
+  # print shema for fast edit input
   public static function print_filename_shema_fast_edit_input() : void {
     printf(self::template_shema_fast_edit_input_form_begin,"");
     foreach(Main::ui_shema_order_global as $class_id){
@@ -438,6 +461,14 @@ abstract class Ui {
       $class_name::print_filename_shema_input_for_ui(self::ui_fast_edit_index, self::ui_fast_edit_data_key_root, false);
     }
     printf(self::template_shema_fast_edit_input_form_end,"");
+  }
+
+
+  # print duplicate file erros
+  private static $duplicate_file_error_index = 1;
+  public static function print_duplicate_files_error(string $path1, string $path2) : void {
+    printf(self::template_duplicate_file_error_copy_button, $path1, dirname($path1), 1, "", self::$duplicate_file_error_index++);
+    printf(self::template_duplicate_file_error_copy_button, $path2, dirname($path2), 2, "<hr>", self::$duplicate_file_error_index++);
   }
 
 
@@ -516,7 +547,72 @@ abstract class Ui {
 
 
   public static function print_duplicate_file_check_input() : void {
-    printf(self::template_duplicate_file_check_input_source_path_list, self::ui_key_duplicate_file_check, "");
+    $duplicate_file_check_saved_input = (isset($_COOKIE[self::ui_key_duplicate_file_check_file_list_input]) === true ? str_replace("+"," ",$_COOKIE[self::ui_key_duplicate_file_check_file_list_input]) : "");
+    $duplicate_file_check_saved_search_recursive = ($_COOKIE[self::ui_key_duplicate_file_check_search_recursive] == 1 ? "checked" : "");
+    printf(self::template_duplicate_file_check_input_source_path_list, self::ui_key_duplicate_file_check_root_key, "", self::ui_key_duplicate_file_check_file_list_input, self::ui_key_duplicate_file_check_search_recursive, $duplicate_file_check_saved_input, $duplicate_file_check_saved_search_recursive);
+  }
+
+
+  # main function for handeling ui printing
+  public static function print_ui() : void {
+
+    # if no source existing in session data
+    if(Session_Cookie_Handler::is_session_startpage() === true){
+      self::print_start_page_heading();
+      self::print_source_path_input_start();
+      self::print_duplicate_file_check_input();
+      self::print_source_path_input_end();
+
+      # pull recent data from git on printing start page
+      Git_Auto_Pull_Push::pull();
+    }
+
+    # if not start page
+    # print delete session button
+    if(Session_Cookie_Handler::is_session_startpage() === false){
+      self::print_delete_session_button();
+    }
+
+    # if source path option mode is search
+    # print search input
+    if($_SESSION[self::ui_path_source_root_option_mode_key] === self::ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data){
+      self::print_filename_shema_search_input();
+      self::fill_search_input_shema_with_filename_data_list([self::ui_data_key_root => $_SESSION[self::ui_search_data_key_root]]);
+    }
+
+    # print fast edit input form
+    if(Session_Cookie_Handler::is_session_startpage() === false){
+      self::print_filename_shema_fast_edit_input_and_fill($_SESSION);
+    }
+
+    # if data for files exists in session
+    if(isset($_SESSION[self::ui_data_key_root]) === true && empty($_SESSION[self::ui_data_key_root]) === false){
+      self::print_input_shema_for_filename_data_list_and_fill($_SESSION);
+    }
+
+    # if source existing in session data
+    if(isset($_SESSION[self::ui_file_list_key_root]) === true && empty($_SESSION[self::ui_file_list_key_root]) === false){
+      self::print_filename_shema_input_for_filename_list($_SESSION[self::ui_file_list_key_root]);
+    }
+
+    # if auto move file is enabled
+    # print js for the right select value to all file inputs
+    if(isset($_SESSION[self::ui_key_auto_move_file]) === true && empty($_SESSION[self::ui_key_auto_move_file]) === false){
+      self::print_set_data_in_element_by_class(self::ui_key_auto_move_file, $_SESSION[self::ui_key_auto_move_file]);
+    }
+
+    # if not start page
+    # print delete session button
+    if(Session_Cookie_Handler::is_session_startpage() === false){
+      Session_Cookie_Handler::store_blacklist_entries_in_session();
+      self::print_delete_session_button();
+    }
+
+    # if start page
+    # print open blacklist site button, to navigate to the mod-blacklist page
+    if(Session_Cookie_Handler::is_session_startpage() === true){
+      self::print_open_blacklist_site_button();
+    }
   }
 
 }

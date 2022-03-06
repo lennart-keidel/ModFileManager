@@ -1,6 +1,6 @@
 <?php
 
-class Ui_Exception extends Custom_Exception {
+class Shema_Exception extends Custom_Exception {
 
   # print error to ui
   public function print_error(string $message) : void {

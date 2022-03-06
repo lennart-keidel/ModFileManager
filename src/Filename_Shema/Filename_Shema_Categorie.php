@@ -202,7 +202,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
   public static function convert_filename_to_data(string $filename_part) : array {
 
     if(empty($filename_part)){
-      throw new Shema_Exception("Fehler bei Verarbeitung der Daten. Lehren Dateinamen erhalten.");
+      throw new Shema_Exception("Fehler bei Verarbeitung der Daten. Leeren Dateinamen erhalten.");
     }
 
     $filename_splitted = explode(self::filename_sub_data_delimiter, $filename_part);

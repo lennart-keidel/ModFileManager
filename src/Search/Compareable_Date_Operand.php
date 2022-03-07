@@ -34,6 +34,12 @@ abstract class Compareable_Date_Operand extends Compareable_Operand implements I
           return (new DateTime($value_to_compare)) == (new DateTime($search_input));
         }
       ],
+      "is_not_date" => [
+        "text" => "!=",
+        "callable" => function(string $search_input, string $value_to_compare) : bool {
+          return (new DateTime($value_to_compare)) != (new DateTime($search_input));
+        }
+      ],
     ];
   }
 

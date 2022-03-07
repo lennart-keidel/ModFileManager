@@ -348,21 +348,23 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     $result .= self::array_option_short_id[$option_key];
 
     # iterate through sub data
-    foreach($data["sub_data"][$option_key] as $key_sub_data => $sub_data){
+    foreach($data["sub_data"][$option_key] as $key_sub_data => $sub_data_array){
 
       # error if required sub data is empty
-      if(empty($sub_data)){
+      if(empty($sub_data_array)){
         throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Optionsschlüssel '$key_sub_data' darf nicht leer sein.");
       }
 
       # error if value of sub data not matching regex pattern
       # subdata value always to lowercase
-      $sub_data_lowercase = strtolower($sub_data);
-      if(preg_match("/^ep(0[1-9]|10|11)|sp0[1-9]$/",$sub_data_lowercase) === 0){
-        throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Wert '$sub_data' für den Optionsschlüssel '$key_sub_data' ist nicht gültig.");
+      foreach(array_unique($sub_data_array) as $sub_data){
+        $sub_data = strtolower($sub_data);
+        if(preg_match("/^ep(0[1-9]|10|11)|sp0[1-9]$/",$sub_data) === 0){
+          throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Wert '$sub_data' für den Optionsschlüssel '$key_sub_data' ist nicht gültig.");
+        }
+        $result .= $sub_data;
       }
 
-      $result .= $sub_data_lowercase;
     }
 
     return $result;
@@ -393,11 +395,11 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     foreach($filename_as_array as $filename_flag_part){
 
       $short_id = substr($filename_flag_part,0,1);
-      if(in_array($short_id,self::array_option_short_id) === false){
+      $option = array_search($short_id, self::array_option_short_id);
+      if($option === false){
         throw new Shema_Exception("Fehler beim Auslesen der Daten.\\nDas Flag '$short_id' im Dateinamen ist nicht gültig. Das Flag '$short_id' wird daher für diese Datei übersprungen.", false);
         continue;
       }
-      $option = array_search($short_id, self::array_option_short_id);
 
       # if flag not valid, skip this flag for this file
       if(self::convert_filename_to_data_validate_option($option, $filename_flag_part, $filename_as_array, $array_result[$main_key]) === false ||
@@ -488,13 +490,15 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
 
   private static function convert_filename_to_data_option_depends_on_expansion(string $filename_part, array &$array_result) : bool {
     $short_id = substr($filename_part,0,1);
-    $value = strtolower(substr($filename_part,1));
-    if(preg_match("/^ep(0[1-9]|10|11)|sp0[1-9]$/",$value) === 0){
-      new Shema_Exception("Fehler beim Auslesen der Daten.\\nDer Wert '$value' für das Flag '$short_id' ist nicht gültig. Das Flag '$short_id' wird daher für diese Datei übersprungen.", false);
-      return false;
+    $value_splited_as_array = array_unique(str_split(strtolower(substr($filename_part,1)),4));
+    foreach($value_splited_as_array as $value){
+      if(preg_match("/^ep(0[1-9]|10|11)|sp0[1-9]$/",$value) === 0){
+        new Shema_Exception("Fehler beim Auslesen der Daten.\\nDer Wert '$value' für das Flag '$short_id' ist nicht gültig. Das Flag '$short_id' wird daher für diese Datei übersprungen.", false);
+        return false;
+      }
     }
     $key = current(self::array_ui_data_key_sub_data["option_depends_on_expansion"]);
-    $array_result[$key] = $value;
+    $array_result[$key] = $value_splited_as_array;
     return true;
   }
 

@@ -31,12 +31,12 @@ function fill_search_input_shema_with_filename_data_list(filename_data_list) {
   // set operands
   // set values
   for (var class_id in value_array){
-    if(class_id != "Filename_Shema_Flag"){
+    // if(class_id != "Filename_Shema_Flag"){
       var w = value_array[class_id].length;
       while(w-- > 1){
         add_search_input_with_plus_button($("[name*="+operand_key+"]."+class_id+root_sub_key)[0]);
       }
-    }
+    // }
     for (var index in value_array[class_id]){
       var operand = operand_array[class_id][index];
       var value = value_array[class_id][index];
@@ -100,6 +100,13 @@ function fill_fast_edit_input_shema_with_filename_data_list(filename_data_list) 
             class_name += index;
           }
           value = filename_data[key][inner_key];
+          if(key == "Sub_Data_Flag_Depends_On_Expansion"){
+            if(inner_key > 0){
+              add_search_input_with_plus_button($("."+key+array_index)[inner_key-1]);
+            }
+            console.log($("."+key+array_index)[inner_key]);
+            set_data_in_element($("."+key+array_index)[inner_key], value);
+          }
           set_data_in_element_by_class(class_name, value);
         }
       }
@@ -145,7 +152,7 @@ function fill_input_shema_with_filename_data_list(filename_data_list) {
 
       // if key of filename data list is checkbox (flag option)
       // use different value and class_name
-      // set data in checkbox elementfilename_data_lis
+      // set data in checkbox element filename_data_list
       if (typeof filename_data[key] == 'object') {
         for (inner_key in filename_data[key]) {
           class_name = filename_data[key][inner_key];
@@ -153,6 +160,13 @@ function fill_input_shema_with_filename_data_list(filename_data_list) {
             class_name += index;
           }
           value = filename_data[key][inner_key];
+          if(key == "Sub_Data_Flag_Depends_On_Expansion"){
+            if(inner_key > 0){
+              add_search_input_with_plus_button($("."+key+array_index)[inner_key-1]);
+            }
+            console.log($("."+key+array_index)[inner_key]);
+            set_data_in_element($("."+key+array_index)[inner_key], value);
+          }
           set_data_in_element_by_class(class_name, value);
         }
       }
@@ -187,6 +201,22 @@ function get_index_of_filename_input_by_path(path) {
 // set data in element
 function set_data_in_element_by_id(id, value) {
   var element = document.getElementById(id);
+  set_data_in_element(element, value);
+}
+
+
+// set data in element
+function set_data_in_element_by_class(class_name, value) {
+  var element_array = document.getElementsByClassName(class_name);
+  for(index in element_array){
+    element = element_array[index];
+    set_data_in_element(element, value);
+  }
+
+}
+
+
+function set_data_in_element(element, value) {
 
   // if element is checkbox
   // set checked instead of value
@@ -199,28 +229,6 @@ function set_data_in_element_by_id(id, value) {
   else {
     element.value = value;
   }
-}
-
-
-// set data in element
-function set_data_in_element_by_class(class_name, value) {
-  var element_array = document.getElementsByClassName(class_name);
-
-  for(index in element_array){
-    element = element_array[index];
-    // if element is checkbox
-    // set checked instead of value
-    if (element.tagName == "INPUT" && element.getAttribute("type") == "checkbox") {
-      element.checked = true;
-    }
-
-    // if element is not checkbox
-    // set value
-    else {
-      element.value = value;
-    }
-  }
-
 }
 
 

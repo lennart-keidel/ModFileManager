@@ -56,7 +56,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
+      "Sub_Data_Flag_Depends_On_Expansion" => ["ep01"],
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
@@ -71,7 +71,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Sub_Data_Flag_Depends_On_Expansion" => "ep11",
+      "Sub_Data_Flag_Depends_On_Expansion" => ["ep11"],
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
@@ -88,7 +88,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Sub_Data_Flag_Depends_On_Expansion" => "sp09",
+      "Sub_Data_Flag_Depends_On_Expansion" => ["sp09"],
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
@@ -116,7 +116,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
+      "Sub_Data_Flag_Depends_On_Expansion" => ["ep01"],
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
@@ -136,7 +136,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
+      "Sub_Data_Flag_Depends_On_Expansion" => ["ep01"],
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
@@ -170,7 +170,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       "Filename_Shema_Description" => "somtehing to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Sub_Data_Flag_Depends_On_Expansion" => "sp99",
+      "Sub_Data_Flag_Depends_On_Expansion" => ["sp99"],
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion",
@@ -438,7 +438,12 @@ class Filename_Shema_Flag_Test extends TestCase {
       if(array_search($key,$data_from_filename[$main_key])!==false){
         foreach($array_keys_sub as $key_sub){
           assertTrue(array_key_exists($key_sub, $data_from_filename) !== false);
-          assertIsString($data_from_filename[$key_sub]);
+          if($key_sub==="Sub_Data_Flag_Depends_On_Expansion"){
+            assertIsArray($data_from_filename[$key_sub]);
+          }
+          else {
+            assertIsString($data_from_filename[$key_sub]);
+          }
           assertNotEmpty($data_from_filename[$key_sub]);
         }
       }
@@ -476,7 +481,7 @@ class Filename_Shema_Flag_Test extends TestCase {
     assertIsArray($data_from_filename[$main_key]);
     assertCount(1, $data_from_filename[$main_key]);
     assertContains("option_depends_on_expansion",$data_from_filename[$main_key]);
-    assertTrue($data_from_filename["Sub_Data_Flag_Depends_On_Expansion"] === "sp09");
+    assertTrue($data_from_filename["Sub_Data_Flag_Depends_On_Expansion"] === ["sp09"]);
   }
 
 

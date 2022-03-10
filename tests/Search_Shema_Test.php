@@ -313,7 +313,7 @@ class Search_Shema_Test extends TestCase {
       "Filename_Shema_Description" => "something to do with this",
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
+      "Sub_Data_Flag_Depends_On_Expansion" => ["ep01"],
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
@@ -330,7 +330,7 @@ class Search_Shema_Test extends TestCase {
       "Filename_Shema_Description" => "some other description",
       "Filename_Shema_Link" => "https://potato-ballad-sims.tumblr.com/post/asd",
       "Filename_Shema_Installation_Date" => "2020-10-29",
-      "Sub_Data_Flag_Depends_On_Expansion" => "ep09",
+      "Sub_Data_Flag_Depends_On_Expansion" => ["ep09"],
       "Filename_Shema_Flag" => [
         "option_is_essential"
       ],
@@ -344,7 +344,7 @@ class Search_Shema_Test extends TestCase {
       "Filename_Shema_Description" => "some other description",
       "Filename_Shema_Link" => "https://potato-ballad-sims.tumblr.com/post/asd",
       "Filename_Shema_Installation_Date" => "2020-11-12",
-      "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
+      "Sub_Data_Flag_Depends_On_Expansion" => ["ep01"],
       "Filename_Shema_Flag" => [
         "option_is_essential"
       ],
@@ -358,7 +358,7 @@ class Search_Shema_Test extends TestCase {
       "Filename_Shema_Description" => "some other description",
       "Filename_Shema_Link" => "https://potato-ballad-sims.tumblr.com/post/asd",
       "Filename_Shema_Installation_Date" => "2020-11-12",
-      "Sub_Data_Flag_Depends_On_Expansion" => "ep11",
+      "Sub_Data_Flag_Depends_On_Expansion" => ["ep11"],
       "Filename_Shema_Flag" => [
         "option_is_essential"
       ],

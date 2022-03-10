@@ -48,7 +48,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
 
-      "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
+      "Sub_Data_Flag_Depends_On_Expansion" => ["ep01"],
       "Filename_Shema_Patch_Level" => "1.67",
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
@@ -66,7 +66,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
       "Filename_Shema_Link" => "https://modthesims.info/",
       "Filename_Shema_Installation_Date" => "2020-10-29",
 
-      "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
+      "Sub_Data_Flag_Depends_On_Expansion" => ["ep01"],
       "Filename_Shema_Flag" => [
         "option_depends_on_content",
         "option_depends_on_expansion"
@@ -134,7 +134,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
           "Filename_Shema_Description" => "somtehing to do with this",
           "Filename_Shema_Link" => "https://modthesims.info/",
           "Filename_Shema_Installation_Date" => "2020-10-29",
-          "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
+          "Sub_Data_Flag_Depends_On_Expansion" => ["ep01"],
           "Filename_Shema_Patch_Level" => "1.67",
           "Filename_Shema_Flag" => [
             "option_depends_on_content",
@@ -150,7 +150,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
           "Filename_Shema_Description" => "somtehing to do with this",
           "Filename_Shema_Link" => "https://modthesims.info/",
           "Filename_Shema_Installation_Date" => "2020-10-29",
-          "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
+          "Sub_Data_Flag_Depends_On_Expansion" => ["ep01"],
           "Filename_Shema_Patch_Level" => "1.67",
           "Filename_Shema_Flag" => [
             "option_depends_on_content",
@@ -192,7 +192,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
       "input" => [
         "\\path\\to\\a\\dir" => [
           "TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01__q3vcX__f0XFQ__zd5tW.sims3pack",
-          "TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01__q3vcX__f0XFQ__zd5tW__2.sims3pack"
+          "TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01sp01ep08__q3vcX__f0XFQ__zd5tW__2.sims3pack"
         ],
         "\\path\\to\\another\\dir" => [
           "DR__a_little_description__167__12Nov20__V__q3vcX__f0XFQ__zd5tW.package"
@@ -206,7 +206,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
             "Filename_Shema_Description" => "somtehing to do with this",
             "Filename_Shema_Link" => "https://modthesims.info/",
             "Filename_Shema_Installation_Date" => "2020-10-29",
-            "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
+            "Sub_Data_Flag_Depends_On_Expansion" => ["ep01"],
             "Filename_Shema_Patch_Level" => "1.67",
             "Filename_Shema_Flag" => [
               "option_depends_on_content",
@@ -217,12 +217,12 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
             "Filename_Shema_Creator" => "Nraas",
           ],
           [
-            "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01__q3vcX__f0XFQ__zd5tW__2.sims3pack",
+            "path_source" => "\\path\\to\\a\\dir\\TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01sp01ep08__q3vcX__f0XFQ__zd5tW__2.sims3pack",
             "Filename_Shema_Categorie" => "option_tuning",
             "Filename_Shema_Description" => "somtehing to do with this",
             "Filename_Shema_Link" => "https://modthesims.info/",
             "Filename_Shema_Installation_Date" => "2020-10-29",
-            "Sub_Data_Flag_Depends_On_Expansion" => "ep01",
+            "Sub_Data_Flag_Depends_On_Expansion" => ["ep01", "sp01", "ep08"],
             "Filename_Shema_Patch_Level" => "1.67",
             "Filename_Shema_Flag" => [
               "option_depends_on_content",

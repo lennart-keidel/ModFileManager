@@ -557,8 +557,15 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     }
 
     # print sub data value
-    foreach($sub_data as $sub_data_key => $sub_data_value){
-      printf(self::string_ui_format, $sub_data_value);
+    foreach($sub_data as $sub_data_value_array){
+      if(is_array($sub_data_value_array) === true){
+        foreach($sub_data_value_array as $sub_data_value){
+          printf(self::string_ui_format, $sub_data_value);
+        }
+      }
+      else {
+        printf(self::string_ui_format, $sub_data_value_array);
+      }
     }
   }
 

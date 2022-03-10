@@ -60,6 +60,18 @@ label > .sub {
   opacity: 80%;
 }
 
+/* sub link under label */
+a.sub, a.sub:hover, a.sub:focus, a.sub:active {
+  color: inherit;
+  text-decoration: none;
+  margin-bottom: 0.3em;
+}
+
+a.sub::before {
+  content: "\1F517";
+  padding-right: 0.3em;
+}
+
 
 /* === SEARCH === */
 .enable_search_shema {

@@ -18,7 +18,6 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
   # SHORT IDs CAN HAVE MAX 6 CHARACTERS
   private const array_option_id = [
     "option_core_mod" => "COR",
-    "option_default_replacemant" => "DR",
     "option_tuning" => "TUN",
     "option_script" => "SCR",
     "option_mod_create_a_sim" => "MODCAS",
@@ -75,7 +74,6 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
         <optgroup label="Mod">
           <option value="option_tuning">Tuning</option>
           <option value="option_script">Script-Mod</option>
-          <option value="option_default_replacemant">Default Replacemant</option>
           <option value="option_fix">Fix</option>
           <option value="option_mod_create_a_sim">Slider oder Mod für CAS</option>
           <option value="option_core_mod">Core Mod</option>
@@ -120,7 +118,6 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
         <optgroup label="Mod">
           <option value="option_tuning">Tuning</option>
           <option value="option_script">Script-Mod</option>
-          <option value="option_default_replacemant">Default Replacemant</option>
           <option value="option_fix">Fix</option>
           <option value="option_mod_create_a_sim">Slider oder Mod für CAS</option>
           <option value="option_core_mod">Core Mod</option>
@@ -279,8 +276,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     $path_base = File_Handler::get_path_home_directory().File_Handler::path_seperator."Documents".File_Handler::path_seperator."Electronic Arts".File_Handler::path_seperator."The Sims 3";
     $categorie_value = $data_for_one_filename[current(self::array_ui_data_key)];
     if(
-    $categorie_value == "option_default_replacemant"
-    || $categorie_value == "option_tuning"
+    $categorie_value == "option_tuning"
     || $categorie_value == "option_script"
     || $categorie_value == "option_mod_create_a_sim"
     || $categorie_value == "option_cc_create_a_sim"

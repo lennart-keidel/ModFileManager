@@ -162,7 +162,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
         ],
         [
           "path_source" => "\\path\\to\\another\\dir\\def.package",
-          "Filename_Shema_Categorie" => "option_default_replacemant",
+          "Filename_Shema_Categorie" => "option_fix",
           "Filename_Shema_Description" => "a little description",
           "Filename_Shema_Link" => "https://modthesims.info/",
           "Filename_Shema_Installation_Date" => "2020-11-12",
@@ -183,7 +183,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
         "def.sims3pack" => "TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01__q3vcX__f0XFQ__zd5tW__2.sims3pack"
       ],
       "\\path\\to\\another\\dir" => [
-        "def.package" => "DR__a_little_description__167__12Nov20__V__q3vcX__f0XFQ__zd5tW.package"
+        "def.package" => "FIX__a_little_description__167__12Nov20__V__q3vcX__f0XFQ__zd5tW.package"
       ]
     ];
 
@@ -195,7 +195,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
           "TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep01sp01ep08__q3vcX__f0XFQ__zd5tW__2.sims3pack"
         ],
         "\\path\\to\\another\\dir" => [
-          "DR__a_little_description__167__12Nov20__V__q3vcX__f0XFQ__zd5tW.package"
+          "FIX__a_little_description__167__12Nov20__V__q3vcX__f0XFQ__zd5tW.package"
         ]
       ],
       "expected_output" => [
@@ -233,8 +233,8 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
             "Filename_Shema_Creator" => "Nraas",
           ],
           [
-            "path_source" => "\\path\\to\\another\\dir\\DR__a_little_description__167__12Nov20__V__q3vcX__f0XFQ__zd5tW.package",
-            "Filename_Shema_Categorie" => "option_default_replacemant",
+            "path_source" => "\\path\\to\\another\\dir\\FIX__a_little_description__167__12Nov20__V__q3vcX__f0XFQ__zd5tW.package",
+            "Filename_Shema_Categorie" => "option_fix",
             "Filename_Shema_Description" => "a little description",
             "Filename_Shema_Link" => "https://modthesims.info/",
             "Filename_Shema_Installation_Date" => "2020-11-12",
@@ -257,7 +257,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
         "TUN__somtehing_to_do_with_this__167__29Oct20__Czd5tW_Eep99__q3vcX__f0XFQ__zd5tW__2.sims3pack"
       ],
       "\\path\\to\\another\\dir" => [
-        "DR__a_little_description__167__12Nov20__V__q3vcX__f0XFQ__zd5tW.package"
+        "FIX__a_little_description__167__12Nov20__V__q3vcX__f0XFQ__zd5tW.package"
       ]
     ];
   }

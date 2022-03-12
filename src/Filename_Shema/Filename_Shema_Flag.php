@@ -13,7 +13,8 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     // "option_install_in_packages",
     "option_depends_on_content",
     "option_depends_on_expansion",
-    "option_is_essential"
+    "option_is_essential",
+    "option_is_default_replacement",
   ];
 
   # default flag to use if no flag-options were selected
@@ -28,7 +29,8 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     "option_depends_on_content" => "C",
     "option_depends_on_expansion" => "E",
     "option_is_essential" => "V",
-    "no_flag_option_selected" => "I"
+    "no_flag_option_selected" => "I",
+    "option_is_default_replacement" => "D",
   ];
 
   # array of invalid combinations of values from ui-data-key-array
@@ -43,7 +45,8 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
       // "option_install_in_packages",
       "option_depends_on_content",
       "option_depends_on_expansion",
-      "option_is_essential"
+      "option_is_essential",
+      "option_is_default_replacement"
     ]
   ];
 
@@ -68,6 +71,11 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
   # input shema template for ui
   private const input_shema_template = '
   <span class="toggle_rowbreak"></span>
+  <div class="container_label_and_input">
+    <input type="checkbox" %6$s name="%2$s[%1$d]['.self::class.'][]" class="%3$s%1$d option_is_default_replacement%1$d" id="option_is_default_replacement%1$d" value="option_is_default_replacement">
+    <label for="option_is_default_replacement%1$d">ist Default Replacement</label>
+  </div>
+
   <div class="container_label_and_input">
     <input type="checkbox" %6$s class="%3$s%1$d option_install_in_overrides%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
     <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
@@ -130,9 +138,19 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
         disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\',\'%3$s_operand%1$d_deaktivate_3\');
         disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\',\'%3$s_operand%1$d_deaktivate_4\');
         disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_essential%1$d\',\'%3$s_operand%1$d_deaktivate_5\');
+        disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_default_replacement%1$d\',\'%3$s_operand%1$d_deaktivate_6\');
       },100);
     });
   </script>
+
+
+  <div class="container_label_and_input">
+    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_6" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+      %4$s
+    </select>
+    <input type="checkbox" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" class="%3$s%1$d %3$s_root%1$d option_is_default_replacement%1$d" id="option_is_default_replacement%1$d" value="option_is_default_replacement" onclick="disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_default_replacement%1$d\',\'%3$s_operand%1$d_deaktivate_6\');">
+    <label for="option_is_default_replacement%1$d">ist Default Replacement</label>
+  </div>
 
   <span class="toggle_rowbreak"></span>
   <div class="container_label_and_input">
@@ -377,6 +395,13 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     return $result;
   }
 
+  # convert data to file for is default replacement flag option
+  private static function convert_data_to_filename_option_is_default_replacement(array $data, string $option_key) : string {
+    $result = "";
+    $result .= self::array_option_short_id[$option_key];
+    return $result;
+  }
+
   # convert data to file for no option selected flag option
   private static function convert_data_to_filename_no_flag_option_selected(array $data, string $option_key) : string {
     $result = "";
@@ -504,6 +529,11 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
 
 
   private static function convert_filename_to_data_option_is_essential(string $filename_part, array &$array_result) : bool {
+    return true;
+  }
+
+
+  private static function convert_filename_to_data_option_is_default_replacement(string $filename_part, array &$array_result) : bool {
     return true;
   }
 

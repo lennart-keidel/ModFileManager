@@ -51,7 +51,7 @@ summary:focus {
 .container_label_and_input > label + input,
 .container_label_and_input > label + select,
 .container_label_and_input > label + textarea {
-  display: inline-block;
+  display: inline-block!important;
 }
 
 label > .sub {
@@ -117,6 +117,7 @@ label::selection {
 .search_minus_button {
   font-family: monospace;
   opacity: 0;
+  display: inline-block!important;
 }
 
 .container_label_and_input:hover .search_plus_button:not([disabled]),

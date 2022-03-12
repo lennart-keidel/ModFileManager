@@ -104,7 +104,6 @@ function fill_fast_edit_input_shema_with_filename_data_list(filename_data_list) 
             if(inner_key > 0){
               add_search_input_with_plus_button($("."+key+array_index)[inner_key-1]);
             }
-            console.log($("."+key+array_index)[inner_key]);
             set_data_in_element($("."+key+array_index)[inner_key], value);
           }
           set_data_in_element_by_class(class_name, value);
@@ -164,7 +163,6 @@ function fill_input_shema_with_filename_data_list(filename_data_list) {
             if(inner_key > 0){
               add_search_input_with_plus_button($("."+key+array_index)[inner_key-1]);
             }
-            console.log($("."+key+array_index)[inner_key]);
             set_data_in_element($("."+key+array_index)[inner_key], value);
           }
           set_data_in_element_by_class(class_name, value);

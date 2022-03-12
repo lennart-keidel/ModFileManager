@@ -26,6 +26,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     "option_cc_script" => "CCSCR",
     "option_cc_buy" => "CCBUY",
     "option_cc_build" => "CCBUI",
+    "option_cc_caw" => "CCCAW",
     "option_fix" => "FIX",
     "option_mod_tuning" => "MODTUN",
     "option_pattern" => "PATTN",
@@ -63,19 +64,20 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
       <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.self::class.']" %9$s onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_gender%1$d\');disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_build\', \'option_cc_build_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_lot\', \'option_lot_sub_data_categorie%1$d\');">
         <option value="" selected disabled>Auswählen</option>
         <optgroup label="CC">
-          <option value="option_cc_buy">Custom Content Objekt für Kaufmodus</option>
-          <option value="option_cc_build">Custom Content Objekt für Baumodus</option>
-          <option value="option_cc_script">Custom Content Objekt mit eigenem Script/Funktion</option>
-          <option value="option_cc_create_a_sim">Cutom Content für Create-A-Sim</option>
-          <option value="option_pattern">Muster für Create-A-Style</option>
+          <option value="option_cc_buy">Custom Content für Kaufmodus</option>
+          <option value="option_cc_build">Custom Content für Baumodus</option>
+          <option value="option_cc_script">Custom Content mit eigenem Script/Funktion</option>
+          <option value="option_cc_create_a_sim">Custom Content für CAS</option>
+          <option value="option_pattern">Pattern</option>
           <option value="option_store">Store-Content</option>
+          <option value="option_cc_caw">Custom Content für CAW</option>
         </optgroup>
         <optgroup label="Mod">
           <option value="option_tuning">Tuning</option>
           <option value="option_script">Script-Mod</option>
           <option value="option_default_replacemant">Default Replacemant</option>
           <option value="option_fix">Fix</option>
-          <option value="option_mod_create_a_sim">Slider oder Mod für Create-A-Sim</option>
+          <option value="option_mod_create_a_sim">Slider oder Mod für CAS</option>
           <option value="option_core_mod">Core Mod</option>
           <option value="option_mod_tuning">Mod Tuning</option>
           <option value="option_music">Soundtrack oder Radio Musik</option>
@@ -84,7 +86,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_lot">Grundstück</option>
           <option value="option_household">Haushalt</option>
           <option value="option_world">Welt</option>
-          <option value="option_cas_sim">gespeicherter Sim für Create-A-Sim (SavedSims)</option>
+          <option value="option_cas_sim">gespeicherter Sim für CAS (SavedSims)</option>
         </optgroup>
         <option value="option_other">keine der anderen Kategorien</option>
       </select>
@@ -104,22 +106,23 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
       <select class="%3$s_operand%1$d %3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
         %4$s
       </select>
-      <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_gender%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_build\', \'option_cc_build_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_lot\', \'option_lot_sub_data_categorie%1$d\');" required>
+      <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_gender%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_sub_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_build\', \'option_cc_build_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_lot\', \'option_lot_sub_data_categorie%1$d\');" required>
         <option value="" selected disabled>Auswählen</option>
         <optgroup label="CC">
-          <option value="option_cc_buy">Custom Content Objekt für Kaufmodus</option>
-          <option value="option_cc_build">Custom Content Objekt für Baumodus</option>
-          <option value="option_cc_script">Custom Content Objekt mit eigenem Script/Funktion</option>
-          <option value="option_cc_create_a_sim">Custom Content für Create-A-Sim</option>
-          <option value="option_pattern">Muster für Create-A-Style</option>
+          <option value="option_cc_buy">Custom Content für Kaufmodus</option>
+          <option value="option_cc_build">Custom Content für Baumodus</option>
+          <option value="option_cc_script">Custom Content mit eigenem Script/Funktion</option>
+          <option value="option_cc_create_a_sim">Custom Content für CAS</option>
+          <option value="option_pattern">Pattern</option>
           <option value="option_store">Store-Content</option>
+          <option value="option_cc_caw">Custom Content für CAW</option>
         </optgroup>
         <optgroup label="Mod">
           <option value="option_tuning">Tuning</option>
           <option value="option_script">Script-Mod</option>
           <option value="option_default_replacemant">Default Replacemant</option>
           <option value="option_fix">Fix</option>
-          <option value="option_mod_create_a_sim">Slider oder Mod für Create-A-Sim</option>
+          <option value="option_mod_create_a_sim">Slider oder Mod für CAS</option>
           <option value="option_core_mod">Core Mod</option>
           <option value="option_mod_tuning">Mod Tuning</option>
           <option value="option_music">Soundtrack oder Radio Musik</option>
@@ -128,7 +131,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_lot">Grundstück</option>
           <option value="option_household">Haushalt</option>
           <option value="option_world">Welt</option>
-          <option value="option_cas_sim">gespeicherter Sim für Create-A-Sim (SavedSims)</option>
+          <option value="option_cas_sim">gespeicherter Sim für CAS (SavedSims)</option>
         </optgroup>
         <option value="option_other">keine der anderen Kategorien</option>
       </select>

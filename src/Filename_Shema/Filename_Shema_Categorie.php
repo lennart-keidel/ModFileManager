@@ -75,7 +75,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_tuning">Tuning</option>
           <option value="option_script">Script-Mod</option>
           <option value="option_fix">Fix</option>
-          <option value="option_mod_create_a_sim">Slider oder Mod für CAS</option>
+          <option value="option_mod_create_a_sim">Slider, Skin, Mod oder anderes für CAS</option>
           <option value="option_core_mod">Core Mod</option>
           <option value="option_mod_tuning">Mod Tuning</option>
           <option value="option_music">Soundtrack oder Radio Musik</option>
@@ -119,7 +119,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_tuning">Tuning</option>
           <option value="option_script">Script-Mod</option>
           <option value="option_fix">Fix</option>
-          <option value="option_mod_create_a_sim">Slider oder Mod für CAS</option>
+          <option value="option_mod_create_a_sim">Slider, Skin, Mod oder anderes für CAS</option>
           <option value="option_core_mod">Core Mod</option>
           <option value="option_mod_tuning">Mod Tuning</option>
           <option value="option_music">Soundtrack oder Radio Musik</option>

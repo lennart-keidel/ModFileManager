@@ -31,10 +31,12 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     "option_pattern" => "PATTN",
     "option_store" => "STORE",
     "option_music" => "MUSIC",
+    "option_custom_animation" => "ANIMA",
     "option_lot" => "LOT",
     "option_household" => "HSHLD",
     "option_world" => "WORLD",
     "option_cas_sim" => "SIMCAS",
+    "option_pose" => "POSE",
     "option_other" => "OTH",
   ];
 
@@ -79,12 +81,14 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_core_mod">Core Mod</option>
           <option value="option_mod_tuning">Mod Tuning</option>
           <option value="option_music">Soundtrack oder Radio Musik</option>
+          <option value="option_custom_animation">Custom Animation oder Animation Port</option>
         </optgroup>
         <optgroup label="Download">
           <option value="option_lot">Grundstück</option>
           <option value="option_household">Haushalt</option>
           <option value="option_world">Welt</option>
           <option value="option_cas_sim">gespeicherter Sim für CAS (SavedSims)</option>
+          <option value="option_pose">Pose</option>
         </optgroup>
         <option value="option_other">keine der anderen Kategorien</option>
       </select>
@@ -123,12 +127,14 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_core_mod">Core Mod</option>
           <option value="option_mod_tuning">Mod Tuning</option>
           <option value="option_music">Soundtrack oder Radio Musik</option>
+          <option value="option_custom_animation">Custom Animation oder Animation Port</option>
         </optgroup>
         <optgroup label="Download">
           <option value="option_lot">Grundstück</option>
           <option value="option_household">Haushalt</option>
           <option value="option_world">Welt</option>
           <option value="option_cas_sim">gespeicherter Sim für CAS (SavedSims)</option>
+          <option value="option_pose">Pose</option>
         </optgroup>
         <option value="option_other">keine der anderen Kategorien</option>
       </select>

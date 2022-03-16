@@ -38,6 +38,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     "option_cas_sim" => "SIMCAS",
     "option_collection_file" => "COLEC",
     "option_pose" => "POSE",
+    "option_camera_mod" => "CAMMOD",
     "option_other" => "OTH",
   ];
 
@@ -91,6 +92,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_cas_sim">gespeicherter Sim für CAS (SavedSims)</option>
           <option value="option_collection_file">Collection-Datei</option>
           <option value="option_pose">Pose</option>
+          <option value="option_camera_mod">Kamera Mod</option>
         </optgroup>
         <option value="option_other">keine der anderen Kategorien</option>
       </select>
@@ -138,6 +140,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_cas_sim">gespeicherter Sim für CAS (SavedSims)</option>
           <option value="option_collection_file">Collection-Datei</option>
           <option value="option_pose">Pose</option>
+          <option value="option_camera_mod">Kamera Mod</option>
         </optgroup>
         <option value="option_other">keine der anderen Kategorien</option>
       </select>
@@ -297,6 +300,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     || $categorie_value == "option_pattern"
     || $categorie_value == "option_store"
     || $categorie_value == "option_music"
+    || $categorie_value == "option_camera_mod"
     ){
       $success_heading = "Refresh-Button in CC-Magic ausführen damit die neue Datei geladen wird.";
       $path_result = $path_base.File_Handler::path_seperator."Downloads";

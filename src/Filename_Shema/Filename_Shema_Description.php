@@ -15,7 +15,7 @@ abstract class Filename_Shema_Description extends Compareable_Text_Operand imple
       <label for="'.self::class.'%1$d">Beschreibung
         <span class="sub">max. '.self::max_description_length.' Zeichen; Sonderzeichen werden ersetzt</span>
       </label>
-      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.self::class.']" %4$s>
+      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="text" maxlength="'.self::max_description_length.'" name="%2$s[%1$d]['.self::class.']" %4$s>
     </div>
   ';
 
@@ -28,7 +28,7 @@ abstract class Filename_Shema_Description extends Compareable_Text_Operand imple
       <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
         %4$s
       </select>
-      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" required>
+      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="text" maxlength="'.self::max_description_length.'" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" required>
       %5$s
     </div>
   ';

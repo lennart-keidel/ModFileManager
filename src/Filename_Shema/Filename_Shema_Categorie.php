@@ -36,6 +36,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     "option_household" => "HSHLD",
     "option_world" => "WORLD",
     "option_cas_sim" => "SIMCAS",
+    "option_collection_file" => "COLEC",
     "option_pose" => "POSE",
     "option_other" => "OTH",
   ];
@@ -88,6 +89,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_household">Haushalt</option>
           <option value="option_world">Welt</option>
           <option value="option_cas_sim">gespeicherter Sim für CAS (SavedSims)</option>
+          <option value="option_collection_file">Collection-Datei</option>
           <option value="option_pose">Pose</option>
         </optgroup>
         <option value="option_other">keine der anderen Kategorien</option>
@@ -134,6 +136,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_household">Haushalt</option>
           <option value="option_world">Welt</option>
           <option value="option_cas_sim">gespeicherter Sim für CAS (SavedSims)</option>
+          <option value="option_collection_file">Collection-Datei</option>
           <option value="option_pose">Pose</option>
         </optgroup>
         <option value="option_other">keine der anderen Kategorien</option>
@@ -351,6 +354,10 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
 
     elseif($categorie_value == "option_other"){
       $path_result = "";
+    }
+
+    elseif($categorie_value == "option_collection_file"){
+      $path_result = $path_base.File_Handler::path_seperator."Collections".File_Handler::path_seperator."User";
     }
 
     return [$path_result, $success_heading, $error_heading];

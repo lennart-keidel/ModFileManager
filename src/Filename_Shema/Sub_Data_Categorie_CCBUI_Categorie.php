@@ -26,6 +26,7 @@ abstract class Sub_Data_Categorie_CCBUI_Categorie extends Compareable_Is_Operand
     "option_floor" => "FR",
     "option_roof" => "RF",
     "option_stair" => "SR",
+    "option_railing" => "RG",
     "option_flower" => "FW",
     "option_shrub" => "SB",
     "option_tree" => "TE",
@@ -55,6 +56,7 @@ abstract class Sub_Data_Categorie_CCBUI_Categorie extends Compareable_Is_Operand
       <option value="option_fireplace">Kamin</option>
       <option value="option_column">Säule</option>
       <option value="option_stair">Treppe</option>
+      <option value="option_railing">Geländer</option>
       <option value="option_rock">Stein</option>
       <option value="option_half_wall">Halbwand</option>
       <option value="option_fountain">Fontäne</option>
@@ -95,6 +97,7 @@ abstract class Sub_Data_Categorie_CCBUI_Categorie extends Compareable_Is_Operand
       <option value="option_fireplace">Kamin</option>
       <option value="option_column">Säule</option>
       <option value="option_stair">Treppe</option>
+      <option value="option_railing">Geländer</option>
       <option value="option_rock">Stein</option>
       <option value="option_half_wall">Halbwand</option>
       <option value="option_fountain">Fontäne</option>

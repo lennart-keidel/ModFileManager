@@ -41,9 +41,17 @@ abstract class Main {
       # delete session
       self::execute_delete_session_button($ui_data);
 
+      # if reread session button pushed
+      # delete session
+      self::execute_reread_source_path_button($ui_data);
+
       # if source path uploaded
       # store source path in cookie
       Session_Cookie_Handler::store_source_path_in_cookie($ui_data);
+
+      # if source path uploaded
+      # store source path in cookie
+      Session_Cookie_Handler::store_source_input_path_and_input_options_in_session($ui_data);
 
       # if duplicate file check input uploaded
       # store the string in cookie
@@ -86,6 +94,7 @@ abstract class Main {
     # print ui
     Ui::print_ui();
 
+
   }
 
 
@@ -93,6 +102,16 @@ abstract class Main {
   private static function execute_delete_session_button(array $ui_data) : void {
     if(isset($ui_data["delete_session_button"]) === true){
       Session_Cookie_Handler::delete_session_data();
+    }
+  }
+
+
+  # if reread source path is contained in ui-data
+  private static function execute_reread_source_path_button(array &$ui_data) : void {
+    var_dump($ui_data["reread_source_path_button"]);
+    if(isset($ui_data["reread_source_path_button"]) === true){
+      $_POST["source"] = $_SESSION["source"];
+      $ui_data["source"] = $_SESSION["source"];
     }
   }
 

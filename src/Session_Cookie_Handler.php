@@ -66,6 +66,17 @@ abstract class Session_Cookie_Handler {
   }
 
 
+  # if source path uploaded
+  # store source path and input options in session
+  public static function store_source_input_path_and_input_options_in_session(array $ui_data) : void {
+
+    # if source key exists in ui data
+    if(isset($ui_data[Ui::ui_source_input_key_root]) === true){
+      $_SESSION[Ui::ui_source_input_key_root] = $ui_data[Ui::ui_source_input_key_root];
+    }
+  }
+
+
   # if duplicate file check input uploaded
   # store the string in cookie
   public static function store_duplicate_file_check_input_in_cookie(array $ui_data) : void {

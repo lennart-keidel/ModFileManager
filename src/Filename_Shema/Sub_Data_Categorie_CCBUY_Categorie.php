@@ -27,13 +27,35 @@ abstract class Sub_Data_Categorie_CCBUY_Categorie extends Compareable_Is_Operand
     // "option_pets" => "PE",
     // "option_other" => "OT",
 
+    "option_deco_plant" => "DPLAN",
+    "option_deco_picture" => "DPICT",
+    "option_deco_mirror" => "DMIRR",
+    "option_deco_curtain" => "DCURT",
+    "option_deco_rug" => "DRUG",
+    "option_deco_roof" => "DROOF",
+    "option_deco_sculpture" => "DSCUL",
+    "option_deco_misc" => "DMISC",
+
+    "option_lighting_table" => "LTABL",
+    "option_lighting_stand" => "LSTAN",
+    "option_lighting_wall" => "LWALL",
+    "option_lighting_ceiling" => "LCEIL",
+    "option_lighting_outdoor" => "LOUTD",
+
+    "option_comfort_bed" => "CBED",
+    "option_comfort_dining_chair" => "CCHAI",
+    "option_comfort_armchair" => "CARMC",
+    "option_comfort_sofa" => "CSOFA",
+    "option_comfort_lounge_chair" => "CLOUN",
+    "option_comfort_misc" => "CMISC",
+
     "option_plumbing_sink" => "PSINK",
     "option_plumbing_toilet" => "PTOIL",
     "option_plumbing_shower_tub" => "PSHOW",
 
-    "option_appliances_large" => "ALARG",
-    "option_appliances_small" => "ASMAL",
-    "option_appliances_misc" => "AMISC",
+    "option_storage_bookshelf" => "SBOOK",
+    "option_storage_drawer" => "SDRAW",
+    "option_storage_misc" => "SMISC",
 
     "option_surfaces_counter" => "SCOUN",
     "option_surfaces_cabinet" => "SCABI",
@@ -44,12 +66,9 @@ abstract class Sub_Data_Categorie_CCBUY_Categorie extends Compareable_Is_Operand
     "option_surfaces_display" => "SDISP",
     "option_surfaces_misc" => "SMISC",
 
-    "option_comfort_bed" => "CBED",
-    "option_comfort_dining_chair" => "CCHAI",
-    "option_comfort_armchair" => "CARMC",
-    "option_comfort_sofa" => "CSOFA",
-    "option_comfort_lounge_chair" => "CLOUN",
-    "option_comfort_misc" => "CMISC",
+    "option_appliances_large" => "ALARG",
+    "option_appliances_small" => "ASMAL",
+    "option_appliances_misc" => "AMISC",
 
     "option_electronics_tv" => "ETV",
     "option_electronics_computer" => "ECOMP",
@@ -61,38 +80,19 @@ abstract class Sub_Data_Categorie_CCBUY_Categorie extends Compareable_Is_Operand
     "option_entertainment_party" => "EPART",
     "option_entertainment_misc" => "EMISC",
 
-    "option_lighting_table" => "LTABL",
-    "option_lighting_stand" => "LSTAN",
-    "option_lighting_wall" => "LWALL",
-    "option_lighting_ceiling" => "LCEIL",
-    "option_lighting_outdoor" => "LOUTD",
-
-    "option_deco_plant" => "DPLAN",
-    "option_deco_picture" => "DPICT",
-    "option_deco_mirror" => "DMIRR",
-    "option_deco_curtain" => "DCURT",
-    "option_deco_rug" => "DRUG",
-    "option_deco_roof" => "DROOF",
-    "option_deco_sculpture" => "DSCUL",
-    "option_deco_misc" => "DMISC",
-
-    "option_storage_bookshelf" => "SBOOK",
-    "option_storage_drawer" => "SDRAW",
-    "option_storage_misc" => "SMISC",
-
     "option_childreen_furniture" => "CFURN",
     "option_childreen_toys" => "CTOYS",
     "option_childreen_misc" => "CMISC",
-
-    "option_vehicle_car" => "VCAR",
-    "option_vehicle_bike" => "VBIKE",
-    "option_vehicle_boat" => "VBOAT",
-    "option_vehicle_misc" => "VMISC",
 
     "option_pet_cat" => "PCAT",
     "option_pet_dog" => "PDOG",
     "option_pet_horse" => "PHORS",
     "option_pet_misc" => "PMISC",
+
+    "option_vehicle_car" => "VCAR",
+    "option_vehicle_bike" => "VBIKE",
+    "option_vehicle_boat" => "VBOAT",
+    "option_vehicle_misc" => "VMISC",
 
     "option_stage_effects_light" => "SEFFE",
     "option_stage_props" => "SPROP",

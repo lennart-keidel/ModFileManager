@@ -203,6 +203,14 @@ abstract class Ui {
   </form>
   ';
 
+  private const template_reread_source_path_button = '
+  <form class="reread_source_path" method="post" action=".">
+    <button type="submit" class="reread_source_path_button" name="reread_source_path_button" onclick="return confirm(this.value);" value="Quellpfad neu einlesen">Quellpfad neu einlesen</button>
+    <br>
+    <br>
+  </form>
+  ';
+
   private const template_heading = '
   <h2>%1$s</h2>
   ';
@@ -231,7 +239,7 @@ abstract class Ui {
     <label>Aktion nach erfolgreichem umbenennen</label>
     <select class="%2$s" name="%2$s" id="%2$s%1$d">
       <option value="%3$s">Datei nicht automatisch verschieben</option>
-      <option value="%2$s">Datei automatisch zum Installationsort verschieben</option>
+      <option value="%2$s" selected>Datei automatisch zum Installationsort verschieben</option>
       <option value="%4$s">Datei automatisch in einen Sub-Ordner vom Quellordner verschieben</option>
     </select>
   </div>
@@ -478,6 +486,12 @@ abstract class Ui {
   }
 
 
+  # print reread source path button
+  public static function print_reread_source_path_button() : void {
+    printf(self::template_reread_source_path_button, "");
+  }
+
+
   # print heading
   public static function print_heading(string $content) : void {
     printf(self::template_heading, $content);
@@ -571,6 +585,7 @@ abstract class Ui {
     # print delete session button
     if(Session_Cookie_Handler::is_session_startpage() === false){
       self::print_delete_session_button();
+      self::print_reread_source_path_button();
     }
 
     # if source path option mode is search

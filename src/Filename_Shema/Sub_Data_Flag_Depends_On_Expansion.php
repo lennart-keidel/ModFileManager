@@ -134,7 +134,6 @@ abstract class Sub_Data_Flag_Depends_On_Expansion extends Compareable_Is_Operand
       "is_not" => [
         "text" => "ist nicht",
         "callable" => function(string $search_input, array $value_to_compare) : bool {
-          var_dump($value_to_compare, $search_input);
           return in_array($search_input, $value_to_compare) === false;
         }
       ]

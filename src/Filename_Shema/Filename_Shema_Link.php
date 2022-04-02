@@ -16,7 +16,7 @@ abstract class Filename_Shema_Link extends Compareable_Is_Operand implements I_F
   private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="'.self::class.'%1$d">Link zum Mod, CC</label>
-      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="url" name="%2$s[%1$d]['.self::class.']" autocomplete="off" $4%s>
+      <input class="%3$s%1$d" id="'.self::class.'%1$d" type="url" name="%2$s[%1$d]['.self::class.']" autocomplete="off" %4$s>
     </div>
   ';
 

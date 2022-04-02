@@ -27,6 +27,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     "option_cc_build" => "CCBUI",
     "option_cc_caw" => "CCCAW",
     "option_fix" => "FIX",
+    "option_recategorizing" => "RECAT",
     "option_mod_tuning" => "MODTUN",
     "option_pattern" => "PATTN",
     "option_store" => "STORE",
@@ -79,6 +80,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_tuning">Tuning</option>
           <option value="option_script">Script-Mod</option>
           <option value="option_fix">Fix</option>
+          <option value="option_recategorizing">Rekategorizierung von Objekten</option>
           <option value="option_mod_create_a_sim">Slider, Skin, Mod oder anderes für CAS</option>
           <option value="option_core_mod">Core Mod</option>
           <option value="option_mod_tuning">Mod Tuning</option>
@@ -127,6 +129,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
           <option value="option_tuning">Tuning</option>
           <option value="option_script">Script-Mod</option>
           <option value="option_fix">Fix</option>
+          <option value="option_recategorizing">Rekategorizierung von Objekten</option>
           <option value="option_mod_create_a_sim">Slider, Skin, Mod oder anderes für CAS</option>
           <option value="option_core_mod">Core Mod</option>
           <option value="option_mod_tuning">Mod Tuning</option>
@@ -301,6 +304,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     || $categorie_value == "option_store"
     || $categorie_value == "option_music"
     || $categorie_value == "option_camera_mod"
+    || $categorie_value == "option_recategorizing"
     ){
       $success_heading = "Refresh-Button in CC-Magic ausführen damit die neue Datei geladen wird.";
       $path_result = $path_base.File_Handler::path_seperator."Downloads";

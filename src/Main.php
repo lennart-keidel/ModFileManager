@@ -108,7 +108,6 @@ abstract class Main {
 
   # if reread source path is contained in ui-data
   private static function execute_reread_source_path_button(array &$ui_data) : void {
-    var_dump($ui_data["reread_source_path_button"]);
     if(isset($ui_data["reread_source_path_button"]) === true){
       $_POST["source"] = $_SESSION["source"];
       $ui_data["source"] = $_SESSION["source"];

@@ -368,6 +368,11 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
       $path_result = $path_base.File_Handler::path_seperator."Collections".File_Handler::path_seperator."User";
     }
 
+    # create target directory if not existing
+    if(is_dir($path_result) === false){
+      mkdir($path_result);
+    }
+
     return [$path_result, $success_heading, $error_heading];
   }
 

@@ -96,6 +96,14 @@ abstract class Sub_Data_Categorie_CCBUY_Categorie extends Compareable_Is_Operand
 
     "option_stage_effects_light" => "SEFFE",
     "option_stage_props" => "SPROP",
+
+    "option_debug_tomb_objects" => "DGTO",
+    "option_debug_underwater_objects" => "DGUO",
+    "option_debug_fish_spawners" => "DGFS",
+    "option_debug_gardening_plants_and_seed_spawners" => "DGGS",
+    "option_debug_rock_metal_gem_spawners" => "DGRS",
+    "option_debug_insect_spawners" => "DGIS",
+    "option_debug_misc" => "DGMISC",
   ];
 
   # input shema template for ui
@@ -186,6 +194,15 @@ abstract class Sub_Data_Categorie_CCBUY_Categorie extends Compareable_Is_Operand
       <optgroup label="Bühne">
         <option value="option_stage_effects_light">Beleuchtung und Effekte</option>
         <option value="option_stage_props">Requisiten</option>
+      </optgroup>
+      <optgroup label="Debug">
+        <option value="option_debug_tomb_objects">Gruft Objekte</option>
+        <option value="option_debug_underwater_objects">Unterwasser Objekte</option>
+        <option value="option_debug_fish_spawners">Fish Spawner</option>
+        <option value="option_debug_gardening_plants_and_seed_spawners">Pflanzen und Samen Spawner</option>
+        <option value="option_debug_rock_metal_gem_spawners">Stein, Metal und Edelstein Spawner</option>
+        <option value="option_debug_insect_spawners">Insekten Spawner</option>
+        <option value="option_debug_misc">Verschiedenes</option>
       </optgroup>
     </select>
     <script>
@@ -290,6 +307,15 @@ abstract class Sub_Data_Categorie_CCBUY_Categorie extends Compareable_Is_Operand
       <optgroup label="Bühne">
         <option value="option_stage_effects_light">Beleuchtung und Effekte</option>
         <option value="option_stage_props">Requisiten</option>
+      </optgroup>
+      <optgroup label="Debug">
+        <option value="option_debug_tomb_objects">Gruft Objekte</option>
+        <option value="option_debug_underwater_objects">Unterwasser Objekte</option>
+        <option value="option_debug_fish_spawners">Fish Spawner</option>
+        <option value="option_debug_gardening_plants_and_seed_spawners">Pflanzen und Samen Spawner</option>
+        <option value="option_debug_rock_metal_gem_spawners">Stein, Metal und Edelstein Spawner</option>
+        <option value="option_debug_insect_spawners">Insekten Spawner</option>
+        <option value="option_debug_misc">Verschiedenes</option>
       </optgroup>
     </select>
     <script>

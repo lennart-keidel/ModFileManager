@@ -33,6 +33,7 @@ abstract class Sub_Data_Categorie_CCBUI_Categorie extends Compareable_Is_Operand
     "option_rock" => "RK",
     "option_terrain_paint" => "TP",
     "option_half_wall" => "HW",
+    "option_community_object" => "CO",
   ];
 
   # input shema template for ui
@@ -61,6 +62,7 @@ abstract class Sub_Data_Categorie_CCBUI_Categorie extends Compareable_Is_Operand
       <option value="option_half_wall">Halbwand</option>
       <option value="option_fountain">Fontäne</option>
       <option value="option_pool_object">Pool Objekte</option>
+      <option value="option_community_object">Community Object</option>
     </select>
     <script>
       document.addEventListener("DOMContentLoaded", function(){
@@ -102,6 +104,7 @@ abstract class Sub_Data_Categorie_CCBUI_Categorie extends Compareable_Is_Operand
       <option value="option_half_wall">Halbwand</option>
       <option value="option_fountain">Fontäne</option>
       <option value="option_pool_object">Pool Objekte</option>
+      <option value="option_community_object">Community Object</option>
     </select>
     <script>
       document.addEventListener("DOMContentLoaded", function(){

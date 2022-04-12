@@ -598,7 +598,10 @@ abstract class Ui {
     # print delete session button
     if(Session_Cookie_Handler::is_session_startpage() === false){
       self::print_delete_session_button();
-      self::print_reread_source_path_button();
+
+      if($_SESSION[self::ui_path_source_root_option_mode_key] !== self::ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data){
+        self::print_reread_source_path_button();
+      }
     }
 
     # if source path option mode is search

@@ -1,3 +1,10 @@
+function open_first_details_slot(){
+  // open details tag
+  if (document.getElementById("file_details0")) {
+    document.getElementById("file_details0").setAttribute("open", "open");
+  }
+}
+
 
 // fill data in search shema input with data from data list
 function fill_search_input_shema_with_filename_data_list(filename_data_list) {
@@ -248,7 +255,7 @@ function disable_input_by_class_name_if_source_element_is_not_checked(id_source_
       element.removeAttr("disabled");
     }
     else {
-      element.attr("disabled", "disabled");
+      element.attr("disabled", true);
     }
   };
 
@@ -256,7 +263,10 @@ function disable_input_by_class_name_if_source_element_is_not_checked(id_source_
   all_elements.each(function(){
     disable(source, $(this));
     $(this).find("input, select, textarea, button").each(function(){
-      disable(source, $(this));
+      console.log($(this), $(this).css("display"));
+      if($(this).css("display") != "none"){
+        disable(source, $(this));
+      }
     });
   });
 }

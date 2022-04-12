@@ -252,7 +252,7 @@ abstract class Ui {
     <label for="%3$s">Doppelte Dateien vermeiden: Pfade zu Sims3Pack- und Package-Dateien</label>
     <textarea style="white-space: nowrap" wrap="hard" class="%1$s" name="%1$s[%3$s]" id="%3$s" cols="60" rows="15" placeholder="Füge hier Pfade zu Odnern mit Sims3Pack- und Package-Dateien ein. Diese werden, mit den Dateien die umbenannt werden sollen, auf Duplikate geprüft.">%5$s</textarea>
     <br>
-    <input type="checkbox" id="%4$s" name="%1$s[%4$s]" %6$s>
+    <input type="checkbox" id="%4$s" name="%1$s[%4$s]" checked>
     <label for="%4$s">Auch Unterordner auf Dupliakte durchsuchen</label>
   </div>
   ';
@@ -270,6 +270,14 @@ abstract class Ui {
   <br>
   <br>
   %4$s
+  ';
+
+  # allways open first file detail-element for file input
+  # print js script with function 'open_first_details_slot'
+  private const template_open_first_details_slot = '
+    <script>
+      open_first_details_slot();
+    </script>
   ';
 
   public static $out_input_shema_index = 0;
@@ -562,8 +570,13 @@ abstract class Ui {
 
   public static function print_duplicate_file_check_input() : void {
     $duplicate_file_check_saved_input = (isset($_COOKIE[self::ui_key_duplicate_file_check_file_list_input]) === true ? str_replace("+"," ",$_COOKIE[self::ui_key_duplicate_file_check_file_list_input]) : "");
-    $duplicate_file_check_saved_search_recursive = ($_COOKIE[self::ui_key_duplicate_file_check_search_recursive] == 1 ? "checked" : "");
-    printf(self::template_duplicate_file_check_input_source_path_list, self::ui_key_duplicate_file_check_root_key, "", self::ui_key_duplicate_file_check_file_list_input, self::ui_key_duplicate_file_check_search_recursive, $duplicate_file_check_saved_input, $duplicate_file_check_saved_search_recursive);
+    printf(self::template_duplicate_file_check_input_source_path_list, self::ui_key_duplicate_file_check_root_key, "", self::ui_key_duplicate_file_check_file_list_input, self::ui_key_duplicate_file_check_search_recursive, $duplicate_file_check_saved_input);
+  }
+
+  # allways open first file detail-element for file input
+  # print js script with function 'open_first_details_slot'
+  public static function open_first_details_slot() : void {
+    printf(self::template_open_first_details_slot, "");
   }
 
 
@@ -628,6 +641,9 @@ abstract class Ui {
     if(Session_Cookie_Handler::is_session_startpage() === true){
       self::print_open_blacklist_site_button();
     }
+
+    # allways open first file detail-element for file input
+    self::open_first_details_slot();
   }
 
 }

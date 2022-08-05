@@ -1,7 +1,4 @@
 composer.phar
 /vendor/
-/*.cmd
-/*.sh
-/*.reg
 *.package
 *.sims3pack

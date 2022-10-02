@@ -2,7 +2,7 @@
 
 abstract class File_Handler {
 
-  public const fileextension_filter = ["sims3pack", "package"];
+  public const fileextension_filter = ["sims3pack", "package", "sim"];
   public const path_seperator = "\\"; # path seperator, different in windows than in macOs or linux
   public const sub_dir_name_for_auto_move_file_into_sub_dir = "mit MDM umbenannt";
   private static $ui_data = [];

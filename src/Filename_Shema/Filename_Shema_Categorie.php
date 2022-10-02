@@ -347,7 +347,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     }
 
     elseif($categorie_value == "option_cas_sim"){
-      if(File_Handler::get_fileextension_from_path($source_path) === "package"){
+      if(File_Handler::get_fileextension_from_path($source_path) === "sim"){
         $path_result = $path_base.File_Handler::path_seperator."SavedSims";
       }
       else {

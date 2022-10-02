@@ -32,6 +32,9 @@ abstract class Sub_Data_Categorie_CCCAS_Gender extends Compareable_Is_Operand im
     "option_baby_male" => "BM",
     "option_baby_unisex" => "BU",
     "option_multiple" => "MLTPL",
+    "option_plumbot_female" => "PBF",
+    "option_plumbot_male" => "PBM",
+    "option_plumbot_unisex" => "PBU",
   ];
 
   # input shema template for ui
@@ -69,8 +72,15 @@ abstract class Sub_Data_Categorie_CCCAS_Gender extends Compareable_Is_Operand im
         <option value="option_baby_female">Weiblich</option>
         <option value="option_baby_male">Männlich</option>
         <option value="option_baby_unisex">Unisex</option>
-        </optgroup>
-      <option value="option_multiple">Mehrere Optionen</option>
+      </optgroup>
+      <optgroup label="Sim">
+        <option value="option_multiple">Mehrere Optionen</option>
+      </optgroup>
+      <optgroup label="Plumbot">
+        <option value="option_plumbot_female">Weiblich</option>
+        <option value="option_plumbot_male">Männlich</option>
+        <option value="option_plumbot_unisex">Unisex</option>
+      </optgroup>
     </select>
     <script>
       document.addEventListener("DOMContentLoaded", function(){
@@ -121,8 +131,13 @@ abstract class Sub_Data_Categorie_CCCAS_Gender extends Compareable_Is_Operand im
         <option value="option_baby_female">Weiblich</option>
         <option value="option_baby_male">Männlich</option>
         <option value="option_baby_unisex">Unisex</option>
-        </optgroup>
+      </optgroup>
       <option value="option_multiple">Mehrere Optionen</option>
+      <optgroup label="Plumbot">
+        <option value="option_plumbot_female">Weiblich</option>
+        <option value="option_plumbot_male">Männlich</option>
+        <option value="option_plumbot_unisex">Unisex</option>
+      </optgroup>
     </select>
     <script>
       document.addEventListener("DOMContentLoaded", function(){

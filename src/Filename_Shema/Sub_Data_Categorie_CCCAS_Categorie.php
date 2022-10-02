@@ -26,6 +26,10 @@ abstract class Sub_Data_Categorie_CCCAS_Categorie extends Compareable_Is_Operand
     "option_makeup" => "MP",
     "option_tatoo" => "TO",
     "option_other" => "OR",
+    "option_plumbot_head" => "PBH",
+    "option_plumbot_body" => "PBB",
+    "option_plumbot_arm" => "PBA",
+    "option_plumbot_leg" => "PBL",
   ];
 
   # input shema template for ui
@@ -33,20 +37,28 @@ abstract class Sub_Data_Categorie_CCCAS_Categorie extends Compareable_Is_Operand
   <div class="container_label_and_input sub_input option_cc_create_a_sim_sub_data_categorie%1$d">
     <label for="%3$s%1$d">CAS-Kategorie</label>
     <select class="%3$s%1$d option_cc_create_a_sim_sub_data_categorie%1$d" name="%2$s[%1$d]['.self::class.']" id="%3$s%1$d" %4$s>
-      <option value="" selected disabled>Auswählen</option>
-      <option value="option_top">Oberteil</option>
-      <option value="option_bottom">Unterteil</option>
-      <option value="option_outfit">Outfit</option>
-      <option value="option_shoe">Schuhe</option>
-      <option value="option_accessories">Accessories</option>
-      <option value="option_hair">Haare</option>
-      <option value="option_hair">Haare mit Accessories</option>
-      <option value="option_eyebrow">Augenbrauen</option>
-      <option value="option_beard">Bart</option>
-      <option value="option_bodyhear">Körperbehaarung</option>
-      <option value="option_makeup">Makeup</option>
-      <option value="option_tatoo">Tatoo</option>
-      <option value="option_other">Other</option>
+    <option value="" selected disabled>Auswählen</option>
+      <optgroup label="Sim">
+        <option value="option_top">Oberteil</option>
+        <option value="option_bottom">Unterteil</option>
+        <option value="option_outfit">Outfit</option>
+        <option value="option_shoe">Schuhe</option>
+        <option value="option_accessories">Accessories</option>
+        <option value="option_hair">Haare</option>
+        <option value="option_hair">Haare mit Accessories</option>
+        <option value="option_eyebrow">Augenbrauen</option>
+        <option value="option_beard">Bart</option>
+        <option value="option_bodyhear">Körperbehaarung</option>
+        <option value="option_makeup">Makeup</option>
+        <option value="option_tatoo">Tatoo</option>
+        <option value="option_other">Andere</option>
+      </optgroup>
+      <optgroup label="Plumbot">
+        <option value="option_plumbot_head">Kopf</option>
+        <option value="option_plumbot_body">Körper</option>
+        <option value="option_plumbot_arm">Arme</option>
+        <option value="option_plumbot_leg">Beine</option>
+      </optgroup>
     </select>
     <script>
       document.addEventListener("DOMContentLoaded", function(){
@@ -67,20 +79,28 @@ abstract class Sub_Data_Categorie_CCCAS_Categorie extends Compareable_Is_Operand
       %4$s
     </select>
     <select class="%3$s%1$d option_cc_create_a_sim_sub_data_categorie%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="%3$s%1$d" required>
-      <option value="" selected disabled>Auswählen</option>
-      <option value="option_top">Oberteil</option>
-      <option value="option_bottom">Unterteil</option>
-      <option value="option_outfit">Outfit</option>
-      <option value="option_shoe">Schuhe</option>
-      <option value="option_accessories">Accessories</option>
-      <option value="option_hair">Haare</option>
-      <option value="option_hair">Haare mit Accessories</option>
-      <option value="option_eyebrow">Augenbrauen</option>
-      <option value="option_beard">Bart</option>
-      <option value="option_bodyhear">Körperbehaarung</option>
-      <option value="option_makeup">Makeup</option>
-      <option value="option_tatoo">Tatoo</option>
-      <option value="option_other">Other</option>
+    <option value="" selected disabled>Auswählen</option>
+      <optgroup label="Sim">
+        <option value="option_top">Oberteil</option>
+        <option value="option_bottom">Unterteil</option>
+        <option value="option_outfit">Outfit</option>
+        <option value="option_shoe">Schuhe</option>
+        <option value="option_accessories">Accessories</option>
+        <option value="option_hair">Haare</option>
+        <option value="option_hair">Haare mit Accessories</option>
+        <option value="option_eyebrow">Augenbrauen</option>
+        <option value="option_beard">Bart</option>
+        <option value="option_bodyhear">Körperbehaarung</option>
+        <option value="option_makeup">Makeup</option>
+        <option value="option_tatoo">Tatoo</option>
+        <option value="option_other">Andere</option>
+      </optgroup>
+      <optgroup label="Plumbot">
+        <option value="option_plumbot_head">Kopf</option>
+        <option value="option_plumbot_body">Körper</option>
+        <option value="option_plumbot_arm">Arme</option>
+        <option value="option_plumbot_leg">Beine</option>
+      </optgroup>
     </select>
     <script>
       document.addEventListener("DOMContentLoaded", function(){

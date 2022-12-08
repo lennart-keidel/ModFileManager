@@ -62,7 +62,7 @@ abstract class Blacklist {
       return false;
     }
     file_put_contents(self::path_blacklist_json_file, json_encode(array_merge($content,$data)));
-    Git_Auto_Pull_Push::push();
+    Git_Auto_Pull_Push::push_blacklist_file();
     return true;
   }
 

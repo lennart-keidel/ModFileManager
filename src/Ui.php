@@ -587,7 +587,7 @@ abstract class Ui {
 
 
   public static function print_duplicate_file_check_input() : void {
-    $duplicate_file_check_saved_input = (isset($_COOKIE[self::ui_key_duplicate_file_check_file_list_input]) === true ? str_replace("+"," ",$_COOKIE[self::ui_key_duplicate_file_check_file_list_input]) : "");
+    $duplicate_file_check_saved_input = file_get_contents("src/Duplicate_File_Check/duplicate_file_check_path_entrys.txt");
     printf(self::template_duplicate_file_check_input_source_path_list, self::ui_key_duplicate_file_check_root_key, "", self::ui_key_duplicate_file_check_file_list_input, self::ui_key_duplicate_file_check_search_recursive, $duplicate_file_check_saved_input);
   }
 

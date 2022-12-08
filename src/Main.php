@@ -55,7 +55,7 @@ abstract class Main {
 
       # if duplicate file check input uploaded
       # store the string in cookie
-      Session_Cookie_Handler::store_duplicate_file_check_input_in_cookie($ui_data);
+      Session_Cookie_Handler::store_duplicate_file_check_input_in_file($ui_data);
 
       # store fast edit input from start page in session
       Session_Cookie_Handler::store_fast_edit_input_in_session($ui_data);

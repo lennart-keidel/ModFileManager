@@ -79,14 +79,17 @@ abstract class Session_Cookie_Handler {
 
   # if duplicate file check input uploaded
   # store the string in cookie
-  public static function store_duplicate_file_check_input_in_cookie(array $ui_data) : void {
+  # store the string in file
+  # push file to git
+  public static function store_duplicate_file_check_input_in_file(array $ui_data) : void {
 
     # if source path key exists in ui data
     # set expire date: now + 1 month
     if(isset($ui_data[Ui::ui_key_duplicate_file_check_root_key][Ui::ui_key_duplicate_file_check_file_list_input]) === true){
-      self::set_cookie(Ui::ui_key_duplicate_file_check_file_list_input, $ui_data[Ui::ui_key_duplicate_file_check_root_key][Ui::ui_key_duplicate_file_check_file_list_input]);
+      file_put_contents("src/Duplicate_File_Check/duplicate_file_check_path_entrys.txt", $ui_data[Ui::ui_key_duplicate_file_check_root_key][Ui::ui_key_duplicate_file_check_file_list_input]);
+      Git_Auto_Pull_Push::push_duplicate_file_check_input_paths_file();
     }
-    self::set_cookie(Ui::ui_key_duplicate_file_check_search_recursive, isset($ui_data[Ui::ui_key_duplicate_file_check_root_key][Ui::ui_key_duplicate_file_check_search_recursive]) === true);
+    // self::set_cookie(Ui::ui_key_duplicate_file_check_search_recursive, isset($ui_data[Ui::ui_key_duplicate_file_check_root_key][Ui::ui_key_duplicate_file_check_search_recursive]) === true);
   }
 
 

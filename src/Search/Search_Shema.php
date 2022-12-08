@@ -18,7 +18,7 @@ abstract class Search_Shema {
     if(isset($ui_data[Ui::ui_search_data_key_root]) === true){
       Session_Cookie_Handler::store_search_input_in_session($ui_data);
       self::set_search_ui_data(current($ui_data[Ui::ui_search_data_key_root]));
-      $filename_list = Main::get_filename_list_from_source_path();
+      $filename_list = self::get_filename_list_for_file_search_in_duplicate_file_paths(Main::get_filename_list_from_source_path());
       Ui::dont_print_errors_from_this_exceptions(Shema_Exception::class);
       $filename_data = Create_Read_Filename_By_Shema::read_data_from_filename_list_by_shema($filename_list);
       Ui::reset_dont_print_errors_from_this_exceptions();
@@ -32,6 +32,23 @@ abstract class Search_Shema {
       }
       $_SESSION[Ui::ui_data_key_root] = $filtered_filename_data;
     }
+  }
+
+
+  # if in session additional search in duplicate files option is set in Session
+  # search recursive if duplicate file check recurive option is set in Session
+  # get filename list of duplicate file paths
+  # merge this paths with the input filename list
+  # return input with merged pathes
+  private static function get_filename_list_for_file_search_in_duplicate_file_paths(array $filename_list_to_merge_with){
+    if(isset($_SESSION[Ui::ui_key_duplicate_file_check_root_key]) === true && isset($_SESSION[Ui::ui_key_duplicate_file_check_root_key][Ui::ui_key_duplicate_file_check_file_list_input]) === true){
+      $function_name = isset($_SESSION[Ui::ui_key_duplicate_file_check_root_key][Ui::ui_key_duplicate_file_check_search_recursive]) === true ? "File_Handler::get_filename_list_from_path_recursive" : "File_Handler::get_filename_list_from_path";
+      foreach(explode("\n",$_SESSION[Ui::ui_key_duplicate_file_check_root_key][Ui::ui_key_duplicate_file_check_file_list_input]) as $path_duplicate_file_check_dir){
+        $path_duplicate_file_check_dir = trim($path_duplicate_file_check_dir);
+        $filename_list_to_merge_with = array_merge($filename_list_to_merge_with, $function_name($path_duplicate_file_check_dir));
+      }
+    }
+    return $filename_list_to_merge_with;
   }
 
 

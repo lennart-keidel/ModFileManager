@@ -228,6 +228,10 @@ abstract class Session_Cookie_Handler {
       $_SESSION[Ui::ui_path_source_root_option_mode_key] = $ui_data[Ui::ui_source_input_key_root][Ui::ui_path_source_root_option_mode_key];
     }
 
+    if(isset($_SESSION[Ui::ui_path_source_root_option_mode_search_additional_info]) === false && isset($ui_data[Ui::ui_source_input_key_root][Ui::ui_path_source_root_option_mode_search_additional_info]) === true){
+      $_SESSION[Ui::ui_path_source_root_option_mode_search_additional_info] = $ui_data[Ui::ui_source_input_key_root][Ui::ui_path_source_root_option_mode_search_additional_info];
+    }
+
     if(isset($ui_data[Ui::ui_key_auto_move_file]) === true){
       $_SESSION[Ui::ui_key_auto_move_file] = $ui_data[Ui::ui_key_auto_move_file];
     }

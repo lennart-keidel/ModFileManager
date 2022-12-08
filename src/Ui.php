@@ -45,11 +45,17 @@ abstract class Ui {
   # ui data key for mode
   public const ui_path_source_root_option_mode_key = "path_source_root_options_mode";
 
+  # ui data key for mode additional info on search mode
+  public const ui_path_source_root_option_mode_search_additional_info = "path_source_root_options_mode_search_additional_info";
+
   # ui data value for mode: rename files by shema
   public const ui_path_source_root_option_mode_value_rename_files_by_shema = "rename_files_by_shema";
 
   # ui data value for mode: search source dir for shema files by shema data
   public const ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data = "search_source_dir_for_shema_files_by_shema_data";
+
+  # ui data value for search in double data comparission paths as well
+  public const ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too = "search_in_double_data_paths_too";
 
   # ui data key for filename source path
   public const ui_key_path_source = "path_source";
@@ -87,12 +93,24 @@ abstract class Ui {
     <label for="input_source_path_root_recursive%1$d">Alle Unterordner und deren Dateien einbinden</label>
   </div>
   <div class="container_label_and_input">
-    <input id="rename_files_by_shema%1$d" type="radio" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_option_mode_key.']" value="'.self::ui_path_source_root_option_mode_value_rename_files_by_shema.'" checked>
+    <input id="rename_files_by_shema%1$d" type="radio" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_option_mode_key.']" value="'.self::ui_path_source_root_option_mode_value_rename_files_by_shema.'" checked onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'search_source_dir_for_shema_files_by_shema_data%1$d\', \'ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too\')">
     <label for="rename_files_by_shema%1$d">Dateien in Shema-Format bringen</label>
   </div>
   <div class="container_label_and_input">
-    <input id="search_source_dir_for_shema_files_by_shema_data%1$d" type="radio" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_option_mode_key.']" value="'.self::ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data.'">
+    <input id="search_source_dir_for_shema_files_by_shema_data%1$d" type="radio" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_option_mode_key.']" value="'.self::ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data.'" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'search_source_dir_for_shema_files_by_shema_data%1$d\', \'ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too\')">
     <label for="search_source_dir_for_shema_files_by_shema_data%1$d">Nach Dateien suchen anhand von Shema-Daten</label>
+  </div>
+
+  <div class="container_label_and_input sub_input ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too" style="display:none;">
+    <input id="ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too%1$d" type="checkbox" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_option_mode_search_additional_info.']" value="'.self::ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too.'">
+    <label for="ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too%1$d">auch in Vergleichsordnern für doppelte Dateien suchen</label>
+    <script>
+      document.addEventListener("DOMContentLoaded", function(){
+        setTimeout(function(){
+          disable_and_hide_input_by_class_name_if_source_element_is_not_checked("search_source_dir_for_shema_files_by_shema_data%1$d", "ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too")
+        },100);
+      });
+    </script>
   </div>
   ';
 

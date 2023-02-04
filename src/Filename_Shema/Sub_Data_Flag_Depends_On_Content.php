@@ -2,7 +2,7 @@
 
 # this class is only required for a clean structuring of the ui and filename data
 # it's only for ment to be a sub class of Filename_Shema_Flag
-abstract class Sub_Data_Flag_Depends_On_Content extends Compareable_Text_Operand implements I_Filename_Shema {
+abstract class Sub_Data_Flag_Depends_On_Content extends Compareable_Is_In_Array_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
     self::class
@@ -10,16 +10,17 @@ abstract class Sub_Data_Flag_Depends_On_Content extends Compareable_Text_Operand
 
   # input shema template for ui
   private const input_shema_template = '
-  <div class="sub_data_option_depends_on_content%1$d container_label_and_input sub_input">
+  <div class="sub_data_option_depends_on_content%1$d additional_input_root container_label_and_input sub_input">
     <label class="sub_data_option_depends_on_content%1$d" for="'.self::class.'%1$d">Link zum Mod, CC von dem dieser Mod, CC abhängig ist</label>
-    <input class="sub_data_option_depends_on_content%1$d %3$s%1$d" id="'.self::class.'%1$d" type="url" name="%2$s[%1$d]['.self::class.']" %4$s disabled>
+    <input class="sub_data_option_depends_on_content%1$d %3$s%1$d" id="'.self::class.'%1$d" type="url" name="%2$s[%1$d]['.self::class.'][]" %4$s disabled>
+    %5$s
   </div>
   ';
 
 
   # input shema template for search ui
   private const search_input_shema_template = '
-  <div class="sub_data_option_depends_on_content%1$d container_label_and_input sub_input">
+  <div class="sub_data_option_depends_on_content%1$d additional_input_root container_label_and_input sub_input">
     <label class="sub_data_option_depends_on_content%1$d" for="'.self::class.'%1$d">Link zum Mod, CC von dem dieser Mod, CC abhängig ist</label>
     <select class="sub_data_option_depends_on_content%1$d %3$s_operand%1$d %3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
       %4$s
@@ -38,7 +39,8 @@ abstract class Sub_Data_Flag_Depends_On_Content extends Compareable_Text_Operand
   # generate filename shema input to ui
   # return html string
   public static function generate_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = true) : string {
-    return sprintf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, ($is_required === true ? "required" : ""));
+    $additional_search_buttons = Ui::generate_additional_search_buttons_ui(self::class);
+    return sprintf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, ($is_required === true ? "required" : ""), $additional_search_buttons);
   }
 
 

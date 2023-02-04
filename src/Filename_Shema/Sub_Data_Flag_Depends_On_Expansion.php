@@ -2,7 +2,7 @@
 
 # this class is only required for a clean structuring of the ui and filename data
 # it's only for ment to be a sub class of Filename_Shema_Flag
-abstract class Sub_Data_Flag_Depends_On_Expansion extends Compareable_Is_Operand implements I_Filename_Shema {
+abstract class Sub_Data_Flag_Depends_On_Expansion extends Compareable_Is_In_Array_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
     self::class
@@ -92,8 +92,7 @@ abstract class Sub_Data_Flag_Depends_On_Expansion extends Compareable_Is_Operand
   # return html string
   public static function generate_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = true) : string {
     $additional_search_buttons = Ui::generate_additional_search_buttons_ui(self::class);
-    $ret = sprintf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, ($is_required === true ? "required" : ""), $additional_search_buttons);
-    return $ret;
+    return sprintf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, ($is_required === true ? "required" : ""), $additional_search_buttons);
   }
 
 
@@ -118,26 +117,6 @@ abstract class Sub_Data_Flag_Depends_On_Expansion extends Compareable_Is_Operand
     $success_heading = "";
     $error_heading = "";
     return [$path_result, $success_heading, $error_heading];
-  }
-
-
-  # overwrite inheritted function
-  public static function get_search_operand() : array {
-    return [
-      "is" => [
-        "text" => "ist",
-        "callable" => function(string $search_input, array $value_to_compare) : bool {
-          var_dump($value_to_compare, $search_input);
-          return in_array($search_input, $value_to_compare) === true;
-        }
-      ],
-      "is_not" => [
-        "text" => "ist nicht",
-        "callable" => function(string $search_input, array $value_to_compare) : bool {
-          return in_array($search_input, $value_to_compare) === false;
-        }
-      ]
-    ];
   }
 
 }

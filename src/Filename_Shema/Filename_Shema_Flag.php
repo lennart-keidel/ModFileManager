@@ -1,6 +1,6 @@
 <?php
 
-abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_Filename_Shema {
+abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
     self::class
@@ -341,18 +341,20 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     $result .= self::array_option_short_id[$option_key];
 
     # iterate through sub data
-    foreach($data["sub_data"][$option_key] as $key_sub_data => $sub_data){
+    foreach($data["sub_data"][$option_key] as $key_sub_data => $sub_data_array){
+      foreach($sub_data_array as $sub_data){
 
       # error if required sub data is empty
-      if(empty($sub_data)){
-        throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Optionsschlüssel '$key_sub_data' darf nicht leer sein.");
+        if(empty($sub_data)){
+          throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Optionsschlüssel '$key_sub_data' darf nicht leer sein.");
+        }
+
+        // if(Url_Shortener_API_Handler::test_if_url_is_valid($sub_data) === false){
+        //   throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Link für den Optionsschlüssel '$key_sub_data' gibt keinen validen HTTP-Response-Code zurück.");
+        // }
+
+        $result .= Url_Shortener_API_Handler::short_url($sub_data);
       }
-
-      // if(Url_Shortener_API_Handler::test_if_url_is_valid($sub_data) === false){
-      //   throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Link für den Optionsschlüssel '$key_sub_data' gibt keinen validen HTTP-Response-Code zurück.");
-      // }
-
-      $result .= Url_Shortener_API_Handler::short_url($sub_data);
     }
 
     return $result;
@@ -615,25 +617,6 @@ abstract class Filename_Shema_Flag extends Compareable_Is_Operand implements I_F
     $sub_data_flag_depends_on_content_input_html = Sub_Data_Flag_Depends_On_Content::generate_filename_shema_search_input_for_ui($index);
     $sub_data_flag_depends_on_expansion_input_html = Sub_Data_Flag_Depends_On_Expansion::generate_filename_shema_search_input_for_ui($index);
     printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $additional_search_buttons, $sub_data_flag_depends_on_content_input_html, $sub_data_flag_depends_on_expansion_input_html);
-  }
-
-
-  # overwrite inheritted function
-  public static function get_search_operand() : array {
-    return [
-      "is" => [
-        "text" => "ist",
-        "callable" => function(string $search_input, array $value_to_compare) : bool {
-          return in_array($search_input, $value_to_compare) === true;
-        }
-      ],
-      "is_not" => [
-        "text" => "ist nicht",
-        "callable" => function(string $search_input, array $value_to_compare) : bool {
-          return in_array($search_input, $value_to_compare) === false;
-        }
-      ]
-    ];
   }
 
 

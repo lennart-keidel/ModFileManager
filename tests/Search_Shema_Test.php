@@ -11,7 +11,7 @@ use function PHPUnit\Framework\assertTrue;
 # test class
 class Search_Shema_Test extends TestCase {
 
-  private static $search_input1, $search_input2, $search_input3, $search_input4, $search_input5, $search_input6, $search_input7, $search_input8, $search_input9, $search_input10, $search_input11, $search_input12, $search_input13, $search_input14, $search_input15, $search_input16, $search_input17, $search_input18, $search_input19, $search_input20, $search_input21, $search_input22, $search_input23, $search_input24, $search_input25, $search_input26, $search_input27, $search_input28, $search_input29, $search_input30, $search_input31, $search_input32, $search_input33, $filename_data_for_one_file1, $filename_data_for_one_file2, $filename_data_for_one_file3, $filename_data_for_one_file4 = [];
+  private static $search_input1, $search_input2, $search_input3, $search_input4, $search_input5, $search_input6, $search_input7, $search_input8, $search_input9, $search_input10, $search_input11, $search_input12, $search_input13, $search_input14, $search_input15, $search_input16, $search_input17, $search_input18, $search_input19, $search_input20, $search_input21, $search_input22, $search_input23, $search_input24, $search_input25, $search_input26, $search_input27, $search_input28, $search_input29, $search_input30, $search_input31, $search_input32, $search_input33, $filename_data_for_one_file1, $filename_data_for_one_file2, $filename_data_for_one_file3, $filename_data_for_one_file4, $filename_data_for_one_file5 = [];
 
 
   # set up ui data with realistic data
@@ -307,6 +307,117 @@ class Search_Shema_Test extends TestCase {
       ],
     ];
 
+    self::$search_input25 = [
+      "search_shema_connector" => "or",
+      Ui::ui_search_data_key_operand_root => [
+        "Sub_Data_Flag_Depends_On_Expansion" => [ "is", ],
+        "Filename_Shema_Flag" => [ "is", "is", ],
+        "Sub_Data_Flag_Depends_On_Content" => [ "is", ],
+      ],
+      Ui::ui_search_data_key_value_root => [
+        "Sub_Data_Flag_Depends_On_Expansion" => [ "ep02" ],
+        "Filename_Shema_Flag" => [
+          "option_depends_on_content",
+          "option_depends_on_expansion"
+        ],
+        "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
+      ],
+    ];
+
+    self::$search_input26 = [
+      "search_shema_connector" => "or",
+      Ui::ui_search_data_key_operand_root => [
+        "Sub_Data_Flag_Depends_On_Expansion" => [ "is", ],
+        "Filename_Shema_Flag" => [ "is", "is", ],
+        "Sub_Data_Flag_Depends_On_Content" => [ "is", ],
+      ],
+      Ui::ui_search_data_key_value_root => [
+        "Sub_Data_Flag_Depends_On_Expansion" => [ "ep03", ],
+        "Filename_Shema_Flag" => [
+          "option_depends_on_content",
+          "option_depends_on_expansion"
+        ],
+        "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
+      ],
+    ];
+
+    self::$search_input27 = [
+      "search_shema_connector" => "and",
+      Ui::ui_search_data_key_operand_root => [
+        "Sub_Data_Flag_Depends_On_Expansion" => [ "is", ],
+        "Filename_Shema_Flag" => [ "is", "is", ],
+        "Sub_Data_Flag_Depends_On_Content" => [ "is", ],
+      ],
+      Ui::ui_search_data_key_value_root => [
+        "Sub_Data_Flag_Depends_On_Expansion" => [ "ep02" ],
+        "Filename_Shema_Flag" => [
+          "option_depends_on_content",
+          "option_depends_on_expansion"
+        ],
+        "Sub_Data_Flag_Depends_On_Content" => [
+          "https://store.thesims3.com/setsProductDetails.html?productId=OFB-SIM3:57762",
+        ],
+      ],
+    ];
+
+    self::$search_input28 = [
+      "search_shema_connector" => "or",
+      Ui::ui_search_data_key_operand_root => [
+        "Sub_Data_Flag_Depends_On_Expansion" => [ "is_not", ],
+        "Filename_Shema_Flag" => [ "is", "is", ],
+        "Sub_Data_Flag_Depends_On_Content" => [ "is", ],
+      ],
+      Ui::ui_search_data_key_value_root => [
+        "Sub_Data_Flag_Depends_On_Expansion" => [ "ep04" ],
+        "Filename_Shema_Flag" => [
+          "option_depends_on_content",
+          "option_depends_on_expansion"
+        ],
+        "Sub_Data_Flag_Depends_On_Content" => [
+          "https://store.thesims3.com/setsProductDetails.html?productId=OFB-SIM3:57762",
+        ],
+      ],
+    ];
+
+    self::$search_input29 = [
+      "search_shema_connector" => "or",
+      Ui::ui_search_data_key_operand_root => [
+        "Sub_Data_Flag_Depends_On_Expansion" => [ "is_not", ],
+        "Filename_Shema_Flag" => [ "is", "is", ],
+        "Sub_Data_Flag_Depends_On_Content" => [ "is", ],
+      ],
+      Ui::ui_search_data_key_value_root => [
+        "Sub_Data_Flag_Depends_On_Expansion" => [ "ep11" ],
+        "Filename_Shema_Flag" => [
+          "option_depends_on_content",
+          "option_depends_on_expansion"
+        ],
+        "Sub_Data_Flag_Depends_On_Content" => [
+          "https://store.thesims3.com/setsProductDetails.html?productId=OFB-SIM3:57762",
+        ],
+      ],
+    ];
+
+    self::$search_input30 = [
+      "search_shema_connector" => "and",
+      Ui::ui_search_data_key_operand_root => [
+        "Sub_Data_Flag_Depends_On_Expansion" => [ "is_not", ],
+        "Filename_Shema_Flag" => [ "is", "is", ],
+        "Sub_Data_Flag_Depends_On_Content" => [ "is", ],
+      ],
+      Ui::ui_search_data_key_value_root => [
+        "Sub_Data_Flag_Depends_On_Expansion" => [ "ep08" ],
+        "Filename_Shema_Flag" => [
+          "option_depends_on_content",
+          "option_depends_on_expansion"
+        ],
+        "Sub_Data_Flag_Depends_On_Content" => [
+          "https://store.thesims3.com/setsProductDetails.html?productId=OFB-SIM3:57762",
+        ],
+      ],
+    ];
+
+
     # every data matches search_input1 and search_input2
     self::$filename_data_for_one_file1 = [
       "Filename_Shema_Categorie" => "option_tuning",
@@ -318,7 +429,7 @@ class Search_Shema_Test extends TestCase {
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
       "Filename_Shema_Creator" => "Nraas",
       "Filename_Shema_Patch_Level" => "1.69",
       "Filename_Shema_Long_Description" => "A Longer Description",
@@ -332,7 +443,8 @@ class Search_Shema_Test extends TestCase {
       "Filename_Shema_Installation_Date" => "2020-10-29",
       "Sub_Data_Flag_Depends_On_Expansion" => ["ep09"],
       "Filename_Shema_Flag" => [
-        "option_is_essential"
+        "option_is_essential",
+        "option_depends_on_expansion",
       ],
       "Filename_Shema_Patch_Level" => "1.69",
       "Filename_Shema_Long_Description" => "",
@@ -346,7 +458,8 @@ class Search_Shema_Test extends TestCase {
       "Filename_Shema_Installation_Date" => "2020-11-12",
       "Sub_Data_Flag_Depends_On_Expansion" => ["ep01"],
       "Filename_Shema_Flag" => [
-        "option_is_essential"
+        "option_is_essential",
+        "option_depends_on_expansion",
       ],
       "Filename_Shema_Patch_Level" => "1.67",
       "Filename_Shema_Long_Description" => "A Different Description",
@@ -358,7 +471,7 @@ class Search_Shema_Test extends TestCase {
       "Filename_Shema_Description" => "some other description",
       "Filename_Shema_Link" => "https://potato-ballad-sims.tumblr.com/post/asd",
       "Filename_Shema_Installation_Date" => "2020-11-12",
-      "Sub_Data_Flag_Depends_On_Expansion" => ["ep11"],
+      "Sub_Data_Flag_Depends_On_Expansion" => ["ep04"],
       "Filename_Shema_Flag" => [
         "option_is_essential"
       ],
@@ -366,8 +479,25 @@ class Search_Shema_Test extends TestCase {
       "Filename_Shema_Long_Description" => "A Longer Description",
     ];
 
-  }
+    # matches search_input25, search_input26, search_input27, search_input28, search_input29s
+    self::$filename_data_for_one_file5 = [
+      "Filename_Shema_Categorie" => "option_cc_buy",
+      "Filename_Shema_Description" => "some other description",
+      "Filename_Shema_Link" => "https://potato-ballad-sims.tumblr.com/post/asd",
+      "Filename_Shema_Installation_Date" => "2020-11-12",
+      "Sub_Data_Flag_Depends_On_Expansion" => [ "ep11", "ep02", "sp01" ],
+      "Sub_Data_Flag_Depends_On_Content" => [
+        "https://store.thesims3.com/setsProductDetails.html?productId=OFB-SIM3:57762",
+      ],
+      "Filename_Shema_Flag" => [
+        "option_depends_on_content",
+        "option_depends_on_expansion",
+      ],
+      "Filename_Shema_Patch_Level" => "1.55",
+      "Filename_Shema_Long_Description" => "A Longer Description",
+    ];
 
+  }
 
   public function test_check_if_filename_data_for_one_file_matches_search_input_with_or_connector() : void {
     Search_Shema::set_search_ui_data(self::$search_input1);
@@ -651,6 +781,32 @@ class Search_Shema_Test extends TestCase {
     assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file2));
     assertTrue(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file3));
     assertTrue(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file4));
+  }
+
+  public function test_check_if_filename_data_for_one_file_matches_search_input_with_multiple_expansion_dependencys_and_with_or_connector() : void {
+    Search_Shema::set_search_ui_data(self::$search_input25);
+    assertTrue(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file5));
+    Search_Shema::set_search_ui_data(self::$search_input26);
+    assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file5));
+  }
+
+  public function test_check_if_filename_data_for_one_file_matches_search_input_with_multiple_expansion_dependencys_and_with_and_connector() : void {
+    Search_Shema::set_search_ui_data(self::$search_input27);
+    assertTrue(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file5));
+    assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file4));
+  }
+
+  public function test_check_if_filename_data_for_one_file_matches_search_input_with_multiple_expansion_dependencys_and_with_or_connector_and_is_not_operator() : void {
+    Search_Shema::set_search_ui_data(self::$search_input28);
+    assertTrue(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file5));
+    Search_Shema::set_search_ui_data(self::$search_input29);
+    assertTrue(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file5));
+  }
+
+  public function test_check_if_filename_data_for_one_file_matches_search_input_with_multiple_expansion_dependencys_and_with_and_connector_and_is_not_operator() : void {
+    Search_Shema::set_search_ui_data(self::$search_input30);
+    assertTrue(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file5));
+    assertFalse(Search_Shema::check_if_filename_data_for_one_file_matches_search_input(self::$filename_data_for_one_file4));
   }
 }
 

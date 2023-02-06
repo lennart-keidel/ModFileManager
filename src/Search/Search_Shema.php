@@ -41,7 +41,9 @@ abstract class Search_Shema {
   # merge this paths with the input filename list
   # return input with merged pathes
   private static function get_filename_list_for_file_search_in_duplicate_file_paths(array $filename_list_to_merge_with){
-    if(isset($_SESSION[Ui::ui_key_duplicate_file_check_root_key]) === true && isset($_SESSION[Ui::ui_key_duplicate_file_check_root_key][Ui::ui_key_duplicate_file_check_file_list_input]) === true){
+    if($_SESSION[Ui::ui_source_input_key_root][Ui::ui_path_source_root_option_mode_search_additional_info] === Ui::ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too
+    && isset($_SESSION[Ui::ui_key_duplicate_file_check_root_key]) === true
+    && isset($_SESSION[Ui::ui_key_duplicate_file_check_root_key][Ui::ui_key_duplicate_file_check_file_list_input]) === true){
       $function_name = isset($_SESSION[Ui::ui_key_duplicate_file_check_root_key][Ui::ui_key_duplicate_file_check_search_recursive]) === true ? "File_Handler::get_filename_list_from_path_recursive" : "File_Handler::get_filename_list_from_path";
       foreach(explode("\n",$_SESSION[Ui::ui_key_duplicate_file_check_root_key][Ui::ui_key_duplicate_file_check_file_list_input]) as $path_duplicate_file_check_dir){
         $path_duplicate_file_check_dir = trim($path_duplicate_file_check_dir);

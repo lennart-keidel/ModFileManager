@@ -106,7 +106,6 @@ abstract class Search_Shema {
         }
 
         $search_operand = self::$search_operand_array[$search_ui_key][$index];
-        var_dump("--------------------------",$search_ui_key,$index,$value_to_compare);
         if($search_ui_key::search_compare($search_value, $search_operand, $value_to_compare, $search_ui_key) === true){
           if(self::$search_connector === "or"){
 

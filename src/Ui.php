@@ -167,11 +167,11 @@ abstract class Ui {
   <br>
   <br>
   <hr>
-  <h3>Zum Kopieren der Daten</h3>
+  <h3>📝 Vorlage</h3>
   <form class="shema_fast_edit" id="shema_fast_edit" method="post" action="." autocomplete="on">
   ';
   private const template_shema_fast_edit_input_form_end = '
-  <input type="submit" value="speichern">
+  <input type="submit" value="📤 Speichern">
   <hr>
   <br>
   <br>
@@ -182,10 +182,10 @@ abstract class Ui {
   private const template_shema_template_button_copy_from_fast_edit_form = '
   <br>
   <div class="input_shema_source_path_ui">
-    <button type="button" class="copy_button_source_path_file" onclick="copy_data_from_fast_edit_form_into_file_input_form(\'#shema_fast_edit\',\'#shema_input%1$d\', false)">Daten von oben übernehmen</button>
+    <button type="button" class="copy_button_source_path_file" onclick="copy_data_from_fast_edit_form_into_file_input_form(\'#shema_fast_edit\',\'#shema_input%1$d\', false)">📥 aus Vorlage übernehmen</button>
     <br>
     <br>
-    <button type="button" class="copy_button_source_path_file" onclick="copy_data_from_fast_edit_form_into_file_input_form(\'#shema_fast_edit\',\'#shema_input%1$d\', true)">Daten von oben übernehmen und überschreiben</button>
+    <button type="button" class="copy_button_source_path_file" onclick="copy_data_from_fast_edit_form_into_file_input_form(\'#shema_fast_edit\',\'#shema_input%1$d\', true)">📥❌ aus Vorlage überschreiben</button>
   </div>
   <br>
   <br>
@@ -193,7 +193,7 @@ abstract class Ui {
 
   # html template for hidden input for source path
   private const template_shema_template_path_source_for_ui = '
-  <div class="input_shema_source_path_ui"><b>Ordner:</b> <span id="file_source_path%1$d">%2$s<span></div><button type="button" class="copy_button_source_path_file" onclick="copyToClipboard(\'#file_source_path%1$d\')">kopieren</button>
+  <div class="input_shema_source_path_ui"><b>Ordner:</b> <span id="file_source_path%1$d">%2$s<span></div><button type="button" class="copy_button_source_path_file" onclick="copyToClipboard(\'#file_source_path%1$d\')">📋 kopieren</button>
   ';
 
   # html template for hidden input for source path
@@ -210,12 +210,12 @@ abstract class Ui {
   ';
 
   private const template_shema_input_submit_button = '
-  <input type="submit" value="Diese Datei umbenennen">
+  <input type="submit" value="📤 Diese Datei umbenennen">
   ';
 
   private const template_delete_session_button = '
   <form class="delete_session" method="post" action=".">
-    <button type="submit" class="delete_session_button" name="delete_session_button" onclick="return confirm(this.value);" value="alle offenen eingetragenen Daten löschen und zurück zum Anfang">alle offenen eingetragenen Daten löschen und zurück zum Anfang</button>
+    <button type="submit" class="delete_session_button" name="delete_session_button" onclick="return confirm(this.value);" value="Zurück zur Startseite">◀ Zurück zur Startseite</button>
     <br>
     <br>
   </form>
@@ -223,7 +223,7 @@ abstract class Ui {
 
   private const template_reread_source_path_button = '
   <form class="reread_source_path" method="post" action=".">
-    <button type="submit" class="reread_source_path_button" name="reread_source_path_button" onclick="return confirm(this.value);" value="Quellpfad neu einlesen">Quellpfad neu einlesen</button>
+    <button type="submit" class="reread_source_path_button" name="reread_source_path_button" onclick="return confirm(this.value);" value="Quellpfad neu einlesen">🔁 Quellpfad neu einlesen</button>
     <br>
     <br>
   </form>
@@ -282,8 +282,8 @@ abstract class Ui {
   <div class="input_shema_source_path_ui">
     <span style="display:none;" id="duplicate_file_error_path_to_file_full_%5$s">%1$s</span>
     <span style="display:none;" id="duplicate_file_error_path_to_file_directory_%5$s">%2$s</span>
-    <button type="button" onclick="copyToClipboard(\'#duplicate_file_error_path_to_file_full_%5$s\')">Pfad zur Datei kopieren</button>
-    <button type="button" onclick="copyToClipboard(\'#duplicate_file_error_path_to_file_directory_%5$s\')">Pfad zum Ordner kopieren</button>
+    <button type="button" onclick="copyToClipboard(\'#duplicate_file_error_path_to_file_full_%5$s\')">📋 Pfad zur Datei kopieren</button>
+    <button type="button" onclick="copyToClipboard(\'#duplicate_file_error_path_to_file_directory_%5$s\')">📋 Pfad zum Ordner kopieren</button>
   </div>
   <br>
   <br>

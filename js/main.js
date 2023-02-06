@@ -337,6 +337,15 @@ function copyToClipboard(element) {
 function add_search_input_with_plus_button(element){
   var parent = element.closest('.additional_input_root');
   var parent_clone = $(parent).clone();
+  var parent_clone_children = parent_clone.children("input:first, textarea:first, select:nth-child(2)");
+
+  // remove value of clone
+  parent_clone_children.val("");
+
+  // add prefix to child id
+  parent_clone_children.attr("id", "additional_input__"+parent_clone_children.attr("id"));
+
+  // insert clone
   parent_clone.insertAfter(parent);
 }
 
@@ -345,21 +354,35 @@ function remove_search_input_with_minus_button(element){
   class_name = element.siblings('input:first, textarea:first, select:nth-child(2)').attr('class').split(/\s+/)[0];
   if($('.'+class_name).length > 1){
     var parent = element.closest('.additional_input_root');
-    parent.remove();
+    var class_names = parent.attr("class").replaceAll(" ",".");
+
+    // don't remove last element
+    if($("."+class_names).length > 1){
+      parent.remove();
+    }
   }
 }
 
 //
 function copy_data_from_fast_edit_form_into_file_input_form(parent_form_source, parent_form_target, override_existing_data){
   var all_elements_source = $(parent_form_source+" input, "+parent_form_source+" select, "+parent_form_source+" textarea");
+  var previous_element;
 
   all_elements_source.each(function(){
     var source_value = this.value;
     var source_checked = this.checked;
     var source_type = this.getAttribute("type");
-    if(source_value != undefined){
+    if(source_value != undefined && source_type!="submit"){
       var source_id = remove_trailing_index_from_name(this.id);
-      var target_element = $(parent_form_target+" "+"*[id*="+source_id+"]");
+      var is_additional_input = source_id.includes("additional_input__") === true;
+      console.log(parent_form_target+" "+"*[id*="+source_id+"]");
+      var target_element = $(parent_form_target+" "+"*[id^="+source_id+"]");
+      console.log(is_additional_input, target_element.length, is_additional_input === true && target_element.length === 0);
+      if(is_additional_input === true && target_element.length === 0){
+        add_search_input_with_plus_button(previous_element);
+        target_element = $(parent_form_target+" "+"*[id^="+source_id+"]");
+      }
+      console.log(target_element);
       var target_checked = target_element.get(0).checked;
       if(source_type == "checkbox"){
         if(override_existing_data === false ? source_checked == true && target_checked == false : source_checked != target_checked){
@@ -373,6 +396,7 @@ function copy_data_from_fast_edit_form_into_file_input_form(parent_form_source, 
         }
       }
     }
+    previous_element = target_element;
   });
 }
 

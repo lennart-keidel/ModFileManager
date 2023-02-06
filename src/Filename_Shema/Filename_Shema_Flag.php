@@ -337,14 +337,15 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
 
   # convert data to file for depends on content flag option
   private static function convert_data_to_filename_option_depends_on_content(array $data, string $option_key) : string {
-    $result = "";
-    $result .= self::array_option_short_id[$option_key];
+    $connected_links = "";
 
     # iterate through sub data
     foreach($data["sub_data"][$option_key] as $key_sub_data => $sub_data_array){
+
+      # iterate through mulitple urls
       foreach($sub_data_array as $sub_data){
 
-      # error if required sub data is empty
+        # error if required sub data is empty
         if(empty($sub_data)){
           throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Optionsschlüssel '$key_sub_data' darf nicht leer sein.");
         }
@@ -353,11 +354,23 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
         //   throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Link für den Optionsschlüssel '$key_sub_data' gibt keinen validen HTTP-Response-Code zurück.");
         // }
 
-        $result .= Url_Shortener_API_Handler::short_url($sub_data);
+        # encode ; in url
+        $sub_data = str_replace(";","%3B",$sub_data);
+
+        # connect multiple url in one string with ; character
+        if(empty($connected_links)){
+          $connected_links = $sub_data;
+        }
+        else {
+          $connected_links .= ";".$sub_data;
+        }
+
       }
     }
 
-    return $result;
+
+    # return complete string of short id and short url
+    return self::array_option_short_id[$option_key] . Url_Shortener_API_Handler::short_url($connected_links);
   }
 
 
@@ -501,14 +514,32 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
 
 
   private static function convert_filename_to_data_option_depends_on_content(string $filename_part, array &$array_result) : bool {
+    $result = [];
+
+    # extract short id from filename part (first letter)
     $short_id = substr($filename_part,0,1);
-    $value = substr($filename_part,1);
+
+    # remove short id from filename part (first letter)
+    $filename_part = substr($filename_part,1);
+
+    # expand url through url shortener
     try {
-      $result = Url_Shortener_API_Handler::expand_url($value);
+      $value = Url_Shortener_API_Handler::expand_url($filename_part);
     }
     catch(Exception $e){
       return false;
     }
+
+    # explode filename part by ;
+    # in case their're multiple url
+    $array_value = explode(";",$value);
+
+    # iterate through url list
+    foreach($array_value as $value){
+      # replace ; in string back to original character
+      $result[] = str_replace("%3B",";",$value);
+    }
+
     $key = current(self::array_ui_data_key_sub_data["option_depends_on_content"]);
     $array_result[$key] = $result;
     return true;

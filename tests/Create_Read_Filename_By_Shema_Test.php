@@ -54,7 +54,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -71,7 +71,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -140,7 +140,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
             "option_depends_on_content",
             "option_depends_on_expansion"
           ],
-          "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+          "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
           "Filename_Shema_Long_Description" => "A Longer Description",
           "Filename_Shema_Creator" => "Nraas",
         ],
@@ -156,7 +156,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
             "option_depends_on_content",
             "option_depends_on_expansion"
           ],
-          "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+          "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
           "Filename_Shema_Long_Description" => "A Longer Description",
           "Filename_Shema_Creator" => "Nraas",
         ],
@@ -212,7 +212,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
               "option_depends_on_content",
               "option_depends_on_expansion"
             ],
-            "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+            "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
             "Filename_Shema_Long_Description" => "A Longer Description",
             "Filename_Shema_Creator" => "Nraas",
           ],
@@ -228,7 +228,7 @@ class Create_Read_Filename_By_Shema_Test extends TestCase {
               "option_depends_on_content",
               "option_depends_on_expansion"
             ],
-            "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+            "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
             "Filename_Shema_Long_Description" => "A Longer Description",
             "Filename_Shema_Creator" => "Nraas",
           ],

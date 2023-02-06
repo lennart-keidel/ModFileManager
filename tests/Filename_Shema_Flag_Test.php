@@ -19,17 +19,20 @@ class Filename_Shema_Flag_Test extends TestCase {
   protected $ui_data2 = [];
   protected $ui_data3 = [];
   protected $ui_data4 = [];
+  protected $ui_data5 = [];
   protected $wrong_ui_data1 = [];
   protected $wrong_ui_data2 = [];
   protected $wrong_ui_data3 = [];
   protected $wrong_ui_data4 = [];
   protected $wrong_ui_data6 = [];
   protected $wrong_ui_data7 = [];
+  protected $wrong_ui_data8 = [];
   protected $filename1 = "";
   protected $filename2 = "";
   protected $filename3 = "";
   protected $filename4 = "";
   protected $filename5 = "";
+  protected $filename6 = "";
   protected $wrong_filename1 = "";
   protected $wrong_filename2 = "";
   protected $wrong_filename3 = "";
@@ -61,7 +64,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_depends_on_content",
         "option_depends_on_expansion"
       ],
-      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/d/526207/more-traits-for-all-ages.html",
+      "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/d/526207/more-traits-for-all-ages.html", ],
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -78,7 +81,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         // "option_install_in_packages",
         "option_is_essential"
       ],
-      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -95,7 +98,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_overrides",
         "option_is_essential"
       ],
-      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -108,6 +111,20 @@ class Filename_Shema_Flag_Test extends TestCase {
       "Filename_Shema_Flag" => [
 
       ]
+    ];
+
+    $this->ui_data5 = [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => [
+        "option_depends_on_content",
+      ],
+      "Sub_Data_Flag_Depends_On_Content" => [
+        "https://modthesims.info/d/673996/instant-transformations.html",
+        "https://modthesims.info/d/647088/base-game-expansion-pack-and-stuff-pack-loading-screens-with-the-base-game-logo.html",
+      ],
     ];
 
     # "no_flag_option_selected" and any else flag are selected, which is restricted
@@ -124,7 +141,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         "no_flag_option_selected",
         "option_is_essential"
       ],
-      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -158,7 +175,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         // "option_install_in_packages",
         "option_is_essential"
       ],
-      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -177,7 +194,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         // "option_install_in_packages",
         "option_is_essential"
       ],
-      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -195,7 +212,7 @@ class Filename_Shema_Flag_Test extends TestCase {
         // "option_install_in_packages",
         "option_is_e"
       ],
-      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -213,7 +230,22 @@ class Filename_Shema_Flag_Test extends TestCase {
         "option_install_in_overrides",
         "option_install_in_overrides",
       ],
-      "Sub_Data_Flag_Depends_On_Content" => "https://modthesims.info/",
+      "Sub_Data_Flag_Depends_On_Content" => [ "https://modthesims.info/", ],
+      "Filename_Shema_Long_Description" => "A Longer Description",
+      "Filename_Shema_Creator" => "Nraas",
+    ];
+
+
+    # "Sub_Data_Flag_Depends_On_Content" has no data
+    $this->wrong_ui_data8 = [
+      "Filename_Shema_Categorie" => "Tuning",
+      "Filename_Shema_Description" => "somtehing to do with this",
+      "Filename_Shema_Link" => "https://modthesims.info/",
+      "Filename_Shema_Installation_Date" => "2020-10-29",
+      "Filename_Shema_Flag" => [
+        "option_depends_on_content",
+      ],
+      "Sub_Data_Flag_Depends_On_Content" => [ "", ],
       "Filename_Shema_Long_Description" => "A Longer Description",
       "Filename_Shema_Creator" => "Nraas",
     ];
@@ -229,6 +261,8 @@ class Filename_Shema_Flag_Test extends TestCase {
 
     # expansion id is uppercase, assume it's converted to lowercase
     $this->filename5 = "ESP09";
+
+    $this->filename6 = "CvdVDM";
 
 
     # empty flag, that only is valid if it's the only flag
@@ -254,7 +288,6 @@ class Filename_Shema_Flag_Test extends TestCase {
 
     # no flag selected and any other flag are not combinable, but in different order
     $this->wrong_filename8 = "O_Czd5tW_Eep01_I_V";
-
   }
 
 
@@ -379,8 +412,23 @@ class Filename_Shema_Flag_Test extends TestCase {
   }
 
 
+  public function test_convert_data_to_filename4() : void {
+    $converted_ui_data = Filename_Shema_Flag::convert_ui_data_to_data($this->ui_data5);
+    $filename = Filename_Shema_Flag::convert_data_to_filename($converted_ui_data);
+    assertIsString($filename);
+    assertNotEquals("", $filename);
+  }
+
+
   public function test_convert_data_to_filename_with_wrong_ui_data1() : void {
     $converted_ui_data = Filename_Shema_Flag::convert_ui_data_to_data($this->wrong_ui_data4);
+    $this->expectException(Shema_Exception::class);
+    Filename_Shema_Flag::convert_data_to_filename($converted_ui_data);
+  }
+
+
+  public function test_convert_data_to_filename_with_wrong_ui_data2() : void {
+    $converted_ui_data = Filename_Shema_Flag::convert_ui_data_to_data($this->wrong_ui_data8);
     $this->expectException(Shema_Exception::class);
     Filename_Shema_Flag::convert_data_to_filename($converted_ui_data);
   }
@@ -438,7 +486,7 @@ class Filename_Shema_Flag_Test extends TestCase {
       if(array_search($key,$data_from_filename[$main_key])!==false){
         foreach($array_keys_sub as $key_sub){
           assertTrue(array_key_exists($key_sub, $data_from_filename) !== false);
-          if($key_sub==="Sub_Data_Flag_Depends_On_Expansion"){
+          if($key_sub==="Sub_Data_Flag_Depends_On_Expansion" || $key_sub==="Sub_Data_Flag_Depends_On_Content"){
             assertIsArray($data_from_filename[$key_sub]);
           }
           else {
@@ -477,13 +525,24 @@ class Filename_Shema_Flag_Test extends TestCase {
     $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->filename5);
     assertIsArray($data_from_filename);
     assertCount(2, $data_from_filename);
-    $main_key = current(Filename_Shema_Flag::array_ui_data_key,);
+    $main_key = current(Filename_Shema_Flag::array_ui_data_key);
     assertIsArray($data_from_filename[$main_key]);
     assertCount(1, $data_from_filename[$main_key]);
     assertContains("option_depends_on_expansion",$data_from_filename[$main_key]);
-    assertTrue($data_from_filename["Sub_Data_Flag_Depends_On_Expansion"] === ["sp09"]);
+    assertEquals($data_from_filename["Sub_Data_Flag_Depends_On_Expansion"], ["sp09"]);
   }
 
+
+  public function test_convert_filename_to_data7() : void {
+    $data_from_filename = Filename_Shema_Flag::convert_filename_to_data($this->filename6);
+    assertIsArray($data_from_filename);
+    assertCount(2, $data_from_filename);
+    $main_key = current(Filename_Shema_Flag::array_ui_data_key);
+    assertIsArray($data_from_filename[$main_key]);
+    assertCount(1, $data_from_filename[$main_key]);
+    assertContains("option_depends_on_content",$data_from_filename[$main_key]);
+    assertEquals($data_from_filename["Sub_Data_Flag_Depends_On_Content"], $this->ui_data5["Sub_Data_Flag_Depends_On_Content"]);
+  }
 
 
   public function test_convert_filename_to_data_with_wrong_data1() : void {

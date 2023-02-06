@@ -607,9 +607,6 @@ abstract class Ui {
       self::print_source_path_input_start();
       self::print_duplicate_file_check_input();
       self::print_source_path_input_end();
-
-      # pull recent data from git on printing start page
-      Git_Auto_Pull_Push::pull();
     }
 
     # if not start page
@@ -620,6 +617,9 @@ abstract class Ui {
       if($_SESSION[self::ui_path_source_root_option_mode_key] !== self::ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data){
         self::print_reread_source_path_button();
       }
+
+      # pull recent data from git on printing start page
+      Git_Auto_Pull_Push::pull();
     }
 
     # if source path option mode is search

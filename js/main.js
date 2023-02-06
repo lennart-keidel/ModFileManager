@@ -404,3 +404,17 @@ function copy_data_from_fast_edit_form_into_file_input_form(parent_form_source, 
 function remove_trailing_index_from_name(string_name){
   return string_name.replace(/\d+$/, "");
 }
+
+
+document.addEventListener("DOMContentLoaded", function(){
+  setTimeout(function(){
+    $(".shema_input0 input:not([type=hidden]), .shema_input0 select, .shema_input0 textarea").each(function(){
+      // console.log(this, this.value, this.value === '');
+      if(this.value !== ''){
+        return;
+      }
+      copy_data_from_fast_edit_form_into_file_input_form('#shema_fast_edit','#shema_input0', false);
+      $("#Filename_Shema_Description0").focus();
+    });
+  },100);
+});

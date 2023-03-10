@@ -263,7 +263,6 @@ function disable_input_by_class_name_if_source_element_is_not_checked(id_source_
   all_elements.each(function(){
     disable(source, $(this));
     $(this).find("input, select, textarea, button").each(function(){
-      console.log($(this), $(this).css("display"));
       if($(this).css("display") != "none"){
         disable(source, $(this));
       }
@@ -375,14 +374,11 @@ function copy_data_from_fast_edit_form_into_file_input_form(parent_form_source, 
     if(source_value != undefined && source_type!="submit"){
       var source_id = remove_trailing_index_from_name(this.id);
       var is_additional_input = source_id.includes("additional_input__") === true;
-      console.log(parent_form_target+" "+"*[id*="+source_id+"]");
       var target_element = $(parent_form_target+" "+"*[id^="+source_id+"]");
-      console.log(is_additional_input, target_element.length, is_additional_input === true && target_element.length === 0);
       if(is_additional_input === true && target_element.length === 0){
         add_search_input_with_plus_button(previous_element);
         target_element = $(parent_form_target+" "+"*[id^="+source_id+"]");
       }
-      console.log(target_element);
       var target_checked = target_element.get(0).checked;
       if(source_type == "checkbox"){
         if(override_existing_data === false ? source_checked == true && target_checked == false : source_checked != target_checked){
@@ -408,13 +404,9 @@ function remove_trailing_index_from_name(string_name){
 
 document.addEventListener("DOMContentLoaded", function(){
   setTimeout(function(){
-    $(".shema_input0 input:not([type=hidden]), .shema_input0 select, .shema_input0 textarea").each(function(){
-      // console.log(this, this.value, this.value === '');
-      if(this.value !== ''){
-        return;
-      }
-      copy_data_from_fast_edit_form_into_file_input_form('#shema_fast_edit','#shema_input0', false);
+    if($("#Filename_Shema_Link0").val() === ''){
+      copy_data_from_fast_edit_form_into_file_input_form('#shema_fast_edit','#shema_input0', true);
       $("#Filename_Shema_Description0").focus();
-    });
+    }
   },100);
 });

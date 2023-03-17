@@ -305,6 +305,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     || $categorie_value == "option_music"
     || $categorie_value == "option_camera_mod"
     || $categorie_value == "option_recategorizing"
+    || $categorie_value == "option_custom_animation"
     ){
       $success_heading = "Refresh-Button in CC-Magic ausführen damit die neue Datei geladen wird.";
       $path_result = $path_base.File_Handler::path_seperator."Downloads";

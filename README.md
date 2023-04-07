@@ -1,5 +1,7 @@
 # CC-Magic - einrichten, Dateinamen festlegen,  dokumentieren, genau überlegen, wie am besten
 
+Auto SQL Dump von Yourls Link Shortener auf Server: https://github.com/lennart-keidel/ModDateinamenManager-SQL-Dump/tree/master
+
 Datum Zusammenfassung: Sep 14, 2020
 Datum letzte Bearbeitung: Nov 21, 2021 5:28 PM
 

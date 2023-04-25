@@ -52,6 +52,7 @@ abstract class Sub_Data_Categorie_CCBUY_Categorie extends Compareable_Is_Operand
     "option_plumbing_sink" => "PSINK",
     "option_plumbing_toilet" => "PTOIL",
     "option_plumbing_shower_tub" => "PSHOW",
+    "option_plumbing_misc" => "PLMIS",
 
     "option_storage_bookshelf" => "SBOOK",
     "option_storage_drawer" => "SDRAW",
@@ -116,11 +117,12 @@ abstract class Sub_Data_Categorie_CCBUY_Categorie extends Compareable_Is_Operand
         <option value="option_plumbing_sink">Waschbecken</option>
         <option value="option_plumbing_toilet">Toilette</option>
         <option value="option_plumbing_shower_tub">Dusche oder Wanne</option>
+        <option value="option_plumbing_misc">Verschiedenes</option>
       </optgroup>
       <optgroup label="Geräte">
         <option value="option_appliances_large">Große Geräte</option>
         <option value="option_appliances_small">kleine Geräte</option>
-        <option value="option_appliances_misc">verschiedene Geräte</option>
+        <option value="option_appliances_misc">Verschiedenes</option>
       </optgroup>
       <optgroup label="Oberflächen">
         <option value="option_surfaces_counter">Theke</option>
@@ -229,11 +231,12 @@ abstract class Sub_Data_Categorie_CCBUY_Categorie extends Compareable_Is_Operand
         <option value="option_plumbing_sink">Waschbecken</option>
         <option value="option_plumbing_toilet">Toilette</option>
         <option value="option_plumbing_shower_tub">Dusche oder Wanne</option>
+        <option value="option_plumbing_misc">Verschiedenes</option>
       </optgroup>
       <optgroup label="Geräte">
         <option value="option_appliances_large">Große Geräte</option>
         <option value="option_appliances_small">kleine Geräte</option>
-        <option value="option_appliances_misc">verschiedene Geräte</option>
+        <option value="option_appliances_misc">Verschiedenes</option>
       </optgroup>
       <optgroup label="Oberflächen">
         <option value="option_surfaces_counter">Theke</option>

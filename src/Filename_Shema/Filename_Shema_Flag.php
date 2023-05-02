@@ -15,6 +15,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
     "option_depends_on_expansion",
     "option_is_essential",
     "option_is_default_replacement",
+    "option_is_part_of_set",
   ];
 
   # default flag to use if no flag-options were selected
@@ -31,6 +32,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
     "option_is_essential" => "V",
     "no_flag_option_selected" => "I",
     "option_is_default_replacement" => "D",
+    "option_is_part_of_set" => "S",
   ];
 
   # array of invalid combinations of values from ui-data-key-array
@@ -46,7 +48,8 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
       "option_depends_on_content",
       "option_depends_on_expansion",
       "option_is_essential",
-      "option_is_default_replacement"
+      "option_is_default_replacement",
+      "option_is_part_of_set",
     ]
   ];
 
@@ -62,6 +65,9 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
     ],
     "option_depends_on_content" => [
       "Sub_Data_Flag_Depends_On_Content"
+    ],
+    "option_is_part_of_set" => [
+      "Sub_Data_Flag_Is_Part_Of_Set"
     ]
   ];
 
@@ -72,17 +78,17 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
   private const input_shema_template = '
   <span class="toggle_rowbreak"></span>
   <div class="container_label_and_input">
-    <input type="checkbox" %6$s name="%2$s[%1$d]['.self::class.'][]" class="%3$s%1$d option_is_default_replacement%1$d" id="option_is_default_replacement%1$d" value="option_is_default_replacement">
+    <input type="checkbox" %7$s name="%2$s[%1$d]['.self::class.'][]" class="%3$s%1$d option_is_default_replacement%1$d" id="option_is_default_replacement%1$d" value="option_is_default_replacement">
     <label for="option_is_default_replacement%1$d">ist Default Replacement</label>
   </div>
 
   <div class="container_label_and_input">
-    <input type="checkbox" %6$s class="%3$s%1$d option_install_in_overrides%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
+    <input type="checkbox" %7$s class="%3$s%1$d option_install_in_overrides%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_install_in_overrides%1$d" value="option_install_in_overrides">
     <label for="option_install_in_overrides%1$d">muss in Overrides-Ordner installiert werden</label>
   </div>
 
   <div class="container_label_and_input">
-    <input type="checkbox" %6$s class="%3$s%1$d option_not_merge%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_not_merge%1$d" value="option_not_merge">
+    <input type="checkbox" %7$s class="%3$s%1$d option_not_merge%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_not_merge%1$d" value="option_not_merge">
     <label for="option_not_merge%1$d">darf nicht mit anderen Dateien gemerget werden</label>
   </div>
   '.
@@ -92,7 +98,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
   // </div>
   '
   <div class="container_label_and_input">
-    <input type="checkbox" %6$s class="%3$s%1$d option_depends_on_content%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_depends_on_content%1$d" value="option_depends_on_content" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\', \'sub_data_option_depends_on_content%1$d\')">
+    <input type="checkbox" %7$s class="%3$s%1$d option_depends_on_content%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_depends_on_content%1$d" value="option_depends_on_content" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\', \'sub_data_option_depends_on_content%1$d\')">
     <label for="option_depends_on_content%1$d">abhängig von anderem Mod, CC, Store oder ähnlichem</label>
     <script>
       document.addEventListener("DOMContentLoaded", function(){
@@ -106,7 +112,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
   %4$s
 
   <div class="container_label_and_input">
-    <input type="checkbox" %6$s class="%3$s%1$d option_depends_on_expansion%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\', \'sub_data_option_depends_on_expansion%1$d\')">
+    <input type="checkbox" %7$s class="%3$s%1$d option_depends_on_expansion%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_depends_on_expansion%1$d" value="option_depends_on_expansion" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\', \'sub_data_option_depends_on_expansion%1$d\')">
     <label for="option_depends_on_expansion%1$d">abhängig von Erweiterungspack oder Accessoirepack</label>
     <script>
       document.addEventListener("DOMContentLoaded", function(){
@@ -120,9 +126,23 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
   %5$s
 
   <div class="container_label_and_input">
-    <input type="checkbox" %6$s name="%2$s[%1$d]['.self::class.'][]" class="%3$s%1$d option_is_essential%1$d" id="option_is_essential%1$d" value="option_is_essential">
+    <input type="checkbox" %7$s name="%2$s[%1$d]['.self::class.'][]" class="%3$s%1$d option_is_essential%1$d" id="option_is_essential%1$d" value="option_is_essential">
     <label for="option_is_essential%1$d">gehört zu den absolut wichtigsten Mods/CC, die immer installiert sein sollen</label>
   </div>
+
+  <div class="container_label_and_input">
+    <input type="checkbox" %7$s class="%3$s%1$d option_is_part_of_set%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_is_part_of_set%1$d" value="option_is_part_of_set" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_is_part_of_set%1$d\', \'sub_data_option_is_part_of_set%1$d\')">
+    <label for="option_is_part_of_set%1$d">ist Teil eines Sets von diesem Creator</label>
+    <script>
+      document.addEventListener("DOMContentLoaded", function(){
+        setTimeout(function(){
+          disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_is_part_of_set%1$d\',\'sub_data_option_is_part_of_set%1$d\');
+        },100);
+      });
+    </script>
+  </div>
+
+  %6$s
   ';
 
 
@@ -139,6 +159,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
         disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\',\'%3$s_operand%1$d_deaktivate_4\');
         disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_essential%1$d\',\'%3$s_operand%1$d_deaktivate_5\');
         disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_default_replacement%1$d\',\'%3$s_operand%1$d_deaktivate_6\');
+        disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_part_of_set%1$d\',\'%3$s_operand%1$d_deaktivate_6\');
       },100);
     });
   </script>
@@ -204,6 +225,17 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
     </select>
     <input type="checkbox" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" class="%3$s%1$d %3$s_root%1$d option_is_essential%1$d" id="option_is_essential%1$d" value="option_is_essential" onclick="disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_essential%1$d\',\'%3$s_operand%1$d_deaktivate_5\');">
     <label for="option_is_essential%1$d">gehört zu den absolut wichtigsten Mods/CC, die immer installiert sein sollen</label>
+  </div>
+
+  <div class="container_label_and_input">
+    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_4" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+      %4$s
+    </select>
+    <input type="checkbox" class="%3$s%1$d %3$s_root%1$d option_is_part_of_set%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_is_part_of_set%1$d" value="option_is_part_of_set" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_is_part_of_set%1$d\', \'sub_data_option_is_part_of_set%1$d\'); disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_part_of_set%1$d\',\'%3$s_operand%1$d_deaktivate_4\');">
+    <label for="option_is_part_of_set%1$d">ist Teil eines Sets von diesem Creator</label>
+
+    %8$s
+
   </div>
   ';
 
@@ -337,6 +369,45 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
 
   # convert data to file for depends on content flag option
   private static function convert_data_to_filename_option_depends_on_content(array $data, string $option_key) : string {
+    $connected_links = "";
+
+    # iterate through sub data
+    foreach($data["sub_data"][$option_key] as $key_sub_data => $sub_data_array){
+
+      # iterate through mulitple urls
+      foreach($sub_data_array as $sub_data){
+
+        # error if required sub data is empty
+        if(empty($sub_data)){
+          throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Optionsschlüssel '$key_sub_data' darf nicht leer sein.");
+        }
+
+        // if(Url_Shortener_API_Handler::test_if_url_is_valid($sub_data) === false){
+        //   throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nDer Link für den Optionsschlüssel '$key_sub_data' gibt keinen validen HTTP-Response-Code zurück.");
+        // }
+
+        # encode ; in url
+        $sub_data = str_replace(";","%3B",$sub_data);
+
+        # connect multiple url in one string with ; character
+        if(empty($connected_links)){
+          $connected_links = $sub_data;
+        }
+        else {
+          $connected_links .= ";".$sub_data;
+        }
+
+      }
+    }
+
+
+    # return complete string of short id and short url
+    return self::array_option_short_id[$option_key] . Url_Shortener_API_Handler::short_url($connected_links);
+  }
+
+
+  # convert data to file for is part of set
+  private static function convert_data_to_filename_option_is_part_of_set(array $data, string $option_key) : string {
     $connected_links = "";
 
     # iterate through sub data
@@ -546,6 +617,39 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
   }
 
 
+  private static function convert_filename_to_data_option_is_part_of_set(string $filename_part, array &$array_result) : bool {
+    $result = [];
+
+    # extract short id from filename part (first letter)
+    $short_id = substr($filename_part,0,1);
+
+    # remove short id from filename part (first letter)
+    $filename_part = substr($filename_part,1);
+
+    # expand url through url shortener
+    try {
+      $value = Url_Shortener_API_Handler::expand_url($filename_part);
+    }
+    catch(Exception $e){
+      return false;
+    }
+
+    # explode filename part by ;
+    # in case their're multiple url
+    $array_value = explode(";",$value);
+
+    # iterate through url list
+    foreach($array_value as $value){
+      # replace ; in string back to original character
+      $result[] = str_replace("%3B",";",$value);
+    }
+
+    $key = current(self::array_ui_data_key_sub_data["option_is_part_of_set"]);
+    $array_result[$key] = $result;
+    return true;
+  }
+
+
   private static function convert_filename_to_data_option_depends_on_expansion(string $filename_part, array &$array_result) : bool {
     $short_id = substr($filename_part,0,1);
     $value_splited_as_array = array_unique(str_split(strtolower(substr($filename_part,1)),4));
@@ -637,7 +741,8 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
   public static function print_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = false) : void {
     $sub_data_flag_depends_on_content_input_html = Sub_Data_Flag_Depends_On_Content::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
     $sub_data_flag_depends_on_expansion_input_html = Sub_Data_Flag_Depends_On_Expansion::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
-    printf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, $sub_data_flag_depends_on_content_input_html, $sub_data_flag_depends_on_expansion_input_html, ($is_required === true ? "required" : ""));
+    $sub_data_flag_is_part_of_set_input_html = Sub_Data_Flag_Is_Part_Of_Set::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
+    printf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, $sub_data_flag_depends_on_content_input_html, $sub_data_flag_depends_on_expansion_input_html, $sub_data_flag_is_part_of_set_input_html, ($is_required === true ? "required" : ""));
   }
 
 
@@ -647,7 +752,8 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
     $additional_search_buttons = Ui::generate_additional_search_buttons_ui(self::class);
     $sub_data_flag_depends_on_content_input_html = Sub_Data_Flag_Depends_On_Content::generate_filename_shema_search_input_for_ui($index);
     $sub_data_flag_depends_on_expansion_input_html = Sub_Data_Flag_Depends_On_Expansion::generate_filename_shema_search_input_for_ui($index);
-    printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $additional_search_buttons, $sub_data_flag_depends_on_content_input_html, $sub_data_flag_depends_on_expansion_input_html);
+    $sub_data_flag_is_part_of_set_input_html = Sub_Data_Flag_Is_Part_Of_Set::generate_filename_shema_search_input_for_ui($index);
+    printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $additional_search_buttons, $sub_data_flag_depends_on_content_input_html, $sub_data_flag_depends_on_expansion_input_html, $sub_data_flag_is_part_of_set_input_html);
   }
 
 

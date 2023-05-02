@@ -107,7 +107,7 @@ function fill_fast_edit_input_shema_with_filename_data_list(filename_data_list) 
             class_name += index;
           }
           value = filename_data[key][inner_key];
-          if(key == "Sub_Data_Flag_Depends_On_Expansion" || key == "Sub_Data_Flag_Depends_On_Content"){
+          if(key == "Sub_Data_Flag_Depends_On_Expansion" || key == "Sub_Data_Flag_Depends_On_Content" || key == "Sub_Data_Flag_Is_Part_Of_Set"){
             if(inner_key > 0){
               add_search_input_with_plus_button($("."+key+array_index)[inner_key-1]);
             }
@@ -166,7 +166,7 @@ function fill_input_shema_with_filename_data_list(filename_data_list) {
             class_name += index;
           }
           value = filename_data[key][inner_key];
-          if(key == "Sub_Data_Flag_Depends_On_Expansion" || key == "Sub_Data_Flag_Depends_On_Content"){
+          if(key == "Sub_Data_Flag_Depends_On_Expansion" || key == "Sub_Data_Flag_Depends_On_Content" || key == "Sub_Data_Flag_Is_Part_Of_Set"){
             if(inner_key > 0){
               add_search_input_with_plus_button($("."+key+array_index)[inner_key-1]);
             }

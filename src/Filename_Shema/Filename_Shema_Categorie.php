@@ -59,13 +59,17 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     "option_lot" => [
       0 => "Sub_Data_Categorie_Lot_Categorie",
     ],
+    "option_pattern" => [
+      0 => "Sub_Data_Categorie_Pattern_Categorie",
+      1 => "Sub_Data_Categorie_Pattern_Is_Recolorable",
+    ],
   ];
 
   # input shema template for ui
   private const input_shema_template = '
     <div class="container_label_and_input">
       <label for="'.self::class.'%1$d">Kategorie</label>
-      <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.self::class.']" %9$s onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_gender%1$d\');disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_build\', \'option_cc_build_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_lot\', \'option_lot_sub_data_categorie%1$d\');">
+      <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.self::class.']" %11$s onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_gender%1$d\');disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_build\', \'option_cc_build_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_lot\', \'option_lot_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_pattern\', \'option_pattern_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_pattern\', \'option_pattern_sub_data_is_recolorable%1$d\');">
         <option value="" selected disabled>Auswählen</option>
         <optgroup label="CC">
           <option value="option_cc_buy">Custom Content für Kaufmodus</option>
@@ -105,6 +109,8 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     %6$s
     %7$s
     %8$s
+    %9$s
+    %10$s
   ';
 
   # input shema template for search ui
@@ -114,7 +120,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
       <select class="%3$s_operand%1$d %3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
         %4$s
       </select>
-      <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_gender%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_sub_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_build\', \'option_cc_build_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_lot\', \'option_lot_sub_data_categorie%1$d\');" required>
+      <select class="%3$s%1$d" id="'.self::class.'%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_gender%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_create_a_sim\', \'option_cc_create_a_sim_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_buy\', \'option_cc_buy_sub_data_sub_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_cc_build\', \'option_cc_build_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_lot\', \'option_lot_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_pattern\', \'option_pattern_sub_data_categorie%1$d\'); disable_and_hide_input_by_class_name_if_source_element_is_not_selected(\''.self::class.'%1$d\', \'option_pattern\', \'option_pattern_sub_data_is_recolorable%1$d\');" required>
         <option value="" selected disabled>Auswählen</option>
         <optgroup label="CC">
           <option value="option_cc_buy">Custom Content für Kaufmodus</option>
@@ -152,6 +158,8 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
       %7$s
       %8$s
       %9$s
+      %10$s
+      %11$s
     </div>
   ';
 
@@ -266,7 +274,9 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     $sub_data_ccbuy_categorie = Sub_Data_Categorie_CCBUY_Categorie::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
     $sub_data_ccbui_categorie = Sub_Data_Categorie_CCBUI_Categorie::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
     $sub_data_lot_categorie = Sub_Data_Categorie_Lot_Categorie::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
-    printf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, $sub_data_cccas_gender, $sub_data_cccas_categorie, $sub_data_ccbuy_categorie, $sub_data_ccbui_categorie, $sub_data_lot_categorie, ($is_required === true ? "required" : ""));
+    $sub_data_pattern_categorie = Sub_Data_Categorie_Pattern_Categorie::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
+    $sub_data_pattern_is_recolorable = Sub_Data_Categorie_Pattern_Is_Recolorable::generate_filename_shema_input_for_ui($index, $different_ui_key_root, $is_required);
+    printf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, $sub_data_cccas_gender, $sub_data_cccas_categorie, $sub_data_ccbuy_categorie, $sub_data_ccbui_categorie, $sub_data_lot_categorie, $sub_data_pattern_categorie, $sub_data_pattern_is_recolorable, ($is_required === true ? "required" : ""));
   }
 
 
@@ -279,7 +289,9 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     $sub_data_ccbuy_categorie = Sub_Data_Categorie_CCBUY_Categorie::generate_filename_shema_search_input_for_ui($index);
     $sub_data_ccbui_categorie = Sub_Data_Categorie_CCBUI_Categorie::generate_filename_shema_search_input_for_ui($index);
     $sub_data_lot_categorie = Sub_Data_Categorie_Lot_Categorie::generate_filename_shema_search_input_for_ui($index);
-    printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $sub_data_cccas_gender, $sub_data_cccas_categorie, $sub_data_ccbuy_categorie, $sub_data_ccbui_categorie, $sub_data_lot_categorie);
+    $sub_data_pattern_categorie = Sub_Data_Categorie_Pattern_Categorie::generate_filename_shema_search_input_for_ui($index);
+    $sub_data_pattern_is_recolorable = Sub_Data_Categorie_Pattern_Is_Recolorable::generate_filename_shema_search_input_for_ui($index);
+    printf(self::search_input_shema_template, $index, Ui::ui_search_data_key_root, self::class, $operand_select_option_html, $sub_data_cccas_gender, $sub_data_cccas_categorie, $sub_data_ccbuy_categorie, $sub_data_ccbui_categorie, $sub_data_lot_categorie, $sub_data_pattern_categorie, $sub_data_pattern_is_recolorable);
   }
 
 

@@ -13,6 +13,7 @@ abstract class Sub_Data_Categorie_Pattern_Categorie extends Compareable_Is_Opera
   # value: short id
   # SHORT IDs CAN HAVE MAX 6 CHARACTERS
   private const array_option_id = [
+    "option_multiple" => "MU",
     "option_fabrics" => "FA",
     "option_leather_and_furs" => "LE",
     "option_carpeting_and_rugs" => "CA",
@@ -51,6 +52,7 @@ abstract class Sub_Data_Categorie_Pattern_Categorie extends Compareable_Is_Opera
       <option value="option_rock_and_stone">Rock & Stone</option>
       <option value="option_masonry">Masonry</option>
       <option value="option_misc">Misc</option>
+      <option value="option_multiple">Unbekannt oder enthält Verschiedene</option>
     </select>
     <script>
       document.addEventListener("DOMContentLoaded", function(){
@@ -87,6 +89,7 @@ abstract class Sub_Data_Categorie_Pattern_Categorie extends Compareable_Is_Opera
       <option value="option_rock_and_stone">Rock & Stone</option>
       <option value="option_masonry">Masonry</option>
       <option value="option_misc">Misc</option>
+      <option value="option_multiple">Unbekannt oder enthält Verschiedene</option>
     </select>
     <script>
       document.addEventListener("DOMContentLoaded", function(){

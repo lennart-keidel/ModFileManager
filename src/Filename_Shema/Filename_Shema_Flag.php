@@ -228,7 +228,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
   </div>
 
   <div class="container_label_and_input">
-    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_4" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_4" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]" disabled>
       %4$s
     </select>
     <input type="checkbox" class="%3$s%1$d %3$s_root%1$d option_is_part_of_set%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_is_part_of_set%1$d" value="option_is_part_of_set" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_is_part_of_set%1$d\', \'sub_data_option_is_part_of_set%1$d\'); disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_part_of_set%1$d\',\'%3$s_operand%1$d_deaktivate_4\');">

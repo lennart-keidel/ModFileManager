@@ -22,7 +22,7 @@ abstract class Sub_Data_Flag_Is_Part_Of_Set extends Compareable_Is_In_Array_Oper
   private const search_input_shema_template = '
   <div class="sub_data_option_is_part_of_set%1$d additional_input_root container_label_and_input sub_input">
     <label class="sub_data_option_is_part_of_set%1$d" for="'.self::class.'%1$d">Name des Set\'s</label>
-    <select class="sub_data_option_is_part_of_set%1$d %3$s_operand%1$d %3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+    <select class="sub_data_option_is_part_of_set%1$d %3$s_operand%1$d %3$s%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]" disabled>
       %4$s
     </select>
     <input class="sub_data_option_is_part_of_set%1$d %3$s%1$d" id="'.self::class.'%1$d" type="text" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" required disabled>

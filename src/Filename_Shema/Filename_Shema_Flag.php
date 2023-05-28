@@ -153,6 +153,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
       setTimeout(function(){
         disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\',\'sub_data_option_depends_on_content%1$d\');
         disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_depends_on_expansion%1$d\',\'sub_data_option_depends_on_expansion%1$d\');
+        disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'option_is_part_of_set%1$d\',\'sub_data_option_is_part_of_set%1$d\');
         disable_input_by_id_name_if_source_element_is_not_checked(\'option_install_in_overrides%1$d\',\'%3$s_operand%1$d_deaktivate_1\');
         disable_input_by_id_name_if_source_element_is_not_checked(\'option_not_merge%1$d\',\'%3$s_operand%1$d_deaktivate_2\');
         disable_input_by_id_name_if_source_element_is_not_checked(\'option_depends_on_content%1$d\',\'%3$s_operand%1$d_deaktivate_3\');

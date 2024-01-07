@@ -1,6 +1,6 @@
 <?php
 
-abstract class Filename_Shema_Long_Description extends Compareable_Text_Optional_Value_Operand implements I_Filename_Shema {
+abstract class Filename_Shema_Long_Description extends Compareable_Text_Optinal_Value_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
     self::class

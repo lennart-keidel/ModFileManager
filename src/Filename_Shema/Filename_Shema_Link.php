@@ -1,6 +1,6 @@
 <?php
 
-abstract class Filename_Shema_Link extends Compareable_Is_Operand implements I_Filename_Shema {
+abstract class Filename_Shema_Link extends Compareable_Text_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
     self::class

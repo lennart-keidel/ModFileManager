@@ -1,6 +1,6 @@
 <?php
 
-abstract class Compareable_Text_Optinal_Value_Operand extends Compareable_Text_Operand implements I_Shared_Shema {
+abstract class Compareable_Text_Optional_Value_Operand extends Compareable_Text_Operand implements I_Shared_Shema {
 
   # extend inheritted get_search_operand from Compareable_Text_Operand
   # with options to search for empty values

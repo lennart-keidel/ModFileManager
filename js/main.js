@@ -410,3 +410,11 @@ document.addEventListener("DOMContentLoaded", function(){
     }
   },100);
 });
+
+
+// @param open boolean, if true, set summary to open
+function open_close_all_summaries(open){
+  document.querySelectorAll("details").forEach((detail) => {
+    detail.open = open === false ? false : true;
+  });
+}

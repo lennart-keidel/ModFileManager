@@ -619,7 +619,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
 
 
   private static function convert_filename_to_data_option_is_part_of_set(string $filename_part, array &$array_result) : bool {
-    $result = [];
+    $result = "";
 
     # extract short id from filename part (first letter)
     $short_id = substr($filename_part,0,1);
@@ -642,7 +642,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
     # iterate through url list
     foreach($array_value as $value){
       # replace ; in string back to original character
-      $result[] = str_replace("%3B",";",$value);
+      $result .= str_replace("%3B",";",$value);
     }
 
     $key = current(self::array_ui_data_key_sub_data["option_is_part_of_set"]);

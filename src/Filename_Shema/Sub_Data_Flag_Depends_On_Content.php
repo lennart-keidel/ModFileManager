@@ -2,7 +2,7 @@
 
 # this class is only required for a clean structuring of the ui and filename data
 # it's only for ment to be a sub class of Filename_Shema_Flag
-abstract class Sub_Data_Flag_Depends_On_Content extends Compareable_Is_In_Array_Operand implements I_Filename_Shema {
+abstract class Sub_Data_Flag_Depends_On_Content extends Compareable_Text_Operand implements I_Filename_Shema {
 
   public const array_ui_data_key = [
     self::class

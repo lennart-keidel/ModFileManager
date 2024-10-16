@@ -10,6 +10,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
   private const array_ui_data_option_valid = [
     "option_install_in_overrides",
     "option_not_merge",
+    "option_not_compress",
     // "option_install_in_packages",
     "option_depends_on_content",
     "option_depends_on_expansion",
@@ -26,6 +27,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
   public const array_option_short_id = [
     "option_install_in_overrides" => "O",
     "option_not_merge" => "M",
+    "option_not_compress" => "N",
     // "option_install_in_packages" => "P",
     "option_depends_on_content" => "C",
     "option_depends_on_expansion" => "E",
@@ -44,6 +46,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
     "no_flag_option_selected" => [
       "option_install_in_overrides",
       "option_not_merge",
+      "option_not_compress",
       // "option_install_in_packages",
       "option_depends_on_content",
       "option_depends_on_expansion",
@@ -90,6 +93,11 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
   <div class="container_label_and_input">
     <input type="checkbox" %7$s class="%3$s%1$d option_not_merge%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_not_merge%1$d" value="option_not_merge">
     <label for="option_not_merge%1$d">darf nicht mit anderen Dateien gemerget werden</label>
+  </div>
+
+  <div class="container_label_and_input">
+    <input type="checkbox" %7$s class="%3$s%1$d option_not_compress%1$d" name="%2$s[%1$d]['.self::class.'][]" id="option_not_compress%1$d" value="option_not_compress">
+    <label for="option_not_compress%1$d">darf nicht komprimiert werden</label>
   </div>
   '.
   // <div class="container_label_and_input">
@@ -161,6 +169,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
         disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_essential%1$d\',\'%3$s_operand%1$d_deaktivate_5\');
         disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_default_replacement%1$d\',\'%3$s_operand%1$d_deaktivate_6\');
         disable_input_by_id_name_if_source_element_is_not_checked(\'option_is_part_of_set%1$d\',\'%3$s_operand%1$d_deaktivate_7\');
+        disable_input_by_id_name_if_source_element_is_not_checked(\'option_not_compress%1$d\',\'%3$s_operand%1$d_deaktivate_8\');
       },100);
     });
   </script>
@@ -189,6 +198,14 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
     </select>
     <input type="checkbox" class="%3$s%1$d %3$s_root%1$d option_not_merge%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_not_merge%1$d" value="option_not_merge" onclick="disable_input_by_id_name_if_source_element_is_not_checked(\'option_not_merge%1$d\',\'%3$s_operand%1$d_deaktivate_2\');">
     <label for="option_not_merge%1$d">darf nicht mit anderen Dateien gemerget werden</label>
+  </div>
+
+  <div class="container_label_and_input">
+    <select class="%3$s_operand%1$d %3$s%1$d" id="%3$s_operand%1$d_deaktivate_8" name="%2$s[%1$d]['.Ui::ui_search_data_key_operand_root.']['.self::class.'][]">
+      %4$s
+    </select>
+    <input type="checkbox" class="%3$s%1$d %3$s_root%1$d option_not_compress%1$d" name="%2$s[%1$d]['.Ui::ui_search_data_key_value_root.']['.self::class.'][]" id="option_not_compress%1$d" value="option_not_compress" onclick="disable_input_by_id_name_if_source_element_is_not_checked(\'option_not_compress%1$d\',\'%3$s_operand%1$d_deaktivate_8\');">
+    <label for="option_not_compress%1$d">darf nicht komprimiert werden</label>
   </div>
   '.
   // <div class="container_label_and_input">
@@ -356,6 +373,13 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
 
   # convert data to file for install in ovverides flag option
   private static function convert_data_to_filename_option_not_merge(array $data, string $option_key) : string {
+    $result = "";
+    $result .= self::array_option_short_id[$option_key];
+    return $result;
+  }
+
+  # convert data to file for install in ovverides flag option
+  private static function convert_data_to_filename_option_not_compress(array $data, string $option_key) : string {
     $result = "";
     $result .= self::array_option_short_id[$option_key];
     return $result;
@@ -579,6 +603,10 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
     return true;
   }
 
+  private static function convert_filename_to_data_option_not_compress(string $filename_part, array &$array_result) : bool {
+    return true;
+  }
+
 
   // private static function convert_filename_to_data_option_install_in_packages(string $filename_part, array &$array_result) : bool {
   //   return true;
@@ -775,7 +803,7 @@ abstract class Filename_Shema_Flag extends Compareable_Is_In_Array_Operand imple
       }
     }
 
-    if(in_array("option_not_merge", $flag_value) === true){
+    if(in_array("option_not_merge", $flag_value) === true || in_array("option_not_compress", $flag_value) === true){
       if(in_array("option_install_in_overrides", $flag_value) === false){
         $path_result = $path_base.File_Handler::path_seperator."Mods".File_Handler::path_seperator."Packages";
       }

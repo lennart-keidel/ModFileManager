@@ -161,6 +161,76 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
   ';
 
 
+  # if conditions are met, manipulate something in the input data
+  public static function manipulate_ui_data(array $data_from_ui) : array {
+    $ui_key_flag = current(Filename_Shema_Flag::array_ui_data_key);
+    $ui_key_categorie = current(self::array_ui_data_key);
+    $ui_key_sub_data_cc_buy = current(Sub_Data_Categorie_CCBUY_Categorie::array_ui_data_key);
+
+    if(!isset($data_from_ui[$ui_key_categorie])){
+      throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST-Request: '".$ui_key_categorie."'");
+    }
+
+    # if selected categorie is one of these
+    # set flag "option_not_compress"
+    if(in_array($data_from_ui[$ui_key_categorie], ["option_core_mod", "option_script", "option_mod_create_a_sim", "option_cc_script", "option_fix"])){
+      if(array_key_exists($ui_key_flag, $data_from_ui)){
+        if(!in_array("option_not_compress", $data_from_ui[$ui_key_flag])){
+          $data_from_ui[$ui_key_flag][] = "option_not_compress";
+        }
+      }
+      else {
+        $data_from_ui[$ui_key_flag] = ["option_not_compress"];
+      }
+    }
+
+    # if selected categorie is one of these
+    # set flag "option_not_merge"
+    if(in_array($data_from_ui[$ui_key_categorie], ["option_core_mod", "option_script", "option_mod_create_a_sim", "option_cc_script", "option_fix", "option_pattern", "option_lot", "option_household", "option_world", "option_cas_sim", "option_collection_file"])){
+      if(array_key_exists($ui_key_flag, $data_from_ui)){
+        if(!in_array("option_not_merge", $data_from_ui[$ui_key_flag])){
+          $data_from_ui[$ui_key_flag][] = "option_not_merge";
+        }
+      }
+      else {
+        $data_from_ui[$ui_key_flag] = ["option_not_merge"];
+      }
+    }
+
+
+    # if selected categorie is "option_cc_buy" and Sub-Data-CC-Buy is "option_surfaces_counter"
+    # set flag "option_not_merge"
+    if($data_from_ui[$ui_key_categorie] === "option_cc_buy"){
+
+      if(!isset($data_from_ui[$ui_key_sub_data_cc_buy])){
+        throw new Shema_Exception("Fehler bei Verarbeitung der Daten.\\nFehlender Schlüssel in POST-Request: '".$ui_key_sub_data_cc_buy."'");
+      }
+
+      if($data_from_ui[$ui_key_sub_data_cc_buy] === "option_surfaces_counter"){
+        if(array_key_exists($ui_key_flag, $data_from_ui)){
+          if(!in_array("option_not_merge", $data_from_ui[$ui_key_flag])){
+            $data_from_ui[$ui_key_flag][] = "option_not_merge";
+          }
+        }
+        else {
+          $data_from_ui[$ui_key_flag] = ["option_not_merge"];
+        }
+      }
+    }
+
+
+    # if selected flag is "option_is_default_replacement"
+    # set flag "option_not_merge"
+    if(array_key_exists($ui_key_flag, $data_from_ui) && in_array("option_is_default_replacement", $data_from_ui[$ui_key_flag])){
+      if(!in_array("option_not_merge", $data_from_ui[$ui_key_flag])){
+        $data_from_ui[$ui_key_flag][] = "option_not_merge";
+      }
+    }
+
+    return $data_from_ui;
+  }
+
+
   # convert data collected from ui to usable data for following process
   public static function convert_ui_data_to_data(array $data_from_ui) : array {
 

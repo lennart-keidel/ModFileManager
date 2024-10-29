@@ -298,6 +298,20 @@ abstract class Ui {
     </script>
   ';
 
+  # print js script with console log, to print string
+  private const template_print_console_log_string = '
+    <script>
+      console.log(\'%1$s\')
+    </script>
+  ';
+
+  # print js script with console log, to print object
+  private const template_print_console_log_object = '
+    <script>
+      console.log(%1$s)
+    </script>
+  ';
+
   public static $out_input_shema_index = 0;
 
   public static $out_individual_index = 0;
@@ -595,6 +609,16 @@ abstract class Ui {
   # print js script with function 'open_first_details_slot'
   public static function open_first_details_slot() : void {
     printf(self::template_open_first_details_slot, "");
+  }
+
+
+  public static function print_js_console_log($input) : void {
+    if(is_array($input) || is_object($input)){
+      printf(self::template_print_console_log_object, json_encode($input));
+    }
+    else {
+      printf(self::template_print_console_log_string, $input);
+    }
   }
 
 

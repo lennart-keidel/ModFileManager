@@ -30,6 +30,12 @@ abstract class Sub_Data_Flag_Is_Part_Of_Set extends Compareable_Text_Operand imp
   ';
 
 
+  # if conditions are met, manipulate something in the input data
+  public static function manipulate_ui_data(array $data_from_ui) : array {
+    return $data_from_ui;
+  }
+
+
   # print filename shema input to ui
   public static function print_filename_shema_input_for_ui(int $index, string $different_ui_key_root = null, bool $is_required = true) : void {
     printf(self::input_shema_template, $index, ($different_ui_key_root === null ? Ui::ui_data_key_root : $different_ui_key_root), self::class, ($is_required === true ? "required" : ""));

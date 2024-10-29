@@ -6,6 +6,9 @@ Interface I_Filename_Shema {
   # convert data collected from ui to usable data for following process
   public static function convert_ui_data_to_data(array $data_from_ui) : array;
 
+  # if conditions are met, manipulate something in the internal input data
+  public static function manipulate_ui_data(array $data_from_ui) : array;
+
   # convert data to filename part using this shema
   public static function convert_data_to_filename(array $data_converted) : string;
 

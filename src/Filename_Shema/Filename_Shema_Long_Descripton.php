@@ -34,6 +34,13 @@ abstract class Filename_Shema_Long_Description extends Compareable_Text_Optinal_
   # format-string to use with printf to print in ui
   private const string_ui_format = "<span>%s</span>";
 
+
+  # if conditions are met, manipulate something in the input data
+  public static function manipulate_ui_data(array $data_from_ui) : array {
+    return $data_from_ui;
+  }
+
+
   # convert data collected from ui to usable data for following process
   public static function convert_ui_data_to_data(array $data_from_ui) : array {
     # filter data for this schema from whole ui data

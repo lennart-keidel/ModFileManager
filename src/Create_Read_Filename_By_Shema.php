@@ -4,6 +4,24 @@ abstract class Create_Read_Filename_By_Shema {
 
   public const filename_shema_seperator = "__";
 
+
+  # manipulata ui data for each filename shema
+  # return manipulated ui data array
+  private static function manipulate_ui_data(array $ui_data_for_one_file) : array {
+    $result = $ui_data_for_one_file;
+    foreach(Main::shema_order_global as $shema_index => $shema_class_name){
+      $shema_class = "Filename_Shema_$shema_class_name";
+      try {
+        $result = $shema_class::manipulate_ui_data($ui_data_for_one_file);
+      }
+      catch(Exception $e){
+        Ui_Failed_Files::add_failed_filename_data($ui_data_for_one_file);
+      }
+    }
+    return $result;
+  }
+
+
   # create filename by calling shema classes and connecting results to one string
   # input is ui data part for one file
   public static function create_filename_by_shema_from_ui_data(array $ui_data_for_one_file) : string {
@@ -11,9 +29,12 @@ abstract class Create_Read_Filename_By_Shema {
 
     Shema_Exception::set_source_path($ui_data_for_one_file[Ui::ui_key_path_source]);
     $original_fileextension = File_Handler::get_fileextension_from_path($ui_data_for_one_file[Ui::ui_key_path_source]);
+
+    $ui_data_for_one_file = self::manipulate_ui_data($ui_data_for_one_file);
     foreach(Main::shema_order_global as $shema_index => $shema_class_name){
       $shema_class = "Filename_Shema_$shema_class_name";
       try {
+        $ui_data_for_one_file = $shema_class::manipulate_ui_data($ui_data_for_one_file);
         $data = $shema_class::convert_ui_data_to_data($ui_data_for_one_file);
         $result .= $shema_class::convert_data_to_filename($data);
       }

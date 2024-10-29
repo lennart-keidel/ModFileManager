@@ -50,6 +50,12 @@ abstract class Filename_Shema_Creator extends Compareable_Text_Operand implement
   }
 
 
+  # if conditions are met, manipulate something in the input data
+  public static function manipulate_ui_data(array $data_from_ui) : array {
+    return $data_from_ui;
+  }
+
+
   # convert data to filename part using this shema
   public static function convert_data_to_filename(array $data_converted) : string {
     $string_creator = current($data_converted);

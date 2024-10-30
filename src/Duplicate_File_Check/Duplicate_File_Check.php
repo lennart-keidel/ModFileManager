@@ -67,11 +67,13 @@ abstract class Duplicate_File_Check {
 
     # if file with same filesize exists
     $path_existing_file_in_list = array_search($filesize, $duplicate_file_check_list);
-    if($path_existing_file_in_list !== false && hash_file("md5",$path_file_to_check) === hash_file("md5",$path_existing_file_in_list) && $path_existing_file_in_list !== $path_file_to_check){
-      Ui::print_error_heading("Es wurden zwei Dateien gefunden, die doppelt sind. Bitte eine der doppelten Dateien entfernen, damit fortgefahren werden kann.");
-      Ui::print_duplicate_files_error($path_file_to_check, $path_existing_file_in_list);
-      // throw new File_Handler_Exception("Es wurden zwei Dateien gefunden, die identisch sind");
-      return true;
+    if(strpos($path_existing_file_in_list, "Documents\Electronic Arts\The Sims 3\Mods\Packages\COMPRESSED__NOBACKUP") !== false){
+      if($path_existing_file_in_list !== false && hash_file("md5",$path_file_to_check) === hash_file("md5",$path_existing_file_in_list) && $path_existing_file_in_list !== $path_file_to_check){
+        Ui::print_error_heading("Es wurden zwei Dateien gefunden, die doppelt sind. Bitte eine der doppelten Dateien entfernen, damit fortgefahren werden kann.");
+        Ui::print_duplicate_files_error($path_file_to_check, $path_existing_file_in_list);
+        // throw new File_Handler_Exception("Es wurden zwei Dateien gefunden, die identisch sind");
+        return true;
+      }
     }
     return false;
   }

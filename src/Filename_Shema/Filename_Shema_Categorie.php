@@ -231,15 +231,6 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
       }
     }
 
-
-    # if selected flag is "option_is_default_replacement"
-    # set flag "option_not_merge"
-    if(array_key_exists($ui_key_flag, $data_from_ui) && in_array("option_is_default_replacement", $data_from_ui[$ui_key_flag])){
-      if(!in_array("option_not_merge", $data_from_ui[$ui_key_flag])){
-        $data_from_ui[$ui_key_flag][] = "option_not_merge";
-      }
-    }
-
     return $data_from_ui;
   }
 

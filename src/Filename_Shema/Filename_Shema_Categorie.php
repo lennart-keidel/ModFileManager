@@ -201,7 +201,9 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     # set flag "option_is_essential"
     if($data_from_ui[$ui_key_categorie] == "option_fix"){
       if(array_key_exists($ui_key_flag, $data_from_ui)){
-        $data_from_ui[$ui_key_flag][] = "option_is_essential";
+        if(!in_array("option_is_essential", $data_from_ui[$ui_key_flag])){
+          $data_from_ui[$ui_key_flag][] = "option_is_essential";
+        }
       }
       else {
         $data_from_ui[$ui_key_flag] = ["option_is_essential"];

@@ -173,7 +173,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
 
     # if selected categorie is one of these
     # set flag "option_not_compress"
-    if(in_array($data_from_ui[$ui_key_categorie], ["option_core_mod", "option_script", "option_mod_create_a_sim", "option_cc_script", "option_fix"])){
+    if(in_array($data_from_ui[$ui_key_categorie], ["option_core_mod", "option_script", "option_mod_create_a_sim", "option_cc_script"])){
       if(array_key_exists($ui_key_flag, $data_from_ui)){
         if(!in_array("option_not_compress", $data_from_ui[$ui_key_flag])){
           $data_from_ui[$ui_key_flag][] = "option_not_compress";
@@ -186,7 +186,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
 
     # if selected categorie is one of these
     # set flag "option_not_merge"
-    if(in_array($data_from_ui[$ui_key_categorie], ["option_core_mod", "option_script", "option_mod_create_a_sim", "option_cc_script", "option_fix", "option_lot", "option_household", "option_world", "option_cas_sim", "option_collection_file"])){
+    if(in_array($data_from_ui[$ui_key_categorie], ["option_core_mod", "option_script", "option_mod_create_a_sim", "option_cc_script", "option_lot", "option_household", "option_world", "option_cas_sim", "option_collection_file"])){
       if(array_key_exists($ui_key_flag, $data_from_ui)){
         if(!in_array("option_not_merge", $data_from_ui[$ui_key_flag])){
           $data_from_ui[$ui_key_flag][] = "option_not_merge";
@@ -194,6 +194,17 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
       }
       else {
         $data_from_ui[$ui_key_flag] = ["option_not_merge"];
+      }
+    }
+
+    # if selected categorie is fix
+    # set flag "option_is_essential"
+    if($data_from_ui[$ui_key_categorie] == "option_is_essential"){
+      if(array_key_exists($ui_key_flag, $data_from_ui)){
+        $data_from_ui[$ui_key_flag][] = "option_is_essential";
+      }
+      else {
+        $data_from_ui[$ui_key_flag] = ["option_is_essential"];
       }
     }
 

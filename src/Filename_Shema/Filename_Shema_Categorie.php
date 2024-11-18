@@ -373,7 +373,6 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
     $categorie_value = $data_for_one_filename[current(self::array_ui_data_key)];
     if(
     $categorie_value == "option_tuning"
-    || $categorie_value == "option_script"
     || $categorie_value == "option_mod_create_a_sim"
     || $categorie_value == "option_cc_create_a_sim"
     || $categorie_value == "option_cc_script"
@@ -438,11 +437,16 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
       }
     }
 
+    elseif($categorie_value == "option_script"){
+      $path_result = $path_base.File_Handler::path_seperator."Mods".File_Handler::path_seperator."Packages";
+    }
+
     elseif($categorie_value == "option_core_mod"){
       $path_result = $path_base.File_Handler::path_seperator."Mods".File_Handler::path_seperator."Packages";
     }
 
     elseif($categorie_value == "option_other"){
+      $error_heading = "Die Datei kann nicht automatisch verschoben werden, weil die Kategorie 'keine der anderen Kategorien' ausgewählt wurde";
       $path_result = "";
     }
 

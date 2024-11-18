@@ -135,10 +135,10 @@ abstract class Main {
 
     # if retrieved filename list from path is empty
     # throw error
-    if(empty($filename_list) === true){
-      Session_Cookie_Handler::delete_session_data();
-      throw new Ui_Exception("Fehler beim Suchen der Quelldateien. Der Quellpfad enthält keine Sims3Pack- oder Package-Dateien.");
-    }
+    // if(empty($filename_list) === true){
+    //   Session_Cookie_Handler::delete_session_data();
+    //   throw new Ui_Exception("Fehler beim Suchen der Quelldateien. Der Quellpfad enthält keine Sims3Pack- oder Package-Dateien.");
+    // }
 
     return $filename_list;
   }

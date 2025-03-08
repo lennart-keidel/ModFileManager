@@ -33,6 +33,8 @@ abstract class Main {
 
     try {
 
+      # set max execution time limit to 16 minutes
+      set_time_limit(1000);
 
       # create session
       Session_Cookie_Handler::create_session();

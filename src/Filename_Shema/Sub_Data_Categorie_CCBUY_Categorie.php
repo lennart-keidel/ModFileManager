@@ -65,7 +65,7 @@ abstract class Sub_Data_Categorie_CCBUY_Categorie extends Compareable_Is_Operand
     "option_surfaces_coffee_table" => "SCOFF",
     "option_surfaces_desk" => "SDESK",
     "option_surfaces_display" => "SDISP",
-    "option_surfaces_misc" => "SMISC",
+    "option_surfaces_misc" => "SUMSC",
 
     "option_appliances_large" => "ALARG",
     "option_appliances_small" => "ASMAL",

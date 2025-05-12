@@ -14,7 +14,7 @@ abstract class Sub_Data_Categorie_CCBUY_Categorie extends Compareable_Is_Operand
   # SHORT IDs CAN HAVE MAX 6 CHARACTERS
   private const array_option_id = [
     // "option_plumbing" => "PL",
-    // "option_appliances" => "AP",
+    // "option_appliances"  => "AP",
     // "option_surfaces" => "SU",
     // "option_comfort" => "CO",
     // "option_electronics" => "EL",
@@ -65,7 +65,7 @@ abstract class Sub_Data_Categorie_CCBUY_Categorie extends Compareable_Is_Operand
     "option_surfaces_coffee_table" => "SCOFF",
     "option_surfaces_desk" => "SDESK",
     "option_surfaces_display" => "SDISP",
-    "option_surfaces_misc" => "SMISC",
+    "option_surfaces_misc" => "SUMSC",
 
     "option_appliances_large" => "ALARG",
     "option_appliances_small" => "ASMAL",

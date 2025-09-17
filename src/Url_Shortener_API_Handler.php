@@ -46,7 +46,7 @@ abstract class Url_Shortener_API_Handler
     }
 
     # error if url-API response contains error
-    if (isset($data->errorCode)) {
+    if (isset($data->errorCode) && !empty($data->errorCode)) {
       $message = "Fehler beim Erstellen der Short-Url.\\nEingegebene Url: '" . $ipt_long_url . "'\\nError-Code von Url-Api: " . $data->errorCode;
       if (isset($data->message) && !strpos($data->message, "already exists in database")) {
         $message .= "\\nNachricht von Url-API: '" . $data->message . "'";

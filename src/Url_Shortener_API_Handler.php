@@ -1,11 +1,9 @@
 <?php
 
-use function PHPUnit\Framework\isEmpty;
-
 abstract class Url_Shortener_API_Handler
 {
 
-  private const signature = 'f13712add9';
+  private const signature = '58089c8739'; // from lennart-keidel.de/url/admin/tools.php
   public const api_url =  'https://lennart-keidel.de/url/yourls-api.php';
   public const short_id_base_url = 'https://lennart-keidel.de/url';
 
@@ -20,14 +18,15 @@ abstract class Url_Shortener_API_Handler
     // Init the CURL session
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, self::api_url);
-    curl_setopt($ch, CURLOPT_HEADER, 0);            // No header in the result
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return, do not echo result
-    curl_setopt($ch, CURLOPT_POST, 1);              // This is a POST request
-    curl_setopt($ch, CURLOPT_POSTFIELDS, array(     // Data to POST
-      'signature' => self::signature,
-      'action'   => 'shorturl',
-      'format'   => 'json',
-      'url'      => "$ipt_long_url"
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+      'signature' => self::signature,   // from lennart-keidel.de/url/admin/tools.php
+      'action'    => 'shorturl',
+      'format'    => 'json',
+      'url'       => "$ipt_long_url"
     ));
 
     // Fetch and return content
@@ -49,10 +48,10 @@ abstract class Url_Shortener_API_Handler
     # error if url-API response contains error
     if (isset($data->errorCode)) {
       $message = "Fehler beim Erstellen der Short-Url.\\nEingegebene Url: '" . $ipt_long_url . "'\\nError-Code von Url-Api: " . $data->errorCode;
-      if (isset($data->message)) {
+      if (isset($data->message) && !strpos($data->message, "already exists in database")) {
         $message .= "\\nNachricht von Url-API: '" . $data->message . "'";
+        throw new Shema_Exception($message);
       }
-      throw new Shema_Exception($message);
     }
 
     # error if not object or required key not existing or empty
@@ -84,9 +83,10 @@ abstract class Url_Shortener_API_Handler
     curl_setopt($ch, CURLOPT_URL, self::api_url);
     curl_setopt($ch, CURLOPT_HEADER, 0);            // No header in the result
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return, do not echo result
-    curl_setopt($ch, CURLOPT_POST, 1);              // This is a POST request
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_POSTFIELDS, array(     // Data to POST
-      'signature' => self::signature,
+      'signature' => self::signature,               // from lennart-keidel.de/url/admin/tools.php
       'action'   => 'expand',
       'format'   => 'json',
       'shorturl' => "$ipt_short_url"

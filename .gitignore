@@ -2,3 +2,4 @@ composer.phar
 /vendor/
 *.package
 *.sims3pack
+error.log

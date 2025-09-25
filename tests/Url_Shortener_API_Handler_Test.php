@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertEmpty;
@@ -8,7 +11,8 @@ use function PHPUnit\Framework\assertNotEmpty;
 use function PHPUnit\Framework\assertTrue;
 
 # test class
-class Url_Shortener_API_Handler_Test extends TestCase {
+class Url_Shortener_API_Handler_Test extends TestCase
+{
 
   private $array_url = [];
   private $array_wrong_url = [];
@@ -16,7 +20,8 @@ class Url_Shortener_API_Handler_Test extends TestCase {
   private $test_short_text_orginal = "";
 
   # set up ui data with realistic data
-  protected function setUp() : void {
+  protected function setUp(): void
+  {
 
 
 
@@ -28,8 +33,8 @@ class Url_Shortener_API_Handler_Test extends TestCase {
 
 
     $this->array_url[] = "https://modthesims.info";
-    $this->array_url[] = "https://modthesims.info/";
-    $this->array_url[] = "https://modthesims.info/";
+    $this->array_url[] = "https://simblr.cc";
+    $this->array_url[] = "https://www.tumblr.com";
 
     $this->array_wrong_url[] = ""; # only empty string is invalid for url-api
 
@@ -45,8 +50,9 @@ class Url_Shortener_API_Handler_Test extends TestCase {
   }
 
   # test short url creation
-  public function test_short_url() : void {
-    foreach($this->array_url as $fe_url){
+  public function test_short_url(): void
+  {
+    foreach ($this->array_url as $fe_url) {
       $result_short_id = Url_Shortener_API_Handler::short_url($fe_url);
       assertIsString($result_short_id);
       assertEquals(5, strlen($result_short_id));
@@ -56,15 +62,17 @@ class Url_Shortener_API_Handler_Test extends TestCase {
 
 
   # test short url creation with wrong data
-  public function test_short_url_with_wrong_data1() : void {
+  public function test_short_url_with_wrong_data1(): void
+  {
     $this->expectException(Shema_Exception::class);
     Url_Shortener_API_Handler::short_url($this->array_wrong_url[0]);
   }
 
 
   # test short url expantion
-  public function test_expand_url() : void {
-    foreach($this->array_short_url as $key => $fe_url){
+  public function test_expand_url(): void
+  {
+    foreach ($this->array_short_url as $key => $fe_url) {
       $original_url = $this->array_url[$key];
       $result_url = Url_Shortener_API_Handler::expand_url($fe_url);
       assertEquals($original_url, $result_url);
@@ -73,14 +81,16 @@ class Url_Shortener_API_Handler_Test extends TestCase {
 
 
   # test short url expantion with wrong data
-  public function test_expand_url_with_wrong_data1() : void {
+  public function test_expand_url_with_wrong_data1(): void
+  {
     $this->expectException(Shema_Exception::class);
     Url_Shortener_API_Handler::expand_url($this->array_wrong_url[0]);
   }
 
 
   # test get http response code
-  public function test_get_http_response_code() : void {
+  public function test_get_http_response_code(): void
+  {
     $url = "google.com";
     $response_code = Url_Shortener_API_Handler::get_http_response_code($url);
     assertTrue($response_code < 300 && $response_code > 100);
@@ -88,7 +98,8 @@ class Url_Shortener_API_Handler_Test extends TestCase {
 
 
   # test get http response code with wrong data
-  public function test_get_http_response_code_with_wrong_data1() : void {
+  public function test_get_http_response_code_with_wrong_data1(): void
+  {
     $url = ""; # empty string
     $response_code = Url_Shortener_API_Handler::get_http_response_code($url);
     assertTrue($response_code > 300 || $response_code < 100);
@@ -100,7 +111,8 @@ class Url_Shortener_API_Handler_Test extends TestCase {
 
 
   # test short text via url shortener
-  public function test_short_and_expand_text() : void {
+  public function test_short_and_expand_text(): void
+  {
 
     # short text
     $short_url = Url_Shortener_API_Handler::short_text($this->test_short_text_orginal);
@@ -113,7 +125,4 @@ class Url_Shortener_API_Handler_Test extends TestCase {
     assertNotEmpty($expanded_text);
     assertEquals($this->test_short_text_orginal, $expanded_text);
   }
-
 }
-
-?>

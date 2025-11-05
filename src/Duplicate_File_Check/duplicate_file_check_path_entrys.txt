@@ -5,7 +5,6 @@ C:\Users\U\Documents\Electronic Arts\CC Magic\Content\Corrupt
 C:\Users\U\Documents\Electronic Arts\CC Magic\Content\Archives
 C:\Users\U\Documents\Electronic Arts\The Sims 3\Mods\Packages
 C:\Users\U\Documents\Electronic Arts\The Sims 3\Mods\Overrides
-C:\Users\U\Documents\Electronic Arts\The Sims 3\Mods\Disabled
 C:\Users\U\Documents\Electronic Arts\The Sims 3\Downloads
 C:\Users\U\Documents\Electronic Arts\The Sims 3\Library
 C:\Users\U\Documents\Electronic Arts\The Sims 3\SavedSims

@@ -426,7 +426,7 @@ abstract class Filename_Shema_Categorie extends Compareable_Is_Operand implement
       if (File_Handler::get_fileextension_from_path($source_path) === "sim") {
         $path_result = $path_base . File_Handler::path_seperator . "SavedSims";
       } else {
-        $error_heading = "gespeicherte Sims für Create-A-Sim können nur im Package-Dateiformat installiert werden";
+        $error_heading = "gespeicherte Sims für Create-A-Sim können nur im \".sim\"-Dateiformat installiert werden";
         $path_result = "";
       }
     } elseif ($categorie_value == "option_script") {

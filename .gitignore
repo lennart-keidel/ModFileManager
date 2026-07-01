@@ -3,3 +3,4 @@ composer.phar
 *.package
 *.sims3pack
 error.log
+src/Duplicate_File_Check/duplicate_file_check_path_entrys.txt

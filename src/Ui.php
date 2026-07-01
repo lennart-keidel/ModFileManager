@@ -1,6 +1,7 @@
 <?php
 
-abstract class Ui {
+abstract class Ui
+{
 
 
   # ui data root key for filename shema input
@@ -86,23 +87,23 @@ abstract class Ui {
   private const input_path_source_template = '
   <div class="container_label_and_input">
     <label for="input_source_path_root%1$d">Pfad zum Quellordner</label>
-    <input id="input_source_path_root%1$d" type="text" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_key.']" value="%2$s" size="120" required>
+    <input id="input_source_path_root%1$d" type="text" name="' . self::ui_source_input_key_root . '[' . self::ui_path_source_root_key . ']" value="%2$s" size="120" required>
   </div>
   <div class="container_label_and_input">
-    <input id="input_source_path_root_recursive%1$d" type="checkbox" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_recursive_key.']" value="'.self::ui_path_source_root_recursive_value.'">
+    <input id="input_source_path_root_recursive%1$d" type="checkbox" name="' . self::ui_source_input_key_root . '[' . self::ui_path_source_root_recursive_key . ']" value="' . self::ui_path_source_root_recursive_value . '">
     <label for="input_source_path_root_recursive%1$d">Alle Unterordner und deren Dateien einbinden</label>
   </div>
   <div class="container_label_and_input">
-    <input id="rename_files_by_shema%1$d" type="radio" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_option_mode_key.']" value="'.self::ui_path_source_root_option_mode_value_rename_files_by_shema.'" checked onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'search_source_dir_for_shema_files_by_shema_data%1$d\', \'ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too\')">
+    <input id="rename_files_by_shema%1$d" type="radio" name="' . self::ui_source_input_key_root . '[' . self::ui_path_source_root_option_mode_key . ']" value="' . self::ui_path_source_root_option_mode_value_rename_files_by_shema . '" checked onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'search_source_dir_for_shema_files_by_shema_data%1$d\', \'ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too\')">
     <label for="rename_files_by_shema%1$d">Dateien in Shema-Format bringen</label>
   </div>
   <div class="container_label_and_input">
-    <input id="search_source_dir_for_shema_files_by_shema_data%1$d" type="radio" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_option_mode_key.']" value="'.self::ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data.'" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'search_source_dir_for_shema_files_by_shema_data%1$d\', \'ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too\')">
+    <input id="search_source_dir_for_shema_files_by_shema_data%1$d" type="radio" name="' . self::ui_source_input_key_root . '[' . self::ui_path_source_root_option_mode_key . ']" value="' . self::ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data . '" onclick="disable_and_hide_input_by_class_name_if_source_element_is_not_checked(\'search_source_dir_for_shema_files_by_shema_data%1$d\', \'ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too\')">
     <label for="search_source_dir_for_shema_files_by_shema_data%1$d">Nach Dateien suchen anhand von Shema-Daten</label>
   </div>
 
   <div class="container_label_and_input sub_input ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too" style="display:none;">
-    <input id="ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too%1$d" type="checkbox" name="'.self::ui_source_input_key_root.'['.self::ui_path_source_root_option_mode_search_additional_info.']" value="'.self::ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too.'">
+    <input id="ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too%1$d" type="checkbox" name="' . self::ui_source_input_key_root . '[' . self::ui_path_source_root_option_mode_search_additional_info . ']" value="' . self::ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too . '">
     <label for="ui_path_source_root_option_mode_search_additional_info_value_search_in_double_data_paths_too%1$d">auch in Vergleichsordnern für doppelte Dateien suchen</label>
     <script>
       document.addEventListener("DOMContentLoaded", function(){
@@ -115,16 +116,16 @@ abstract class Ui {
   ';
 
   private const search_connector_input_template = '
-  <label class="'.Search_Shema::ui_key_search_connector.'" for="'.Search_Shema::ui_key_search_connector.'%1$d">Suche verbinden mit: </label>
-  <select class="'.Search_Shema::ui_key_search_connector.'" id="'.Search_Shema::ui_key_search_connector.'%1$d" name="%2$s[%1$d]['.Search_Shema::ui_key_search_connector.']" required>
+  <label class="' . Search_Shema::ui_key_search_connector . '" for="' . Search_Shema::ui_key_search_connector . '%1$d">Suche verbinden mit: </label>
+  <select class="' . Search_Shema::ui_key_search_connector . '" id="' . Search_Shema::ui_key_search_connector . '%1$d" name="%2$s[%1$d][' . Search_Shema::ui_key_search_connector . ']" required>
     <option value="or" selected>Oder</option>
     <option value="and">Und</option>
   </select>
   ';
 
   private const search_disable_input_template = '
-  <script>window.addEventListener("load", function () {disable_input_by_class_name_if_source_element_is_not_checked("'.self::ui_key_enable_search_shema.'%1$d", "%2$s_root%3$d");});</script>
-  <input type="checkbox" name="search['.self::ui_search_index.']['.self::ui_key_enable_search_shema.'][]" value="'.self::ui_key_enable_search_shema.'%1$d" class="'.self::ui_key_enable_search_shema.'" id="'.self::ui_key_enable_search_shema.'%1$d" onclick="disable_input_by_class_name_if_source_element_is_not_checked(\''.self::ui_key_enable_search_shema.'%1$d\', \'%2$s_root%3$d\')">
+  <script>window.addEventListener("load", function () {disable_input_by_class_name_if_source_element_is_not_checked("' . self::ui_key_enable_search_shema . '%1$d", "%2$s_root%3$d");});</script>
+  <input type="checkbox" name="search[' . self::ui_search_index . '][' . self::ui_key_enable_search_shema . '][]" value="' . self::ui_key_enable_search_shema . '%1$d" class="' . self::ui_key_enable_search_shema . '" id="' . self::ui_key_enable_search_shema . '%1$d" onclick="disable_input_by_class_name_if_source_element_is_not_checked(\'' . self::ui_key_enable_search_shema . '%1$d\', \'%2$s_root%3$d\')">
   ';
 
   # html template for begin/end of shema input container
@@ -198,7 +199,7 @@ abstract class Ui {
 
   # html template for hidden input for source path
   private const input_shema_template_path_source = '
-  <input type="hidden" class="'.self::ui_key_path_source.'" name="%2$s[%1$d]['.self::ui_key_path_source.']" value="%3$s" id="'.self::ui_key_path_source.'%1$d">
+  <input type="hidden" class="' . self::ui_key_path_source . '" name="%2$s[%1$d][' . self::ui_key_path_source . ']" value="%3$s" id="' . self::ui_key_path_source . '%1$d">
   ';
 
   private const template_source_input_submit_button = '
@@ -242,13 +243,13 @@ abstract class Ui {
   ';
 
   # templpate for search operand select option input
-  private const search_operand_select_option_template = '<option value="%1$s">%2$s</option>'."\n";
+  private const search_operand_select_option_template = '<option value="%1$s">%2$s</option>' . "\n";
 
   # template for buttons to add additional search input
-  private const search_add_additional_input_buttons_template = '<button type="button" class="%2$s%1$d search_plus_button" onclick="add_search_input_with_plus_button($(this))">+</button>'."\n";
+  private const search_add_additional_input_buttons_template = '<button type="button" class="%2$s%1$d search_plus_button" onclick="add_search_input_with_plus_button($(this))">+</button>' . "\n";
 
   # template for buttons to remove additional search input
-  private const search_remove_additional_input_buttons_template = '<button type="button" class="%2$s%1$d search_minus_button" onclick="remove_search_input_with_minus_button($(this))">-</button>'."\n";
+  private const search_remove_additional_input_buttons_template = '<button type="button" class="%2$s%1$d search_minus_button" onclick="remove_search_input_with_minus_button($(this))">-</button>' . "\n";
 
   # template for checkbox to auto move file
   private const template_auto_move_file = '
@@ -320,8 +321,9 @@ abstract class Ui {
 
 
   # print shema input for one file
-  private static function print_filename_shema_input(string $path_source) : void {
-    if(empty($path_source) === true){
+  private static function print_filename_shema_input(string $path_source): void
+  {
+    if (empty($path_source) === true) {
       return;
     }
     $filename = basename($path_source);
@@ -331,23 +333,24 @@ abstract class Ui {
     printf(self::template_shema_input_form_begin, self::$out_input_shema_index);
     printf(self::input_shema_template_path_source, self::$out_input_shema_index, self::ui_data_key_root, $path_source);
     printf(self::template_shema_template_path_source_for_ui, self::$out_input_shema_index, $dirname);
-    foreach(Main::ui_shema_order_global as $class_id){
+    foreach (Main::ui_shema_order_global as $class_id) {
       $class_name = "Filename_Shema_$class_id";
       $class_name::print_filename_shema_input_for_ui(self::$out_input_shema_index);
     }
     printf(self::template_shema_input_submit_button, "");
     printf(self::template_auto_move_file, self::$out_input_shema_index, self::ui_key_auto_move_file, self::ui_key_disable_auto_move_file, self::ui_key_auto_move_file_into_sub_dir);
     printf(self::template_shema_input_form_end, "");
-    printf(self::template_shema_input_container_end,"");
+    printf(self::template_shema_input_container_end, "");
     self::$out_input_shema_index++;
   }
 
 
   # print shema input for each filename of a filename list
-  public static function print_filename_shema_input_for_filename_list(array $filename_list) : void {
-    foreach($filename_list as $path => $filename_array){
-      foreach($filename_array as $filename){
-        $source_path = (empty($path) === false ? $path.File_Handler::path_seperator : "")."$filename";
+  public static function print_filename_shema_input_for_filename_list(array $filename_list): void
+  {
+    foreach ($filename_list as $path => $filename_array) {
+      foreach ($filename_array as $filename) {
+        $source_path = (empty($path) === false ? $path . File_Handler::path_seperator : "") . "$filename";
         self::print_filename_shema_input($source_path);
       }
     }
@@ -355,7 +358,8 @@ abstract class Ui {
 
 
   # print js code to fill shema input with received data from filename after page load
-  public static function fill_input_shema_with_filename_data_list(array $filename_data_list) : void {
+  public static function fill_input_shema_with_filename_data_list(array $filename_data_list): void
+  {
 
     $js_template_code = '
     <script>
@@ -368,9 +372,8 @@ abstract class Ui {
 
     try {
       $filename_data_list_as_json = json_encode($filename_data_list);
-    }
-    catch(Exception $e){
-      throw new Ui_Exception("Fehler beim Verarbeiten der ausgelesenen Daten. Die ausgelesenen Daten konnten nicht nach JSON konvertiert werden.\\nHier die PHP-Fehlermeldung: ".$e->getMessage(), false);
+    } catch (Exception $e) {
+      throw new Ui_Exception("Fehler beim Verarbeiten der ausgelesenen Daten. Die ausgelesenen Daten konnten nicht nach JSON konvertiert werden.\\nHier die PHP-Fehlermeldung: " . $e->getMessage(), false);
       return;
     }
 
@@ -379,7 +382,8 @@ abstract class Ui {
 
 
   # print js code to fill search shema input with received data from filename after page load
-  public static function fill_search_input_shema_with_filename_data_list(array $filename_data_list) : void {
+  public static function fill_search_input_shema_with_filename_data_list(array $filename_data_list): void
+  {
 
     $js_template_code = '
     <script>
@@ -392,9 +396,8 @@ abstract class Ui {
 
     try {
       $filename_data_list_as_json = json_encode($filename_data_list);
-    }
-    catch(Exception $e){
-      throw new Ui_Exception("Fehler beim Verarbeiten der ausgelesenen Daten. Die ausgelesenen Daten konnten nicht nach JSON konvertiert werden.\\nHier die PHP-Fehlermeldung: ".$e->getMessage(), false);
+    } catch (Exception $e) {
+      throw new Ui_Exception("Fehler beim Verarbeiten der ausgelesenen Daten. Die ausgelesenen Daten konnten nicht nach JSON konvertiert werden.\\nHier die PHP-Fehlermeldung: " . $e->getMessage(), false);
       return;
     }
 
@@ -403,7 +406,8 @@ abstract class Ui {
 
 
   # print js code to fill shema input with received data from filename after page load
-  public static function fill_fast_edit_input_shema_with_filename_data_list(array $filename_data_list) : void {
+  public static function fill_fast_edit_input_shema_with_filename_data_list(array $filename_data_list): void
+  {
 
     $js_template_code = '
     <script>
@@ -416,9 +420,8 @@ abstract class Ui {
 
     try {
       $filename_data_list_as_json = json_encode($filename_data_list);
-    }
-    catch(Exception $e){
-      throw new Ui_Exception("Fehler beim Verarbeiten der ausgelesenen Daten. Die ausgelesenen Daten konnten nicht nach JSON konvertiert werden.\\nHier die PHP-Fehlermeldung: ".$e->getMessage(), false);
+    } catch (Exception $e) {
+      throw new Ui_Exception("Fehler beim Verarbeiten der ausgelesenen Daten. Die ausgelesenen Daten konnten nicht nach JSON konvertiert werden.\\nHier die PHP-Fehlermeldung: " . $e->getMessage(), false);
       return;
     }
 
@@ -428,7 +431,8 @@ abstract class Ui {
 
 
   # print js code to fill search shema input with received data from filename after page load
-  public static function print_set_data_in_element_by_class(string $id, mixed $value) : void {
+  public static function print_set_data_in_element_by_class(string $id, mixed $value): void
+  {
 
     $js_template_code = '
     <script>
@@ -445,8 +449,9 @@ abstract class Ui {
 
 
   # print input shema by filename data list and print js code to fill it with the data
-  protected static function print_input_shema_for_filename_data_list(array $filename_data_list) : void {
-    foreach($filename_data_list[self::ui_data_key_root] as $filename_data_for_one_file){
+  protected static function print_input_shema_for_filename_data_list(array $filename_data_list): void
+  {
+    foreach ($filename_data_list[self::ui_data_key_root] as $filename_data_for_one_file) {
       $path_source = $filename_data_for_one_file[self::ui_key_path_source];
       self::print_filename_shema_input($path_source);
     }
@@ -454,7 +459,8 @@ abstract class Ui {
 
 
   # print input shema by filename data list and print js code to fill it with the data
-  public static function print_input_shema_for_filename_data_list_and_fill(array $filename_data_list) : void {
+  public static function print_input_shema_for_filename_data_list_and_fill(array $filename_data_list): void
+  {
     $filename_data_list[self::ui_data_key_root] = array_values($filename_data_list[self::ui_data_key_root]);
     self::print_input_shema_for_filename_data_list($filename_data_list);
     self::fill_input_shema_with_filename_data_list($filename_data_list);
@@ -462,9 +468,10 @@ abstract class Ui {
 
 
   # print input shema by filename data list and print js code to fill it with the data
-  public static function print_filename_shema_fast_edit_input_and_fill(array $filename_data_list) : void {
+  public static function print_filename_shema_fast_edit_input_and_fill(array $filename_data_list): void
+  {
     self::print_filename_shema_fast_edit_input();
-    if(isset($filename_data_list[self::ui_fast_edit_data_key_root]) === true){
+    if (isset($filename_data_list[self::ui_fast_edit_data_key_root]) === true) {
       // $filename_data_list[self::ui_fast_edit_data_key_root] = array_values($filename_data_list[self::ui_fast_edit_data_key_root]);
       self::fill_fast_edit_input_shema_with_filename_data_list($filename_data_list);
     }
@@ -472,24 +479,27 @@ abstract class Ui {
 
 
   # print source path input for the root path of files
-  public static function print_source_path_input_end() : void {
+  public static function print_source_path_input_end(): void
+  {
     printf(self::template_source_input_submit_button, "");
     printf(self::template_source_input_form_end, "");
   }
 
-  public static function print_source_path_input_start() : void {
+  public static function print_source_path_input_start(): void
+  {
     printf(self::template_source_input_form_begin, "");
-    $source_path_value = (isset($_COOKIE[self::ui_path_source_root_key]) === true ? str_replace("+"," ",$_COOKIE[self::ui_path_source_root_key]) : "");
+    $source_path_value = (isset($_COOKIE[self::ui_path_source_root_key]) === true ? str_replace("+", " ", $_COOKIE[self::ui_path_source_root_key]) : "");
     printf(self::input_path_source_template, self::$out_input_shema_index, $source_path_value);
     printf(self::template_auto_move_file, "", self::ui_key_auto_move_file, self::ui_key_disable_auto_move_file, self::ui_key_auto_move_file_into_sub_dir);
   }
 
 
   # print shema search input
-  public static function print_filename_shema_search_input() : void {
-    printf(self::template_shema_search_input_form_begin,"");
+  public static function print_filename_shema_search_input(): void
+  {
+    printf(self::template_shema_search_input_form_begin, "");
     printf(self::search_connector_input_template, self::ui_search_index, self::ui_search_data_key_root);
-    foreach(Main::ui_shema_order_global as $class_id){
+    foreach (Main::ui_shema_order_global as $class_id) {
       echo "<div class='container_search_disable'>";
       $class_name = "Filename_Shema_$class_id";
       printf(self::search_disable_input_template, self::$out_individual_index++, $class_name, self::ui_search_index);
@@ -497,74 +507,84 @@ abstract class Ui {
       echo "</div>";
     }
     printf(self::template_shema_search_submit_button, "");
-    printf(self::template_shema_search_input_form_end,"");
+    printf(self::template_shema_search_input_form_end, "");
   }
 
 
   # print shema for fast edit input
-  public static function print_filename_shema_fast_edit_input() : void {
-    printf(self::template_shema_fast_edit_input_form_begin,"");
-    foreach(Main::ui_shema_order_global as $class_id){
+  public static function print_filename_shema_fast_edit_input(): void
+  {
+    printf(self::template_shema_fast_edit_input_form_begin, "");
+    foreach (Main::ui_shema_order_global as $class_id) {
       $class_name = "Filename_Shema_$class_id";
       $class_name::print_filename_shema_input_for_ui(self::ui_fast_edit_index, self::ui_fast_edit_data_key_root, false);
     }
-    printf(self::template_shema_fast_edit_input_form_end,"");
+    printf(self::template_shema_fast_edit_input_form_end, "");
   }
 
 
   # print duplicate file erros
   private static $duplicate_file_error_index = 1;
-  public static function print_duplicate_files_error(string $path1, string $path2) : void {
+  public static function print_duplicate_files_error(string $path1, string $path2): void
+  {
     printf(self::template_duplicate_file_error_copy_button, $path1, dirname($path1), 1, "", self::$duplicate_file_error_index++);
     printf(self::template_duplicate_file_error_copy_button, $path2, dirname($path2), 2, "<hr>", self::$duplicate_file_error_index++);
   }
 
 
   # print delete session button
-  public static function print_delete_session_button() : void {
+  public static function print_delete_session_button(): void
+  {
     printf(self::template_delete_session_button, "");
   }
 
 
   # print reread source path button
-  public static function print_reread_source_path_button() : void {
+  public static function print_reread_source_path_button(): void
+  {
     printf(self::template_reread_source_path_button, "");
   }
 
 
   # print heading
-  public static function print_heading(string $content) : void {
+  public static function print_heading(string $content): void
+  {
     printf(self::template_heading, $content);
   }
 
 
   # print heading for error message
-  public static function print_error_heading(string $content) : void {
+  public static function print_error_heading(string $content): void
+  {
     printf(self::template_error_heading, $content);
   }
 
 
   # print heading for success message
-  public static function print_success_heading(string $content) : void {
+  public static function print_success_heading(string $content): void
+  {
     printf(self::template_success_heading, $content);
   }
 
 
   # add class name to exception array
-  public static function dont_print_errors_from_this_exceptions(string $class_name) : void {
+  public static function dont_print_errors_from_this_exceptions(string $class_name): void
+  {
     self::$dont_print_errors_from_this_exceptions[] = $class_name;
   }
 
 
   # reset exception array
-  public static function reset_dont_print_errors_from_this_exceptions() : void {
+  public static function reset_dont_print_errors_from_this_exceptions(): void
+  {
     self::$dont_print_errors_from_this_exceptions = [];
   }
 
 
   # print error message as js alert
-  public static function print_error(string $message, string $class_name = "") : void {
-    if(empty($message) === false && in_array($class_name, self::$dont_print_errors_from_this_exceptions) === false){
+  public static function print_error(string $message, string $class_name = ""): void
+  {
+    if (empty($message) === false && in_array($class_name, self::$dont_print_errors_from_this_exceptions) === false) {
       printf(self::template_error_message, trim($message));
     }
   }
@@ -572,9 +592,10 @@ abstract class Ui {
   # generate search operand select option for ui
   # returns the html code
   # does not print the html code
-  public static function generate_search_operand_select_options_ui(string $class_reference) : string {
+  public static function generate_search_operand_select_options_ui(string $class_reference): string
+  {
     $result = "";
-    foreach($class_reference::get_search_operand() as $key_operand => $fe_operand){
+    foreach ($class_reference::get_search_operand() as $key_operand => $fe_operand) {
       $result .= sprintf(self::search_operand_select_option_template, $key_operand, $fe_operand["text"]);
     }
     return $result;
@@ -583,50 +604,56 @@ abstract class Ui {
   # generate buttons for additional search inputs for ui
   # returns html code
   # does not print the html code
-  public static function generate_additional_search_buttons_ui(string $class_reference) : string {
+  public static function generate_additional_search_buttons_ui(string $class_reference): string
+  {
     $result = sprintf(self::search_add_additional_input_buttons_template, self::ui_search_index, $class_reference);
     $result .= sprintf(self::search_remove_additional_input_buttons_template, self::ui_search_index, $class_reference);
     return $result;
   }
 
   # print open blacklist site button, to open the blacklisting feature site
-  public static function print_open_blacklist_site_button() : void {
+  public static function print_open_blacklist_site_button(): void
+  {
     echo '<br><br><br><a href="./blacklist.php"><button>Mod-Blacklisting öffnen</button></a>';
   }
 
 
-  public static function print_start_page_heading() : void {
+  public static function print_start_page_heading(): void
+  {
     echo "<h3>Mod-Dateinamen-Manager</h3>";
   }
 
 
-  public static function print_duplicate_file_check_input() : void {
-    $duplicate_file_check_saved_input = file_get_contents("src/Duplicate_File_Check/duplicate_file_check_path_entrys.txt");
+  public static function print_duplicate_file_check_input(): void
+  {
+    $duplicate_file_check_saved_input = file_get_contents("src/Duplicate_File_Check/duplicate_file_check_paths.txt");
     printf(self::template_duplicate_file_check_input_source_path_list, self::ui_key_duplicate_file_check_root_key, "", self::ui_key_duplicate_file_check_file_list_input, self::ui_key_duplicate_file_check_search_recursive, $duplicate_file_check_saved_input);
   }
 
   # allways open first file detail-element for file input
   # print js script with function 'open_first_details_slot'
-  public static function open_first_details_slot() : void {
+  public static function open_first_details_slot(): void
+  {
     printf(self::template_open_first_details_slot, "");
   }
 
 
-  public static function print_js_console_log($input) : void {
-    if(is_array($input) || is_object($input)){
+  public static function print_js_console_log($input): void
+  {
+    if (is_array($input) || is_object($input)) {
       printf(self::template_print_console_log_object, json_encode($input));
-    }
-    else {
+    } else {
       printf(self::template_print_console_log_string, $input);
     }
   }
 
 
   # main function for handeling ui printing
-  public static function print_ui() : void {
+  public static function print_ui(): void
+  {
 
     # if no source existing in session data
-    if(Session_Cookie_Handler::is_session_startpage() === true){
+    if (Session_Cookie_Handler::is_session_startpage() === true) {
       self::print_start_page_heading();
       self::print_source_path_input_start();
       self::print_duplicate_file_check_input();
@@ -635,10 +662,10 @@ abstract class Ui {
 
     # if not start page
     # print delete session button
-    if(Session_Cookie_Handler::is_session_startpage() === false){
+    if (Session_Cookie_Handler::is_session_startpage() === false) {
       self::print_delete_session_button();
 
-      if($_SESSION[self::ui_path_source_root_option_mode_key] !== self::ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data){
+      if ($_SESSION[self::ui_path_source_root_option_mode_key] !== self::ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data) {
         self::print_reread_source_path_button();
       }
 
@@ -648,49 +675,46 @@ abstract class Ui {
 
     # if source path option mode is search
     # print search input
-    if($_SESSION[self::ui_path_source_root_option_mode_key] === self::ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data){
+    if ($_SESSION[self::ui_path_source_root_option_mode_key] === self::ui_path_source_root_option_mode_value_search_source_dir_for_shema_files_by_shema_data) {
       self::print_filename_shema_search_input();
       self::fill_search_input_shema_with_filename_data_list([self::ui_data_key_root => $_SESSION[self::ui_search_data_key_root]]);
     }
 
     # print fast edit input form
-    if(Session_Cookie_Handler::is_session_startpage() === false){
+    if (Session_Cookie_Handler::is_session_startpage() === false) {
       self::print_filename_shema_fast_edit_input_and_fill($_SESSION);
     }
 
     # if data for files exists in session
-    if(isset($_SESSION[self::ui_data_key_root]) === true && empty($_SESSION[self::ui_data_key_root]) === false){
+    if (isset($_SESSION[self::ui_data_key_root]) === true && empty($_SESSION[self::ui_data_key_root]) === false) {
       self::print_input_shema_for_filename_data_list_and_fill($_SESSION);
     }
 
     # if source existing in session data
-    if(isset($_SESSION[self::ui_file_list_key_root]) === true && empty($_SESSION[self::ui_file_list_key_root]) === false){
+    if (isset($_SESSION[self::ui_file_list_key_root]) === true && empty($_SESSION[self::ui_file_list_key_root]) === false) {
       self::print_filename_shema_input_for_filename_list($_SESSION[self::ui_file_list_key_root]);
     }
 
     # if auto move file is enabled
     # print js for the right select value to all file inputs
-    if(isset($_SESSION[self::ui_key_auto_move_file]) === true && empty($_SESSION[self::ui_key_auto_move_file]) === false){
+    if (isset($_SESSION[self::ui_key_auto_move_file]) === true && empty($_SESSION[self::ui_key_auto_move_file]) === false) {
       self::print_set_data_in_element_by_class(self::ui_key_auto_move_file, $_SESSION[self::ui_key_auto_move_file]);
     }
 
     # if not start page
     # print delete session button
-    if(Session_Cookie_Handler::is_session_startpage() === false){
+    if (Session_Cookie_Handler::is_session_startpage() === false) {
       Session_Cookie_Handler::store_blacklist_entries_in_session();
       self::print_delete_session_button();
     }
 
     # if start page
     # print open blacklist site button, to navigate to the mod-blacklist page
-    if(Session_Cookie_Handler::is_session_startpage() === true){
+    if (Session_Cookie_Handler::is_session_startpage() === true) {
       self::print_open_blacklist_site_button();
     }
 
     # allways open first file detail-element for file input
     self::open_first_details_slot();
   }
-
 }
-
-?>
